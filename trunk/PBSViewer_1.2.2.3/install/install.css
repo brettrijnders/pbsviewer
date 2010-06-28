@@ -1,0 +1,37 @@
+body,td,th {
+	font-size: 12px;
+	color: #333333;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+body {
+	background-color: #E4E4E4;
+}
+a:link {
+	color: #666666;
+}
+a:visited {
+	color: #999999;
+}
+a:hover {
+	color: #FF0000;
+}
+a:active {
+	color: #000000;
+}
+
+.txt_light {
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+.bg_table_main
+{background-color: #333333;}
+
+.bg_table_body
+{background-color: #FFFFFF;}
+
+.bg_table_install
+{background-color: #EFEFEF;}
+
+.bg_table_error
+{background-color: #EFEFEF;}

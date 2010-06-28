@@ -1,0 +1,243 @@
+/*
+    This program 'PBSViewer' also known as Punkbuster Screenshot Viewer, 
+    will download pb screens. Those downloaded screens are published on
+    your website.
+    
+    Copyright (C) 2009  B.S. Rijnders aka BandAhr
+
+    PBSViewer is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    PBSViewer is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with PBSViewer.  If not, see <http://www.gnu.org/licenses/>.
+    
+    ____________________
+    contact information:
+    --------------------
+    mail:		brettrijnders@gmail.com
+    website:	http://www.beesar.com       
+*/
+
+body,td,th {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #333333;
+}
+body {
+	background-color: #ececec;
+	background-repeat: no-repeat;
+}
+a:link {
+	color: #FF0000;
+	text-decoration: underline;
+}
+a:visited {
+	text-decoration: underline;
+	color: #FF9900;
+}
+a:hover {
+	text-decoration: none;
+	color: #990000;
+}
+a:active {
+	text-decoration: underline;
+	color: #FFFF00;
+}
+
+/* table styles */
+
+.header_main_bg
+{background-color:#e5e5e5;}
+
+.header_menu_bg
+{background-color:#333333;}
+
+.header_menu_bg_admin
+{background-color:#454545;}
+
+.txt_admin_message
+{color:#FF0000;
+text-decoration:blink;}
+
+.bg_main_table
+{background-color:#e7e6e6;}
+
+.footer_main_bg_1
+{background-color:#dfdddd;}
+
+.footer_main_bg_1_row_1
+{background-color:#d3d1d1;}
+
+.footer_main_bg_1_row_2
+{background-color:#BBBBBB;}
+
+.footer_main_bg_2
+{background-color:#333333;}
+
+.bg_new_version
+{background-color:#dddcdc;}
+
+.bg_install_del_warning
+{background-color:#dddcdc;}
+
+
+
+/* txt styles */
+.txt_light
+{color:#ececec;}
+
+.txt_warning
+{color: #FF0000; background-color:#F4F4F4;}
+
+/* form */
+.search_field_bg
+{background-color: #EAEAEA;}
+
+.search_field_hover
+{background-color: #F9F9F9;}
+
+.option_search_bg
+{background-color: #F9F9F9; border:thin;}
+
+.option_search_hover
+{background-color: #EAEAEA; border:thin;}
+
+.option_fields_bg_1
+{background-color: #D8D8D8;}
+
+.option_fields_bg_2
+{background-color: #CACACA;}
+
+.buttons
+{background-color: #E8E8E8; border:thin;}
+
+.req_button
+{background-color: #C5C5C5; border:thin;}
+
+.buttons_hover
+{background-color: #F2F2F2; border:thin;}
+
+/*style for info about gathered screens*/
+
+.header_info_screen_row1
+{background-color: #454545;}
+
+.header_info_screen_row2
+{background-color: #333333;}
+
+.header_info_screen_bg
+{background-color:#272727;}
+
+/* pop-up screen for used for screenshots */
+a.popup {
+	position: relative;;
+}
+
+a.popup span {
+	display: none;
+	position: absolute;
+	top: -200%;
+	left: -25%;
+	width: 300px;
+	padding: 5px;
+	z-index: 100;
+	background: #F5F5F5;
+	border: double;
+	border-color:#333333;
+	color: #333333;
+	text-align:left;
+	-moz-border-radius: 5px; /* this works only in camino/firefox */
+	-webkit-border-radius: 5px; /* this is just for Safari */
+    -moz-opacity: 0.8;
+    opacity:.80;
+    filter: alpha(opacity=80);
+
+}
+
+
+
+a:hover.popup span {
+	display: table;
+}
+
+
+/* error style */
+.header_error_bg
+{background-color:#454545;}
+
+.header_error_txt
+{color:#ff0000;}
+
+.body_error_bg
+{background-color:#dfdddd;}
+
+/* custom msg */
+.header_msg_bg
+{background-color:#454545;}
+
+.header_msg_txt
+{color:#ff0000;}
+
+.body_msg_bg
+{background-color:#dfdddd;}
+
+/* detailed screen styles */
+.body_bg_detailed_screen
+{background-color:#333333;}
+
+.first_row_detailed_screen
+{background-color:#F3F3F3;}
+
+.second_row_detailed_screen
+{background-color:#E2E2E2;}
+
+.bg_detailed_screen_back_table
+{background-color:#CCCCCC;}
+
+/* style for update page*/
+.bg_update_table_row1
+{background-color:#333333;}
+
+.bg_update_table_row2
+{background-color:#E8E8E8;}
+
+.bg_update_table_row3
+{background-color:#666666;}
+
+/* style for reset page*/
+.bg_reset_table_row1
+{background-color:#333333;}
+
+.bg_reset_table_row2
+{background-color:#E8E8E8;}
+
+.bg_reset_table_row3
+{background-color:#666666;}
+
+.txt_reset_warning
+{color:#F00;}
+
+
+.md5_valid
+{
+	color:#00CC00;
+}
+
+.md5_mismatch
+{
+	color:#FF0000;
+}
+
+.md5_mismatch_border
+{
+   padding:1px;
+   border:4px solid #F00;
+
+}
