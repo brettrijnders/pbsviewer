@@ -4,4 +4,4 @@ This page contains a full list of punkbuster related games that are supported by
     * Battlefield Bad company 2
     * Call of Duty 4 
 
-Probably it can also run on other punkbuster supported games. If your game is not listed here and PBSViewer does work, please notify me about it by adding a comment or [http://www.beesar.com/contact/ contact me personally], then I will add it on the list.
+Probably it can also run on other punkbuster supported games. If your game is not listed here and PBSViewer does work, please notify me about it by adding a comment or [http://www.beesar.com/contact/ contact me personally], then I will add it to this list.
