@@ -1,0 +1,43 @@
+#labels Featured,Phase-Design
+=Changelog=
+
+==Version 1.2.2.2==
+
+    * Easy installation, added installation script
+    * reset button added, to delete all screens and logs
+    * For search field, field name is selected as default, instead of fid
+    * Auto rewrite of special characters used by html
+    * Fixed day selection field, it was not working properly
+
+==Version 1.2.2.1==
+
+    * Read log files to obtain extra information like ip and md5 of original screen.
+    * Extra info is given on top of screen, like player with most incomplete pb screens.
+    * Screens can be selected by date. This allows you to search for screens of a match played yesterday.
+    * All screens shown are ordered by date, the newest one are located on top.
+    * Smart update feature: it will only download new or changed screens.
+    * Numbers of screens shown on main page can be customized.
+    * Fix: if user used wrong ‘pb_sv_SsCeiling’, script just works.
+    * Filesize field added to DB, used for verification of a file.
+    * Changed type of field `date` to datetime field type, used to order the screens by date.
+    * User can request an update: admin will be notified
+
+==Version 1.1.2.1==
+
+    * Parser fix: couldn’t always find correct guid.
+    * Compatible with CoD4.
+    * Security fix: player names could be used for sql injections.
+    * Debug mode added to parser.
+    * MD5 hashes added to screenshots.
+    * Security fix: this fix is related to the one in version 1.0.2.1, method to check it is modified.
+    * Detailed screenshot info on a single page.
+    * Detailed screenshot page will also show if player has other names.
+    * GUID length can be altered in config file.
+    * Added powered by PBSViewer txt in footer.
+    * Design of update.php is improved
+    * Added a banner of PBSViewer on top of the page
+    * Made a better security key to get acces to config file, security key makes a ‘fingerprint’ of server on which it is running
+
+==Version 1.0.2.1==
+
+    * Security fix: check before install wether a previous version is already installed.
