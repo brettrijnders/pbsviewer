@@ -727,42 +727,34 @@ function parser_screens ($file,$debug=false)
 	//	parse each line
 	foreach($lines as $line_nr=>$line)
 	{
-
+		
 		//	get link
-		$posStart	=	strpos($line,'href=')+5;
-		$posEnd		=	strpos($line,'target')-1;
-		$link		=	substr($line,$posStart,($posEnd-$posStart));
-
 		//	get file name without extension
-		$posStart	=	strpos($link,'.');
-		$fileID		=	substr($link,0,$posStart);
-
-		//	clear previous data, otherwise there is a possibility to get wrong data
-		$line_edited	=	substr($line,$posEnd);
-
+		preg_match("~<a href\=pb[0-9]+\.htm~",$line,$matches);
+		$newMatch = $matches[0];
+		preg_match("~pb[0-9]+~",$newMatch,$matches);
+		$fileID	=	$matches[0];
+		
 		//	get name
-		$posStart	=	strpos($line_edited,'"')+1;
-		$line_edited2=	substr($line_edited,$posStart);
-		$posEnd		=	strpos($line_edited2,'"');
-		$name		=	substr($line_edited2,0,$posEnd);
-		//	clear previous data, otherwise there is a possibility to get wrong data
-		$line_edited3	=	substr($line,$posEnd);
+		preg_match("~</a> \".*\" \(.*\) ~",$line,$matches);
+		$newMatch = $matches[0];
+		preg_match("~\".*\"~",$newMatch,$matches);
+		$newMatch = $matches[0];
+		$name = substr($newMatch,1,strlen($newMatch)-2);
 
 		//	if user uses forbidden characters, this is new since version 1.1.2.1
 		$name		=	addslashes($name);
-
+		
+			
 		//	get guide
-		$posStart	=	strpos($line_edited3,'GUID=')+5;
-		//	should be 32 for all games, this fix is new since version 1.1.2.1
-		$guidlength	=	guidlength;
-		$guid		=	substr($line_edited3,$posStart,(($posStart+$guidlength)-$posStart));
-		//	clear previous data, otherwise there is a possibility to get wrong data
-		$line_edited4	=	substr($line,$posStart+$guidlength);
-
+		preg_match("~GUID=[a-z0-9]{32}\(VALID\)~",$line,$matches);
+		$newMatch = $matches[0];
+		preg_match("~[a-z0-9]{32}~",$newMatch,$matches);
+		$guid = $matches[0];
+				
 		//	get date
-		$posStart	=	strpos($line_edited4,'[')+1;
-		$posEnd		=	strpos($line_edited4,']');
-		$date		=	substr($line_edited4,$posStart,($posEnd-$posStart));
+		preg_match("~\[[0-9]+\.[0-9]{2}\.[0-9]{2}\ [0-9]{2}\:[0-9]{2}\:[0-9]{2}\]~",$line,$matches);
+		$date = substr($matches[0],1,strlen($matches[0])-2);
 
 		if($debug==false)
 		{

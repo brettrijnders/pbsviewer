@@ -1,1 +1,2 @@
-- bug fix, see issue #1: omitting 'p' of pbxxxxx.png when updating
+- Changed function parser_screens, now parses by using regular expression match. This results in much faster and more reliable parsing.
+- Bug fix, see issue #1: omitting 'p' of pbxxxxx.png when updating
