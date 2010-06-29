@@ -1,0 +1,1 @@
+- bug fix, see issue #1: omitting 'p' of pbxxxxx.png when updating
