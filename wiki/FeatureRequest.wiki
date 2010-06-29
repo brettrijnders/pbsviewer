@@ -1,0 +1,8 @@
+#labels Featured,Phase-Design
+=Feature request=
+
+Here you can request a feature you like to see in next release. You can request a feature by placing a comment. If you don't want to create a google account you can always post your comment here:
+
+http://www.beesar.com/work/php/pbsviewer/development/
+
+Or you can contact me personally, see [http://www.beesar.com/contact/ contact page].
