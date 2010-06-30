@@ -2853,7 +2853,32 @@ function is_reset()
 }
 
 
-
+//new in version 1.2.2.3
+// get browser info
+function get_browser_info()
+{
+	$browser = "unknown";
+	
+	$user_agent = $_SERVER['HTTP_USER_AGENT'];
+	if (eregi("firefox",$user_agent))
+	{
+		$browser = "firefox";
+	}
+	elseif (eregi("chrome",$user_agent))
+	{
+		$browser = "chrome";
+	}
+	elseif (eregi("MSIE",$user_agent))
+	{
+		$browser = "IE";
+	}
+	else 
+	{
+		$browser = "unknown";
+	}
+	
+	return $browser;
+}
 
 
 //	see if there is a new version
