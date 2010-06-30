@@ -155,6 +155,11 @@ template_header();
 		template_show_all(NR,$admin_ip,get_total_nr_screens());
 		template_footer(UPDATE_TIME,$lastUpdateTime,$startTime);
 	}
+	elseif (isset($_GET['show_available']))
+	{
+		template_show_available(NR,$admin_ip,get_total_nr_screens());
+		template_footer(UPDATE_TIME,$lastUpdateTime,$startTime);
+	}
 	//	this select option is new since 1.2.2.1
 	elseif (isset($_GET['select']))
 	{

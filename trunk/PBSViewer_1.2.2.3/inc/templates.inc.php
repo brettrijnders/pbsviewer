@@ -207,9 +207,7 @@ function template_search($admin_ip,$current_scrn_nr)
                 </select>              </td>
               <td width="50%" align="center"><input name="input" type="text" id="input" value="" onclick="this.focus();" size="70" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';"></td>
                 <td width="10%" align="left">&nbsp;<input type="submit" name="search" id="search" value="Search" class="buttons" onmouseover="this.className='buttons_hover'" onmouseout="this.className='buttons'"></td>
-                <td align="left"><p>
-                  <input type="submit" name="show_all" id="show_all" value="Show all" class="buttons" onmouseover="this.className='buttons_hover'" onmouseout="this.className='buttons'">
-                </p></td>
+                <td align="left"><input type="submit" name="show_all" id="show_all" value="Show all" class="buttons" onmouseover="this.className='buttons_hover'" onmouseout="this.className='buttons'"></td>
                 <td align="left"> 
                 </td>
               </tr>
@@ -259,7 +257,7 @@ function template_search($admin_ip,$current_scrn_nr)
                   ?>                  
                 </select></td>
               <td width="10%" align="left">&nbsp;<input type="submit" name="select" id="select" value="Select" class="buttons" onmouseover="this.className='buttons_hover'" onmouseout="this.className='buttons'"></td>
-              <td align="left">&nbsp;</td>
+              <td align="left"><input type="submit" name="show_available" id="show_available" value="Show available" class="buttons" onmouseover="this.className='buttons_hover'" onmouseout="this.className='buttons'"></td>
               <td align="left">&nbsp;</td>
             </tr>
             </table>
@@ -579,6 +577,22 @@ function template_show_all($nr,$admin_ip,$current_scrn_nr=nr_screens_main)
 	       
 <?
 show_all_screens($nr);
+echo "</table>";
+
+}
+
+// this template is new since 1.2.2.3
+// only show available screens
+function template_show_available($nr,$admin_ip,$current_scrn_nr=nr_screens_main)
+{
+
+	template_search($admin_ip,$current_scrn_nr);
+?>
+	      <table width="100%" border="0" cellspacing="10" cellpadding="0" align="center">
+	       
+<?
+// show all available screens by setting 2nd parameter to true
+show_all_screens($nr,true);
 echo "</table>";
 
 }

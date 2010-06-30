@@ -95,25 +95,60 @@ function get_list_pbscreens ($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir)
 			//	find all the .png files
 			if(eregi('.png',$content))
 			{
-				//	alter png index url
-				$pos	=	strrpos($content,"/");
-				$length	=	strlen($content);
-				$content		=	substr($content,$pos+1,$length-$pos);
+				
+				// new in version 1.2.2.3
+				// if .png file is smaller than 10 kB then do not include it in download list
+				// first check if ftp_size is supported by hosting
+				if (ftp_size($connect,$content)!=-1)
+				{
+					// no errors have been occurred, so continue with using ftp_size function
+					// this feature will save some bandwith
+					if (ftp_size($connect,$content)>10000)
+					{
+						//	alter png index url
+						$pos	=	strrpos($content,"/");
+						$length	=	strlen($content);
+						$content		=	substr($content,$pos+1,$length-$pos);
 
 
-				//	store png file into array and in DB
-				//	those are the png files that can be downloaded
-				//	if they are downloaded extra information can be obtained from parser_screens
-				$png_files[$i]	=	$content;
+						//	store png file into array and in DB
+						//	those are the png files that can be downloaded
+						//	if they are downloaded extra information can be obtained from parser_screens
+						$png_files[$i]	=	$content;
 
-				//	store in file names without extension in DB
-				$posStart	=	strpos($content,'.');
-				$fileID		=	substr($content,0,$posStart);
+						//	store in file names without extension in DB
+						$posStart	=	strpos($content,'.');
+						$fileID		=	substr($content,0,$posStart);
 
-				$sql_insert	=	"INSERT INTO `dl_screens` (`fid`) VALUES ('".$fileID."')";
-				$sql 		=	mysql_query($sql_insert);
+						$sql_insert	=	"INSERT INTO `dl_screens` (`fid`) VALUES ('".$fileID."')";
+						$sql 		=	mysql_query($sql_insert);
 
-				$i++;
+						$i++;
+					}
+				}
+				// error has occurred, stop using ftp_size and just store all .png images
+				else 
+				{
+						//	alter png index url
+						$pos	=	strrpos($content,"/");
+						$length	=	strlen($content);
+						$content		=	substr($content,$pos+1,$length-$pos);
+
+
+						//	store png file into array and in DB
+						//	those are the png files that can be downloaded
+						//	if they are downloaded extra information can be obtained from parser_screens
+						$png_files[$i]	=	$content;
+
+						//	store in file names without extension in DB
+						$posStart	=	strpos($content,'.');
+						$fileID		=	substr($content,0,$posStart);
+
+						$sql_insert	=	"INSERT INTO `dl_screens` (`fid`) VALUES ('".$fileID."')";
+						$sql 		=	mysql_query($sql_insert);
+
+						$i++;
+				}
 			}
 
 
@@ -795,7 +830,8 @@ function get_latest_fid	($fid)
 	}
 }
 
-function show_all_screens($nr=4)
+// if $available = true, then it will only show available screens
+function show_all_screens($nr=4,$available=false)
 {
 	$nr_counter	=	0;
 
@@ -897,29 +933,34 @@ function show_all_screens($nr=4)
 			}
 			else
 			{
-				//	if there are no results, then there is no image available. So it is not downloaded
-				//	can be edited with custum image
-
-				if($nr_counter==0)
+				if ($available==false)
 				{
-					echo "<tr>\n";
-					echo "<td align='center'><br><a href='#' target='_self' class='popup'><span><strong>File</strong>: n/a<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."</span><img src='style/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0'></a></td>\n";
+					//	if there are no results, then there is no image available. So it is not downloaded
+					//	can be edited with custum image
 
-			$nr_counter++;
-				}
-				else
-				{
-					echo "<td align='center'><br><a href='#' target='_self' class='popup'><span><strong>File</strong>: n/a<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."</span><img src='style/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0'></a></td>\n";
-					$nr_counter++;
-				}
+					if($nr_counter==0)
+					{
+						echo "<tr>\n";
+						echo "<td align='center'><br><a href='#' target='_self' class='popup'><span><strong>File</strong>: n/a<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."</span><img src='style/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0'></a></td>\n";
 
-				if($nr_counter>=$nr)
-				{
-					echo "</tr>\n";
-					$nr_counter=0;
+						$nr_counter++;
+					}
+					else
+					{
+						echo "<td align='center'><br><a href='#' target='_self' class='popup'><span><strong>File</strong>: n/a<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."</span><img src='style/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0'></a></td>\n";
+						$nr_counter++;
+					}
+
+					if($nr_counter>=$nr)
+					{
+						echo "</tr>\n";
+						$nr_counter=0;
+					}
+				
 				}
 
 			}
+			
 
 
 		}
