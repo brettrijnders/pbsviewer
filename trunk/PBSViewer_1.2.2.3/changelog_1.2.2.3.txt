@@ -1,7 +1,0 @@
-
-changelog 1.2.2.3:
-------------------------------------
-- added available button
-- only download .png files that are larger than 10 kB
-- Changed function parser_screens, now parses by using regular expression match. This results in much faster and more reliable parsing.
-- Bug fix, see issue #1: omitting 'p' of pbxxxxx.png when updating
