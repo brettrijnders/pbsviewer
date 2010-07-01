@@ -187,6 +187,29 @@ function get_fids()
 		return false;
 	}
 }
+// new function since 1.2.2.3
+// functions checks if player is on clanbase
+function checkPlayerOnCB($guid8,$guidID)
+{
+	
+
+$url 	=	"http://clanbase.ggl.com/personlist.php?guidid=$guidID&guidvalue=$guid8";
+$file		=	file($url);
+
+$check = true;
+
+foreach ($file as $line)
+{
+	//	find line that has the guid ids
+	if(preg_match("~No players matching criteria~",$line,$match))
+	{
+		$check = false;
+	}
+}
+	
+return $check;
+	
+}
 
 //	new function since 1.1.2.1
 //	it will gather information by looking at fid
@@ -782,7 +805,7 @@ function parser_screens ($file,$debug=false)
 		
 			
 		//	get guide
-		preg_match("~GUID=[a-z0-9]{32}\(VALID\)~",$line,$matches);
+		preg_match("~GUID=[a-z0-9]{32}\(.*\)~",$line,$matches);
 		$newMatch = $matches[0];
 		preg_match("~[a-z0-9]{32}~",$newMatch,$matches);
 		$guid = $matches[0];
