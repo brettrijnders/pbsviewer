@@ -237,6 +237,9 @@ if($ACP==true)
 	$weblog_dir 		= $data[21];
 	$debug				= $data[22];
 	
+	//	this is needed to make automatic class(css) altering of rows
+	$row_nr		=	1;		//	odd nr get different class then even nr
+	
 	?>
 	
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -257,65 +260,67 @@ if($ACP==true)
   <tr>
     <td class="bg_reset_table_row2"><form name="form1" method="post" action=""><table width="90%" border="0" align="center">
       <tr>
-        <td colspan="3"><strong>Welcome Admin, in this control panel you can configure most options. To change login details for ftp gameserver or ftp webhosting  please edit 'config.inc.php' manually<br>
-          <br>
+        <td colspan="3" align="center"><strong>Welcome Admin, in this control panel you can configure most options. To change login details for ftp gameserver or ftp webhosting  please edit 'config.inc.php' manually<br>
+            <br>
+            <?echo '<a href="./" target="_parent">Click here to go back</a>';?>
+            <br>
         </strong></td>
       </tr>
       <tr>
         <td colspan="3" align="center" class="bg_reset_table_row3"><span class="txt_light"><strong>User</strong></span></td>
       </tr>
       <tr>
-        <td width="20%">Admin mail</td>
-        <td width="45%"><label>
+        <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Admin mail</td>
+        <td width="45%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="admin_mail" id="admin_mail" value="<?php echo $admin_mail;?>">
         </label></td>
-        <td>Only fill in  if you want to be notified when someone has requested an update</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Only fill in  if you want to be notified when someone has requested an update</td>
       </tr>
       <tr>
         <td colspan="3" align="center" class="bg_reset_table_row3"><span class="txt_light"><strong>Clan</strong></span></td>
       </tr>
       <tr>
-        <td width="20%">Clan name</td>
-        <td><label>
+        <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Clan name</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="clan_name" id="clan_name" value="<?php echo $clan_game;?>">
         </label></td>
-        <td>What is your full clan name?</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">What is your full clan name?</td>
       </tr>
       <tr>
-        <td width="20%">Clan Tag</td>
-        <td><label>
+        <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Clan Tag</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="clan_tag" id="clan_tag" value="<?php echo $clan_tag;?>">
         </label></td>
-        <td>Your clantag ingame?</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Your clantag ingame?</td>
       </tr>
       <tr>
-        <td width="20%">Clan Game</td>
-        <td><label>
+        <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Clan Game</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="clan_game" id="clan_game" value="<?php echo $clan_game;?>">
         </label></td>
-        <td>Which game are you playing. So what is your gameserver running?</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Which game are you playing. So what is your gameserver running?</td>
       </tr>
       <tr>
-        <td width="20%">Clan Game short</td>
-        <td width="45%"><label>
+        <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Clan Game short</td>
+        <td width="45%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="clan_game_short" id="clan_game_short" value="<?php echo $clan_game_short;?>">
         </label></td>
-        <td>What is your game name in short?</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">What is your game name in short?</td>
       </tr>
       <tr>
         <td colspan="3" align="center" class="bg_reset_table_row3"><span class="txt_light"><strong>Update</strong></span></td>
       </tr>
       <tr>
-        <td>PB directory</td>
-        <td><label>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">PB directory</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="pb_dir" id="pb_dir" value="<?php echo $pb_dir;?>">
         </label></td>
-        <td><p>Directory of punkbuster on your ftp gameserver.</p>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p>Directory of punkbuster on your ftp gameserver.</p>
           <p>Use '/' and don't use 'pb/' with a trailing slash.</p></td>
       </tr>
       <tr>
-        <td>Custom update</td>
-        <td><label>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Custom update</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <select name="custom_update" id="custom_update">
           <option value="1" <?php if($custom_update=='1') echo "selected"; ?>>True</option>
           <option value="0" <?php if($custom_update=='0') echo "selected"; ?>>False</option>  
@@ -323,23 +328,23 @@ if($ACP==true)
             
           </select>
         </label></td>
-        <td> If 'custom' is true then the admin or a cron job should run the 'update.php' which is located in in map 'update'.<br>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"> If 'custom' is true then the admin or a cron job should run the 'update.php' which is located in in map 'update'.<br>
 If option is false, then it will update after x seconds which can can be configured with 'Update time' see below.<br>
 You still have the possibility to force an update manually by running 'update.php' if you want.</td>
       </tr>
       <tr>
-        <td>Update time</td>
-        <td><label>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Update time</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="update_time" id="update_time" value="<?php echo $update_time;?>">
         </label></td>
-        <td>The update time is in seconds. Use a small update time if gameserver is crowded (since a lot of new screens are captured), for example a public gameserver. However keep in mind that bandwith will also increase if update time is smaller. Recommended: 86400 seconds</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">The update time is in seconds. Use a small update time if gameserver is crowded (since a lot of new screens are captured), for example a public gameserver. However keep in mind that bandwith will also increase if update time is smaller. Recommended: 86400 seconds</td>
       </tr>
       <tr>
-        <td>pb_sv_SsCeiling</td>
-        <td><label>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">pb_sv_SsCeiling</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="pb_sv_ssceiling" id="pb_sv_ssceiling" value="<?php echo $pb_sv_ssceiling;?>">
         </label></td>
-        <td><p>To find your number open this file 'pbsv.cfg' and look for 'pb_sv_SsCeiling'. The file should be located in your 'pb' directory on your ftp of your gameserver. <br>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p>To find your number open this file 'pbsv.cfg' and look for 'pb_sv_SsCeiling'. The file should be located in your 'pb' directory on your ftp of your gameserver. <br>
           It is recommended to have a small amount as possible to save some bandwith and space. NB both values of 'pb_sv_SsCeiling' as in 'pbsv.cfg' and this config file should be the same <br>
           If you are not sure please take a large number like 10000 or contact me ;)<br>
           </p>
@@ -347,54 +352,54 @@ You still have the possibility to force an update manually by running 'update.ph
             PB default is 100</p></td>
       </tr>
       <tr>
-        <td>PBSV download dir</td>
-        <td><label>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">PBSV download dir</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="pbsv_download_dir" id="pbsv_download_dir" value="<?php echo $pbsv_download_dir;?>">
         </label></td>
-        <td><p>If you connect to your webserver through FTP, what is the location of the download folder of PBSViewer? copy past or type your path directly after login</p>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p>If you connect to your webserver through FTP, what is the location of the download folder of PBSViewer? copy past or type your path directly after login</p>
           <p>omit trailing slash /</p></td>
       </tr>
       <tr>
-        <td>Reset</td>
-        <td><label>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Reset</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <select name="reset" id="reset">
             <option value="1" <?php if($reset=='1') echo "selected"; ?>>True</option>
             <option value="0" <?php if($reset=='0') echo "selected"; ?>>False</option>
           </select>
         </label></td>
-        <td>Default	=	false. Reset feature allows admins to delete all screens and log files from your webserver and gameserver</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Default	=	false. Reset feature allows admins to delete all screens and log files from your webserver and gameserver</td>
       </tr>
       <tr>
-        <td width="20%">pbsvss_updater</td>
-        <td width="45%"><label>
+        <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">pbsvss_updater</td>
+        <td width="45%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <select name="pbsvss_updater" id="pbsvss_updater">
             <option value="1" <?php if($pbsvss_updater=='1') echo "selected"; ?>>True</option>
             <option value="0" <?php if($pbsvss_updater=='0') echo "selected"; ?>>False</option>
           </select>
         </label></td>
-        <td>Default=false. pb keeps logging screenshots data to pbsvss.htm, it places the newest entries at the end of this file. However pb does not remove old data, so this file will keep on growing in size. If you choose true, then old entries will be removed automatically. This will keep the filesize at a small size.</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Default=false. pb keeps logging screenshots data to pbsvss.htm, it places the newest entries at the end of this file. However pb does not remove old data, so this file will keep on growing in size. If you choose true, then old entries will be removed automatically. This will keep the filesize at a small size.</td>
       </tr>
       <tr>
         <td colspan="3" align="center" class="bg_reset_table_row3"><span class="txt_light"><strong>Logging</strong></span></td>
       </tr>
       <tr>
-        <td width="20%" align="left">PB_log</td>
-        <td width="45%" align="left"><label>
+        <td width="20%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">PB_log</td>
+        <td width="45%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <select name="pb_log" id="pb_log">
             <option value="1" <?php if($pb_log=='1') echo "selected"; ?>>True</option>
             <option value="0" <?php if($pb_log=='0') echo "selected"; ?>>False</option>
           </select>
         </label></td>
-        <td align="left"><p>gather more info about screens, like md5 check or ip address of players, with help of logs</p>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p>gather more info about screens, like md5 check or ip address of players, with help of logs</p>
           <p>Default	=	false, If you don't want logging use false</p>
           <p>Note that the FTP webhost (not your gameserver) login details needs to be configured correctly in 'config.inc.php' if you want to use logging.</p></td>
       </tr>
       <tr>
-        <td width="20%" align="left">max logs on webserver</td>
-        <td width="45%" align="left"><label>
+        <td width="20%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">max logs on webserver</td>
+        <td width="45%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="auto_del_count" id="auto_del_count" value="<?php echo $auto_del_count;?>">
           </label></td>
-        <td align="left"><p>Default	=	4, 'max logs on webserver' has to be lower than PB_SV_LogCeiling. Otherwise there won't be an auto-delete. This is the number of logs stored on your webserver<br>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p>Default	=	4, 'max logs on webserver' has to be lower than PB_SV_LogCeiling. Otherwise there won't be an auto-delete. This is the number of logs stored on your webserver<br>
           If you choose 0, then log files are deleted immediately after updating<br>
           </p>
           <p>If you don't want to delete the logs from your webserver leave this filed empty</p></td>
@@ -403,15 +408,15 @@ You still have the possibility to force an update manually by running 'update.ph
         <td colspan="3" align="center" class="bg_reset_table_row3"><span class="txt_light"><strong>Template</strong></span></td>
       </tr>
       <tr>
-        <td>Screens on main page</td>
-        <td><label>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Screens on main page</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="nr_screens_main" id="nr_screens_main" value="<?php echo $nr_screens_main;?>">
         </label></td>
-        <td>Default=10, on the main page the latest x screens are shown to save some bandwith</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Default=10, on the main page the latest x screens are shown to save some bandwith</td>
       </tr>
       <tr>
-        <td>Screens per row</td>
-        <td><label>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Screens per row</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <select name="screens_per_row" id="screens_per_row">
             <option value="1" <?php if($screens_per_row=='1') echo "selected"; ?>>1</option>
             <option value="2" <?php if($screens_per_row=='2') echo "selected"; ?>>2</option>
@@ -421,25 +426,25 @@ You still have the possibility to force an update manually by running 'update.ph
             <option value="6" <?php if($screens_per_row=='6') echo "selected"; ?>>6</option>
           </select>
         </label></td>
-        <td>Amount of screens you want to have on each row</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Amount of screens you want to have on each row</td>
       </tr>
       <tr>
-        <td>Image width</td>
-        <td><label>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Image width</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="width" id="width" value="<?php echo $width;?>">
         </label></td>
-        <td>Thumbnail image width</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Thumbnail image width</td>
       </tr>
       <tr>
-        <td>Image height</td>
-        <td><label>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Image height</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="height" id="height" value="<?php echo $height;?>">
         </label></td>
-        <td>Thumbnail image height</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Thumbnail image height</td>
       </tr>
       <tr>
-        <td width="20%">CB game</td>
-        <td width="45%"><label>
+        <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">CB game</td>
+        <td width="45%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <select name="CB_game" id="CB_game">
           <option value="1" <?php if($CB_game=='none') echo "selected"; ?>>none</option>
           <?
@@ -459,41 +464,41 @@ You still have the possibility to force an update manually by running 'update.ph
             
           </select>
         </label></td>
-        <td>The games in this list are supported by clanbase, please select the game that is running on your gameserver. This information will be used to automatically find clanbase players (only if he/she has joined cb) for each pb screenshot. select none if you don't want this extra information.</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">The games in this list are supported by clanbase, please select the game that is running on your gameserver. This information will be used to automatically find clanbase players (only if he/she has joined cb) for each pb screenshot. select none if you don't want this extra information.</td>
       </tr>
       <tr>
         <td colspan="3" align="center" class="bg_reset_table_row3"><span class="txt_light"><strong>Advanced</strong></span></td>
       </tr>
       <tr>
-        <td align="left">Minimal screen download size</td>
-        <td align="left"><label>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Minimal screen download size</td>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="min_screen_size" id="min_screen_size" value="<?php echo $min_screen_size;?>">
         </label></td>
-        <td align="left">Screens with a size smaller than the 'Minimal screen download size' are not downloaded.</td>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Screens with a size smaller than the 'Minimal screen download size' are not downloaded.</td>
       </tr>
       <tr>
-        <td align="left">Script load time</td>
-        <td align="left"><label>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Script load time</td>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="script_load_time" id="script_load_time" value="<?php echo $script_load_time;?>">
         </label></td>
-        <td align="left">After this time the script does stop running, if you for instance need   to download a lot of screens then it is recommended to have a high   script load time. If you are not sure, then use default setting. Default=600 seconds or 10 minutes, after 600 Maximum execution time error will be shown.</td>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">After this time the script does stop running, if you for instance need   to download a lot of screens then it is recommended to have a high   script load time. If you are not sure, then use default setting. Default=600 seconds or 10 minutes, after 600 Maximum execution time error will be shown.</td>
       </tr>
       <tr>
-        <td align="left">Web log dir</td>
-        <td align="left"><label>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Web log dir</td>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="weblog_dir" id="weblog_dir" value="<?php echo $weblog_dir;?>">
         </label></td>
-        <td align="left">directory where the log files are stored. The directory should be CHMODDED to 777.</td>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">directory where the log files are stored. The directory should be CHMODDED to 777.</td>
       </tr>
       <tr>
-        <td width="20%" align="left">Debug</td>
-        <td width="45%" align="left"><label>
+        <td width="20%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Debug</td>
+        <td width="45%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <select name="debug" id="debug">
             <option value="1" <?php if($debug=='1') echo "selected"; ?>>True</option>
             <option value="0" <?php if($debug=='0') echo "selected"; ?>>False</option>
           </select>
         </label></td>
-        <td align="left">Default is false</td>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Default is false</td>
       </tr>
       <tr>
         <td colspan="3"><table width="100%" border="0">
