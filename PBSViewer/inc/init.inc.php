@@ -32,8 +32,11 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 {
 	if(eregi("init.inc.php", $_SERVER["PHP_SELF"])) die('Acces denied!');
 	
+	//change argument separator to &amp instead of &, because & is not valid
+	ini_set('arg_separator.output','&amp;'); 
 	
-		// gather data
+	
+	// gather data
 	$i=0;	
 	$sql_select = "SELECT * FROM `settings`";
 	$sql = mysql_query($sql_select) or die(mysql_error());
