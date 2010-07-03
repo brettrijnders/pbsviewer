@@ -30,13 +30,16 @@
 $key=md5(($_SERVER['SERVER_SIGNATURE'].' '.php_uname()));
 require_once('inc/config.inc.php');
 require_once('inc/functions.inc.php');
+
+//	connect to DB
+connect_DB();
+require_once('inc/init.inc.php');
 $update=false;
 
 //	maximum script load time
 ini_set('max_execution_time',script_load_time);
 
-//	connect to DB
-connect_DB();
+
 
 //	get time wrt to Unix
 $startTime	=	get_microtime();

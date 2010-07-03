@@ -34,6 +34,10 @@ require_once('inc/config.inc.php');
 require_once('inc/functions.inc.php');
 require_once('inc/templates.inc.php');
 
+//	connect to DB
+connect_DB();
+require_once('inc/init.inc.php');
+
 
 
 //	maximum script load time
@@ -48,8 +52,7 @@ if(DEBUG==false)
 	error_reporting(0);
 }
 
-//	connect to DB
-connect_DB();
+
 
 //	this is new in version 1.1.2.1
 //	it will show a detailed screen info on a seperate page

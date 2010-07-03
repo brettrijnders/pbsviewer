@@ -1,6 +1,7 @@
 
 changelog 2.0.0.0:
 ------------------------------------
+- basic admin control panel (ACP)
 - added available button
 - only download .png files that are larger than 10 kB
 - Changed function parser_screens, now parses by using regular expression match. This results in much faster and more reliable parsing.
