@@ -338,7 +338,7 @@ function template_detailed_screen($fid)
 
 	//	get aliases of player
 	$alias	=	get_alias($guid,addslashes($name));
-	
+		
 	?>
 	
 	
@@ -356,7 +356,13 @@ function template_detailed_screen($fid)
         <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong>Player:</strong></td>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?echo $name;?></td>
       </tr>
-      <?if($alias)
+      <tr>
+        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong>CB link:</strong></td>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?echo "<a href=\"http://clanbase.ggl.com/personlist.php?guidid=".CBGAMEID."&guidvalue=".substr($guid,$guidlength-8)."\" target=\"_blank\">".$name."</a>";?></td>
+      </tr>
+      <?
+	
+      if($alias)
       {
       	
       ?>
