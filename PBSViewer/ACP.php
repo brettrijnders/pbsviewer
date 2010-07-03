@@ -114,6 +114,77 @@ if(isset($_POST['save'])&&$ACP==true)
 	
 	if ($saving==true)
 	{
+		
+		// update one by one
+		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['admin_mail'])."' WHERE `name`='admin_mail'";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['clan_name'])."' WHERE `name`='clan_name'";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['clan_tag'])."' WHERE `name`='clan_tag'";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['clan_game'])."' WHERE `name`='clan_game';";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['clan_game_short'])."' WHERE `name`='clan_game_short'";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['pb_dir'])."' WHERE `name`='pb_dir'";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['custom_update'])."' WHERE `name`='custom_update'";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['update_time'])."' WHERE `name`='update_time'";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['pb_sv_ssceiling'])."' WHERE `name`='pb_sv_ssceiling'";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['pbsv_download_dir'])."' WHERE `name`='pbsv_download_dir'";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['reset'])."' WHERE `name`='reset'";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['pbsvss_updater'])."' WHERE `name`='pbsvss_updater';";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['pb_log'])."' WHERE `name`='pb_log';";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['auto_del_count'])."' WHERE `name`='auto_del_count'";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['nr_screens_main'])."' WHERE `name`='nr_screens_main'";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['screens_per_row'])."' WHERE `name`='screens_per_row'";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['width'])."' WHERE `name`='width'";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['height'])."' WHERE `name`='height'";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['CB_game'])."' WHERE `name`='CB_game'";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['min_screen_size'])."' WHERE `name`='min_screen_size'";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['script_load_time'])."' WHERE `name`='script_load_time'";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['weblog_dir'])."' WHERE `name`='weblog_dir'";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['debug'])."' WHERE `name`='debug'";
+		$sql     	=	mysql_query($sql_update);
+		
 		//save data
 		template_saved();
 	}
@@ -370,10 +441,25 @@ You still have the possibility to force an update manually by running 'update.ph
         <td width="20%">CB game</td>
         <td width="45%"><label>
           <select name="CB_game" id="CB_game">
-            <option value="1" <?php if($CB_game=='none') echo "selected"; ?>>none</option>
+          <option value="1" <?php if($CB_game=='none') echo "selected"; ?>>none</option>
+          <?
+          include("inc/CB_guidID.inc.php");
+          foreach ($CBGUIDID as $CBdata)
+          {
+          	if ($CB_game==$CBdata[1])
+          	{
+          		echo "<option value=\"".$CBdata[1]."\" selected>".$CBdata[0]."</option>\n";
+          	}
+          	else 
+          	{
+          		echo "<option value=\"".$CBdata[1]."\">".$CBdata[0]."</option>\n";
+          	}
+          }
+          ?>
+            
           </select>
         </label></td>
-        <td>&nbsp;</td>
+        <td>The games in this list are supported by clanbase, please select the game that is running on your gameserver. This information will be used to automatically find clanbase players (only if he/she has joined cb) for each pb screenshot. select none if you don't want this extra information.</td>
       </tr>
       <tr>
         <td colspan="3" align="center" class="bg_reset_table_row3"><span class="txt_light"><strong>Advanced</strong></span></td>
@@ -404,7 +490,7 @@ You still have the possibility to force an update manually by running 'update.ph
         <td width="45%" align="left"><label>
           <select name="debug" id="debug">
             <option value="1" <?php if($debug=='1') echo "selected"; ?>>True</option>
-            <option value="0" <?php if($CB_game=='0') echo "selected"; ?>>False</option>
+            <option value="0" <?php if($debug=='0') echo "selected"; ?>>False</option>
           </select>
         </label></td>
         <td align="left">Default is false</td>
