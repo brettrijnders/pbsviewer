@@ -259,7 +259,7 @@ function template_search($admin_ip,$current_scrn_nr)
                   ?>                  
                 </select></td>
               <td width="10%" align="left">&nbsp;<input type="submit" name="select" id="select" value="Select" class="buttons" onmouseover="this.className='buttons_hover'" onmouseout="this.className='buttons'"></td>
-              <td align="left"><input type="submit" name="show_available" id="show_available" value="Show available" class="buttons" onmouseover="this.className='buttons_hover'" onmouseout="this.className='buttons'"></td>
+              <td align="left"><input type="submit" name="show_available" id="show_available" value="Show available all" class="buttons" onmouseover="this.className='buttons_hover'" onmouseout="this.className='buttons'"></td>
               <td align="left">&nbsp;</td>
             </tr>
             </table>
@@ -288,12 +288,12 @@ function template_info_screens($current_scrn_nr)
     <td class="header_info_screen_row1"><span class="txt_light"><?echo get_nr_complete_screens();?></span></td>
   </tr>
   <tr>
-    <td width="25%" class="header_info_screen_row2"><span class="txt_light"><strong>Player with most pb screens:</strong></td>
+    <td width="25%" class="header_info_screen_row2"><span class="txt_light"><strong>Player with most pb screens:</strong></span></td>
     <td width="25%" class="header_info_screen_row2"><span class="txt_light"><?
     
     $guid	=	get_player_most_complete_screens();
     $name	=	get_player_name_by_guid($guid);
-    echo "<a href='?sID=guid&input=".$guid."&search=Search&year=all_years&month=all_months&day=all_days&hour=all_hours' target='_self'>".$name."</a>";
+    echo "<a href='?sID=guid&amp;input=".$guid."&amp;search=Search&amp;year=all_years&amp;month=all_months&amp;day=all_days&amp;hour=all_hours' target='_self'>".$name."</a>";
     
     ?></span></td>
     <td width="25%" class="header_info_screen_row2"><span class="txt_light"><strong>Total incomplete screens:</strong></span></td>
@@ -305,7 +305,7 @@ function template_info_screens($current_scrn_nr)
     
     $guid	=	get_player_most_incomplete_screens();
     $name	=	get_player_name_by_guid($guid);
-    echo "<a href='?sID=guid&input=".$guid."&search=Search&year=all_years&month=all_months&day=all_days&hour=all_hours' target='_self'>".$name."</a>";
+    echo "<a href='?sID=guid&amp;input=".$guid."&amp;search=Search&amp;year=all_years&amp;month=all_months&amp;day=all_days&amp;hour=all_hours' target='_self'>".$name."</a>";
     
     ?></span></td>
     <td class="header_info_screen_row1"><span class="txt_light"><strong>Screens shown in current window:</strong></span></td>
@@ -358,7 +358,7 @@ function template_detailed_screen($fid)
       </tr>
       <tr>
         <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong>CB link:</strong></td>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?echo "<a href=\"http://clanbase.ggl.com/personlist.php?guidid=".CBGAMEID."&guidvalue=".substr($guid,$guidlength-8)."\" target=\"_blank\">".$name."</a>";?></td>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?echo "<a href=\"http://clanbase.ggl.com/personlist.php?guidid=".CBGAMEID."&amp;guidvalue=".substr($guid,$guidlength-8)."\" target=\"_blank\">".$name."</a>";?></td>
       </tr>
       <?
 	
@@ -773,7 +773,9 @@ function template_footer($update_time,$lastUpdate,$startTime)
     <a href="http://validator.w3.org/check?uri=referer"><img
         src="style/img/valid-html401-blue.png"
         alt="Valid HTML 4.01 Transitional" height="31" width="88" border="0"></a>
-      <a href="http://www.gnu.org/copyleft/gpl.html" target="_blank"><img src="style/img/gplv3-88x31.png" alt="Small GPLv3 logo" width="88" height="31" border="0"></a></p>
+      <a href="http://www.gnu.org/copyleft/gpl.html" target="_blank"><img src="style/img/gplv3-88x31.png" alt="Small GPLv3 logo" width="88" height="31" border="0"></a>
+      
+      </p>
   
       
         <br>
