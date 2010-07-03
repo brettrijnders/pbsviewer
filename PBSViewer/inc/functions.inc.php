@@ -2503,8 +2503,20 @@ function get_md5($file)
 function set_request()
 {
 
-	$sql_update	=	"UPDATE `admin` SET `request_update`='1'";
-	$sql 		=	mysql_query($sql_update);
+	// first check whether there already is an entry
+	
+	$sql_select = "SELECT `request_update` FROM `admin`";
+	$sql		=	mysql_query($sql_select);
+	if(mysql_num_rows($sql)>0)
+	{
+		$sql_update	=	"UPDATE `admin` SET `request_update`='1'";
+		$sql 		=	mysql_query($sql_update);
+	}
+	else 
+	{
+		$sql_insert = "INSERT INTO `admin` (`request_update`) VALUES ('1')";
+		$sql		=	mysql_query($sql_insert);
+	}
 
 }
 
