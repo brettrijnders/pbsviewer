@@ -1,5 +1,5 @@
 
-changelog 1.2.2.3:
+changelog 2.0.0.0:
 ------------------------------------
 - added available button
 - only download .png files that are larger than 10 kB
