@@ -101,7 +101,7 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 	//---------------------]	OPTIONAL	[---------------------\
 
 	// admin mail
-	define("ADMIN_MAIL",$admin_mail);
+	define('ADMIN_MAIL',$admin_mail);
 	
 	//	gather more info about screens, like md5 check
 	//	or ip address of players, with help of logs

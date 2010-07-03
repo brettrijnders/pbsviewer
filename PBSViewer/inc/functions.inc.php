@@ -2517,6 +2517,34 @@ function set_request()
 		$sql_insert = "INSERT INTO `admin` (`request_update`) VALUES ('1')";
 		$sql		=	mysql_query($sql_insert);
 	}
+	
+	// send mail if someone requested an update
+	if (ADMIN_MAIL!='')
+	{
+		$subj = "PBSViewer: Update Requested";
+		$msg  = "Dear Admin,\n\n";
+		$msg .= "An update for PBSViewer has been requested by an user.\n";
+		$msg .= "Please update PBSViewer, use this link to update:\n";
+		$msg .= $_SERVER["SERVER_NAME"].dirname($_SERVER['PHP_SELF'])."/update.php\n\n";
+		$msg .= "User ip: ".$_SERVER['REMOTE_ADDR']."\n";
+		$msg .= "User agent information: ".$_SERVER['HTTP_USER_AGENT']."\n";
+		if (isset($_SERVER['HTTP_REFERER']))
+		{
+			$msg .= "User's previous page: ".$_SERVER['HTTP_REFERER']."\n";
+		}
+		
+		$msg .= "\n";
+		$msg .= "---------------------------------";
+		$msg .= "\n\nThis message was generated automatically. If you do not wish to receive those notifications,\nplease go to your ACP and leave the 'admin mail' field empty.\n";
+		$msg .= "Click on the link below to go directly to your ACP:\n";
+		$msg .= $_SERVER["SERVER_NAME"].dirname($_SERVER['PHP_SELF'])."/ACP.php";
+		
+		$headers = 'From: PBSViewer@ '.substr($_SERVER['SERVER_NAME'],4).' ' . "\r\n" .
+    	'Reply-To: '.ADMIN_MAIL.' ' . "\r\n" .
+    	'X-Mailer: PHP/' . phpversion();
+		
+		send_mail($subj,$msg,$headers);
+	}
 
 }
 
@@ -2931,6 +2959,14 @@ function get_browser_info()
 	}
 	
 	return $browser;
+}
+
+// this function is new since version 2.0.0.0
+function send_mail($subject,$msg,$headers)
+{
+
+	$to      = ADMIN_MAIL;
+	mail($to, $subject, $msg,$headers);
 }
 
 
