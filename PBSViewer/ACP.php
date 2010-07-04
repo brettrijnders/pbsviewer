@@ -252,7 +252,12 @@ if($ACP==true)
 </head>
 
 <body>
-<p>&nbsp;</p>
+	<table width="100%" border="0" align="center">
+  <tr>
+    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a></td>
+  </tr>
+</table>
+<br>
 <table width="80%" border="0" align="center">
   <tr>
     <td align="center" class="bg_reset_table_row1"><span class="txt_light">:: Admin Control Panel ::</span></td>
@@ -474,7 +479,7 @@ You still have the possibility to force an update manually by running 'update.ph
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="min_screen_size" id="min_screen_size" value="<?php echo $min_screen_size;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Screens with a size smaller than the 'Minimal screen download size' are not downloaded.</td>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Screens with a size smaller than the 'Minimal screen download size' are not downloaded, the size is in bytes.</td>
       </tr>
       <tr>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Script load time</td>
@@ -549,7 +554,12 @@ function template_error($msg,$back_page='ACP.php')
 
 
 <body>
-<p>&nbsp;</p>
+	<table width="100%" border="0" align="center">
+  <tr>
+    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a></td>
+  </tr>
+</table>
+<br>
 <table width="80%" border="0" align="center">
   <tr>
     <td align="center" class="bg_reset_table_row1"><span class="txt_light">:: Error ::</span></td>
@@ -598,7 +608,13 @@ function template_saved()
 <meta http-equiv="refresh" content="3;URL=./" />
 
 <body>
-<p>&nbsp;</p>
+	<table width="100%" border="0" align="center">
+  <tr>
+    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a></td>
+  </tr>
+</table>
+<br>
+
 <table width="80%" border="0" align="center">
   <tr>
     <td align="center" class="bg_reset_table_row1"><span class="txt_light">:: Saving settings ::</span></td>

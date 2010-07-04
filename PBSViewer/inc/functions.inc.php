@@ -103,7 +103,7 @@ function get_list_pbscreens ($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir)
 				{
 					// no errors have been occurred, so continue with using ftp_size function
 					// this feature will save some bandwith
-					if (ftp_size($connect,$content)>10000)
+					if (ftp_size($connect,$content)>MIN_SCREEN_SIZE)
 					{
 						//	alter png index url
 						$pos	=	strrpos($content,"/");
@@ -2977,14 +2977,12 @@ function check_version()
 
 	$nfo_data	=	file('http://beesar.com/pbs_viewer/nfo');
 	$version	=	file('VERSION');
-	$current_version	=	trim(str_replace('.','',$version[0]));
-
-	if($nfo_data[0]!='')
+	
+	if($nfo_data[2]!='')
 	{
 
-		$new_version	=	trim(str_replace('.','',$nfo_data[0]));
-
-		if($new_version!=$current_version)
+		// check local version against version on beesar
+		if($version[1]>=$nfo_data[2])
 		{
 			$new=true;
 

@@ -770,10 +770,14 @@ function template_footer($update_time,$lastUpdate,$startTime)
       </table>
       
         <p>
-    <a href="http://validator.w3.org/check?uri=referer"><img
+    <a href="http://validator.w3.org/check?uri=referer" target="_blank"><img
         src="style/img/valid-html401-blue.png"
         alt="Valid HTML 4.01 Transitional" height="31" width="88" border="0"></a>
       <a href="http://www.gnu.org/copyleft/gpl.html" target="_blank"><img src="style/img/gplv3-88x31.png" alt="Small GPLv3 logo" width="88" height="31" border="0"></a>
+      <a href="https://code.google.com/p/pbsviewer/" target="_blank"><img
+        src="style/img/google_code_project_hosting.gif"
+        alt="Google Code project hosting" height="34" width="34" border="0"></a>
+      
       
       </p>
   
