@@ -173,12 +173,14 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 	//	advance settings (optional)
 	if ($debug==1)
 	{
-		define('DEBUG',true);										//	Default is false;		
+		define('DEBUG',true);									//	Default is false;		
 	}
 	else 
 	{
-		define('DEBUG',false);										//	Default is false;
+		define('DEBUG',false);									//	Default is false;
 	}
+	
+	define("MIN_SCREEN_SIZE",$min_screen_size);					//	Screens with a size smaller than the 'Minimal screen download size' are not downloaded, the size is in bytes.
 
 	define('L_FILE','download/pbsvss.htm');						//	Local File to save remote data to. Only change this if you know what you are doing
 	define('L_FILE_TEMP','download/pbsvss_temp.htm'); 			//	Local file to temporary save remote data to. Only change this if you know what you are doing

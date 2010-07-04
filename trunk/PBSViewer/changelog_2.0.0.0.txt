@@ -1,11 +1,13 @@
 
 changelog 2.0.0.0:
 ------------------------------------
-- new feature: mail admin if update has been requested by someone
+- Added google code project hosting logo
+- Improved version checking
+- New feature: mail admin if update has been requested by someone
 - Bug fix: Request update feature works correctly now
-- added clanbase link information about player
-- basic admin control panel (ACP)
-- added available button
-- only download .png files that are larger than 10 kB
+- Added clanbase link information about player
+- Basic admin control panel (ACP)
+- Added available button
+- Only download .png files that are larger than X kB, size can be configured in ACP
 - Changed function parser_screens, now parses by using regular expression match. This results in much faster and more reliable parsing.
 - Bug fix, see issue #1: omitting 'p' of pbxxxxx.png when updating
