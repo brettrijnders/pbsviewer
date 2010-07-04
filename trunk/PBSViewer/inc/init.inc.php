@@ -36,40 +36,129 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 	ini_set('arg_separator.output','&amp;'); 
 	
 	
+	// default values
+	$admin_mail			= '';
+	$clan_name			= '';
+	$clan_tag			= '';
+	$clan_game			= '';
+	$clan_game_short 	= '';
+	$pb_dir 			= '';
+	$custom_update 		= 0;
+	$update_time 		= 86400;
+	$pb_sv_ssceiling 	= 10000;
+	$pbsv_download_dir	= '';
+	$reset				= 1;
+	$pbsvss_updater		= 1;
+	$pb_log				= 1;
+	$auto_del_count 	= -1;
+	$nr_screens_main 	= 10;
+	$screens_per_row	= 4;
+	$width 				= 200;
+	$height 			= 200;
+	$CB_game			= 'none';
+	$min_screen_size 	= 10000;
+	$script_load_time	= 600;
+	$weblog_dir 		= 'download';
+	$debug				= 0;
+	
 	// gather data
-	$i=0;	
-	$sql_select = "SELECT * FROM `settings`";
+	$sql_select = "SELECT `name`,`value` FROM `settings`";
 	$sql = mysql_query($sql_select) or die(mysql_error());
 	while ($row = mysql_fetch_object($sql))
 	{
-		$data[$i]	= $row->value;
-		$i++;
+		if ($row->name=='admin_mail')
+		{
+			$admin_mail = $row->value;
+		}
+		elseif ($row->name=='clan_name')
+		{
+			$clan_name = $row->value;
+		}
+		elseif ($row->name=='clan_tag')
+		{
+			$clan_tag = $row->value;
+		}
+		elseif ($row->name=='clan_game')
+		{
+			$clan_game = $row->value;
+		}
+		elseif ($row->name=='clan_game_short')
+		{
+			$clan_game_short = $row->value;
+		}
+		elseif ($row->name=='pb_dir')
+		{
+			$pb_dir = $row->value;
+		}
+		elseif ($row->name=='custom_update')
+		{
+			$custom_update = $row->value;
+		}
+		elseif ($row->name=='update_time')
+		{
+			$update_time = $row->value;
+		}
+		elseif ($row->name=='pb_sv_ssceiling')
+		{
+			$pb_sv_ssceiling = $row->value;
+		}
+		elseif ($row->name=='pbsv_download_dir')
+		{
+			$pbsv_download_dir = $row->value;
+		}
+		elseif ($row->name=='reset')
+		{
+			$reset = $row->value;
+		}
+		elseif ($row->name=='pbsvss_updater')
+		{
+			$pbsvss_updater = $row->value;
+		}
+		elseif ($row->name=='pb_log')
+		{
+			$pb_log	 = $row->value;
+		}
+		elseif ($row->name=='auto_del_count')
+		{
+			$auto_del_count	 = $row->value;
+		}
+		elseif ($row->name=='nr_screens_main')
+		{
+			$nr_screens_main	 = $row->value;
+		}
+		elseif ($row->name=='screens_per_row')
+		{
+			$screens_per_row	 = $row->value;
+		}
+		elseif ($row->name=='width')
+		{
+			$width	 = $row->value;
+		}
+		elseif ($row->name=='height')
+		{
+			$height	 = $row->value;
+		}
+		elseif ($row->name=='CB_game')
+		{
+			$CB_game	 = $row->value;
+		}
+		elseif ($row->name=='min_screen_size')
+		{
+			$min_screen_size	 = $row->value;
+		}
+		elseif ($row->name=='script_load_time')
+		{
+			$script_load_time	 = $row->value;
+		}
+		elseif ($row->name=='weblog_dir')
+		{
+			$weblog_dir = $row->value;
+		}
+		elseif ($row->name=='debug')
+		{
+			$debug	 = $row->value;
+		}
 	}
-	
-	$admin_mail			= $data[0];
-	$clan_name			= $data[1];
-	$clan_tag			= $data[2];
-	$clan_game			= $data[3];
-	$clan_game_short 	= $data[4];
-	$pb_dir 			= $data[5];
-	$custom_update 		= $data[6];
-	$update_time 		= $data[7];
-	$pb_sv_ssceiling 	= $data[8];
-	$pbsv_download_dir	= $data[9];
-	$reset				= $data[10];
-	$pbsvss_updater		= $data[11];
-	$pb_log				= $data[12];
-	$auto_del_count 	= $data[13];
-	$nr_screens_main 	= $data[14];
-	$screens_per_row	= $data[15];
-	$width 				= $data[16];
-	$height 			= $data[17];
-	$CB_game			= $data[18];
-	$min_screen_size 	= $data[19];
-	$script_load_time	= $data[20];
-	$weblog_dir 		= $data[21];
-	$debug				= $data[22];
-	
 	
 	//---------------------]	REQUIRED	[---------------------\ 
 	define('PBDIR',$pb_dir);									//	Directory of punkbuster.
