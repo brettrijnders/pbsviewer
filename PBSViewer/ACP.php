@@ -272,7 +272,7 @@ if($ACP==true)
       <tr>
         <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Admin mail</td>
         <td width="45%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
-          <input type="text" name="admin_mail" id="admin_mail" value="<?php echo $admin_mail;?>">
+          <input type="text" name="admin_mail" id="admin_mail" value="<?php echo $admin_mail;?>" onclick="this.focus();" size="40" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Only fill in  if you want to be notified when someone has requested an update</td>
       </tr>
@@ -282,28 +282,28 @@ if($ACP==true)
       <tr>
         <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Clan name</td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
-          <input type="text" name="clan_name" id="clan_name" value="<?php echo $clan_game;?>">
+          <input type="text" name="clan_name" id="clan_name" value="<?php echo $clan_game;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">What is your full clan name?</td>
       </tr>
       <tr>
         <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Clan Tag</td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
-          <input type="text" name="clan_tag" id="clan_tag" value="<?php echo $clan_tag;?>">
+          <input type="text" name="clan_tag" id="clan_tag" value="<?php echo $clan_tag;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Your clantag ingame?</td>
       </tr>
       <tr>
         <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Clan Game</td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
-          <input type="text" name="clan_game" id="clan_game" value="<?php echo $clan_game;?>">
+          <input type="text" name="clan_game" id="clan_game" value="<?php echo $clan_game;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Which game are you playing. So what is your gameserver running?</td>
       </tr>
       <tr>
         <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Clan Game short</td>
         <td width="45%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
-          <input type="text" name="clan_game_short" id="clan_game_short" value="<?php echo $clan_game_short;?>">
+          <input type="text" name="clan_game_short" id="clan_game_short" value="<?php echo $clan_game_short;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">What is your game name in short?</td>
       </tr>
@@ -313,7 +313,7 @@ if($ACP==true)
       <tr>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">PB directory</td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
-          <input type="text" name="pb_dir" id="pb_dir" value="<?php echo $pb_dir;?>">
+          <input type="text" name="pb_dir" id="pb_dir" value="<?php echo $pb_dir;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p>Directory of punkbuster on your ftp gameserver.</p>
           <p>Use '/' and don't use 'pb/' with a trailing slash.</p></td>
@@ -335,14 +335,14 @@ You still have the possibility to force an update manually by running 'update.ph
       <tr>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Update time</td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
-          <input type="text" name="update_time" id="update_time" value="<?php echo $update_time;?>">
+          <input type="text" name="update_time" id="update_time" value="<?php echo $update_time;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">The update time is in seconds. Use a small update time if gameserver is crowded (since a lot of new screens are captured), for example a public gameserver. However keep in mind that bandwith will also increase if update time is smaller. Recommended: 86400 seconds</td>
       </tr>
       <tr>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">pb_sv_SsCeiling</td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
-          <input type="text" name="pb_sv_ssceiling" id="pb_sv_ssceiling" value="<?php echo $pb_sv_ssceiling;?>">
+          <input type="text" name="pb_sv_ssceiling" id="pb_sv_ssceiling" value="<?php echo $pb_sv_ssceiling;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p>To find your number open this file 'pbsv.cfg' and look for 'pb_sv_SsCeiling'. The file should be located in your 'pb' directory on your ftp of your gameserver. <br>
           It is recommended to have a small amount as possible to save some bandwith and space. NB both values of 'pb_sv_SsCeiling' as in 'pbsv.cfg' and this config file should be the same <br>
@@ -354,7 +354,7 @@ You still have the possibility to force an update manually by running 'update.ph
       <tr>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">PBSV download dir</td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
-          <input type="text" name="pbsv_download_dir" id="pbsv_download_dir" value="<?php echo $pbsv_download_dir;?>">
+          <input type="text" name="pbsv_download_dir" id="pbsv_download_dir" value="<?php echo $pbsv_download_dir;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p>If you connect to your webserver through FTP, what is the location of the download folder of PBSViewer? copy past or type your path directly after login</p>
           <p>omit trailing slash /</p></td>
@@ -397,7 +397,7 @@ You still have the possibility to force an update manually by running 'update.ph
       <tr>
         <td width="20%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">max logs on webserver</td>
         <td width="45%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
-          <input type="text" name="auto_del_count" id="auto_del_count" value="<?php echo $auto_del_count;?>">
+          <input type="text" name="auto_del_count" id="auto_del_count" value="<?php echo $auto_del_count;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
           </label></td>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p>Default	=	4, 'max logs on webserver' has to be lower than PB_SV_LogCeiling. Otherwise there won't be an auto-delete. This is the number of logs stored on your webserver<br>
           If you choose 0, then log files are deleted immediately after updating<br>
@@ -410,7 +410,7 @@ You still have the possibility to force an update manually by running 'update.ph
       <tr>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Screens on main page</td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
-          <input type="text" name="nr_screens_main" id="nr_screens_main" value="<?php echo $nr_screens_main;?>">
+          <input type="text" name="nr_screens_main" id="nr_screens_main" value="<?php echo $nr_screens_main;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Default=10, on the main page the latest x screens are shown to save some bandwith</td>
       </tr>
@@ -431,14 +431,14 @@ You still have the possibility to force an update manually by running 'update.ph
       <tr>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Image width</td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
-          <input type="text" name="width" id="width" value="<?php echo $width;?>">
+          <input type="text" name="width" id="width" value="<?php echo $width;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Thumbnail image width</td>
       </tr>
       <tr>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Image height</td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
-          <input type="text" name="height" id="height" value="<?php echo $height;?>">
+          <input type="text" name="height" id="height" value="<?php echo $height;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Thumbnail image height</td>
       </tr>
@@ -472,21 +472,21 @@ You still have the possibility to force an update manually by running 'update.ph
       <tr>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Minimal screen download size</td>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
-          <input type="text" name="min_screen_size" id="min_screen_size" value="<?php echo $min_screen_size;?>">
+          <input type="text" name="min_screen_size" id="min_screen_size" value="<?php echo $min_screen_size;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Screens with a size smaller than the 'Minimal screen download size' are not downloaded.</td>
       </tr>
       <tr>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Script load time</td>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
-          <input type="text" name="script_load_time" id="script_load_time" value="<?php echo $script_load_time;?>">
+          <input type="text" name="script_load_time" id="script_load_time" value="<?php echo $script_load_time;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">After this time the script does stop running, if you for instance need   to download a lot of screens then it is recommended to have a high   script load time. If you are not sure, then use default setting. Default=600 seconds or 10 minutes, after 600 Maximum execution time error will be shown.</td>
       </tr>
       <tr>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Web log dir</td>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
-          <input type="text" name="weblog_dir" id="weblog_dir" value="<?php echo $weblog_dir;?>">
+          <input type="text" name="weblog_dir" id="weblog_dir" value="<?php echo $weblog_dir;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">directory where the log files are stored. The directory should be CHMODDED to 777.</td>
       </tr>
