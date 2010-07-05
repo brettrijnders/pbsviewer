@@ -4,7 +4,7 @@
     will download pb screens. Those downloaded screens are published on
     your website.
     
-    Copyright (C) 2009  B.S. Rijnders aka BandAhr
+    Copyright (C) 2010  B.S. Rijnders aka BandAhr
 
     PBSViewer is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
