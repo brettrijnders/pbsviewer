@@ -1744,6 +1744,29 @@ function is_admin($admin_ip)
 	return $admin;
 }
 
+// new since version 2.0.0.0
+function check_ftp_web_connection($FTP_HOST,$FTP_PORT,$FTP_USER,$FTP_PASS,$DIR)
+{
+	$error	=	array(false,false,false);
+
+	//	ftp connect
+	if($connect	=	@ftp_connect($FTP_HOST,$FTP_PORT)) $connection=true;
+
+	//	check login
+	if($login		=	@ftp_login($connect,$FTP_USER,$FTP_PASS)) $loggedIn=true;
+
+	if($connect && $login)
+	{
+		//	check if directory exists
+		if(ftp_chdir($connect,$DIR))	$dir=true;
+	}
+
+	ftp_close($connect);
+
+	$error	=	array($connection,$loggedIn,$dir);
+	return $error;
+}
+
 ################################
 //	new functions since 1.2.2.1
 //	get screen info on header page
