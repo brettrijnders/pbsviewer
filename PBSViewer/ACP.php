@@ -112,7 +112,7 @@ if(isset($_POST['save'])&&$ACP==true)
 	// if PB_log = true, than check ftp weblogin details whether it works or not
 	if ($_POST['pb_log']==1)
 	{
-		$check_ftp	=	check_ftp_web_connection(FTP_HOST_WEB,FTP_PORT_WEB,FTP_USER_WEB,FTP_PASS_WEB,$pbsv_download_dir);
+		$check_ftp	=	check_ftp_web_connection(FTP_HOST_WEB,FTP_PORT_WEB,FTP_USER_WEB,FTP_PASS_WEB,$_POST['pbsv_download_dir']);
 		//	check if connection is possible
 		if($check_ftp[0])
 		{
@@ -141,7 +141,7 @@ if(isset($_POST['save'])&&$ACP==true)
 	
 	if ($_POST['reset']==1)
 	{
-		$check_ftp	=	check_ftp_web_connection(FTP_HOST_WEB,FTP_PORT_WEB,FTP_USER_WEB,FTP_PASS_WEB,$pbsv_download_dir);
+		$check_ftp	=	check_ftp_web_connection(FTP_HOST_WEB,FTP_PORT_WEB,FTP_USER_WEB,FTP_PASS_WEB,$_POST['pbsv_download_dir']);
 		//	check if connection is possible
 		if($check_ftp[0])
 		{
