@@ -62,40 +62,36 @@ h2 {
         <td align="left" class="h2_text"><h1 align="center"><br>
             <span class="Title">PBSViewer</span></h1>
           <p align="center"><img src="style/img/favicon.ico" alt="Logo PBSViewer"></p>
-          <p align="center"><strong>Version 1.2.2.3</strong></p>
+          <p align="center"><strong>Version 2.0.0.0</strong></p>
           <p align="center">Punkbuster screenshot viewer</p>
           <h1>          Preface</h1>
-          <p class="h1_text">Welcome, thank you very much for downloading this tool. I have put a lot of hours into this project. This tool is based on an older program which I had used for my clan. Now I have made a totally new version with better updating features and less bugs. I hope you will enjoy it, so let's start!</p>
+          <p class="h1_text">Welcome, thank you very much for downloading this tool. I have put a lot of hours into this project, I hope you like it. This tool is based on an older program which I had used for my clan. Now I have made a totally new version with better updating features and less bugs. I hope you will enjoy it, so let's start!</p>
           <hr align="center" width="90%">
             <h1>Installation</h1>
           <ol>
               <li>Unzip package to a new directory.</li>
             <li>Create a database.</li>
-            <li>Upload everything.</li>
+            <li>Upload everything to your ftp webserver.</li>
             <li>CHMOD directory '<strong><em>inc</em></strong>' to <strong>777</strong>.</li>
             <li>CHMOD file '<strong><em>lastUpdate.txt</em></strong>' to <strong>666</strong>.</li>
             <li>CHMOD directory <strong><em>'download'</em></strong> to <strong>777</strong>.</li>
-            <li>Please check if you followed all the above mentioned steps correctly. If so then open '<strong><em>install\install.php</em></strong>' in your browser and follow the instructions. If you don't succeed to install succesfully then go to <a href="#contact" target="_self">contact</a> section.</li>
+            <li>Please check if you followed all the above mentioned steps correctly. If so then open '<strong><em>install/install.php</em></strong>' in your browser and follow the instructions. If you don't succeed to install succesfully then go to <a href="#contact" target="_self">contact</a> section.</li>
             <li>Delete <em><strong>'install'</strong></em> directory.</li>
-            <li>CHMOD directory '<strong><em>inc</em></strong>'  to <strong>755</strong>.</li>
-            <li>If you run the script for the first time, you need to update manually. But before you update do the following thing first <strong>if needed<a href="#note" target="_self">*</a></strong>.</li>
-            <li>Open '<em><strong>reset.php</strong></em>' and click on reset.</li>
+            <li>CHMOD directory '<strong><em>inc</em></strong>' back to <strong>755</strong>.</li>
+            <li>If you run the script for the first time, you need to update manually. But before you update do the following<a href="#note"> thing first <strong>if needed*</strong>.</a></li>
             <li>Now you can go update manually. Do this after you have played in your gameserver for a while. Just open <strong><em>'index</em>.php'</strong> in your browser and click on update. </li>
             </ol>
-          <p class="h1_text"><strong><a name="note" id="note">*</a></strong>It is <strong>recommended</strong> to make a back-up of your files located in <strong>'<em>pb/svss</em>'</strong> and <strong>'<em>pb/svlogs</em>'</strong> located on your gameserver. It is also <strong>recommended</strong> to delete those screens and log files before updating. Especially if you have  <strong>more than 100</strong> screens. Otherwise it will take you a long time to download all the screens and log files. Those screens and logs are deleted in step 11 with use of '<em><strong>reset.php</strong></em>'.</p>
-<hr align="center" width="90%">
+          <p class="h1_text"><strong><a name="note" id="note">*</a></strong>It is <strong>recommended</strong> to make a back-up of your screens and log files located in <strong>'<em>pb/svss</em>'</strong> and <strong>'<em>pb/svlogs</em>'</strong> respectively on your ftp gameserver. After back-up it is also <strong>recommended</strong> to delete those screens and log files before updating. Especially if you have  <strong>more than 100</strong> screens. Otherwise it will take you a long time to download all the screens and log files. Those screens and logs need to be removed manually, unless you have enable the reset feature during install. If you have enabled the reset feature then you should be able to delete those logs and screens automatically by using the reset button on main page.</p>
           <h1>Updating</h1>
-          <p class="h1_text">It is recommended to do a reinstall instead of updating, because config might have changed.<br>
-            Please before updating make a backup  of files you have modified.</p>
-          <h2>Updating from  version 1.2.2.1 to 1.2.2.2</h2>
+          <p class="h1_text">Sorry no easy update feature this time.... A fresh reinstall is recommended, because config and database have been changed drastically. Steps you have to follow are:</p>
           <ol>
-            <li>Upload the  new PBSViewer files.</li>
-            <li>CHMOD file '<strong><em>lastUpdate.txt</em></strong>' (if needed) to <strong>666</strong>.</li>
-            <li>CHMOD directory <strong><em>'download'</em></strong> (if needed) to <strong>777</strong>.</li>
+            <li>Delete database/drop all tables.</li>
+            <li>Delete old files on your ftp webserver.</li>
+            <li>Follow the installation steps shown above.</li>
           </ol>
 <hr align="center" width="90%">
             <h1><a name="contact" id="contact"></a>Contact</h1>
-          <p class="h1_text">In case you have a question/suggestion or found a bug, please leave a comment on my project page or contact me via <a href="http://beesar.com/contct/" target="_blank">mail</a>.</p>
+          <p class="h1_text">In case you have a question/suggestion or found a bug, please leave a comment on my <a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank">project page</a> or contact me via <a href="http://www.beesar.com/contact/" target="_blank">mail</a>.</p>
           <hr align="center" width="90%">
             <h1>System recommendations</h1>
           <ul>
@@ -105,24 +101,26 @@ h2 {
             <li><strong>Punkbuster</strong> server with ftp acces to your <strong>pb screens directory</strong>.</li>
           </ul>
           <h2>Help needed</h2>
-          <p class="h2_text">Since I don't have the time to test all systems, I need your help. If you have installed this tool under another environment, <a href="#contact">please tell me</a> so I can change this list.</p>
+          <p class="h2_text">Since I don't have the time to test all environments, I need your help. If you have installed this tool under another environment, <a href="#contact">please tell me</a> so I can change this list.</p>
           <hr align="center" width="90%">
             <h1>Supported games</h1>
           <p class="h1_text">Below is a list of the games which are supported.</p>
           <ul>
               <li><strong>BF2</strong> - Battlefield 2</li>
               <li><strong>COD4</strong> - Call of Duty 4</li>
+              <li><strong>BFBC2</strong> - Battlefield Bad Company 2</li>
           </ul>
-          <p class="h1_text">Probably there are more games which are compatible with this tool, but I haven't tested it. So if your game is not on the list it you can give it a try if you want. Keep in mind this tool does only support games which run on pb, <a href="http://www.evenbalance.com/" target="_blank">a full list of pb supported games can be seen here</a>. If this tool works for a game which is not mentioned in the above list, please <a href="#contact">contact me</a>. Then I can add your game to this list.<br>
+          <p class="h1_text">Probably there are more games which are compatible with this tool, but I haven't tested it. So if your game is not on the list you can give it a try if you want. Keep in mind this tool  only support games that run on pb, <a href="http://www.evenbalance.com/" target="_blank">a full list of pb supported games can be seen here</a>. If this tool works for a game that is not mentioned in the above list, please <a href="#contact">contact me</a>. Then I can add your game to this list.<br>
             </p>
           <hr align="center" width="90%">
             <h1>Final Word</h1>
             <p class="h1_text">PBViewer is free for everyone. I have put a lot of time in this project. If you want to help me, consider donating. Then I know for who I'm doing all this. It also keeps me motivated to bring out new updates for this tool. <br>
-              Next to this you can also consider  telling  a friend, or help your friend by setting it up.            </p>
+              Next to this you can also consider  telling  a friend, or help your friend by setting it up. If you are a developer and/or artist and you want to help with this project, please visit the <a href="http://code.google.com/p/pbsviewer/#Contributing" target="_blank">project page </a>and check out how you can help.</p>
             <h2 class="h1_text">Special thanks</h2>
-            <p class="h2_text">Here the people are listed who have helped me so far. Those people helped me with testing, sending log files, or made a donation. If you are not on the list, please <a href="#contact" target="_self">contact me</a></p>
+            <p class="h2_text">Here the people are listed who have helped me so far. Those people helped me with testing, sending log files or made a donation. If you are not on the list, please <a href="#contact" target="_self">contact me</a></p>
             <ul>
-              <li><a href="http://www.xfire.com/profile/caponx/" title="CORAX CAPONE" target="_blank">CORAX CAPONE</a> - <em>tested PBSViewer for CoD4 and sent some log files to me</em>.</li>
+              <li><a href="http://www.xfire.com/profile/caponx/" title="CORAX CAPONE" target="_blank">Corax Capone</a> - <em>tested PBSViewer for CoD4 and sent some log files to me</em>.</li>
+              <li>Paul rocco - <em>Tested PBSViewer for BFBC2, helped with spotting/fixing update bug.</em></li>
             </ul>
             <hr align="center" width="90%">
             <h1>Copyright</h1>
