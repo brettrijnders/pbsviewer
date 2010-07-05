@@ -122,7 +122,7 @@ if(isset($_POST['save'])&&$ACP==true)
 				//	check if PB directory does not exist
 				if(!$check_ftp[2])
 				{
-					$error_msg .= "<li>In order to use the pb_log setting first the ftp login details needs to be correct (check config.inc.php). Can\'t find directory, please specify right directory</li>";
+					$error_msg .= "<li>In order to use the pb_log setting first the ftp login details needs to be correct (check config.inc.php). Can't find directory, please specify right directory</li>";
 					$saving = false;
 				}
 			}
@@ -134,7 +134,7 @@ if(isset($_POST['save'])&&$ACP==true)
 		}
 		else 
 		{
-			$error_msg .= "<li>In order to use the pb_log setting first the ftp login details needs to be correct (check config.inc.php). Can\'t connect to ftp server, please check ip and port</li>";
+			$error_msg .= "<li>In order to use the pb_log setting first the ftp login details needs to be correct (check config.inc.php). Can't connect to ftp server, please check ip and port</li>";
 			$saving = false;
 		}
 	}
@@ -151,7 +151,7 @@ if(isset($_POST['save'])&&$ACP==true)
 				//	check if PB directory does not exist
 				if(!$check_ftp[2])
 				{
-					$error_msg .= "<li>In order to use the reset option first the ftp login details needs to be correct (check config.inc.php). Can\'t find directory, please specify right directory</li>";
+					$error_msg .= "<li>In order to use the reset option first the ftp login details needs to be correct (check config.inc.php). Can't find directory, please specify right directory</li>";
 					$saving = false;
 				}
 			}
@@ -163,7 +163,7 @@ if(isset($_POST['save'])&&$ACP==true)
 		}
 		else 
 		{
-			$error_msg .= "<li>In order to use the reset option first the ftp login details needs to be correct (check config.inc.php). Can\'t connect to ftp server, please check ip and port</li>";
+			$error_msg .= "<li>In order to use the reset option first the ftp login details needs to be correct (check config.inc.php). Can't connect to ftp server, please check ip and port</li>";
 			$saving = false;
 		}
 	}
