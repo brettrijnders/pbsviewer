@@ -64,7 +64,12 @@ $startTime	=	get_microtime();
 </head>
 
 <body>
-<p>&nbsp;</p>
+		<table width="100%" border="0" align="center">
+  <tr>
+    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a></td>
+  </tr>
+</table>
+<br>
 <table width="80%" border="0" align="center">
   <tr>
     <td align="center" class="bg_reset_table_row1"><span class="txt_light">:: Resetting ::</span></td>
@@ -111,7 +116,12 @@ if($reset==true&&RESET==true)
 </head>
 
 <body>
-<p>&nbsp;</p>
+		<table width="100%" border="0" align="center">
+  <tr>
+    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a></td>
+  </tr>
+</table>
+<br>
 <table width="80%" border="0" align="center">
   <tr>
     <td align="center" class="bg_reset_table_row1"><span class="txt_light">:: resetting ::</span></td>

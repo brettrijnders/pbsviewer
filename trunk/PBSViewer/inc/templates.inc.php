@@ -68,14 +68,21 @@ if(!check_install_del()) template_install_del();
 		<?
 	}
 	
+template_logo_header();
+}
+
+// new since version 2.0.0.0
+function template_logo_header()
+{
 	?>
 	
-	<table width="100%" border="0" align="center">
+		<table width="100%" border="0" align="center">
   <tr>
     <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a></td>
   </tr>
 </table>
 <br>
+	
 	<?
 }
 
