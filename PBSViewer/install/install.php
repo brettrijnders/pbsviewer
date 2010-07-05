@@ -34,7 +34,35 @@ switch($step)
 {
 	//step 0
 	case 0:
-			
+
+	// initialization
+	$_SESSION['ftp_host_web_configured'] = false;
+	$_SESSION['pb_reset_option_configured'] = false;
+	
+	// config initialization
+	$_SESSION['pb_dir'] 			=	'';
+	$_SESSION['custom_update'] 		=	0;
+	$_SESSION['update_time'] 		=	86400;
+	$_SESSION['pb_sv_ssceiling']	=	10000;
+	$_SESSION['clan_name']			=	'';
+	$_SESSION['clan_tag']			=	'';
+	$_SESSION['clan_game']			=	'';
+	$_SESSION['clan_game_short']	=	'';
+	$_SESSION['pb_log'] 			= 	0;
+	$_SESSION['auto_del_count'] 	= 	-1;
+	$_SESSION['pbsv_download_dir']	= 	'';
+	$_SESSION['reset']				=	0;
+	$_SESSION['screens_per_row']	=	4;
+	$_SESSION['nr_screens_main']	=	10;
+	$_SESSION['width']				=	200;
+	$_SESSION['height']				=	200;
+	$_SESSION['pbsvss_updater']		=	1;
+	$_SESSION['script_load_time']	=	600;
+	$_SESSION['debug']				=	0;
+	$_SESSION['weblog_dir']			=	'download';
+	
+	
+	
 	template_start();
 	
 	break;
@@ -121,8 +149,8 @@ if(\$key==md5(\$_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 	break;
 	
 	case 2:
-	
-							if($_POST['db_host']!=''&&$_POST['username']!=''&&$_POST['password']!=''&&$_POST['db_name']!='')
+
+						if($_POST['db_host']!=''&&$_POST['username']!=''&&$_POST['password']!=''&&$_POST['db_name']!='')
 						{
 							if($_POST['password']=='-') $_POST['password']='';					
 							
@@ -142,22 +170,13 @@ if(\$key==md5(\$_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 								{
 									//	append new data to file
 									$data_app	=	"	//	mysql settings (required)
-			define('DB_HOST','".$_POST['db_host']."');								//	Default=localhost
-			define('DB_USER','".$_POST['username']."');
-			define('DB_PASS','".$_POST['password']."');
-			define('DB_NAME','".$_POST['db_name']."');\n";
+	define('DB_HOST','".$_POST['db_host']."');								//	Default=localhost
+	define('DB_USER','".$_POST['username']."');
+	define('DB_PASS','".$_POST['password']."');
+	define('DB_NAME','".$_POST['db_name']."');\n\n";
 									
 									append_config($data_app);
 									
-									//	create mysql table to insert values that are being configured during install
-									$sql_create	=	"CREATE TABLE `settings`
-(
-`optionID` INT(2) NOT NULL AUTO_INCREMENT,
-`name` TEXT NOT NULL, 
-`value` TEXT,
-PRIMARY KEY(`optionID`)
-);";
-				mysql_query($sql_create) or die(mysql_error());
 									
 								template_ftp_settings();
 				
@@ -182,8 +201,7 @@ PRIMARY KEY(`optionID`)
 	break;
 	
 	case 3:
-	connect_DB($_SESSION['db_host'],$_SESSION['username'],$_SESSION['password'],$_SESSION['db_name']);
-	
+
 					if($_POST['ftp_ip']!=''&&$_POST['ftp_port']!=''&&$_POST['ftp_user']!=''&&$_POST['ftp_password']!=''&&$_POST['pb_dir']!='')
 					{
 						$check_ftp	=	check_ftp_connection($_POST['ftp_ip'],$_POST['ftp_port'],$_POST['ftp_user'],$_POST['ftp_password'],$_POST['pb_dir']);
@@ -199,17 +217,15 @@ PRIMARY KEY(`optionID`)
 									{
 										//	append new data to file
 										$data_app	=	"	//	ftp settings of your gameserver (required)
-				define('FTP_HOST','".$_POST['ftp_ip']."');
-				define('FTP_PORT','".$_POST['ftp_port']."');									//	Default=21
-				define('FTP_USER','".$_POST['ftp_user']."');
-				define('FTP_PASS','".$_POST['ftp_password']."');\n
+	define('FTP_HOST','".$_POST['ftp_ip']."');
+	define('FTP_PORT','".$_POST['ftp_port']."');									//	Default=21
+	define('FTP_USER','".$_POST['ftp_user']."');
+	define('FTP_PASS','".$_POST['ftp_password']."');\n
 				
 				";
 										
-										$pb_dir	=	addslashes($_POST['pb_dir']);
-										$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('pb_dir','".$pb_dir."');";
-										mysql_query($mysql_insert) or die(mysql_error());
-										
+										$_SESSION['pb_dir']	=	addslashes($_POST['pb_dir']);
+																				
 										
 										append_config($data_app);
 																
@@ -242,7 +258,7 @@ PRIMARY KEY(`optionID`)
 	break;
 	
 	case 4:
-	connect_DB($_SESSION['db_host'],$_SESSION['username'],$_SESSION['password'],$_SESSION['db_name']);
+	
 	if($_POST['custom_update']!='')
 				{
 					if($_POST['update_time']!=''||$_POST['update_time']<0)
@@ -261,7 +277,7 @@ PRIMARY KEY(`optionID`)
 								//	user can give an empty ip if they use default input
 								if($admin_ip[$i]!='')
 								{
-									$data_app.="\$admin_ip[".$i."]	=	'".$admin_ip[$i]."';\n";
+									$data_app.="	\$admin_ip[".$i."]	=	'".$admin_ip[$i]."';\n";
 								}
 							}
 							
@@ -269,14 +285,10 @@ PRIMARY KEY(`optionID`)
 							
 							append_config($data_app);
 							
-							$_POST['custom_update']=='true' ? $custom_update = 1: $custom_update = 0;
-							$update_time	=	addslashes($_POST['update_time']);
+							$_POST['custom_update']=='true' ? $_SESSION['custom_update'] = 1: $_SESSION['custom_update'] = 0;
+							$_SESSION['update_time']	=	addslashes($_POST['update_time']);
 							
-							$mysql_insert	=	"INSERT INTO `settings` (`name`,`value`) VALUES ('update_time','".$update_time."');";					
-							mysql_query($mysql_insert) or die(mysql_error());;
-							
-							$mysql_insert	=	"INSERT INTO `settings` (`name`,`value`) VALUES ('custom_update','".$custom_update."');";	
-							mysql_query($mysql_insert) or die(mysql_error());;
+
 							
 							template_pb_settings();
 			
@@ -299,15 +311,12 @@ PRIMARY KEY(`optionID`)
 	break;
 	
 	case 5:
-	connect_DB($_SESSION['db_host'],$_SESSION['username'],$_SESSION['password'],$_SESSION['db_name']);
 	
 				if($_POST['pb_ss_ceiling']>0)
 				{
 					
-					$pb_sv_ssceiling	=	addslashes($_POST['pb_ss_ceiling']);
-					$mysql_insert	=	"INSERT INTO `settings` (`name`,`value`) VALUES ('pb_sv_ssceiling','".$pb_sv_ssceiling."');";
-					mysql_query($mysql_insert) or die(mysql_error());;
-					
+					$_SESSION['pb_sv_ssceiling']	=	addslashes($_POST['pb_ss_ceiling']);
+									
 					
 					template_seo_settings();
 				}
@@ -321,27 +330,14 @@ PRIMARY KEY(`optionID`)
 	break;
 	
 	case 6:
-	connect_DB($_SESSION['db_host'],$_SESSION['username'],$_SESSION['password'],$_SESSION['db_name']);
-		
+	
 				if($_POST['clan_name']!=''||$_POST['clan_tag']!=''||$_POST['clan_game_short']!=''||$_POST['clan_game_full']!='')
 				{
-					$clan_name	=	addslashes($_POST['clan_name']);
-					$clan_tag	=	addslashes($_POST['clan_tag']);
-					$clan_game	=	addslashes($_POST['clan_game_full']);
-					$clan_game_short	=	addslashes($_POST['clan_game_short']);
+					$_SESSION['clan_name']	=	addslashes($_POST['clan_name']);
+					$_SESSION['clan_tag']	=	addslashes($_POST['clan_tag']);
+					$_SESSION['clan_game']	=	addslashes($_POST['clan_game_full']);
+					$_SESSION['clan_game_short']	=	addslashes($_POST['clan_game_short']);
 					
-					$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('clan_name','".$clan_name."');";
-					mysql_query($mysql_insert) or die(mysql_error());;
-					
-					$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('clan_tag','".$clan_tag."');";
-					mysql_query($mysql_insert) or die(mysql_error());;
-					
-					$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('clan_game','".$clan_game."');";
-					mysql_query($mysql_insert) or die(mysql_error());;
-					
-					$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('clan_game_short','".$clan_game_short."');";
-					mysql_query($mysql_insert) or die(mysql_error());;
-									
 					template_log_option();
 				}
 				else 
@@ -353,26 +349,20 @@ PRIMARY KEY(`optionID`)
 	
 	case 7:
 	
-	connect_DB($_SESSION['db_host'],$_SESSION['username'],$_SESSION['password'],$_SESSION['db_name']);
-	
 				if($_POST['pb_log']=='true')
 				{
+					$_SESSION['pb_log'] = 1;					
 					
-					$mysql_insert	=	"INSERT INTO `settings` (`name`,`value`) VALUES ('pb_log','1');";
-					mysql_query($mysql_insert) or die(mysql_error());;
-					
+					// show template for step 8
 					template_log_settings();
 				}
 				//	or other page if log option is false
 				else 
 				{
-					$mysql_insert	=	"INSERT INTO `settings` (`name`,`value`) VALUES ('pb_log','0');";
-					mysql_query($mysql_insert) or die(mysql_error());;
-					
-					$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('auto_del_count','-1');";
-					mysql_query($mysql_insert) or die(mysql_error());;
-			
-					
+					$_SESSION['pb_log'] = 0;
+					$_SESSION['auto_del_count'] = -1;
+								
+					// show template for step 10
 					template_reset_option();
 				}
 	
@@ -380,13 +370,10 @@ PRIMARY KEY(`optionID`)
 	
 	case 8:
 	
-	connect_DB($_SESSION['db_host'],$_SESSION['username'],$_SESSION['password'],$_SESSION['db_name']);
-	
-					if($_POST['auto_del_count']>=0)
+				if($_POST['auto_del_count']>=0)
 				{
-					$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('auto_del_count','".addslashes($_POST['auto_del_count'])."');";
-					mysql_query($mysql_insert) or die(mysql_error());;
-					
+					$_SESSION['auto_del_count'] = addslashes($_POST['auto_del_count']);
+									
 					template_ftp_web_log();
 				}
 				else 
@@ -397,8 +384,6 @@ PRIMARY KEY(`optionID`)
 	break;
 	
 	case 9:	
-	
-	connect_DB($_SESSION['db_host'],$_SESSION['username'],$_SESSION['password'],$_SESSION['db_name']);
 	
 				if($_POST['ftp_host_web']!=''&&$_POST['ftp_port_web']!=''&&$_POST['ftp_user_web']!=''&&$_POST['ftp_password_web']!=''&&$_POST['pbsv_download']!='')
 				{
@@ -414,27 +399,41 @@ PRIMARY KEY(`optionID`)
 							if($check_ftp[2])
 							{
 								$data_app	=	"	//	ftp settings of your webserver (optional)
-		//	only fill in if you are going to use logging option PB_log
-		define('FTP_HOST_WEB','".$_POST['ftp_host_web']."');
-		define('FTP_PORT_WEB','".$_POST['ftp_port_web']."');								//	Default=21
-		define('FTP_USER_WEB','".$_POST['ftp_user_web']."');
-		define('FTP_PASS_WEB','".$_POST['ftp_password_web']."');
+	//	only fill in if you are going to use logging option PB_log
+	define('FTP_HOST_WEB','".$_POST['ftp_host_web']."');
+	define('FTP_PORT_WEB','".$_POST['ftp_port_web']."');								//	Default=21
+	define('FTP_USER_WEB','".$_POST['ftp_user_web']."');
+	define('FTP_PASS_WEB','".$_POST['ftp_password_web']."');
 	
 ";
 								$data_app	.= "\n\n";
 								
 								append_config($data_app);
 								
-
-								$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('pbsv_download_dir','".addslashes($_POST['pbsv_download'])."');";
-								mysql_query($mysql_insert) or die(mysql_error());;
+								$_SESSION['pbsv_download_dir']	= 	addslashes($_POST['pbsv_download']);
+								
 								
 								//$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('reset','1');";
 								//mysql_query($mysql_insert) or die(mysql_error());;						
 								
 								$_SESSION['ftp_host_web_configured'] = true;
 								
-								template_reset_option();
+								//	if reset option already was configured then go directly to template options
+								if (isset($_SESSION['pb_reset_option_configured']))
+								{
+									if ($_SESSION['pb_reset_option_configured']==true)
+									{
+										template_template_settings();
+									}
+									else 
+									{
+										template_reset_option();
+									}
+								}
+								else 
+								{
+									template_reset_option();
+								}
 							}
 							else 
 							{
@@ -460,27 +459,49 @@ PRIMARY KEY(`optionID`)
 	
 	case 10:
 	
-	connect_DB($_SESSION['db_host'],$_SESSION['username'],$_SESSION['password'],$_SESSION['db_name']);
-	
-					if($_POST['pb_reset_option']=='true')
+				if($_POST['pb_reset_option']=='true')
 				{
-					$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('reset','1');";
-					mysql_query($mysql_insert) or die(mysql_error());;	
 					
-					if ($_SESSION['ftp_host_web_configured']==true)
-					{
-						template_template_settings();
+					$_SESSION['reset']	=	1;
+						
+										
+					if(isset($_SESSION['ftp_host_web_configured']))
+					{					
+						if ($_SESSION['ftp_host_web_configured']==true)
+						{
+							template_template_settings();
+						}
+						else 
+						{
+							//	used to prevent that user is being redirected to this page again
+							$_SESSION['pb_reset_option_configured'] = true;
+							template_ftp_web_log();
+						}
 					}
 					else 
 					{
+						//	used to prevent that user is being redirected to this page again
+						$_SESSION['pb_reset_option_configured'] = true;
 						template_ftp_web_log();
 					}					
 					
 				}
 				else 
 				{
-					$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('reset','0');";
-					mysql_query($mysql_insert) or die(mysql_error());;	
+					$data_app	=	"	//	ftp settings of your webserver (optional)
+	//	only fill in if you are going to use logging option PB_log
+	define('FTP_HOST_WEB','Your ftp');
+	define('FTP_PORT_WEB','FTP port');							//	Default=21
+	define('FTP_USER_WEB','username');
+	define('FTP_PASS_WEB','password');
+	
+";
+								$data_app	.= "\n\n";
+								
+								append_config($data_app);
+					
+					$_SESSION['reset']	=	0;								
+				
 					
 					template_template_settings();
 				}
@@ -488,26 +509,20 @@ PRIMARY KEY(`optionID`)
 	break;
 	
 	case 11:
-	
-	connect_DB($_SESSION['db_host'],$_SESSION['username'],$_SESSION['password'],$_SESSION['db_name']);
-	
-					if($_POST['nr_screens_main']>0)
+		
+				if($_POST['nr_screens_main']>0)
 				{
 					if($_POST['NR']>0)
 					{
 						if($_POST['IMG_H']>0&&$_POST['IMG_W']>0)
 						{
-							$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('screens_per_row','".$_POST['NR']."');";
-							mysql_query($mysql_insert) or die(mysql_error());;
 							
-							$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('nr_screens_main','".$_POST['nr_screens_main']."');";
-							mysql_query($mysql_insert) or die(mysql_error());;
 							
-							$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('width','".$_POST['IMG_W']."');";
-							mysql_query($mysql_insert) or die(mysql_error());;
+							$_SESSION['screens_per_row']	=	addslashes($_POST['NR']);
+							$_SESSION['nr_screens_main']	=	addslashes($_POST['nr_screens_main']);
+							$_SESSION['width']	=	addslashes($_POST['IMG_W']);
+							$_SESSION['height']	=	addslashes($_POST['IMG_H']);
 							
-							$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('height','".$_POST['IMG_H']."');";					
-							mysql_query($mysql_insert) or die(mysql_error());;
 				
 							
 							template_additional_settings();
@@ -531,9 +546,7 @@ PRIMARY KEY(`optionID`)
 	
 	case 12:
 	
-	connect_DB($_SESSION['db_host'],$_SESSION['username'],$_SESSION['password'],$_SESSION['db_name']);
-	
-					if($_POST['script_load_time']>30)
+				if($_POST['script_load_time']>30)
 				{
 					$data_app	=	"
 }
@@ -546,19 +559,11 @@ else
 ?>";
 					append_config($data_app);
 					
-					$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('pbsvss_updater','".$_POST['pbsvss_updater']."');";
-					mysql_query($mysql_insert) or die(mysql_error());;
-					
-					$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('script_load_time','".$_POST['script_load_time']."');";
-					mysql_query($mysql_insert) or die(mysql_error());;
-					
-					$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('debug','0');";
-					mysql_query($mysql_insert) or die(mysql_error());;
-					
-					$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('weblog_dir','download');";
-					mysql_query($mysql_insert) or die(mysql_error());;
-				
-					
+					$_SESSION['pbsvss_updater']	=	addslashes($_POST['pbsvss_updater']);									
+					$_SESSION['script_load_time']	=	addslashes($_POST['script_load_time']);
+					$_SESSION['debug']	=	0;
+					$_SESSION['weblog_dir']	=	'download';
+										
 					template_create_db();				
 				}
 				else 
@@ -643,6 +648,77 @@ PRIMARY KEY(`id`)
 				
 				mysql_query($sql_create);
 				
+
+				//	create mysql table to insert values that are being configured during install
+				$sql_create	=	"CREATE TABLE `settings`
+(
+`optionID` INT(2) NOT NULL AUTO_INCREMENT,
+`name` TEXT NOT NULL, 
+`value` TEXT,
+PRIMARY KEY(`optionID`)
+);";
+				mysql_query($sql_create) or die(mysql_error());
+				
+				$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('pb_dir','".$_SESSION['pb_dir']."');";
+				mysql_query($mysql_insert) or die(mysql_error());
+				
+				$mysql_insert	=	"INSERT INTO `settings` (`name`,`value`) VALUES ('update_time','".$_SESSION['update_time']."');";					
+				mysql_query($mysql_insert) or die(mysql_error());
+							
+				$mysql_insert	=	"INSERT INTO `settings` (`name`,`value`) VALUES ('custom_update','".$_SESSION['custom_update']."');";	
+				mysql_query($mysql_insert) or die(mysql_error());
+										
+				$mysql_insert	=	"INSERT INTO `settings` (`name`,`value`) VALUES ('pb_sv_ssceiling','".$_SESSION['pb_sv_ssceiling']."');";
+				mysql_query($mysql_insert) or die(mysql_error());
+				
+				$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('clan_name','".$_SESSION['clan_name']."');";
+				mysql_query($mysql_insert) or die(mysql_error());
+					
+				$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('clan_tag','".$_SESSION['clan_tag']."');";
+				mysql_query($mysql_insert) or die(mysql_error());
+					
+				$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('clan_game','".$_SESSION['clan_game']."');";
+				mysql_query($mysql_insert) or die(mysql_error());
+					
+				$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('clan_game_short','".$_SESSION['clan_game_short']."');";
+				mysql_query($mysql_insert) or die(mysql_error());
+				
+				$mysql_insert	=	"INSERT INTO `settings` (`name`,`value`) VALUES ('pb_log','".$_SESSION['pb_log']."');";
+				mysql_query($mysql_insert) or die(mysql_error());
+				
+				$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('auto_del_count','".$_SESSION['auto_del_count']."');";
+				mysql_query($mysql_insert) or die(mysql_error());
+				
+				$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('pbsv_download_dir','".$_SESSION['pbsv_download_dir']."');";
+				mysql_query($mysql_insert) or die(mysql_error());
+				
+				$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('reset','".$_SESSION['reset']."');";
+				mysql_query($mysql_insert) or die(mysql_error());
+				
+				$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('screens_per_row','".$_SESSION['screens_per_row']."');";
+				mysql_query($mysql_insert) or die(mysql_error());
+				
+				$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('nr_screens_main','".$_SESSION['nr_screens_main']."');";
+				mysql_query($mysql_insert) or die(mysql_error());
+				
+				$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('width','".$_SESSION['width']."');";
+				mysql_query($mysql_insert) or die(mysql_error());
+				
+				$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('height','".$_SESSION['height']."');";					
+				mysql_query($mysql_insert) or die(mysql_error());
+				
+				$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('pbsvss_updater','".$_SESSION['pbsvss_updater']."');";
+				mysql_query($mysql_insert) or die(mysql_error());
+				
+				$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('script_load_time','".$_SESSION['script_load_time']."');";
+				mysql_query($mysql_insert) or die(mysql_error());
+				
+				$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('debug','".$_SESSION['debug']."');";
+				mysql_query($mysql_insert) or die(mysql_error());
+				
+				$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('weblog_dir','".$_SESSION['weblog_dir']."');";
+				mysql_query($mysql_insert) or die(mysql_error());
+							
 				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('admin_mail','');";
 				mysql_query($sql_insert) or die(mysql_error());;
 				
@@ -652,7 +728,7 @@ PRIMARY KEY(`id`)
 				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('min_screen_size','10000');";
 				mysql_query($sql_insert) or die(mysql_error());;				
 
-				
+				session_destroy();
 				template_final();
 	
 	break;
@@ -871,7 +947,7 @@ function template_update_settings()
     <form id="Install_DB" name="Install_DB" method="post" action="install.php?step=4">
       <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
-          <td colspan="3" class="bg_table_body"><p> If 'custom update' is <em>true</em> then the admin or a cron job should run the '<em><strong>update.php</strong></em>' which is located in in map <em><strong>'update'</strong></em>. If option is <em>false</em>, then it will update after x seconds which can can be configured with 'UPDATE_TIME' see below.You still have the possibility to force an update manually by running 'update.php' if you want.</p>
+          <td colspan="3" class="bg_table_body"><p> If 'custom update' is <em>true</em> then the admin or a cron job should run '<em><strong>update.php</strong></em>'. If option is <em>false</em>, then it will update after x seconds which can can be configured with 'Update time' see below.You still have the possibility to force an update manually by running 'update.php' if you want.</p>
             <p>&nbsp;</p></td>
           </tr>
         <tr>
@@ -896,7 +972,7 @@ function template_update_settings()
         </tr>
         <tr>
           <td colspan="3" class="bg_table_body"><p>&nbsp;</p>
-            <p>Fill in your ip, to find your ip one can use <a href="www.cmyip.com" title="ip adres of user" target="_blank">www.cmyip.com</a>, you can have more than one ip if your want. Separate with comma for multiple admins. The first ip address is your ip address. With your ip the program knows wether you are an admin or not.</p></td>
+            <p>Fill in your ip, to find your ip one can use <a href="www.cmyip.com" title="ip adres of user" target="_blank">www.cmyip.com</a>, you can have more than one ip if your want. Separate with comma for multiple admins. The first ip address is your ip address. With your ip the program knows whether you are an admin or not.</p></td>
           </tr>
         <tr>
           <td class="bg_table_body">admin(s)</td>
@@ -943,8 +1019,7 @@ function template_pb_settings()
       <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
           <td colspan="3" class="bg_table_body"><p>&nbsp;</p>
-            <p>If you do not set this correct then, 
-            one can get wrong results. To find your number open this file 'pbsv.cfg' and look for 'pb_sv_SsCeiling'. The file should be located in your 'pb' directory on your ftp of your gameserver. <br />
+            <p>If you do not set this correct then one can get wrong results. To find your number, open this file 'pbsv.cfg' and look for 'pb_sv_SsCeiling'. The file should be located in your 'pb' directory on your ftp of your gameserver. <br />
 It is recommended to have a small amount as possible to save some bandwidth and space. NB both values of '<em>pb_sv_SsCeiling</em>' as in '<em>pbsv.cfg</em>' and here should be the same <br />
 If you are not sure please take a large number like 10000 or contact me ;)<br />
             </p></td>
@@ -1191,7 +1266,7 @@ function template_log_option()
     <form id="Install_DB" name="Install_DB" method="post" action="install.php?step=7">
       <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
-          <td colspan="3" class="bg_table_body"><p> Gather more info about screens. With those logs you have the ability to check if screens you have download are the original ones. This is done with help of md5 check. From those logs also the or ip addresses of players can be found. If you set this option to true, then the gameserver logs are <strong>automatically deleted</strong> and partially stored on your webserver.<br />
+          <td colspan="3" class="bg_table_body"><p> Gather more info about screens. With those logs you have the ability to check if screens you have download are the original ones. This is done with help of md5 check. From those logs also the ip addresses of players can be found. If you set this option to true, then the gameserver logs are <strong>automatically deleted</strong> and partially stored on your webserver.<br />
             Another feature that becomes possible when you choose to use pb logs is the reset feature. As admin you will have an extra button on the main page. This button enables you to delete all the logs and screens from your gameserver and webserver automatically. Also the database will be cleaned automatically. It is recommended to use this button to save some space and/or when the script becomes to slow to load all those screens.</p>
             <p>If you don't want logging use false</p></td>
           </tr>
@@ -1257,7 +1332,7 @@ function template_log_settings()
         <tr>
           <td colspan="3" class="bg_table_body"><p>&nbsp;</p>
             <p>amount of logs  has to be lower than <em>'PB_SV_LogCeiling'</em>. Otherwise there won't be an auto-delete. This is the number of logs stored on your webserver<br />
-If you choose 0, then log files are deleted immediately after updating<br />
+If you choose 0, then log files are deleted immediately after updating.<br />
 If you don't want to delete the logs from your webserver leave this field empty</p></td>
           </tr>
         <tr>
