@@ -1597,7 +1597,7 @@ function template_final()
 
 function append_config($data)
 {
-	$fp		=	fopen('../inc/config.inc.php','a');
+		$fp		=	fopen('../inc/config.inc.php','a');
 		
 		fwrite($fp,$data);
 	

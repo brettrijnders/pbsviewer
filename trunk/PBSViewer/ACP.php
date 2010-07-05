@@ -109,8 +109,64 @@ if(isset($_POST['save'])&&$ACP==true)
 		$saving = false;
 	}
 	
-	// something for feature release:
 	// if PB_log = true, than check ftp weblogin details whether it works or not
+	if ($_POST['pb_log']==1)
+	{
+		$check_ftp	=	check_ftp_web_connection(FTP_HOST_WEB,FTP_PORT_WEB,FTP_USER_WEB,FTP_PASS_WEB,$pbsv_download_dir);
+		//	check if connection is possible
+		if($check_ftp[0])
+		{
+			//	check if we can login
+			if($check_ftp[1])
+			{
+				//	check if PB directory does not exist
+				if(!$check_ftp[2])
+				{
+					$error_msg .= "<li>In order to use the pb_log setting first the ftp login details needs to be correct (check config.inc.php). Can\'t find directory, please specify right directory</li>";
+					$saving = false;
+				}
+			}
+			else 
+			{
+				$error_msg .= "<li>In order to use the pb_log setting first the ftp login details needs to be correct (check config.inc.php). FTP login failed, check username and password please</li>";
+				$saving = false;
+			}
+		}
+		else 
+		{
+			$error_msg .= "<li>In order to use the pb_log setting first the ftp login details needs to be correct (check config.inc.php). Can\'t connect to ftp server, please check ip and port</li>";
+			$saving = false;
+		}
+	}
+	
+	if ($_POST['reset']==1)
+	{
+		$check_ftp	=	check_ftp_web_connection(FTP_HOST_WEB,FTP_PORT_WEB,FTP_USER_WEB,FTP_PASS_WEB,$pbsv_download_dir);
+		//	check if connection is possible
+		if($check_ftp[0])
+		{
+			//	check if we can login
+			if($check_ftp[1])
+			{
+				//	check if PB directory does not exist
+				if(!$check_ftp[2])
+				{
+					$error_msg .= "<li>In order to use the reset option first the ftp login details needs to be correct (check config.inc.php). Can\'t find directory, please specify right directory</li>";
+					$saving = false;
+				}
+			}
+			else 
+			{
+				$error_msg .= "<li>In order to use the reset option first the ftp login details needs to be correct (check config.inc.php). FTP login failed, check username and password please</li>";
+				$saving = false;
+			}
+		}
+		else 
+		{
+			$error_msg .= "<li>In order to use the reset option first the ftp login details needs to be correct (check config.inc.php). Can\'t connect to ftp server, please check ip and port</li>";
+			$saving = false;
+		}
+	}
 	
 	if ($saving==true)
 	{
@@ -463,7 +519,7 @@ You still have the possibility to force an update manually by running 'update.ph
             <option value="0" <?php if($reset=='0') echo "selected"; ?>>False</option>
           </select>
         </label></td>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Default	=	false. Reset feature allows admins to delete all screens and log files from your webserver and gameserver</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Default	=	false. Reset feature allows admins to delete all screens and log files from your webserver and gameserver. <br><br>In order to use this function you need to configure the login details of your ftp webhosting.</td>
       </tr>
       <tr>
         <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">pbsvss_updater</td>
@@ -486,7 +542,7 @@ You still have the possibility to force an update manually by running 'update.ph
             <option value="0" <?php if($pb_log=='0') echo "selected"; ?>>False</option>
           </select>
         </label></td>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p>gather more info about screens, like md5 check or ip address of players, with help of logs</p>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p>Gather more info about screens, like md5 check or ip address of players, with help of logs</p>
           <p>Default	=	false, If you don't want logging use false</p>
           <p>Note that the FTP webhost (not your gameserver) login details needs to be configured correctly in 'config.inc.php' if you want to use logging.</p></td>
       </tr>
@@ -584,7 +640,7 @@ You still have the possibility to force an update manually by running 'update.ph
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="weblog_dir" id="weblog_dir" value="<?php echo $weblog_dir;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">directory where the log files are stored. The directory should be CHMODDED to 777.</td>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Directory where the log files are stored. The directory should be CHMODDED to 777.</td>
       </tr>
       <tr>
         <td width="20%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Debug</td>
