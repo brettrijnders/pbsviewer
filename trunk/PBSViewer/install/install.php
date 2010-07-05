@@ -244,7 +244,7 @@ if(\$key==md5(\$_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 							}
 							else 
 							{
-								template_error('<li>Can\'t connect to ftp server, check ip and port please</li>');
+								template_error('<li>Can\'t connect to ftp server, please check ip and port</li>');
 							}
 							
 						
