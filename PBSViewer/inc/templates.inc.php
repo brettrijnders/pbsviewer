@@ -147,7 +147,7 @@ function template_install_del()
 	
 			<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class=".bg_install_del_warning">
   <tr>
-    <td align="center"><span class="txt_warning"><strong>Please delete map '<em> install </em>' to avoid security problems!</strong></span></td>
+    <td align="center"><span class="txt_warning"><strong>Please delete '<em> install </em>' directory to avoid security problems!</strong></span></td>
   </tr>
 </table>
 <br>

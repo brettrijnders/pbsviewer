@@ -38,8 +38,6 @@ require_once('inc/templates.inc.php');
 connect_DB();
 require_once('inc/init.inc.php');
 
-
-
 //	maximum script load time
 ini_set('max_execution_time',script_load_time);
 
