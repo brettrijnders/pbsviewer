@@ -51,6 +51,16 @@ function check_install_del()
 
 }
 
+// new since version 2.0.0.0
+// check if inc dir is chmodded to 755
+function is_CHMOD_755($file='inc')
+{
+	$result	=	true;
+	if(is_writable($file))		$result=false;
+
+	return $result;
+}
+
 //	check if update is needed
 function update_check($fileLastUpdate)
 {
@@ -2993,24 +3003,19 @@ function send_mail($subject,$msg,$headers)
 }
 
 
+// 	changed in version 2.0.0.0
 //	see if there is a new version
 function check_version()
 {
-	$new=false;
+	$new=1;
 
 	$nfo_data	=	file('http://beesar.com/pbs_viewer/nfo');
 	$version	=	file('VERSION');
 	
 	if($nfo_data[2]!='')
 	{
-
 		// check local version against version on beesar
-		if($version[1]>=$nfo_data[2])
-		{
-			$new=true;
-
-		}
-
+		intval($version[1])>=intval($nfo_data[2]) ? $new=true : $new=false;
 	}
 
 	return $new;

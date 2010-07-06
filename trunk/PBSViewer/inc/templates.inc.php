@@ -54,19 +54,13 @@ function template_header()
 	
 //	first check if install map is gone
 if(!check_install_del()) template_install_del();
-	
-	if(check_version())
-	{
-		?>
-		
-		<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="bg_new_version">
-  <tr>
-    <td align="center"><strong>There is a new version available, check <a href="www.beesar.com" target="_blank"><em>www.beesar.com</em></a> for more info! </strong></td>
-  </tr>
-</table>
-<br>
-		<?
-	}
+
+if(!is_CHMOD_755()) template_chmod_755();
+
+if(!check_version())
+{
+	template_new_version();
+}
 	
 template_logo_header();
 }
@@ -113,19 +107,12 @@ function template_header_detailed_page()
 	
 //	first check if install map is gone
 if(!check_install_del()) template_install_del();
-	
-	if(check_version())
+
+if(!is_CHMOD_755()) template_chmod_755();
+
+	if(!check_version())
 	{
-		?>
-		
-		<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="bg_new_version">
-  <tr>
-    <td align="center"><strong>There is a new version available, check <a href="www.beesar.com" target="_blank"><em>www.beesar.com</em></a> for more info! </strong></td>
-  </tr>
-</table>
-<br>
-		
-		<?
+		template_new_version();
 	}
 
 	?>
@@ -153,6 +140,34 @@ function template_install_del()
 <br>
 	
 	<?
+}
+
+//	new since version 2.0.0.0
+function template_chmod_755()
+{
+	?>
+	
+			<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class=".bg_install_del_warning">
+  <tr>
+    <td align="center"><span class="txt_warning"><strong>Please CHMOD '<em> inc </em>' directory to '755' to avoid security problems!</strong></span></td>
+  </tr>
+</table>
+<br>
+	
+	<?	
+}
+
+function template_new_version()
+{
+		?>
+		
+		<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="bg_new_version">
+  <tr>
+    <td align="center"><strong>There is a new version available, check <a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><em>www.beesar.com</em></a> for more info! </strong></td>
+  </tr>
+</table>
+<br>
+		<?	
 }
 
 function template_admin_tools($admin_ip)

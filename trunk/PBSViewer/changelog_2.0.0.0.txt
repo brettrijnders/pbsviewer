@@ -1,9 +1,13 @@
 
 changelog 2.0.0.0:
 ------------------------------------
+- Check if inc dir is CHMODDED to 755 after install
+- Bug fix: correct checking of version numbers
 - Added google code project hosting logo
+- installer update: Login details are stored in config and remaining settings are stored in database.
 - Improved version checking
 - New feature: mail admin if update has been requested by someone
+- Change argument separator to &amp instead of &, because & is not valid according to W3 validator
 - Bug fix: Request update feature works correctly now
 - Added clanbase link information about player
 - Basic admin control panel (ACP)

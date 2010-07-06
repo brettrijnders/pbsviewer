@@ -543,7 +543,7 @@ You still have the possibility to force an update manually by running 'update.ph
           </select>
         </label></td>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p>Gather more info about screens, like md5 check or ip address of players, with help of logs</p>
-          <p>Default	=	false, If you don't want logging select false</p>
+          <p>Default	=	false, If you don't want logging select false.</p>
           <p>Note that the FTP webhost (not your gameserver) login details needs to be configured correctly in 'config.inc.php' if you want to use logging.</p></td>
       </tr>
       <tr>
