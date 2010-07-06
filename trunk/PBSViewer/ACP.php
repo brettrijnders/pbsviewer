@@ -480,8 +480,8 @@ if($ACP==true)
             
           </select>
         </label></td>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"> If 'custom' is true then the admin or a cron job should run the 'update.php' which is located in in map 'update'.<br>
-If option is false, then it will update after x seconds which can can be configured with 'Update time' see below.<br>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"> If 'custom update' is true then the admin or a cron job should run 'update.php' which is located in map 'update'.<br>
+If option is false, then it will update after x seconds, this can be configured with 'Update time' see below.<br>
 You still have the possibility to force an update manually by running 'update.php' if you want.</td>
       </tr>
       <tr>
@@ -497,8 +497,8 @@ You still have the possibility to force an update manually by running 'update.ph
           <input type="text" name="pb_sv_ssceiling" id="pb_sv_ssceiling" value="<?php echo $pb_sv_ssceiling;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p>To find your number open this file 'pbsv.cfg' and look for 'pb_sv_SsCeiling'. The file should be located in your 'pb' directory on your ftp of your gameserver. <br>
-          It is recommended to have a small amount as possible to save some bandwith and space. NB both values of 'pb_sv_SsCeiling' as in 'pbsv.cfg' and this config file should be the same <br>
-          If you are not sure please take a large number like 10000 or contact me ;)<br>
+          It is recommended to have a small amount as possible to save some bandwith and space. NB both values of 'pb_sv_SsCeiling' as in 'pbsv.cfg' and here should be the same <br>
+          If you are not sure please take a large number like 10000 or <a href="http://www.beesar.com/contact/">ask help</a><br>
           </p>
           <p>Game-violations has set this number to 10000<br>
             PB default is 100</p></td>
@@ -519,7 +519,7 @@ You still have the possibility to force an update manually by running 'update.ph
             <option value="0" <?php if($reset=='0') echo "selected"; ?>>False</option>
           </select>
         </label></td>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Default	=	false. Reset feature allows admins to delete all screens and log files from your webserver and gameserver. <br><br>In order to use this function you need to configure the login details of your ftp webhosting.</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Default	=	false. Reset feature allows admins to delete all screens and log files from your webserver and gameserver. <br><br>In order to use this function you need to configure the login details of your ftp webhosting in config.inc.php.</td>
       </tr>
       <tr>
         <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">pbsvss_updater</td>
@@ -543,7 +543,7 @@ You still have the possibility to force an update manually by running 'update.ph
           </select>
         </label></td>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p>Gather more info about screens, like md5 check or ip address of players, with help of logs</p>
-          <p>Default	=	false, If you don't want logging use false</p>
+          <p>Default	=	false, If you don't want logging select false</p>
           <p>Note that the FTP webhost (not your gameserver) login details needs to be configured correctly in 'config.inc.php' if you want to use logging.</p></td>
       </tr>
       <tr>
@@ -554,7 +554,7 @@ You still have the possibility to force an update manually by running 'update.ph
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p>Default	=	4, 'max logs on webserver' has to be lower than PB_SV_LogCeiling. Otherwise there won't be an auto-delete. This is the number of logs stored on your webserver<br>
           If you choose 0, then log files are deleted immediately after updating<br>
           </p>
-          <p>If you don't want to delete the logs from your webserver leave this filed empty</p></td>
+          <p>If you don't want to delete the logs from your webserver then enter -1</p></td>
       </tr>
       <tr>
         <td colspan="3" align="center" class="bg_reset_table_row3"><span class="txt_light"><strong>Template</strong></span></td>
@@ -633,7 +633,7 @@ You still have the possibility to force an update manually by running 'update.ph
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="script_load_time" id="script_load_time" value="<?php echo $script_load_time;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">After this time the script does stop running, if you for instance need   to download a lot of screens then it is recommended to have a high   script load time. If you are not sure, then use default setting. Default=600 seconds or 10 minutes, after 600 Maximum execution time error will be shown.</td>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">After this the script stops running, if you for instance need to download a lot of screens then it is recommended to have a high script load time. If you are not sure, then use default setting. Default=600 seconds or 10 minutes, after 600 Maximum execution time error will be shown.</td>
       </tr>
       <tr>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Web log dir</td>
