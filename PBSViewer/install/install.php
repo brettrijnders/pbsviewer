@@ -69,7 +69,7 @@ switch($step)
 	
 	case 1:
 	
-				$CHMOD	=	check_CHMOD('../download','../lastUpdate.txt','../inc');
+			$CHMOD	=	check_CHMOD('../download','../lastUpdate.txt','../inc');
 			if($CHMOD[0]!=true)
 			{
 				//	chmod won't work most of the time, since you are not the real owner/admin of your webserver
