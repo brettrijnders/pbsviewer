@@ -32,17 +32,47 @@ $key=md5($key);
 
 require_once('inc/config.inc.php');
 require_once('inc/functions.inc.php');
-require_once('inc/templates.inc.php');
 
 //	connect to DB
 connect_DB();
 require_once('inc/init.inc.php');
+
+// load correct language file
+	$available	=	false;
+	$lang_file	=	get_current_lang().".inc.php";
+		
+	// check if this file is available
+	if ($available_files = get_langs())
+	{
+		foreach ($available_files as $file)
+		{
+			if($lang_file==$file.'.inc.php')
+			{
+				$available	=	true;
+			}
+		}
+	}
+
+	if ($available==true)
+	{
+		include("inc/languages/".$lang_file);
+	}
+	else 
+	{
+		// include default language
+		include("inc/languages/English.inc.php");
+	}
+	
+	
+
+require_once('inc/templates.inc.php');
 
 //	maximum script load time
 ini_set('max_execution_time',script_load_time);
 
 //	get time wrt to Unix
 $startTime	=	get_microtime();
+
 
 if(DEBUG==false)
 {

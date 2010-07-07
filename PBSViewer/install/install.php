@@ -720,13 +720,16 @@ PRIMARY KEY(`optionID`)
 				mysql_query($mysql_insert) or die(mysql_error());
 							
 				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('admin_mail','');";
-				mysql_query($sql_insert) or die(mysql_error());;
+				mysql_query($sql_insert) or die(mysql_error());
 				
 				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('CB_game','none');";
-				mysql_query($sql_insert) or die(mysql_error());;
+				mysql_query($sql_insert) or die(mysql_error());
 				
 				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('min_screen_size','10000');";
-				mysql_query($sql_insert) or die(mysql_error());;				
+				mysql_query($sql_insert) or die(mysql_error());
+
+				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('language','english');";
+				mysql_query($sql_insert) or die(mysql_error());				
 
 				session_destroy();
 				template_final();
