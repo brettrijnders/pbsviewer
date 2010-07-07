@@ -226,6 +226,9 @@ if(isset($_POST['save'])&&$ACP==true)
 		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['height'])."' WHERE `name`='height'";
 		$sql     	=	mysql_query($sql_update);
 		
+		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['language'])."' WHERE `name`='language'";
+		$sql     	=	mysql_query($sql_update);
+		
 		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['CB_game'])."' WHERE `name`='CB_game'";
 		$sql     	=	mysql_query($sql_update);
 		
@@ -240,6 +243,7 @@ if(isset($_POST['save'])&&$ACP==true)
 		
 		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['debug'])."' WHERE `name`='debug'";
 		$sql     	=	mysql_query($sql_update);
+		
 		
 		//save data
 		template_saved();
@@ -283,6 +287,7 @@ if($ACP==true)
 	$script_load_time	= 600;
 	$weblog_dir 		= 'download';
 	$debug				= 0;
+	$language			= 'english';
 	
 	// gather data
 	$sql_select = "SELECT `name`,`value` FROM `settings`";
@@ -381,6 +386,10 @@ if($ACP==true)
 		{
 			$debug	 = $row->value;
 		}
+		elseif ($row->name=='language')
+		{
+			$language	 = $row->value;
+		}
 	}
 
 	
@@ -434,7 +443,7 @@ if($ACP==true)
       <tr>
         <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Clan name</td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
-          <input type="text" name="clan_name" id="clan_name" value="<?php echo $clan_game;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
+          <input type="text" name="clan_name" id="clan_name" value="<?php echo $clan_name;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">What is your full clan name?</td>
       </tr>
@@ -593,6 +602,41 @@ You still have the possibility to force an update manually by running 'update.ph
           <input type="text" name="height" id="height" value="<?php echo $height;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Thumbnail image height</td>
+      </tr>
+      <tr>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Default language</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">
+        <?php
+        // get all language files
+        $lang_data	=	get_langs();
+        if($lang_data)
+        {
+        	echo "<label><select name=\"language\" id=\"language\">";
+        	
+        	foreach ($lang_data as $lang_file)
+        	{
+        		if (get_current_lang()==$lang_file)
+        		{
+        			echo "<option value=\"".$lang_file."\" selected>".$lang_file."</option>\n";
+        		}
+        		else 
+        		{
+        			echo "<option value=\"".$lang_file."\">".$lang_file."</option>\n";
+        		}
+        	}
+        	echo "            
+          </select>
+        </label>";
+        }
+        else
+        {
+        	echo "Please check your language directory, can't read/find language files";
+        }
+        
+        ?>  
+        
+</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">&nbsp;</td>
       </tr>
       <tr>
         <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">CB game</td>

@@ -28,19 +28,20 @@
 */
 
 function template_header()
-{
+{	
+	global $str;
 	?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="description" content="See captured punkbuster screenshots online with PBsViewer. Those screens are captured on gameserver of <?echo CLAN_NAME.' which runs '.CLAN_GAME;?>">
+<meta name="description" content="<?php echo $str["META_DESC"];?>">
 <meta name="keywords" content="pb, view, viewer, punkbuster, php, parser, screens, capture, gaming, <?echo CLAN_NAME.', '.CLAN_TAG.', '.CLAN_GAME;?>">
 <meta name="robot" content="index,follow">
 <meta name="copyright" content="Copyright &copy; 2009 B.S. Rijnders aka BandAhr. All rights reserved">
 <meta name="author" content="B.S. Rijnders">
 <meta name="revisit-after" content="7">
-<title><?echo 'PBsViewer of '.CLAN_TAG.' capturing screens of '.CLAN_GAME;?></title>
+<title><?echo $str["TITLE"];?></title>
 
 <link href="style/style.css" rel="stylesheet" type="text/css">
 <link rel="shortcut icon" href="style/img/favicon.ico"> 
@@ -172,6 +173,8 @@ function template_new_version()
 
 function template_admin_tools($admin_ip)
 {
+	global $str;
+	
 	if(is_admin($admin_ip))
 	{
 	?>
@@ -180,24 +183,24 @@ function template_admin_tools($admin_ip)
 {?>
                                 <table width="100%" border="0" class="header_menu_bg_admin">
                                   <tr>
-                                    <td width="20%"><span class="txt_light"><strong>New message:</strong></span></td>
-                                    <td><span class="txt_admin_message"><strong>An user has requested an update, you can update by clicking on update below</strong></span></td>
+                                    <td width="20%"><span class="txt_light"><strong><?php echo $str['ADM_NEW_MSG'];?>:</strong></span></td>
+                                    <td><span class="txt_admin_message"><strong><?php echo $str['ADM_UPDATE_REQ'];?></strong></span></td>
                                   </tr>
                                 </table>
 <?}?>                                
                                 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="header_menu_bg_admin" align="center">
                                   
                                 <tr>
-                                    <td width="20%" align="left"><br><span class="txt_light"><strong>Admin:</strong></span></td>
-                                  <td align="left"><br><input type="submit" name="Update" id="Update" value="Update" class="buttons" onmouseover="this.className='buttons_hover'" onmouseout="this.className='buttons'">
+                                    <td width="20%" align="left"><br><span class="txt_light"><strong><?php echo $str['ADM_ADMIN'];?>:</strong></span></td>
+                                  <td align="left"><br><input type="submit" name="Update" id="Update" value="<?php echo $str['ADM_UPDATE'];?>" class="buttons" onmouseover="this.className='buttons_hover'" onmouseout="this.className='buttons'">
                                   <? if (RESET){?>
                                   &nbsp;
                                   
-                                    <input type="submit" name="reset" id="reset" value="Reset" class="buttons" onmouseover="this.className='buttons_hover'" onmouseout="this.className='buttons'">
+                                    <input type="submit" name="reset" id="reset" value="<?php echo $str['ADM_RESET'];?>" class="buttons" onmouseover="this.className='buttons_hover'" onmouseout="this.className='buttons'">
                                   
                                   <?}?>
                                   &nbsp;
-                                  <input type="submit" name="ACP" id="ACP" value="ACP" class="buttons" onmouseover="this.className='buttons_hover'" onmouseout="this.className='buttons'">
+                                  <input type="submit" name="ACP" id="ACP" value="<?php echo $str['ADM_ACP'];?>" class="buttons" onmouseover="this.className='buttons_hover'" onmouseout="this.className='buttons'">
                                   </td>
                                   </tr>
                                   
@@ -209,6 +212,8 @@ function template_admin_tools($admin_ip)
 
 function template_search($admin_ip,$current_scrn_nr)
 {
+	global $str;
+	
 	?>
 	    
 <table width="90%" border="0" align="center" cellpadding="0" cellspacing="0" class="bg_main_table">
@@ -219,26 +224,26 @@ function template_search($admin_ip,$current_scrn_nr)
         <td align="center" class="header_main_bg"><form action="" method="get" name="search_form">
                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
-              <td align="center" class="header_menu_bg"><span class="txt_light">for wildcard use *</span></td>
+              <td align="center" class="header_menu_bg"><span class="txt_light"><?php echo $str["SM_WILDCARD"];?></span></td>
             </tr>
           </table>
                  <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_menu_bg">
             <tr>
               <td width="20%" align="center"><select name="sID" id="sID" class="option_search_bg">
-                <option value="filename">filename</option>  
-                <option value="name" selected>name</option>
-                <option value="guid">guid</option>
+                <option value="filename"><?php echo $str['SM_FILENAME'];?></option>  
+                <option value="name" selected><?php echo $str['SM_NAME'];?></option>
+                <option value="guid"><?php echo $str['SM_GUID'];?></option>
                 </select>              </td>
               <td width="50%" align="center"><input name="input" type="text" id="input" value="" onclick="this.focus();" size="70" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';"></td>
-                <td width="10%" align="left">&nbsp;<input type="submit" name="search" id="search" value="Search" class="buttons" onmouseover="this.className='buttons_hover'" onmouseout="this.className='buttons'"></td>
-                <td align="left"><input type="submit" name="show_all" id="show_all" value="Show all" class="buttons" onmouseover="this.className='buttons_hover'" onmouseout="this.className='buttons'"></td>
+                <td width="10%" align="left">&nbsp;<input type="submit" name="search" id="search" value="<?php echo $str['SM_SEARCH'];?>" class="buttons" onmouseover="this.className='buttons_hover'" onmouseout="this.className='buttons'"></td>
+                <td align="left"><input type="submit" name="show_all" id="show_all" value="<?php echo $str['SM_SHOW_ALL'];?>" class="buttons" onmouseover="this.className='buttons_hover'" onmouseout="this.className='buttons'"></td>
                 <td align="left"> 
                 </td>
               </tr>
             <tr>
               <td width="20%" align="center">&nbsp;</td>
               <td width="50%" align="center"><select name="year" id="year">
-                <option value="all_years">all years</option>
+                <option value="all_years"><?php echo $str['SM_ALL_YEARS'];?></option>
                 <?
                 $dates	=	get_dates();
                 foreach ($dates[0] as $year)
@@ -249,7 +254,7 @@ function template_search($admin_ip,$current_scrn_nr)
               </select>
                 -
                 <select name="month" id="month">
-                  <option value="all_months" selected>all months</option>
+                  <option value="all_months" selected><?php echo $str['SM_ALL_MONTHS'];?></option>
                   <?
                   foreach ($dates[1] as $month)
                   {
@@ -262,7 +267,7 @@ function template_search($admin_ip,$current_scrn_nr)
                 </select>
                 -
                 <select name="day" id="day">
-                  <option value="all_days">all days</option>
+                  <option value="all_days"><?php echo $str['SM_ALL_DAYS'];?></option>
                   <?
                   foreach ($dates[2] as $day)
                   {
@@ -272,7 +277,7 @@ function template_search($admin_ip,$current_scrn_nr)
                 </select>
                 -
                 <select name="hour" id="hour">
-                  <option value="all_hours">all hours</option>
+                  <option value="all_hours"><?php echo $str['SM_ALL_HOURS'];?></option>
                   <?
                   foreach ($dates[3] as $hour)
                   {
@@ -280,8 +285,8 @@ function template_search($admin_ip,$current_scrn_nr)
                   }
                   ?>                  
                 </select></td>
-              <td width="10%" align="left">&nbsp;<input type="submit" name="select" id="select" value="Select" class="buttons" onmouseover="this.className='buttons_hover'" onmouseout="this.className='buttons'"></td>
-              <td align="left"><input type="submit" name="show_available" id="show_available" value="Show available all" class="buttons" onmouseover="this.className='buttons_hover'" onmouseout="this.className='buttons'"></td>
+              <td width="10%" align="left">&nbsp;<input type="submit" name="select" id="select" value="<?php echo $str['SM_SELECT'];?>" class="buttons" onmouseover="this.className='buttons_hover'" onmouseout="this.className='buttons'"></td>
+              <td align="left"><input type="submit" name="show_available" id="show_available" value="<?php echo $str['SM_SHOW_ALL_AVAILABLE'];?>" class="buttons" onmouseover="this.className='buttons_hover'" onmouseout="this.className='buttons'"></td>
               <td align="left">&nbsp;</td>
             </tr>
             </table>
@@ -300,17 +305,19 @@ function template_search($admin_ip,$current_scrn_nr)
 //	this template is new since 1.2.2.1
 function template_info_screens($current_scrn_nr)
 {
+	global $str;
+	
 	?>
 	
 <table width="100%" border="0" align="center" class="header_info_screen_bg">
   <tr>
-    <td class="header_info_screen_row1"><span class="txt_light"><strong>Unique players:</strong></span></td>
+    <td class="header_info_screen_row1"><span class="txt_light"><strong><?php echo $str['STAT_UNIQUE_PLAYERS'];?>:</strong></span></td>
     <td class="header_info_screen_row1"><span class="txt_light"><?echo get_nr_unique_players();?></span></td>
-    <td class="header_info_screen_row1"><span class="txt_light"><strong>Total complete screens:</strong></span></td>
+    <td class="header_info_screen_row1"><span class="txt_light"><strong><?php echo $str['STAT_TOTAL_COMPLETE'];?>:</strong></span></td>
     <td class="header_info_screen_row1"><span class="txt_light"><?echo get_nr_complete_screens();?></span></td>
   </tr>
   <tr>
-    <td width="25%" class="header_info_screen_row2"><span class="txt_light"><strong>Player with most pb screens:</strong></span></td>
+    <td width="25%" class="header_info_screen_row2"><span class="txt_light"><strong><?php echo $str['STAT_MOST_SCREENS'];?>:</strong></span></td>
     <td width="25%" class="header_info_screen_row2"><span class="txt_light"><?
     
     $guid	=	get_player_most_complete_screens();
@@ -318,11 +325,11 @@ function template_info_screens($current_scrn_nr)
     echo "<a href='?sID=guid&amp;input=".$guid."&amp;search=Search&amp;year=all_years&amp;month=all_months&amp;day=all_days&amp;hour=all_hours' target='_self'>".$name."</a>";
     
     ?></span></td>
-    <td width="25%" class="header_info_screen_row2"><span class="txt_light"><strong>Total incomplete screens:</strong></span></td>
+    <td width="25%" class="header_info_screen_row2"><span class="txt_light"><strong><?php echo $str['STAT_TOTAL_INCOMPLETE'];?>:</strong></span></td>
     <td width="25%" class="header_info_screen_row2"><span class="txt_light"><?echo get_nr_incomplete_screens();?></span></td>
   </tr>
   <tr>
-    <td class="header_info_screen_row1"><span class="txt_light"><strong>Player with most incomplete screens:</strong></span></td>
+    <td class="header_info_screen_row1"><span class="txt_light"><strong><?php echo $str['STAT_MOST_INC_SCREENS'];?>:</strong></span></td>
     <td class="header_info_screen_row1"><span class="txt_light"><?
     
     $guid	=	get_player_most_incomplete_screens();
@@ -330,7 +337,7 @@ function template_info_screens($current_scrn_nr)
     echo "<a href='?sID=guid&amp;input=".$guid."&amp;search=Search&amp;year=all_years&amp;month=all_months&amp;day=all_days&amp;hour=all_hours' target='_self'>".$name."</a>";
     
     ?></span></td>
-    <td class="header_info_screen_row1"><span class="txt_light"><strong>Screens shown in current window:</strong></span></td>
+    <td class="header_info_screen_row1"><span class="txt_light"><strong><?php echo $str['STAT_CURRENT_WIN_SCREENS'];?>:</strong></span></td>
     <td class="header_info_screen_row1"><span class="txt_light"><?echo $current_scrn_nr;?></span></td>
   </tr>
 </table>

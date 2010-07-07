@@ -843,6 +843,8 @@ function get_latest_fid	($fid)
 // if $available = true, then it will only show available screens
 function show_all_screens($nr=4,$available=false)
 {
+	global $str;
+	
 	$nr_counter	=	0;
 
 	//	only select unique fids
@@ -890,19 +892,19 @@ function show_all_screens($nr=4,$available=false)
 						if($md5_valid)
 						{
 							echo "<tr>\n";
-							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>IP</strong>: ".$ip_player."<br><strong>MD5 hash(VALID)</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
+							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str['POP_IP']."</strong>: ".$ip_player."<br><strong>".$str["POP_MD5_VALID"]."</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
 						}
 						//	mismatch!
 						else 
 						{
 							echo "<tr>\n";
-							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>IP</strong>: ".$ip_player."<br><strong>MD5 mismatch!</strong><br><strong>MD5 hash screen</strong>:".get_md5("download/".$fid.".png")."<br><strong>md5 hash log</strong>: ".$md5_screen."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' class='md5_mismatch_border'></a></td>\n";
+							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str['POP_IP']."</strong>: ".$ip_player."<br><strong>".$str["POP_MD5_INVALID"]."</strong><br><strong>".$str["POP_MD5_SCREEN"]."</strong>:".get_md5("download/".$fid.".png")."<br><strong>".$str["POP_MD5_LOG"]."</strong>: ".$md5_screen."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' class='md5_mismatch_border'></a></td>\n";
 						}
 					}
 					else 
 					{
 						echo "<tr>\n";
-						echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>MD5 hash</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
+						echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str["POP_MD5_HASH"]."</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
 					}
 					
 
@@ -915,19 +917,19 @@ function show_all_screens($nr=4,$available=false)
 						if($md5_valid)
 						{
 							
-							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>IP</strong>: ".$ip_player."<br><strong>MD5 hash(VALID)</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
+							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str['POP_IP']."</strong>: ".$ip_player."<br><strong>".$str["POP_MD5_VALID"]."</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
 						}
 						//	mismatch!
 						else 
 						{
 							
-							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>IP</strong>: ".$ip_player."<br><strong>MD5 mismatch!</strong><br><strong>MD5 hash screen</strong>:".get_md5("download/".$fid.".png")."<br><strong>md5 hash log</strong>: ".$md5_screen."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' class='md5_mismatch_border'></a></td>\n";					
+							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str['POP_IP']."</strong>: ".$ip_player."<br><strong>".$str["POP_MD5_INVALID"]."</strong><br><strong>".$str["POP_MD5_SCREEN"]."</strong>:".get_md5("download/".$fid.".png")."<br><strong>".$str["POP_MD5_LOG"]."</strong>: ".$md5_screen."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' class='md5_mismatch_border'></a></td>\n";					
 						}
 					}
 					else 
 					{
 						
-						echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>MD5 hash</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
+						echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str["POP_MD5_HASH"]."</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
 					}
 					
 					$nr_counter++;
@@ -951,13 +953,13 @@ function show_all_screens($nr=4,$available=false)
 					if($nr_counter==0)
 					{
 						echo "<tr>\n";
-						echo "<td align='center'><br><a href='#' target='_self' class='popup'><span><strong>File</strong>: n/a<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."</span><img src='style/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0'></a></td>\n";
+						echo "<td align='center'><br><a href='#' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$str["POP_NOT_AVAILABLE"]."<br><strong>".$str["POP_PLAYER"]."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."</span><img src='style/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0'></a></td>\n";
 
 						$nr_counter++;
 					}
 					else
 					{
-						echo "<td align='center'><br><a href='#' target='_self' class='popup'><span><strong>File</strong>: n/a<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."</span><img src='style/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0'></a></td>\n";
+						echo "<td align='center'><br><a href='#' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$str["POP_NOT_AVAILABLE"]."<br><strong>".$str["POP_PLAYER"]."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."</span><img src='style/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0'></a></td>\n";
 						$nr_counter++;
 					}
 
@@ -3002,6 +3004,55 @@ function send_mail($subject,$msg,$headers)
 	mail($to, $subject, $msg,$headers);
 }
 
+// get languages
+// new since version 2.0.0.0
+function get_langs()
+{
+	$langDIR	=	"inc/languages";
+	$i=0;
+	if($files = @scandir($langDIR))
+	{
+		foreach ($files as $file)
+		{
+			if($file!='.' && $file!='..')
+			{
+				$language[$i]	=	substr($file,0,strlen($file)-8);
+				$i++;
+			}
+		}
+		
+		//	if there are language files available
+		if ($i>0)
+		{			
+			return $language;
+		}
+		else 
+		{
+			//	language directory is empty
+			return false;
+		}
+	}
+	else 
+	{
+		//no languages, can't read language directory
+		return false;
+	}
+	
+}
+
+//	new since version 2.0.0.0
+//	get current language
+function get_current_lang()
+{
+	$sql_select	=	"SELECT `name`,`value` FROM `settings` WHERE `name`='language'";
+	$sql 		=	mysql_query($sql_select);
+	while ($row = mysql_fetch_object($sql))
+	{
+		$current_lang	=	$row->value;
+	}
+	
+	return $current_lang;
+}
 
 // 	changed in version 2.0.0.0
 //	see if there is a new version
