@@ -34,6 +34,10 @@ require_once('inc/functions.inc.php');
 //	connect to DB
 connect_DB();
 require_once('inc/init.inc.php');
+
+//load correct language
+include("inc/load_language.inc.php");
+
 $reset=false;
 
 //	check if user's ip is on the list
@@ -58,7 +62,7 @@ $startTime	=	get_microtime();
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Resetting Page</title>
+<title><?php echo $str['RESET_TITLE'];?></title>
 <link href="style/style.css" rel="stylesheet" type="text/css">
 <link rel="shortcut icon" href="style/img/favicon.ico"> 
 </head>
@@ -72,7 +76,7 @@ $startTime	=	get_microtime();
 <br>
 <table width="80%" border="0" align="center">
   <tr>
-    <td align="center" class="bg_reset_table_row1"><span class="txt_light">:: Resetting ::</span></td>
+    <td align="center" class="bg_reset_table_row1"><span class="txt_light">:: <?php echo $str["RESET_TITLE_MENU"];?> ::</span></td>
   </tr>
   <tr>
     <td class="bg_reset_table_row2"><table width="90%" border="0" align="center">
@@ -83,13 +87,13 @@ $startTime	=	get_microtime();
       <br>
       <table width="50%" border="0" align="center">
         <tr>
-          <td align="center"><?echo '<br>RESET FINISHED<br>';
-	echo 'Reset took '.get_loadTime($startTime,4).' seconds<br>';?></td>
+          <td align="center"><?echo '<br>'.$str["RESET_FINISHED"].'<br>';
+	echo $str["RESET_DURATION"].' '.get_loadTime($startTime,4).' '.$str["RESET_DURATION_2"].'<br>';?></td>
         </tr>
     </table></td>
   </tr>
   <tr>
-    <td class="bg_reset_table_row3" align="center"><span class="txt_light"><?echo '<a href="./" target="_parent">Click here to go back</a>';?></span></td>
+    <td class="bg_reset_table_row3" align="center"><span class="txt_light"><?echo '<a href="./" target="_parent">'.$str["RESET_GO_BACK"].'</a>';?></span></td>
   </tr>
 </table>
 </body>
@@ -110,7 +114,7 @@ if($reset==true&&RESET==true)
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Reset Page</title>
+<title><?php echo $str['RESET_TITLE'];?></title>
 <link href="style/style.css" rel="stylesheet" type="text/css">
 <link rel="shortcut icon" href="style/img/favicon.ico"> 
 </head>
@@ -124,24 +128,24 @@ if($reset==true&&RESET==true)
 <br>
 <table width="80%" border="0" align="center">
   <tr>
-    <td align="center" class="bg_reset_table_row1"><span class="txt_light">:: resetting ::</span></td>
+    <td align="center" class="bg_reset_table_row1"><span class="txt_light">:: <?php echo $str["RESET_TITLE_MENU"];?> ::</span></td>
   </tr>
   <tr>
     <td class="bg_reset_table_row2"><table width="90%" border="0" align="center">
       <tr>
-        <td><strong><p><span class="txt_reset_warning">If you are experiencing long load times for your website, then a reset may help. Are you sure you want to delete all data?<br>
-          If you click on Reset, the following will happen:</p>
+        <td><strong><p><span class="txt_reset_warning"><?php echo $str["RESET_WARNING_QUESTION"];?><br>
+          <?php echo $str["RESET_WARNING_RESULT"];?>:</p>
           <ul>
-            <li>All screens are removed from you download folder on your webserver</li>
-            <li>All logs and screens on your gameserver will be removed</li>
-            <li>The database will be cleaned</li>
+            <li><?php echo $str["RESET_RESULT_1"];?></li>
+            <li><?php echo $str["RESET_RESULT_2"];?></li>
+            <li><?php echo $str["RESET_RESULT_3"];?></li>
             </ul></span></strong>
 
             <table width="100%" border="0">
               <tr>
                 <td align="center">          <form name="form1" method="post" action="">
             <label>              </label>            <label>
-              <input type="submit" name="reset" id="reset" value="Reset" >
+              <input type="submit" name="reset" id="reset" value="<?php echo $str["RESET_BUTTON"];?>" >
             </label>
           </form></td>
               </tr>
@@ -150,7 +154,7 @@ if($reset==true&&RESET==true)
     </table></td>
   </tr>
   <tr>
-    <td class="bg_reset_table_row3" align="center"><span class="txt_light"><?echo '<a href="./" target="_parent">Click here to go back</a>';?></span></td>
+    <td class="bg_reset_table_row3" align="center"><span class="txt_light"><?echo '<a href="./" target="_parent">'.$str["RESET_GO_BACK"].'</a>';?></span></td>
   </tr>
 </table>
 </body>
@@ -163,7 +167,7 @@ if($reset==true&&RESET==true)
 }
 else 
 {
-	echo "ACCES DENIED!";
+	echo $str["MISC_ACCESS_DENIED"];
 }
 }
 ?>

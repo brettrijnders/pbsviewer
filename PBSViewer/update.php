@@ -34,6 +34,9 @@ require_once('inc/functions.inc.php');
 //	connect to DB
 connect_DB();
 require_once('inc/init.inc.php');
+
+//load correct language
+include("inc/load_language.inc.php");
 $update=false;
 
 //	maximum script load time
@@ -59,7 +62,7 @@ if($update==true)
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Update Page</title>
+<title><?php echo $str["UPD8_TITLE"];?></title>
 <link href="style/style.css" rel="stylesheet" type="text/css">
 <link rel="shortcut icon" href="style/img/favicon.ico"> 
 </head>
@@ -73,7 +76,7 @@ if($update==true)
 <br>
 <table width="80%" border="0" align="center">
   <tr>
-    <td align="center" class="bg_update_table_row1"><span class="txt_light">:: UPDATING ::</span></td>
+    <td align="center" class="bg_update_table_row1"><span class="txt_light">:: <?php echo $str["UPD8_TITLE_MENU"];?> ::</span></td>
   </tr>
   <tr>
     <td class="bg_update_table_row2"><table width="90%" border="0" align="center">
@@ -84,13 +87,13 @@ if($update==true)
       <br>
       <table width="50%" border="0" align="center">
         <tr>
-          <td align="center"><?echo '<br>UPDATE FINISHED<br>';
-	echo 'Updating took '.get_loadTime($startTime,4).' seconds<br>';?></td>
+          <td align="center"><?echo '<br>'.$str["UPD8_FINISHED"].'<br>';
+	echo $str["UPD8_DURATION"].' '.get_loadTime($startTime,4).' '.$str["UPD8_DURATION_2"].'<br>';?></td>
         </tr>
     </table></td>
   </tr>
   <tr>
-    <td class="bg_update_table_row3" align="center"><span class="txt_light"><?echo '<a href="./" target="_parent">Click here to go back</a>';?></span></td>
+    <td class="bg_update_table_row3" align="center"><span class="txt_light"><?echo '<a href="./" target="_parent">'.$str["UPD8_BACK"].'</a>';?></span></td>
   </tr>
 </table>
 </body>
@@ -103,7 +106,7 @@ if($update==true)
 }
 else 
 {
-	echo "ACCES DENIED!";
+	echo $str["MISC_ACCESS_DENIED"];
 }
 
 ?>
