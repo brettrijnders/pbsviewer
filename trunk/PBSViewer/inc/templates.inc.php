@@ -84,18 +84,19 @@ function template_logo_header()
 //	new header added since version 1.1.2.1
 function template_header_detailed_page()
 {
+	global $str;
 	?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="description" content="See captured punkbuster screenshots online with PBsViewer. Those screens are captured on gameserver of <?echo CLAN_NAME.' which runs '.CLAN_GAME;?>">
+<meta name="description" content="<?php echo $str["META_DESC"];?>">
 <meta name="keywords" content="pb, view, viewer, punkbuster, php, parser, screens, capture, gaming, <?echo CLAN_NAME.', '.CLAN_TAG.', '.CLAN_GAME;?>">
 <meta name="robot" content="index,follow">
 <meta name="copyright" content="Copyright &copy; 2009 B.S. Rijnders aka BandAhr. All rights reserved">
 <meta name="author" content="B.S. Rijnders">
 <meta name="revisit-after" content="7">
-<title><?echo 'PBsViewer of '.CLAN_TAG.' capturing screens of '.CLAN_GAME;?></title>
+<title><?echo $str["TITLE"];?></title>
 
 <link href="style/style.css" rel="stylesheet" type="text/css">
 <link rel="shortcut icon" href="style/img/favicon.ico"> 
@@ -352,6 +353,8 @@ function template_info_screens($current_scrn_nr)
 //	It is used to show detailed screen information
 function template_detailed_screen($fid)
 {
+	global $str;
+	
 	$guidlength=guidlength;
 	$guidlength_short=guidlength_short;
 	
@@ -378,29 +381,37 @@ function template_detailed_screen($fid)
   <tr>
     <td align="center"><table width="100%" border="0" align="center">
       <tr>
-        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong>File:</strong></td>
+        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_FILE"];?>:</strong></td>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?echo $fid.'.png';?></td>
       </tr>
       <tr>
-        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong>Player:</strong></td>
+        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_PLAYER"];?>:</strong></td>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?echo $name;?></td>
       </tr>
+      <?php 
+      //	only show clanbase information if admin has configured it in ACP
+      if (CBGAMEID!='none')
+      {
+      ?>
       <tr>
-        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong>CB link:</strong></td>
+        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_CB"];?>:</strong></td>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?echo "<a href=\"http://clanbase.ggl.com/personlist.php?guidid=".CBGAMEID."&amp;guidvalue=".substr($guid,$guidlength-8)."\" target=\"_blank\">".$name."</a>";?></td>
       </tr>
       <?
-	
+      }
       if($alias)
       {
-      	
+      	// bug fix: only show alias if there are any
+      	// don't show alias if there is only one single nickname
+      	if (count($alias)>1)
+      	{
       ?>
       <tr>
-        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong>Aliases:</strong></td>
+        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_ALIASES"];?>:</strong></td>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">
         <?
 
-        echo "<p>This player has ".count($alias)." other names:</p>";
+        echo "<p>".$str["DETSCRN_ALIASES_2"]." ".count($alias)." ".$str["DETSCRN_ALIASES_3"].":</p>";
         
         echo "<ul>";
         foreach ($alias	as $name)
@@ -410,21 +421,21 @@ function template_detailed_screen($fid)
         echo "</ul>
              </td>
       </tr>";
- 
+      	}
       }
       ?>
       <tr>
-        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong>Taken:</strong></td>
+        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_TAKEN"];?>:</strong></td>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?echo $date;?></td>
       </tr>
       <tr>
-        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong>GUID:</strong></td>
+        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_GUID"];?>:</strong></td>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><label>
           <input type="text" name="GUID" id="GUID" size="100" value="<?echo $guid;?>" onclick="this.select();">
         </label></td>
       </tr>
       <tr>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong>GUID_short:</strong></td>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_GUID_SHORT"];?>:</strong></td>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><label>
           <input type="text" name="GUID_short" id="GUID_short" size="100" value="<?echo substr($guid,$guidlength-8);?>" onclick="this.select();">
         </label></td>
@@ -452,14 +463,14 @@ function template_detailed_screen($fid)
 						?>
 						
 											      <tr>
-        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong>IP player:</strong></td>
+        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_IP"];?>:</strong></td>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><label>
           <input type="text" name="IP" id="IP" size="100" value="<?echo $ip_player;?>" onclick="this.select();">
         </label></td>
       </tr>
 						
 											      <tr>
-        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><span class="md5_valid">MD5 hash (VALID):</span></strong></td>
+        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><span class="md5_valid"><?php echo $str["DETSCRN_MD5_VALID"];?>:</span></strong></td>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><label>
           <input type="text" name="MD5" id="MD5" size="100" value="<?echo get_md5('download/'.$fid.'.png')?>" onclick="this.select();">
         </label></td>
@@ -473,28 +484,28 @@ function template_detailed_screen($fid)
 					{
 					?>
 																      <tr>
-        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong>IP player:</strong></td>
+        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_IP"];?>:</strong></td>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><label>
           <input type="text" name="IP" id="IP" size="100" value="<?echo $ip_player;?>" onclick="this.select();">
         </label></td>
       </tr>
 					
 					      <tr>
-        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><span class="md5_mismatch">MD5 hash mismatch!</span></strong></td>
+        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><span class="md5_mismatch"><?php echo $str["DETSCRN_MD5_INVALID"];?></span></strong></td>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">
         </td>
       </tr>
 					
 					
 					      <tr>
-        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong>MD5 hash screen:</strong></td>
+        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_MD5_SCREEN"];?>:</strong></td>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><label>
           <input type="text" name="MD5" id="MD5" size="100" value="<?echo get_md5('download/'.$fid.'.png')?>" onclick="this.select();">
         </label></td>
       </tr>
       
             <tr>
-        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong>MD5 hash log:</strong></td>
+        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_MD5_LOG"];?>:</strong></td>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><label>
           <input type="text" name="MD5" id="MD5" size="100" value="<?echo $md5_screen;?>" onclick="this.select();">
         </label></td>
@@ -511,7 +522,7 @@ function template_detailed_screen($fid)
 					?>
 					
 					      <tr>
-        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong>MD5 hash:</strong></td>
+        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_MD5_HASH"];?>:</strong></td>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><label>
           <input type="text" name="MD5" id="MD5" size="100" value="<?echo get_md5('download/'.$fid.'.png')?>" onclick="this.select();">
         </label></td>
@@ -524,7 +535,7 @@ function template_detailed_screen($fid)
     </table>
       <table width="100%" border="0">
         <tr>
-        <td align="center" class="bg_detailed_screen_back_table"><a href="./" title="Go back" target="_self">Go back</a></td>
+        <td align="center" class="bg_detailed_screen_back_table"><a href="./" title="Go back" target="_self"><?php echo $str["DETSCRN_BACK"];?></a></td>
         </tr>
     </table></td>
   </tr>

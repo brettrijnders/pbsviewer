@@ -866,13 +866,17 @@ function show_all_screens($nr=4,$available=false)
 
 			$sql_select2	=	"SELECT * FROM `dl_screens` WHERE `fid`='".$fid."'";
 			$sql2			=	mysql_query($sql_select2);
+			
+			$sql_result = false;
 			//	screen does exist, is downloaded
 			if(mysql_num_rows($sql2)>=1)
 			{
 				
-				
+				$sql_result = true;
 				$md5_valid	=	false;
 				$logged		=	false;
+				$ip_player = '';
+				$md5_screen = '';
 				
 				//	get info from log data
 				if($log_data	=	get_extra_log_data($fid))
@@ -885,92 +889,19 @@ function show_all_screens($nr=4,$available=false)
 				}
 								
 
-				if($nr_counter==0)
-				{
-					if($logged)
-					{
-						if($md5_valid)
-						{
-							echo "<tr>\n";
-							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str['POP_IP']."</strong>: ".$ip_player."<br><strong>".$str["POP_MD5_VALID"]."</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
-						}
-						//	mismatch!
-						else 
-						{
-							echo "<tr>\n";
-							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str['POP_IP']."</strong>: ".$ip_player."<br><strong>".$str["POP_MD5_INVALID"]."</strong><br><strong>".$str["POP_MD5_SCREEN"]."</strong>:".get_md5("download/".$fid.".png")."<br><strong>".$str["POP_MD5_LOG"]."</strong>: ".$md5_screen."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' class='md5_mismatch_border'></a></td>\n";
-						}
-					}
-					else 
-					{
-						echo "<tr>\n";
-						echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str["POP_MD5_HASH"]."</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
-					}
-					
-
-					$nr_counter++;
-				}
-				else
-				{
-					if($logged)
-					{
-						if($md5_valid)
-						{
-							
-							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str['POP_IP']."</strong>: ".$ip_player."<br><strong>".$str["POP_MD5_VALID"]."</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
-						}
-						//	mismatch!
-						else 
-						{
-							
-							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str['POP_IP']."</strong>: ".$ip_player."<br><strong>".$str["POP_MD5_INVALID"]."</strong><br><strong>".$str["POP_MD5_SCREEN"]."</strong>:".get_md5("download/".$fid.".png")."<br><strong>".$str["POP_MD5_LOG"]."</strong>: ".$md5_screen."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' class='md5_mismatch_border'></a></td>\n";					
-						}
-					}
-					else 
-					{
-						
-						echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str["POP_MD5_HASH"]."</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
-					}
-					
-					$nr_counter++;
-				}
-
-				if($nr_counter>=$nr)
-				{
-					echo "</tr>\n";
-					$nr_counter=0;
-				}
-
-
 			}
-			else
+			
+			show_screens_body($fid,$name,$guid,$date,$ip_player,$md5_screen,$nr,$sql_result,$nr_counter,$logged,$md5_valid,$available);
+			
+			// this is done, otherwise it counts the images that are not displayed as well
+			if(!($available==true && $sql_result==false))
 			{
-				if ($available==false)
-				{
-					//	if there are no results, then there is no image available. So it is not downloaded
-					//	can be edited with custum image
-
-					if($nr_counter==0)
-					{
-						echo "<tr>\n";
-						echo "<td align='center'><br><a href='#' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$str["POP_NOT_AVAILABLE"]."<br><strong>".$str["POP_PLAYER"]."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."</span><img src='style/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0'></a></td>\n";
-
-						$nr_counter++;
-					}
-					else
-					{
-						echo "<td align='center'><br><a href='#' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$str["POP_NOT_AVAILABLE"]."<br><strong>".$str["POP_PLAYER"]."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."</span><img src='style/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0'></a></td>\n";
-						$nr_counter++;
-					}
-
-					if($nr_counter>=$nr)
-					{
-						echo "</tr>\n";
-						$nr_counter=0;
-					}
-				
-				}
-
+				$nr_counter++;
+			}
+			
+			if($nr_counter>=$nr)
+			{
+				$nr_counter=0;
 			}
 			
 
@@ -986,6 +917,8 @@ function show_all_screens($nr=4,$available=false)
 
 function show_date_selection ($nr=4,$data)
 {
+	
+	global $str;
 
 	$nr_counter	=	0;
 
@@ -1009,13 +942,17 @@ function show_date_selection ($nr=4,$data)
 
 			$sql_select2	=	"SELECT * FROM `dl_screens` WHERE `fid`='".$fid."'";
 			$sql2			=	mysql_query($sql_select2);
+			
+			$sql_result = false;
 			//	screen does exist, is downloaded
 			if(mysql_num_rows($sql2)>=1)
 			{
 
-				
+				$sql_result = true;
 				$md5_valid	=	false;
 				$logged		=	false;
+				$ip_player = '';
+				$md5_screen = '';
 				
 				//	get info from log data
 				if($log_data	=	get_extra_log_data($fid))
@@ -1028,88 +965,15 @@ function show_date_selection ($nr=4,$data)
 				}
 				
 				
-				if($nr_counter==0)
-				{
-					if($logged)
-					{
-						if($md5_valid)
-						{
-							echo "<tr>\n";
-							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>IP</strong>: ".$ip_player."<br><strong>MD5 hash(VALID)</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
-						}
-						//	mismatch!
-						else 
-						{
-							echo "<tr>\n";
-							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>IP</strong>: ".$ip_player."<br><strong>MD5 mismatch!</strong><br><strong>MD5 hash screen</strong>:".get_md5("download/".$fid.".png")."<br><strong>md5 hash log</strong>: ".$md5_screen."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' class='md5_mismatch_border'></a></td>\n";
-						}
-					}
-					else 
-					{
-						echo "<tr>\n";
-						echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>MD5 hash</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
-					}
-					
-
-					$nr_counter++;
-				}
-				else
-				{
-					if($logged)
-					{
-						if($md5_valid)
-						{
-							
-							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>IP</strong>: ".$ip_player."<br><strong>MD5 hash(VALID)</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
-						}
-						//	mismatch!
-						else 
-						{
-							
-							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>IP</strong>: ".$ip_player."<br><strong>MD5 mismatch!</strong><br><strong>MD5 hash screen</strong>:".get_md5("download/".$fid.".png")."<br><strong>md5 hash log</strong>: ".$md5_screen."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' class='md5_mismatch_border'></a></td>\n";					
-						}
-					}
-					else 
-					{
-						
-						echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>MD5 hash</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
-					}
-					
-					$nr_counter++;
-				}
-
-				if($nr_counter>=$nr)
-				{
-					echo "</tr>\n";
-					$nr_counter=0;
-				}
-
-
 			}
-			else
+			
+			show_screens_body($fid,$name,$guid,$date,$ip_player,$md5_screen,$nr,$sql_result,$nr_counter,$logged,$md5_valid);
+				
+			$nr_counter++;
+			
+			if($nr_counter>=$nr)
 			{
-				//	if there are no results, then there is no image available. So it is not downloaded
-				//	can be edited with custum image
-
-				if($nr_counter==0)
-				{
-					echo "<tr>\n";
-					echo "<td align='center'><br><a href='#' target='_self' class='popup'><span><strong>File</strong>: n/a<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."</span><img src='style/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0'></a></td>\n";
-
-					$nr_counter++;
-				}
-				else
-				{
-					echo "<td align='center'><br><a href='#' target='_self' class='popup'><span><strong>File</strong>: n/a<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."</span><img src='style/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0'></a></td>\n";
-					$nr_counter++;
-				}
-
-				if($nr_counter>=$nr)
-				{
-					echo "</tr>\n";
-					$nr_counter=0;
-				}
-
+				$nr_counter=0;
 			}
 
 
@@ -1130,6 +994,8 @@ function get_wildcard($search)
 
 function show_fid_screens($nr=4,$fileName)
 {
+	global $str;
+	
 	$nr_counter	=	0;
 
 	//	check if added .png, which is not needed
@@ -1163,13 +1029,17 @@ function show_fid_screens($nr=4,$fileName)
 
 			$sql_select2	=	"SELECT * FROM `dl_screens` WHERE `fid`='".$fid."'";
 			$sql2			=	mysql_query($sql_select2);
+			
+			$sql_result = false;
 			//	screen does exist, is downloaded
 			if(mysql_num_rows($sql2)>=1)
 			{
 
-				
+				$sql_result = true;
 				$md5_valid	=	false;
 				$logged		=	false;
+				$ip_player = '';
+				$md5_screen = '';
 				
 				//	get info from log data
 				if($log_data	=	get_extra_log_data($fid))
@@ -1181,88 +1051,16 @@ function show_fid_screens($nr=4,$fileName)
 					if($md5_screen==get_md5("download/".$fid.".png")) $md5_valid=true;
 				}
 				
-				if($nr_counter==0)
-				{
-					if($logged)
-					{
-						if($md5_valid)
-						{
-							echo "<tr>\n";
-							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>IP</strong>: ".$ip_player."<br><strong>MD5 hash(VALID)</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
-						}
-						//	mismatch!
-						else 
-						{
-							echo "<tr>\n";
-							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>IP</strong>: ".$ip_player."<br><strong>MD5 mismatch!</strong><br><strong>MD5 hash screen</strong>:".get_md5("download/".$fid.".png")."<br><strong>md5 hash log</strong>: ".$md5_screen."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' class='md5_mismatch_border'></a></td>\n";
-						}
-					}
-					else 
-					{
-						echo "<tr>\n";
-						echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>MD5 hash</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
-					}
-					
-
-					$nr_counter++;
-				}
-				else
-				{
-					if($logged)
-					{
-						if($md5_valid)
-						{
-							
-							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>IP</strong>: ".$ip_player."<br><strong>MD5 hash(VALID)</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
-						}
-						//	mismatch!
-						else 
-						{
-							
-							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>IP</strong>: ".$ip_player."<br><strong>MD5 mismatch!</strong><br><strong>MD5 hash screen</strong>:".get_md5("download/".$fid.".png")."<br><strong>md5 hash log</strong>: ".$md5_screen."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' class='md5_mismatch_border'></a></td>\n";					
-						}
-					}
-					else 
-					{
-						
-						echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>MD5 hash</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
-					}
-					
-					$nr_counter++;
-				}
-
-				if($nr_counter>=$nr)
-				{
-					echo "</tr>\n";
-					$nr_counter=0;
-				}
-
-
+			
 			}
-			else
+				
+			show_screens_body($fid,$name,$guid,$date,$ip_player,$md5_screen,$nr,$sql_result,$nr_counter,$logged,$md5_valid);
+				
+			$nr_counter++;
+			
+			if($nr_counter>=$nr)
 			{
-				//	if there are no results, then there is no image available. So it is not downloaded
-				//	can be edited with custum image
-
-				if($nr_counter==0)
-				{
-					echo "<tr>\n";
-					echo "<td align='center'><br><a href='#' target='_self' class='popup'><span><strong>File</strong>: n/a<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."</span><img src='style/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0'></a></td>\n";
-
-					$nr_counter++;
-				}
-				else
-				{
-					echo "<td align='center'><br><a href='#' target='_self' class='popup'><span><strong>File</strong>: n/a<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."</span><img src='style/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0'></a></td>\n";
-					$nr_counter++;
-				}
-
-				if($nr_counter>=$nr)
-				{
-					echo "</tr>\n";
-					$nr_counter=0;
-				}
-
+				$nr_counter=0;
 			}
 
 
@@ -1277,6 +1075,8 @@ function show_fid_screens($nr=4,$fileName)
 
 function show_guid_screens($nr=4,$guid)
 {
+	global $str;
+	
 	$nr_counter	=	0;
 
 	$guid		=	get_wildcard($guid);
@@ -1299,13 +1099,17 @@ function show_guid_screens($nr=4,$guid)
 
 			$sql_select2	=	"SELECT * FROM `dl_screens` WHERE `fid`='".$fid."'";
 			$sql2			=	mysql_query($sql_select2);
+			
+			$sql_result = false;
 			//	screen does exist, is downloaded
 			if(mysql_num_rows($sql2)>=1)
 			{
 				
-				
+				$sql_result = true;
 				$md5_valid	=	false;
 				$logged		=	false;
+				$ip_player = '';
+				$md5_screen = '';
 				
 				//	get info from log data
 				if($log_data	=	get_extra_log_data($fid))
@@ -1317,92 +1121,17 @@ function show_guid_screens($nr=4,$guid)
 					if($md5_screen==get_md5("download/".$fid.".png")) $md5_valid=true;
 				}
 								
-
-				if($nr_counter==0)
-				{
-					if($logged)
-					{
-						if($md5_valid)
-						{
-							echo "<tr>\n";
-							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>IP</strong>: ".$ip_player."<br><strong>MD5 hash(VALID)</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
-						}
-						//	mismatch!
-						else 
-						{
-							echo "<tr>\n";
-							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>IP</strong>: ".$ip_player."<br><strong>MD5 mismatch!</strong><br><strong>MD5 hash screen</strong>:".get_md5("download/".$fid.".png")."<br><strong>md5 hash log</strong>: ".$md5_screen."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' class='md5_mismatch_border'></a></td>\n";
-						}
-					}
-					else 
-					{
-						echo "<tr>\n";
-						echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>MD5 hash</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
-					}
-					
-
-					$nr_counter++;
-				}
-				else
-				{
-					if($logged)
-					{
-						if($md5_valid)
-						{
-							
-							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>IP</strong>: ".$ip_player."<br><strong>MD5 hash(VALID)</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
-						}
-						//	mismatch!
-						else 
-						{
-							
-							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>IP</strong>: ".$ip_player."<br><strong>MD5 mismatch!</strong><br><strong>MD5 hash screen</strong>:".get_md5("download/".$fid.".png")."<br><strong>md5 hash log</strong>: ".$md5_screen."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' class='md5_mismatch_border'></a></td>\n";					
-						}
-					}
-					else 
-					{
-						
-						echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>MD5 hash</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
-					}
-					
-					$nr_counter++;
-				}
-
-				if($nr_counter>=$nr)
-				{
-					echo "</tr>\n";
-					$nr_counter=0;
-				}
-
-
-			}
-			else
+			}	
+		
+			show_screens_body($fid,$name,$guid,$date,$ip_player,$md5_screen,$nr,$sql_result,$nr_counter,$logged,$md5_valid);
+				
+			$nr_counter++;
+			
+			if($nr_counter>=$nr)
 			{
-				//	if there are no results, then there is no image available. So it is not downloaded
-				//	can be edited with custum image
-
-				if($nr_counter==0)
-				{
-					echo "<tr>\n";
-					echo "<td align='center'><br><a href='#' target='_self' class='popup'><span><strong>File</strong>: n/a<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."</span><img src='style/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0'></a></td>\n";
-
-					$nr_counter++;
-				}
-				else
-				{
-					echo "<td align='center'><br><a href='#' target='_self' class='popup'><span><strong>File</strong>: n/a<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."</span><img src='style/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0'></a></td>\n";
-					$nr_counter++;
-				}
-
-				if($nr_counter>=$nr)
-				{
-					echo "</tr>\n";
-					$nr_counter=0;
-				}
-
+				$nr_counter=0;
 			}
-
-
+			
 		}
 	}
 	else
@@ -1414,6 +1143,8 @@ function show_guid_screens($nr=4,$guid)
 
 function show_name_screens($nr=4,$name)
 {
+	global $str;
+	
 	$nr_counter	=	0;
 
 	$name		=	get_wildcard($name);
@@ -1438,12 +1169,17 @@ function show_name_screens($nr=4,$name)
 
 			$sql_select2	=	"SELECT * FROM `dl_screens` WHERE `fid`='".$fid."'";
 			$sql2			=	mysql_query($sql_select2);
+			
+			$sql_result = false;
 			//	screen does exist, is downloaded
 			if(mysql_num_rows($sql2)>=1)
 			{
 				
+				$sql_result = true;
 				$md5_valid	=	false;
 				$logged		=	false;
+				$md5_screen = '';
+				$ip_player = '';
 				
 				//	get info from log data
 				if($log_data	=	get_extra_log_data($fid))
@@ -1454,93 +1190,19 @@ function show_name_screens($nr=4,$name)
 					
 					if($md5_screen==get_md5("download/".$fid.".png")) $md5_valid=true;
 				}
-
-				if($nr_counter==0)
-				{
-					if($logged)
-					{
-						if($md5_valid)
-						{
-							echo "<tr>\n";
-							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>IP</strong>: ".$ip_player."<br><strong>MD5 hash(VALID)</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
-						}
-						//	mismatch!
-						else 
-						{
-							echo "<tr>\n";
-							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>IP</strong>: ".$ip_player."<br><strong>MD5 mismatch!</strong><br><strong>MD5 hash screen</strong>:".get_md5("download/".$fid.".png")."<br><strong>md5 hash log</strong>: ".$md5_screen."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' class='md5_mismatch_border'></a></td>\n";
-						}
-					}
-					else 
-					{
-						echo "<tr>\n";
-						echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>MD5 hash</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
-					}
-					
-
-					$nr_counter++;
-				}
-				else
-				{
-					if($logged)
-					{
-						if($md5_valid)
-						{
-							
-							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>IP</strong>: ".$ip_player."<br><strong>MD5 hash(VALID)</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
-						}
-						//	mismatch!
-						else 
-						{
-							
-							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>IP</strong>: ".$ip_player."<br><strong>MD5 mismatch!</strong><br><strong>MD5 hash screen</strong>:".get_md5("download/".$fid.".png")."<br><strong>md5 hash log</strong>: ".$md5_screen."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' class='md5_mismatch_border'></a></td>\n";					
-						}
-					}
-					else 
-					{
-						
-						echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>MD5 hash</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
-					}
-					
-					$nr_counter++;
-				}
-
-				if($nr_counter>=$nr)
-				{
-					echo "</tr>\n";
-					$nr_counter=0;
-				}
-
-
 			}
-			else
+
+			show_screens_body($fid,$name,$guid,$date,$ip_player,$md5_screen,$nr,$sql_result,$nr_counter,$logged,$md5_valid);
+				
+			$nr_counter++;
+			
+			if($nr_counter>=$nr)
 			{
-				//	if there are no results, then there is no image available. So it is not downloaded
-				//	can be edited with custum image
-
-				if($nr_counter==0)
-				{
-					echo "<tr>\n";
-					echo "<td align='center'><br><a href='#' target='_self' class='popup'><span><strong>File</strong>: n/a<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."</span><img src='style/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0'></a></td>\n";
-
-					$nr_counter++;
-				}
-				else
-				{
-					echo "<td align='center'><br><a href='#' target='_self' class='popup'><span><strong>File</strong>: n/a<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."</span><img src='style/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0'></a></td>\n";
-					$nr_counter++;
-				}
-
-				if($nr_counter>=$nr)
-				{
-					echo "</tr>\n";
-					$nr_counter=0;
-				}
-
+				$nr_counter=0;
 			}
-
 
 		}
+		
 	}
 	else
 	{
@@ -1553,6 +1215,8 @@ function show_name_screens($nr=4,$name)
 //	this function will be used on main page and show x latest screens. This number can be configured in config.inc.php
 function show_main_screens($nr=4)
 {
+	global $str;
+	
 	$nr_counter	=	0;
 
 	//	only select unique fids
@@ -1574,12 +1238,18 @@ function show_main_screens($nr=4)
 
 			$sql_select2	=	"SELECT * FROM `dl_screens` WHERE `fid`='".$fid."'";
 			$sql2			=	mysql_query($sql_select2);
+			
+			$sql_result = false;
 			//	screen does exist, is downloaded
 			if(mysql_num_rows($sql2)>=1)
 			{
+				$sql_result = true;
 				
 				$md5_valid	=	false;
 				$logged		=	false;
+				$ip_player = '';
+				$md5_screen = '';
+				
 				
 				//	get info from log data
 				if($log_data	=	get_extra_log_data($fid))
@@ -1590,92 +1260,16 @@ function show_main_screens($nr=4)
 					
 					if($md5_screen==get_md5("download/".$fid.".png")) $md5_valid=true;
 				}
+			}
+
+			show_screens_body($fid,$name,$guid,$date,$ip_player,$md5_screen,$nr,$sql_result,$nr_counter,$logged,$md5_valid);
 				
-
-				if($nr_counter==0)
-				{
-					if($logged)
-					{
-						if($md5_valid)
-						{
-							echo "<tr>\n";
-							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>IP</strong>: ".$ip_player."<br><strong>MD5 hash(VALID)</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
-						}
-						//	mismatch!
-						else 
-						{
-							echo "<tr>\n";
-							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>IP</strong>: ".$ip_player."<br><strong>MD5 mismatch!</strong><br><strong>MD5 hash screen</strong>:".get_md5("download/".$fid.".png")."<br><strong>md5 hash log</strong>: ".$md5_screen."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' class='md5_mismatch_border'></a></td>\n";
-						}
-					}
-					else 
-					{
-						echo "<tr>\n";
-						echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>MD5 hash</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
-					}
-					
-
-					$nr_counter++;
-				}
-				else
-				{
-					if($logged)
-					{
-						if($md5_valid)
-						{
-							
-							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>IP</strong>: ".$ip_player."<br><strong>MD5 hash(VALID)</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
-						}
-						//	mismatch!
-						else 
-						{
-							
-							echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>IP</strong>: ".$ip_player."<br><strong>MD5 mismatch!</strong><br><strong>MD5 hash screen</strong>:".get_md5("download/".$fid.".png")."<br><strong>md5 hash log</strong>: ".$md5_screen."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' class='md5_mismatch_border'></a></td>\n";					
-						}
-					}
-					else 
-					{
-						
-						echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>File</strong>: ".$fid.".png<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."<br><strong>MD5 hash</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
-					}
-					
-					$nr_counter++;
-				}
-
-				if($nr_counter>=$nr)
-				{
-					echo "</tr>\n";
-					$nr_counter=0;
-				}
-
-
-			}
-			else
+			$nr_counter++;
+			
+			if($nr_counter>=$nr)
 			{
-				//	if there are no results, then there is no image available. So it is not downloaded
-				//	can be edited with custum image
-
-				if($nr_counter==0)
-				{
-					echo "<tr>\n";
-					echo "<td align='center'><br><a href='#' target='_self' class='popup'><span><strong>File</strong>: n/a<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."</span><img src='style/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0'></a></td>\n";
-
-					$nr_counter++;
-				}
-				else
-				{
-					echo "<td align='center'><br><a href='#' target='_self' class='popup'><span><strong>File</strong>: n/a<br><strong>Player</strong>: ".$name."<br><strong>GUID</strong>: ".$guid."<br><strong>Taken</strong>: ".$date."</span><img src='style/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0'></a></td>\n";
-					$nr_counter++;
-				}
-
-				if($nr_counter>=$nr)
-				{
-					echo "</tr>\n";
-					$nr_counter=0;
-				}
-
+				$nr_counter=0;
 			}
-
 
 		}
 	}
@@ -1684,6 +1278,101 @@ function show_main_screens($nr=4)
 		template_error_msg('No screens in DB','No images are downloaded','Ask admin for an update. If this doesn\'t do the trick then probably something is not configured correctly');
 	}
 
+}
+
+//	new since version 2.0.0.0
+//	function is more a template than a real function, it will show the screens
+function show_screens_body($fid,$name,$guid,$date,$ip_player='',$md5_screen='',$nr=4,$sql_result=true,$nr_counter=0,$logged=false,$md5_valid=true,$available=false)
+{
+	global $str;
+	
+	if($sql_result==true)
+	{
+		if($nr_counter==0)
+		{
+			if($logged)
+			{
+				if($md5_valid)
+				{
+					echo "<tr>\n";
+					echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str['POP_IP']."</strong>: ".$ip_player."<br><strong>".$str["POP_MD5_VALID"]."</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
+				}
+				//	mismatch!
+				else 
+				{
+					echo "<tr>\n";
+					echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str['POP_IP']."</strong>: ".$ip_player."<br><strong>".$str["POP_MD5_INVALID"]."</strong><br><strong>".$str["POP_MD5_SCREEN"]."</strong>:".get_md5("download/".$fid.".png")."<br><strong>md5 hash log</strong>: ".$md5_screen."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' class='md5_mismatch_border'></a></td>\n";
+				}
+			}
+			else 
+			{
+				echo "<tr>\n";
+				echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str["POP_MD5_HASH"]."</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
+			}
+					
+
+
+		}
+		else
+		{
+			if($logged)
+			{
+				if($md5_valid)
+				{
+							
+					echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str['POP_IP']."</strong>: ".$ip_player."<br><strong>".$str["POP_MD5_VALID"]."</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
+				}
+				//	mismatch!
+				else 
+				{
+							
+					echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str['POP_IP']."</strong>: ".$ip_player."<br><strong>".$str["POP_MD5_INVALID"]."</strong><br><strong>".$str["POP_MD5_SCREEN"]."</strong>:".get_md5("download/".$fid.".png")."<br><strong>md5 hash log</strong>: ".$md5_screen."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' class='md5_mismatch_border'></a></td>\n";					
+				}
+			}
+			else 
+			{
+						
+				echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str["POP_MD5_HASH"]."</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
+			}
+					
+
+		}
+
+			if($nr_counter>=$nr)
+			{
+				echo "</tr>\n";
+			}
+
+
+		}
+		else
+		{
+			if($available==false)
+			{
+				//	if there are no results, then there is no image available. So it is not downloaded
+				//	can be edited with custum image
+
+				if($nr_counter==0)
+				{
+					echo "<tr>\n";
+					echo "<td align='center'><br><a href='#' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$str["POP_NOT_AVAILABLE"]."<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."</span><img src='style/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0'></a></td>\n";
+
+
+				}
+				else
+				{
+					echo "<td align='center'><br><a href='#' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$str["POP_NOT_AVAILABLE"]."<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."</span><img src='style/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0'></a></td>\n";
+
+				}
+
+				if($nr_counter>=$nr)
+				{
+					echo "</tr>\n";
+				}
+			}
+
+		}			
+			
 }
 
 //	give info in footer about update status

@@ -642,7 +642,7 @@ You still have the possibility to force an update manually by running 'update.ph
         <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">CB game</td>
         <td width="45%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <select name="CB_game" id="CB_game">
-          <option value="1" <?php if($CB_game=='none') echo "selected"; ?>>none</option>
+          <option value="none" <?php if($CB_game=='none') echo "selected"; ?>>none</option>
           <?
           include("inc/CB_guidID.inc.php");
           foreach ($CBGUIDID as $CBdata)
