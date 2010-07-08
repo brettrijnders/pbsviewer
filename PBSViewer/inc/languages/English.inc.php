@@ -79,15 +79,30 @@ $str["POP_MD5_LOG"]	=	"md5 hash log";
 $str["POP_MD5_HASH"] = "MD5 hash";
 $str["POP_NOT_AVAILABLE"] = "n/a";
 
+//----------------DETAILED SCREEN INFO-------------------
+$str["DETSCRN_FILE"]	=	$str["POP_FILE"];
+$str["DETSCRN_PLAYER"]	=	"Player";
+$str["DETSCRN_"]	=	"";
+$str["DETSCRN_"]	=	"";
+$str["DETSCRN_"]	=	"";
+$str["DETSCRN_"]	=	"";
+
 //----------------FOOTER-------------------
 $str["FOOTER_GO_UP"] = "^^^ go up ^^^";
 $str["FOOTER_REQUEST_UPDATE"] = "Request update";
 $str["FOOTER_PAGE_GENERATED"] = "Page generated in";
 $str["FOOTER_SECONDS"] = "seconds";
 $str["FOOTER_FILE_UPDATED"] = "File updated";
-$str["FOOTER_FILE_UPDATED_2"] = "ago";
+$str["FOOTER_FILE_UPDATED_2_SECONDS"] = "seconds ago";
+$str["FOOTER_FILE_UPDATED_2_MINUTES"] = "minutes ago";
+$str["FOOTER_FILE_UPDATED_2_HOURS"] = "hours ago";
+$str["FOOTER_FILE_UPDATED_2_DAYS"] = "hours ago";
+$str["FOOTER_DAYS"] = "days";
 $str["FOOTER_HOURS"] = "hours";
+$str["FOOTER_MINUTES"] = "minutes";
+$str["FOOTER_SECONDS"] = "seconds";
 $str["FOOTER_NEW_UPDATE"] = "The file will or can be updated after";
+$str["FOOTER_CUSTOM_UPDATE"]	=	"Ask admin of this website to update the screens if they are old";
 
 //----------------ERROR MSG-------------------
 $str["ERROR_"]	=	"";

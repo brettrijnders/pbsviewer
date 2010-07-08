@@ -777,8 +777,10 @@ function template_request()
 
 function template_footer($update_time,$lastUpdate,$startTime)
 {
+	global $str;
+	
 	?>
-	<div align="center"><a href="#start" target="_self"><strong>^^^ go up ^^^</strong></a>
+	<div align="center"><a href="#start" target="_self"><strong><?php echo $str['FOOTER_GO_UP'];?></strong></a>
 </div>
     <br></td>
   </tr>
@@ -789,7 +791,7 @@ function template_footer($update_time,$lastUpdate,$startTime)
     <br>
       <table width="40%" border="0" cellpadding="0" cellspacing="0" class="footer_main_bg_1_row_1">
         <tr>
-          <td align="center"><?echo 'Page generated in '.get_loadTime($startTime,4).' seconds';?></td>
+          <td align="center"><?echo $str["FOOTER_PAGE_GENERATED"]." ".get_loadTime($startTime,4)." ".$str["FOOTER_SECONDS"];?></td>
         </tr>
       </table>
       <table width="40%" border="0" cellpadding="0" cellspacing="0" class="footer_main_bg_1_row_2">

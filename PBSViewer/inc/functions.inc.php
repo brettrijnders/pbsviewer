@@ -1689,42 +1689,44 @@ function show_main_screens($nr=4)
 //	give info in footer about update status
 function update_info ($update_time,$lastUpdate)
 {
+	global $str;
+	
 	if(CUSTOM_UPDATE!=true)
 	{
 
 		$lastUpdated	=	(time()-$lastUpdate);
 
 		//	give in seconds
-		if($lastUpdated>=0 && $lastUpdated<60)	echo 'File updated '.$lastUpdated.' seconds ago<br>';
+		if($lastUpdated>=0 && $lastUpdated<60)	echo $str["FOOTER_FILE_UPDATED"]." ".$lastUpdated." ".$str["FOOTER_FILE_UPDATED_2_SECONDS"]."<br>";
 
 		//	give in minutes
-		if($lastUpdated>=60 && $lastUpdated<3600) echo 'File updated '.round(($lastUpdated/60),2).' minutes ago<br>';
+		if($lastUpdated>=60 && $lastUpdated<3600) echo $str["FOOTER_FILE_UPDATED"]." ".round(($lastUpdated/60),2)." ".$str["FOOTER_FILE_UPDATED_2_MINUTES"]."<br>";
 
 		//	give in hours
-		if($lastUpdated>=3600 && $lastUpdated<3600*24) echo 'File updated '.round(($lastUpdated/3600),2).' hours ago<br>';
+		if($lastUpdated>=3600 && $lastUpdated<3600*24) echo $str["FOOTER_FILE_UPDATED"]." ".round(($lastUpdated/3600),2)." ".$str["FOOTER_FILE_UPDATED_2_HOURS"]."<br>";
 
 		//	give in days
-		if($lastUpdated>=3600*24) echo 'File updated '.round(($lastUpdated/3600*24),2).' days ago<br>';
+		if($lastUpdated>=3600*24) echo $str["FOOTER_FILE_UPDATED"]." ".round(($lastUpdated/3600*24),2)." ".$str["FOOTER_FILE_UPDATED_2_DAYS"]."<br>";
 
 
 
 		$nexUpdate		=	($update_time-(time()-$lastUpdate));
 
 		//	give in seconds
-		if($nexUpdate>=0 && $nexUpdate<60) echo 'The file will or can be updated after '.$nexUpdate.' seconds';
+		if($nexUpdate>=0 && $nexUpdate<60) echo $str["FOOTER_NEW_UPDATE"]." ".$nexUpdate." ".$str["FOOTER_SECONDS"];
 
 		//	give in minutes
-		if($nexUpdate>=60 && $nexUpdate<3600) echo 'The file will or can be updated after '.round(($nexUpdate/60),2).' minutes';
+		if($nexUpdate>=60 && $nexUpdate<3600) echo $str["FOOTER_NEW_UPDATE"]." ".round(($nexUpdate/60),2)." ".$str["FOOTER_MINUTES"];
 
 		//	give in hours
-		if($nexUpdate>=3600 && $nexUpdate<3600*24) echo 'The file will or can be updated after '.round(($nexUpdate/3600),2).' hours';
+		if($nexUpdate>=3600 && $nexUpdate<3600*24) echo $str["FOOTER_NEW_UPDATE"]." ".round(($nexUpdate/3600),2)." ".$str["FOOTER_HOURS"];
 
 		//	give in days
-		if($nexUpdate>=3600*24) echo 'The file will or can be updated after '.round(($nexUpdate/3600*24),2).' days';
+		if($nexUpdate>=3600*24) echo $str["FOOTER_NEW_UPDATE"]." ".round(($nexUpdate/3600*24),2)." ".$str["FOOTER_DAYS"];
 	}
 	else
 	{
-		echo "Ask admin of this website to update the screens if they are old";
+		echo $str["FOOTER_CUSTOM_UPDATE"];
 	}
 
 }
