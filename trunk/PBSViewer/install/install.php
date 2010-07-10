@@ -728,7 +728,7 @@ PRIMARY KEY(`optionID`)
 				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('min_screen_size','10000');";
 				mysql_query($sql_insert) or die(mysql_error());
 
-				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('language','english');";
+				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('language','English');";
 				mysql_query($sql_insert) or die(mysql_error());				
 
 				session_destroy();

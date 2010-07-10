@@ -1,6 +1,7 @@
 
 changelog 2.0.0.0:
 ------------------------------------
+- Bug fix: only show aliases if person has more names, don't show when person
 - Check if inc dir is CHMODDED to 755 after install
 - Bug fix: correct checking of version numbers
 - Added google code project hosting logo

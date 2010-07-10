@@ -41,6 +41,10 @@ foreach ($admin_ip as $ip)
 
 //	connect to DB
 connect_DB();
+require_once('inc/init.inc.php');
+
+//load correct language
+include("inc/load_language.inc.php");
 
 if(isset($_POST['save'])&&$ACP==true)
 {
@@ -73,7 +77,7 @@ if(isset($_POST['save'])&&$ACP==true)
 		$error_msg .= "<li>PBSV download dir field is empty</li>";
 		$saving = false;
 	}
-	if ($_POST['auto_del_count']!=-1 || $_POST['auto_del_count']<-1)
+	if (!($_POST['auto_del_count']==-1 || $_POST['auto_del_count']>=0))
 	{
 		$error_msg .= "<li>Valid values for field 'max logs on webserver' are -1 or 0 and larger</li>";
 		$saving = false;
@@ -262,137 +266,7 @@ else
 
 if($ACP==true) 
 {
-	
-	// default values
-	$admin_mail			= '';
-	$clan_name			= '';
-	$clan_tag			= '';
-	$clan_game			= '';
-	$clan_game_short 	= '';
-	$pb_dir 			= '';
-	$custom_update 		= 0;
-	$update_time 		= 86400;
-	$pb_sv_ssceiling 	= 10000;
-	$pbsv_download_dir	= '';
-	$reset				= 1;
-	$pbsvss_updater		= 1;
-	$pb_log				= 1;
-	$auto_del_count 	= -1;
-	$nr_screens_main 	= 10;
-	$screens_per_row	= 4;
-	$width 				= 200;
-	$height 			= 200;
-	$CB_game			= 'none';
-	$min_screen_size 	= 10000;
-	$script_load_time	= 600;
-	$weblog_dir 		= 'download';
-	$debug				= 0;
-	$language			= 'english';
-	
-	// gather data
-	$sql_select = "SELECT `name`,`value` FROM `settings`";
-	$sql = mysql_query($sql_select) or die(mysql_error());
-	while ($row = mysql_fetch_object($sql))
-	{
-		if ($row->name=='admin_mail')
-		{
-			$admin_mail = $row->value;
-		}
-		elseif ($row->name=='clan_name')
-		{
-			$clan_name = $row->value;
-		}
-		elseif ($row->name=='clan_tag')
-		{
-			$clan_tag = $row->value;
-		}
-		elseif ($row->name=='clan_game')
-		{
-			$clan_game = $row->value;
-		}
-		elseif ($row->name=='clan_game_short')
-		{
-			$clan_game_short = $row->value;
-		}
-		elseif ($row->name=='pb_dir')
-		{
-			$pb_dir = $row->value;
-		}
-		elseif ($row->name=='custom_update')
-		{
-			$custom_update = $row->value;
-		}
-		elseif ($row->name=='update_time')
-		{
-			$update_time = $row->value;
-		}
-		elseif ($row->name=='pb_sv_ssceiling')
-		{
-			$pb_sv_ssceiling = $row->value;
-		}
-		elseif ($row->name=='pbsv_download_dir')
-		{
-			$pbsv_download_dir = $row->value;
-		}
-		elseif ($row->name=='reset')
-		{
-			$reset = $row->value;
-		}
-		elseif ($row->name=='pbsvss_updater')
-		{
-			$pbsvss_updater = $row->value;
-		}
-		elseif ($row->name=='pb_log')
-		{
-			$pb_log	 = $row->value;
-		}
-		elseif ($row->name=='auto_del_count')
-		{
-			$auto_del_count	 = $row->value;
-		}
-		elseif ($row->name=='nr_screens_main')
-		{
-			$nr_screens_main	 = $row->value;
-		}
-		elseif ($row->name=='screens_per_row')
-		{
-			$screens_per_row	 = $row->value;
-		}
-		elseif ($row->name=='width')
-		{
-			$width	 = $row->value;
-		}
-		elseif ($row->name=='height')
-		{
-			$height	 = $row->value;
-		}
-		elseif ($row->name=='CB_game')
-		{
-			$CB_game	 = $row->value;
-		}
-		elseif ($row->name=='min_screen_size')
-		{
-			$min_screen_size	 = $row->value;
-		}
-		elseif ($row->name=='script_load_time')
-		{
-			$script_load_time	 = $row->value;
-		}
-		elseif ($row->name=='weblog_dir')
-		{
-			$weblog_dir = $row->value;
-		}
-		elseif ($row->name=='debug')
-		{
-			$debug	 = $row->value;
-		}
-		elseif ($row->name=='language')
-		{
-			$language	 = $row->value;
-		}
-	}
-
-	
+		
 	//	this is needed to make automatic class(css) altering of rows
 	$row_nr		=	1;		//	odd nr get different class then even nr
 	
@@ -402,7 +276,7 @@ if($ACP==true)
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Admin Control Panel (ACP)</title>
+<title><?php echo $str["ACP_TITLE"];?></title>
 <link href="style/style.css" rel="stylesheet" type="text/css">
 <link rel="shortcut icon" href="style/img/favicon.ico"> 
 </head>
@@ -416,167 +290,167 @@ if($ACP==true)
 <br>
 <table width="80%" border="0" align="center">
   <tr>
-    <td align="center" class="bg_reset_table_row1"><span class="txt_light">:: Admin Control Panel ::</span></td>
+    <td align="center" class="bg_reset_table_row1"><span class="txt_light">:: <?php echo $str["ACP_TITLE_MENU"];?> ::</span></td>
   </tr>
   <tr>
     <td class="bg_reset_table_row2"><form name="form1" method="post" action=""><table width="90%" border="0" align="center">
       <tr>
-        <td colspan="3" align="center"><strong>Welcome Admin, in this control panel you can configure most options. To change login details for ftp gameserver or ftp webhosting  please edit 'config.inc.php' manually<br>
+        <td colspan="3" align="center"><strong><?php echo $str["ACP_WELCOME"];?><br>
             <br>
-            <?echo '<a href="./" target="_parent">Click here to go back</a>';?>
+            <?echo '<a href="./" target="_parent">'.$str["ACP_BACK"].'</a>';?>
             <br>
         </strong></td>
       </tr>
       <tr>
-        <td colspan="3" align="center" class="bg_reset_table_row3"><span class="txt_light"><strong>User</strong></span></td>
+        <td colspan="3" align="center" class="bg_reset_table_row3"><span class="txt_light"><strong><?php echo $str["ACP_USER"];?></strong></span></td>
       </tr>
       <tr>
-        <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Admin mail</td>
+        <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_ADMIN_MAIL"];?></td>
         <td width="45%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="admin_mail" id="admin_mail" value="<?php echo $admin_mail;?>" onclick="this.focus();" size="40" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Only fill in  if you want to be notified when someone has requested an update</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_ADMIN_MAIL_COMMENT"];?></td>
       </tr>
       <tr>
-        <td colspan="3" align="center" class="bg_reset_table_row3"><span class="txt_light"><strong>Clan</strong></span></td>
+        <td colspan="3" align="center" class="bg_reset_table_row3"><span class="txt_light"><strong><?php echo $str["ACP_CLAN"];?></strong></span></td>
       </tr>
       <tr>
-        <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Clan name</td>
+        <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_CLAN_NAME"];?></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="clan_name" id="clan_name" value="<?php echo $clan_name;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">What is your full clan name?</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_CLAN_NAME_COMMENT"];?></td>
       </tr>
       <tr>
-        <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Clan Tag</td>
+        <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_CLAN_TAG"];?></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="clan_tag" id="clan_tag" value="<?php echo $clan_tag;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Your clantag ingame?</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_CLAN_COMMENT"];?></td>
       </tr>
       <tr>
-        <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Clan Game</td>
+        <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_CLAN_GAME"];?></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="clan_game" id="clan_game" value="<?php echo $clan_game;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Which game are you playing. So what is your gameserver running?</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_CLAN_GAME_CONTENT"];?></td>
       </tr>
       <tr>
-        <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Clan Game short</td>
+        <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_CLAN_GAME_SHORT"];?></td>
         <td width="45%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="clan_game_short" id="clan_game_short" value="<?php echo $clan_game_short;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">What is your game name in short?</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_CLAN_GAME_SHORT_COMMENT"];?></td>
       </tr>
       <tr>
-        <td colspan="3" align="center" class="bg_reset_table_row3"><span class="txt_light"><strong>Update</strong></span></td>
+        <td colspan="3" align="center" class="bg_reset_table_row3"><span class="txt_light"><strong><?php echo $str["ACP_UPDATE"];?></strong></span></td>
       </tr>
       <tr>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">PB directory</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_PB_DIR"];?></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="pb_dir" id="pb_dir" value="<?php echo $pb_dir;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p>Directory of punkbuster on your ftp gameserver.</p>
-          <p>Use '/' and don't use 'pb/' with a trailing slash.</p></td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p><?php echo $str["ACP_PB_DIR_COMMENT"];?></p>
+          <p><?php echo $str["ACP_PB_DIR_COMMENT_2"];?></p></td>
       </tr>
       <tr>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Custom update</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_CUSTOM_UPDATE"];?></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <select name="custom_update" id="custom_update">
-          <option value="1" <?php if($custom_update=='1') echo "selected"; ?>>True</option>
-          <option value="0" <?php if($custom_update=='0') echo "selected"; ?>>False</option>  
+          <option value="1" <?php if($custom_update=='1') echo "selected"; ?>><?php echo $str["ACP_TRUE"];?></option>
+          <option value="0" <?php if($custom_update=='0') echo "selected"; ?>><?php echo $str["ACP_FALSE"];?></option>  
           
             
           </select>
         </label></td>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"> If 'custom update' is true then the admin or a cron job should run 'update.php' which is located in map 'update'.<br>
-If option is false, then it will update after x seconds, this can be configured with 'Update time' see below.<br>
-You still have the possibility to force an update manually by running 'update.php' if you want.</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_CUSTOM_UPDATE_COMMENT_1"];?><br>
+<?php echo $str["ACP_CUSTOM_UPDATE_COMMENT_2"];?><br>
+<?php echo $str["ACP_CUSTOM_UPDATE_COMMENT_3"];?></td>
       </tr>
       <tr>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Update time</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_UPDATE_TIME"];?></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="update_time" id="update_time" value="<?php echo $update_time;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">The update time is in seconds. Use a small update time if gameserver is crowded (since a lot of new screens are captured), for example a public gameserver. However keep in mind that bandwith will also increase if update time is smaller. Recommended: 86400 seconds</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_UPDATE_TIME_COMMENT"];?></td>
       </tr>
       <tr>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">pb_sv_SsCeiling</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_PB_SSCEILING"];?></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="pb_sv_ssceiling" id="pb_sv_ssceiling" value="<?php echo $pb_sv_ssceiling;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p>To find your number open this file 'pbsv.cfg' and look for 'pb_sv_SsCeiling'. The file should be located in your 'pb' directory on your ftp of your gameserver. <br>
-          It is recommended to have a small amount as possible to save some bandwith and space. NB both values of 'pb_sv_SsCeiling' as in 'pbsv.cfg' and here should be the same <br>
-          If you are not sure please take a large number like 10000 or <a href="http://www.beesar.com/contact/">ask help</a><br>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p><?php echo $str["ACP_PB_SSCEILING_COMMENT_1"];?><br>
+          <?php echo $str["ACP_PB_SSCEILING_COMMENT_2"];?><br>
+          <?php echo $str["ACP_PB_SSCEILING_COMMENT_3"];?></a><br>
           </p>
-          <p>Game-violations has set this number to 10000<br>
-            PB default is 100</p></td>
+          <p><?php echo $str["ACP_PB_SSCEILING_COMMENT_4"];?><br>
+            <?php echo $str["ACP_PB_SSCEILING_COMMENT_5"];?></p></td>
       </tr>
       <tr>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">PBSV download dir</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_PBSV_DOWNLOAD_DIR"];?></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="pbsv_download_dir" id="pbsv_download_dir" value="<?php echo $pbsv_download_dir;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p>If you connect to your webserver through FTP, what is the location of the download folder of PBSViewer? copy past or type your path directly after login</p>
-          <p>omit trailing slash /</p></td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p><?php echo $str["ACP_PBSV_DOWNLOAD_DIR_COMMENT"];?></p>
+          <p><?php echo $str["ACP_PBSV_DOWNLOAD_DIR_COMMENT_2"];?></p></td>
       </tr>
       <tr>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Reset</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_RESET"];?></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <select name="reset" id="reset">
-            <option value="1" <?php if($reset=='1') echo "selected"; ?>>True</option>
-            <option value="0" <?php if($reset=='0') echo "selected"; ?>>False</option>
+            <option value="1" <?php if($reset=='1') echo "selected"; ?>><?php echo $str["ACP_TRUE"];?></option>
+            <option value="0" <?php if($reset=='0') echo "selected"; ?>><?php echo $str["ACP_FALSE"];?></option>
           </select>
         </label></td>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Default	=	false. Reset feature allows admins to delete all screens and log files from your webserver and gameserver. <br><br>In order to use this function you need to configure the login details of your ftp webhosting in config.inc.php.</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_RESET_COMMENT_1"];?><br><br><?php echo $str["ACP_RESET_COMMENT_2"];?></td>
       </tr>
       <tr>
-        <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">pbsvss_updater</td>
+        <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_PBSVSS_UPDATER"];?></td>
         <td width="45%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <select name="pbsvss_updater" id="pbsvss_updater">
-            <option value="1" <?php if($pbsvss_updater=='1') echo "selected"; ?>>True</option>
-            <option value="0" <?php if($pbsvss_updater=='0') echo "selected"; ?>>False</option>
+            <option value="1" <?php if($pbsvss_updater=='1') echo "selected"; ?>><?php echo $str["ACP_TRUE"];?></option>
+            <option value="0" <?php if($pbsvss_updater=='0') echo "selected"; ?>><?php echo $str["ACP_FALSE"];?></option>
           </select>
         </label></td>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Default=false. pb keeps logging screenshots data to pbsvss.htm, it places the newest entries at the end of this file. However pb does not remove old data, so this file will keep on growing in size. If you choose true, then old entries will be removed automatically. This will keep the filesize at a small size.</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_PBSVSS_UPDATER_COMMENT"];?></td>
       </tr>
       <tr>
-        <td colspan="3" align="center" class="bg_reset_table_row3"><span class="txt_light"><strong>Logging</strong></span></td>
+        <td colspan="3" align="center" class="bg_reset_table_row3"><span class="txt_light"><strong><?php echo $str["ACP_LOGGING"];?></strong></span></td>
       </tr>
       <tr>
-        <td width="20%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">PB_log</td>
+        <td width="20%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_PB_LOG"];?></td>
         <td width="45%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <select name="pb_log" id="pb_log">
-            <option value="1" <?php if($pb_log=='1') echo "selected"; ?>>True</option>
-            <option value="0" <?php if($pb_log=='0') echo "selected"; ?>>False</option>
+            <option value="1" <?php if($pb_log=='1') echo "selected"; ?>><?php echo $str["ACP_TRUE"];?></option>
+            <option value="0" <?php if($pb_log=='0') echo "selected"; ?>><?php echo $str["ACP_FALSE"];?></option>
           </select>
         </label></td>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p>Gather more info about screens, like md5 check or ip address of players, with help of logs</p>
-          <p>Default	=	false, If you don't want logging select false.</p>
-          <p>Note that the FTP webhost (not your gameserver) login details needs to be configured correctly in 'config.inc.php' if you want to use logging.</p></td>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p><?php echo $str["ACP_PB_LOG_COMMENT_1"];?></p>
+          <p><?php echo $str["ACP_PB_LOG_COMMENT_2"];?></p>
+          <p><?php echo $str["ACP_PB_LOG_COMMENT_3"];?></p></td>
       </tr>
       <tr>
-        <td width="20%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">max logs on webserver</td>
+        <td width="20%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_MAX_LOGS"];?></td>
         <td width="45%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="auto_del_count" id="auto_del_count" value="<?php echo $auto_del_count;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
           </label></td>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p>Default	=	4, 'max logs on webserver' has to be lower than PB_SV_LogCeiling. Otherwise there won't be an auto-delete. This is the number of logs stored on your webserver<br>
-          If you choose 0, then log files are deleted immediately after updating<br>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p><?php echo $str["ACP_MAX_LOGS_COMMENT_1"];?><br>
+          <?php echo $str["ACP_MAX_LOGS_COMMENT_2"];?><br>
           </p>
-          <p>If you don't want to delete the logs from your webserver then enter -1</p></td>
+          <p><?php echo $str["ACP_MAX_LOGS_COMMENT_3"];?></p></td>
       </tr>
       <tr>
-        <td colspan="3" align="center" class="bg_reset_table_row3"><span class="txt_light"><strong>Template</strong></span></td>
+        <td colspan="3" align="center" class="bg_reset_table_row3"><span class="txt_light"><strong><?php echo $str["ACP_TEMPLATE"];?></strong></span></td>
       </tr>
       <tr>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Screens on main page</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_SCREENS_MAIN"];?></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="nr_screens_main" id="nr_screens_main" value="<?php echo $nr_screens_main;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Default=10, on the main page the latest x screens are shown to save some bandwith</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_SCREENS_MAIN_COMMENT"];?></td>
       </tr>
       <tr>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Screens per row</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_SCREENS_PER_ROW"];?></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <select name="screens_per_row" id="screens_per_row">
             <option value="1" <?php if($screens_per_row=='1') echo "selected"; ?>>1</option>
@@ -587,24 +461,24 @@ You still have the possibility to force an update manually by running 'update.ph
             <option value="6" <?php if($screens_per_row=='6') echo "selected"; ?>>6</option>
           </select>
         </label></td>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Amount of screens you want to have on each row</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_SCREENS_PER_ROW_COMMENT"];?></td>
       </tr>
       <tr>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Image width</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_IMG_W"];?></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="width" id="width" value="<?php echo $width;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Thumbnail image width</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_IMG_W_COMMENT"];?></td>
       </tr>
       <tr>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Image height</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_IMG_H"];?></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="height" id="height" value="<?php echo $height;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Thumbnail image height</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_IMG_H_COMMENT"];?></td>
       </tr>
       <tr>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Default language</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_LANGUAGE"];?></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">
         <?php
         // get all language files
@@ -639,10 +513,10 @@ You still have the possibility to force an update manually by running 'update.ph
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">&nbsp;</td>
       </tr>
       <tr>
-        <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">CB game</td>
+        <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_CB_GAME"];?></td>
         <td width="45%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <select name="CB_game" id="CB_game">
-          <option value="none" <?php if($CB_game=='none') echo "selected"; ?>>none</option>
+          <option value="none" <?php if($CB_game=='none') echo "selected"; ?>><?php echo $str["ACP_CB_NONE"];?></option>
           <?
           include("inc/CB_guidID.inc.php");
           foreach ($CBGUIDID as $CBdata)
@@ -660,48 +534,48 @@ You still have the possibility to force an update manually by running 'update.ph
             
           </select>
         </label></td>
-        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">The games in this list are supported by clanbase, please select the game that is running on your gameserver. This information will be used to automatically find clanbase players (only if he/she has joined cb) for each pb screenshot. select none if you don't want this extra information.</td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_CB_GAME_COMMENT"];?></td>
       </tr>
       <tr>
-        <td colspan="3" align="center" class="bg_reset_table_row3"><span class="txt_light"><strong>Advanced</strong></span></td>
+        <td colspan="3" align="center" class="bg_reset_table_row3"><span class="txt_light"><strong><?php echo $str["ACP_ADVANCED"];?></strong></span></td>
       </tr>
       <tr>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Minimal screen download size</td>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_MIN_SCRN_SIZE"];?></td>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="min_screen_size" id="min_screen_size" value="<?php echo $min_screen_size;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Screens with a size smaller than the 'Minimal screen download size' are not downloaded, the size is in bytes.</td>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_MIN_SCRN_SIZE_COMMENT"];?></td>
       </tr>
       <tr>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Script load time</td>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_SCRIPT_LOAD"];?></td>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="script_load_time" id="script_load_time" value="<?php echo $script_load_time;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">After this the script stops running, if you for instance need to download a lot of screens then it is recommended to have a high script load time. If you are not sure, then use default setting. Default=600 seconds or 10 minutes, after 600 Maximum execution time error will be shown.</td>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_SCRIPT_LOAD_COMMENT"];?></td>
       </tr>
       <tr>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Web log dir</td>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_WEB_LOG_DIR"];?></td>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <input type="text" name="weblog_dir" id="weblog_dir" value="<?php echo $weblog_dir;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Directory where the log files are stored. The directory should be CHMODDED to 777.</td>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_WEB_LOG_DIR_COMMENT"];?></td>
       </tr>
       <tr>
-        <td width="20%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">Debug</td>
+        <td width="20%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_DEBUG"];?></td>
         <td width="45%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
           <select name="debug" id="debug">
-            <option value="1" <?php if($debug=='1') echo "selected"; ?>>True</option>
-            <option value="0" <?php if($debug=='0') echo "selected"; ?>>False</option>
+            <option value="1" <?php if($debug=='1') echo "selected"; ?>><?php echo $str["ACP_TRUE"];?></option>
+            <option value="0" <?php if($debug=='0') echo "selected"; ?>><?php echo $str["ACP_FALSE"];?></option>
           </select>
         </label></td>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">Default is false</td>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_DEBUG_COMMENT"];?></td>
       </tr>
       <tr>
         <td colspan="3"><table width="100%" border="0">
               <tr>
                 <td align="center">          
             <label>              </label>            <label>
-              <input type="submit" name="save" id="save" value="Save settings" >
+              <input type="submit" name="save" id="save" value="<?php echo $str["ACP_SAVE"];?>" >
             </label>
             </td>
               </tr>
@@ -712,7 +586,7 @@ You still have the possibility to force an update manually by running 'update.ph
     </form></td>
   </tr>
   <tr>
-    <td class="bg_reset_table_row3" align="center"><span class="txt_light"><?echo '<a href="./" target="_parent">Click here to go back</a>';?></span></td>
+    <td class="bg_reset_table_row3" align="center"><span class="txt_light"><?echo '<a href="./" target="_parent">'.$str["ACP_BACK"].'</a>';?></span></td>
   </tr>
 </table>
 </body>
@@ -784,6 +658,7 @@ function template_error($msg,$back_page='ACP.php')
 
 function template_saved()
 {
+	global $str;
 	?>
 	
 	
@@ -791,7 +666,7 @@ function template_saved()
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Admin Control Panel (ACP)</title>
+<title><?php echo $str["ACP_TITLE"];?></title>
 <link href="style/style.css" rel="stylesheet" type="text/css">
 <link rel="shortcut icon" href="style/img/favicon.ico"> 
 </head>
@@ -808,12 +683,12 @@ function template_saved()
 
 <table width="80%" border="0" align="center">
   <tr>
-    <td align="center" class="bg_reset_table_row1"><span class="txt_light">:: Saving settings ::</span></td>
+    <td align="center" class="bg_reset_table_row1"><span class="txt_light">:: <?php echo $str["ACP_TITLE_MENU_SAVED"];?> ::</span></td>
   </tr>
   <tr>
     <td class="bg_reset_table_row2"><table width="90%" border="0" align="center">
       <tr>
-        <td align="center">Settings have been saved, you will now be redirected to main page in a couple of seconds<br><span class="txt_light"><?echo '<a href="./" target="_parent">Click here to go back</a>';?></span></td>
+        <td align="center"><?php echo $str["ACP_SAVED"];?><br><span class="txt_light"><?echo '<a href="./" target="_parent">'.$str["ACP_BACK"].'</a>';?></span></td>
       </tr>
     </table>
       <br>

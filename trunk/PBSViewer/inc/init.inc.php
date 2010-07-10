@@ -158,6 +158,10 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 		{
 			$debug	 = $row->value;
 		}
+		elseif ($row->name=='language')
+		{
+			$language	 = $row->value;
+		}
 	}
 	
 	//---------------------]	REQUIRED	[---------------------\ 
@@ -240,6 +244,7 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 	define('NR',$screens_per_row);								//	Amount of pictures you want to have on each row
 	define('IMG_W',$width);										//	Thumbnail image width
 	define('IMG_H',$height);									//	Thumbnail image height
+	define('LANGUAGE',$language);
 	define('CBGAMEID',$CB_game);
 
 	// (optional)
