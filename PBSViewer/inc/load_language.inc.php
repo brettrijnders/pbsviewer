@@ -28,7 +28,8 @@
 */
 // load correct language file
 	$available	=	false;
-	$lang_file	=	get_current_lang().".inc.php";
+	//$lang_file	=	get_current_lang().".inc.php";
+	$lang_file		=	LANGUAGE.".inc.php";
 		
 	// check if this file is available
 	if ($available_files = get_langs())
