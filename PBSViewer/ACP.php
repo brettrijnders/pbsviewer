@@ -24,7 +24,6 @@
     --------------------
     mail:		brettrijnders@gmail.com
     website:	http://www.beesar.com       
-
 */
 
 $key=md5(($_SERVER['SERVER_SIGNATURE'].' '.php_uname()));

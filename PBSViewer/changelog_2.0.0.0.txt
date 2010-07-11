@@ -1,7 +1,8 @@
 
 changelog 2.0.0.0:
 ------------------------------------
-- Bug fix: only show aliases if person has more names, don't show when person
+- Bug fix: during auto-update visitor sees update debug messages, those are meant for admin, this is fixed now.
+- Bug fix: only show aliases if person has more names, don't show when there is only 1 person.
 - Check if inc dir is CHMODDED to 755 after install
 - Bug fix: correct checking of version numbers
 - Added google code project hosting logo

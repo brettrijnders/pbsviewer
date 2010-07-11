@@ -31,7 +31,7 @@
 $language								=	"English";
 
 //----------------PAGE INFO-------------------
-$str["TITLE"] 							=	"PBsViewer of ".CLAN_TAG." capturing screens of ".CLAN_GAME;
+$str["TITLE"] 							=	"PB Screenshot Viewer (PBSViewer) of ".CLAN_TAG." capturing screens of ".CLAN_GAME;
 $str["META_DESC"] 						=	"See captured punkbuster screenshots online with PBsViewer. Those screens are captured on gameserver of ".CLAN_NAME." which runs ".CLAN_GAME;
 
 
@@ -223,9 +223,10 @@ $str["ACP_FALSE"]						=	"False";
 //REMAINING MESSAGES
 //---------------------------------------------
 
-//----------------ERROR MSG-------------------
+//----------------ERROR MESSAGES-------------------
 
 
+//----------------DEBUG MESSAGES-------------------
 
 //----------------MISC-------------------
 $str["MISC_ACCESS_DENIED"] 				= 	"ACCES DENIED!";
