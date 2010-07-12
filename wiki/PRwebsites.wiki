@@ -1,5 +1,5 @@
 #labels Deprecated,PR
-This page is meant for contributors and PR people. Below you will find a list of websites/fora where PBSViewer is being promoted. This list should be used to let people know when a new release is being published.
+This page is meant for project members and PR people. Below you will find a list of websites/fora where PBSViewer is being promoted. This list should be used to let people know when a new release is being published.
 
     * [http://game-violations.ggl.com/index.php?page=Thread&threadID=41573 Game-Violations]
     * [http://www.punksbusted.com/forums/index.php?showtopic=62885 Punksbusted]
