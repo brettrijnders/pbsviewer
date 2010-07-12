@@ -9,3 +9,4 @@ This page is meant for contributors and PR people. Below you will find a list of
     * [http://www.anticheatinc.net/forums/showthread.php?t=69161 Anti Cheat Inc]
     * [http://forum.americasarmy.com/viewtopic.php?t=318091 AmericasArmy Forum]
     * [http://forum.i3d.net/show-off-spam/153965-pb-screenshot-viewer-pbsviewer-php-script.html i3D forum]
+    * [http://www.xfire.com/forums/182635/topic/2023193/ Xfire forum]
