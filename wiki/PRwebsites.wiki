@@ -1,0 +1,9 @@
+#labels Deprecated
+This page is meant for contributors and PR people. Below you will find a list of websites/fora where PBSViewer is being promoted. This list should be used to let people know when a new release is being published.
+
+    * [http://game-violations.ggl.com/index.php?page=Thread&threadID=41573 Game-Violations]
+    * [http://www.punksbusted.com/forums/index.php?showtopic=62885 Punksbusted]
+    * [http://www.pbbans.com/forums/pbsviewer-php-script-t102406.html/page__p__273132__hl__pbsviewer__fromsearch__1#entry273132 PBBans]
+    * [http://www.battlefieldheroes.com/en/forum/showthread.php?tid=151795 Battlefield Heroes Forum]
+    * [http://www.fpsadmin.com/forum/showthread.php?t=20655 FPSadmin]
+    * [http://www.anticheatinc.net/forums/showthread.php?t=69161 Anti Cheat Inc]
