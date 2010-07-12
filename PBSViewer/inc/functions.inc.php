@@ -1447,6 +1447,60 @@ function is_admin($admin_ip)
 	return $admin;
 }
 
+//	new since version 2.0.1.0
+function is_user_on_allowed_list()
+{
+	$allowed=false;
+	
+	// get all ips from database if available
+	if($ips	=	get_ips_allowedList())
+	{	
+		foreach ($ips as $ip)
+		{
+			if($ip==$_SERVER['REMOTE_ADDR']) $allowed=true;
+		}
+	}
+	else 
+	{
+		$allowed=false;
+	}
+	
+	return $allowed;
+}
+
+//	new since version 2.0.1.0
+// 	get the ip addresses from database and return array
+function get_ips_allowedList()
+{
+	$ipsData = '';
+	$sql_select	=	"SELECT `value` FROM `settings` WHERE `name`='AllowedList'";
+	$sql 		=	mysql_query($sql_select);
+	while ($row = mysql_fetch_object($sql))
+	{
+		$ipsData	=	$row->value;	
+	}
+			
+	if ($ipsData=='')
+	{
+		return false;	
+	}
+	else 
+	{
+		//	process this data
+		$ips	=	explode(',',$ipsData);
+		return $ips;		
+	}
+
+	
+}
+
+//	new since version 2.0.1.0
+//	check if entered IP addresses are correct
+function check_ips_allowed_list()
+{
+	
+}
+
 // new since version 2.0.0.0
 function check_ftp_web_connection($FTP_HOST,$FTP_PORT,$FTP_USER,$FTP_PASS,$DIR)
 {
