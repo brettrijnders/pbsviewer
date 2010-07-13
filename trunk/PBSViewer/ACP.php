@@ -111,6 +111,11 @@ if(isset($_POST['save'])&&$ACP==true)
 		$error_msg .= "<li>The weblog directory is empty</li>";
 		$saving = false;
 	}
+	if (!check_ips_allowed_list(auto_correct_input_allowed_list($_POST['AllowedList'])))
+	{
+		$error_msg .= "<li>Please check 'Allowed visitors' field, input is incorrect.</li>";
+		$saving = false;
+	}
 	
 	// if PB_log = true, than check ftp weblogin details whether it works or not
 	if ($_POST['pb_log']==1)
@@ -247,6 +252,9 @@ if(isset($_POST['save'])&&$ACP==true)
 		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['debug'])."' WHERE `name`='debug'";
 		$sql     	=	mysql_query($sql_update);
 		
+		$sql_update = "UPDATE `settings` SET `value`='".addslashes(auto_correct_input_allowed_list($_POST['AllowedList']))."' WHERE `name`='AllowedList'";
+		$sql     	=	mysql_query($sql_update);
+		
 		
 		//save data
 		template_saved();
@@ -309,6 +317,20 @@ if($ACP==true)
           <input type="text" name="admin_mail" id="admin_mail" value="<?php echo $admin_mail;?>" onclick="this.focus();" size="40" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_ADMIN_MAIL_COMMENT"];?></td>
+      </tr>
+      <tr>
+        <td width="20%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_ALLOWEDVISITORS"];?>:</td>
+        <td width="45%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><textarea name="AllowedList" id="AllowedList" cols="45" rows="5" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';"><?php
+
+        // get ips from database
+        echo get_ips_allowedList_string();
+        
+        ?></textarea></td>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p><?php echo $str["ACP_ALLOWEDVISITORS_COMMENT"];?></p>
+          <p><?php echo $str["ACP_ALLOWEDVISITORS_COMMENT_2"];?><br>
+            127.0.0.1, 127.0.0.2
+          </p>
+          <p><?php echo $str["ACP_ALLOWEDVISITORS_COMMENT_3"];?></p></td>
       </tr>
       <tr>
         <td colspan="3" align="center" class="bg_reset_table_row3"><span class="txt_light"><strong><?php echo $str["ACP_CLAN"];?></strong></span></td>

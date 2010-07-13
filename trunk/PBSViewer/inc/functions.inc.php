@@ -1462,7 +1462,7 @@ function is_user_on_allowed_list()
 	}
 	else 
 	{
-		$allowed=false;
+		$allowed=true;
 	}
 	
 	return $allowed;
@@ -1495,10 +1495,66 @@ function get_ips_allowedList()
 }
 
 //	new since version 2.0.1.0
-//	check if entered IP addresses are correct
-function check_ips_allowed_list()
+//	get ip addresses from database return in string
+function get_ips_allowedList_string()
 {
+	$ipsData = '';
+	$sql_select	=	"SELECT `value` FROM `settings` WHERE `name`='AllowedList'";
+	$sql 		=	mysql_query($sql_select);
+	while ($row = mysql_fetch_object($sql))
+	{
+		$ipsData	=	$row->value;	
+	}
 	
+	return $ipsData;
+}
+
+//	new since version 2.0.1.0
+//	check if entered IP addresses are correct
+// 	if not return false
+function check_ips_allowed_list($POST_IPS)
+{
+	if ($POST_IPS=='') 
+	{
+		return true;
+	}
+	else 
+	{
+		// apply trick, because then it is easy to use preg_match later on
+		// the ',' sign is added to get same pattern all the time
+		// 127.0.0.1,
+		// 127.0.0.2,
+		// 127.0.0.3,
+		$POST_IPS = $POST_IPS.',';
+		
+		// the pattern of ips should look something like this
+		// example input: 127.0.0.1,127.0.0.2,127.0.0.3,
+		if (preg_match("~^((\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})\,)+$~",$POST_IPS)==true)
+		{
+			return true;
+		}
+		else 
+		{
+			return false;
+		}
+	}
+
+	
+
+}
+
+//	new since version 2.0.1.0
+//	correct input if needed
+function auto_correct_input_allowed_list($POST_IPS)
+{
+	if ($POST_IPS[strlen($POST_IPS)-1]==',')
+	{
+		return substr($POST_IPS,0,strlen($POST_IPS)-1);
+	}
+	else 
+	{
+		return $POST_IPS;
+	}
 }
 
 // new since version 2.0.0.0

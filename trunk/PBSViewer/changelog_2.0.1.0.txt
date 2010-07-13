@@ -1,3 +1,4 @@
 
 changelog 2.0.1.0:
 ------------------------------------
+- Implemented Issue 7: Allow specified visitors by ip

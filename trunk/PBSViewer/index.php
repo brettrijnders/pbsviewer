@@ -48,7 +48,6 @@ ini_set('max_execution_time',script_load_time);
 //	get time wrt to Unix
 $startTime	=	get_microtime();
 
-
 if(DEBUG==false)
 {
 	// turn of errors:
@@ -56,6 +55,9 @@ if(DEBUG==false)
 }
 
 
+// check if user is allowed to use PBSViewer
+if (is_admin($admin_ip)||is_user_on_allowed_list())
+{
 
 //	this is new in version 1.1.2.1
 //	it will show a detailed screen info on a seperate page
@@ -239,5 +241,10 @@ template_header();
 		template_footer(UPDATE_TIME,$lastUpdateTime,$startTime);
 	}
 
+}
+}
+else 
+{
+	die("You are now allowed!");
 }
 ?>
