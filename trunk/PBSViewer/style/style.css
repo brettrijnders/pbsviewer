@@ -167,6 +167,38 @@ a:hover.popup span {
 	display: table;
 }
 
+/* pop-up screen for used for tools */
+a.popup_tools {
+	position: relative;;
+}
+
+a.popup_tools span {
+	display: none;
+	position: absolute;
+	top: 25%;
+	left: 125%;
+	width: 300px;
+	padding: 5px;
+	z-index: 100;
+	background: #F5F5F5;
+	border: double;
+	border-color:#333333;
+	color: #333333;
+	text-align:left;
+	-moz-border-radius: 5px; /* this works only in camino/firefox */
+	-webkit-border-radius: 5px; /* this is just for Safari */
+    -moz-opacity: 0.8;
+    opacity:.80;
+    filter: alpha(opacity=80);
+
+}
+
+
+
+a:hover.popup_tools span {
+	display: table;
+}
+
 
 /* error style */
 .header_error_bg
@@ -189,6 +221,9 @@ a:hover.popup span {
 {background-color:#dfdddd;}
 
 /* detailed screen styles */
+.bg_detailed_screen_tools
+{background-color:#333;}
+
 .body_bg_detailed_screen
 {background-color:#333333;}
 

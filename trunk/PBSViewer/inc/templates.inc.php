@@ -100,6 +100,11 @@ function template_header_detailed_page()
 
 <link href="style/style.css" rel="stylesheet" type="text/css">
 <link rel="shortcut icon" href="style/img/favicon.ico"> 
+<!-- Load zoom tool created by Janos Pal Toth
+// For more information go to http://valid.tjp.hu/tjpzoom/
+-->
+<script type="text/javascript" src="inc/js/zoom/tjpzoom.js"></script> 
+<script type="text/javascript" src="inc/js/zoom/tjpzoom_config_PBSViewer.js"></script>
 </head>
 
 <body>
@@ -370,13 +375,50 @@ function template_detailed_screen($fid)
 
 	//	get aliases of player
 	$alias	=	get_alias($guid,addslashes($name));
-		
+			
 	?>
 	
+
+<!--
+	
+	
+-->
+
+<SCRIPT>
+
+var imageURL = "style/img/zoom_disabled.gif";
+
+function changeImage() {
+     if (document.images) {
+          if (imageURL == "style/img/zoom.gif") imageURL = "style/img/zoom_disabled.gif";
+          else imageURL = "style/img/zoom.gif";
+
+         document.zoomIMG.src = imageURL;
+     }
+}
+
+</SCRIPT>
 	
 <table width="90%" border="0" align="center">
   <tr>
-    <td align="center" valign="top" class="body_bg_detailed_screen"><img src="<?echo 'download/'.$fid.'.png';?>" alt="<?echo $fid.'png';?>"></td>
+    <td align="center" valign="top" class="bg_detailed_screen_tools"><a href="<?echo "inc/imgSave.inc.php?saveIMG=".$fid;?>" class='popup_tools'><span>Save As...</span><img src="style/img/save.gif" width="32" height="32" alt="Save As" border="0"></a>
+    &nbsp;<a href="#" onclick="TJPzoomswitch(document.getElementById('unique1337'))" class='popup_tools'><span>Enable/Disable Zoom<br><ul>
+  <li>Increase zoom ratio by dragging mouse upwards</li>
+  <li>Decrease zoom ratio by dragging mouse downwards</li>
+  <li>Increase zoom window by dragging mouse to the right</li>
+  <li>Decrease zoom window by dragging mouse to the left</li>
+</ul></span><img src="style/img/zoom_disabled.gif" width="32" height="32" alt="enable/disable Zoom" border="0" onclick="changeImage()" NAME="zoomIMG"></a></td>
+  </tr>
+  <tr>
+    <td align="center" valign="top" class="body_bg_detailed_screen"><p><div>
+    <?php 
+    $IMGsrc = 'download/'.$fid.'.png';
+    list($widthIMG, $heightIMG, $typeIMG, $attrIMG) = getimagesize($IMGsrc);
+    
+    ?>
+<img src="<?echo $IMGsrc;?>" style="width:<?php echo $widthIMG;?>px; height: <?php echo $heightIMG;?>px;" onmouseover="TJPzoomif(this);" id="unique1337"" alt="<?echo $fid.'png';?>">>
+</div>
+</p></td>
   </tr>
   <tr>
     <td align="center"><table width="100%" border="0" align="center">
