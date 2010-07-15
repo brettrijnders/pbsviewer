@@ -401,24 +401,26 @@ function changeImage() {
 	
 <table width="90%" border="0" align="center">
   <tr>
-    <td align="center" valign="top" class="bg_detailed_screen_tools"><a href="<?echo "inc/imgSave.inc.php?saveIMG=".$fid;?>" class='popup_tools'><span>Save As...</span><img src="style/img/save.gif" width="32" height="32" alt="Save As" border="0"></a>
-    &nbsp;<a href="#" onclick="TJPzoomswitch(document.getElementById('unique1337'))" class='popup_tools'><span>Enable/Disable Zoom<br><ul>
-  <li>Increase zoom ratio by dragging mouse upwards</li>
-  <li>Decrease zoom ratio by dragging mouse downwards</li>
-  <li>Increase zoom window by dragging mouse to the right</li>
-  <li>Decrease zoom window by dragging mouse to the left</li>
-</ul></span><img src="style/img/zoom_disabled.gif" width="32" height="32" alt="enable/disable Zoom" border="0" onclick="changeImage()" NAME="zoomIMG"></a></td>
+    <td align="center" valign="top" class="bg_detailed_screen_tools"><a href="<?echo "inc/imgSave.inc.php?saveIMG=".$fid;?>" class='popup_tools'><span><?php echo $str["DETSCRN_TOOLS_SAVE"];?></span><img src="style/img/save.gif" width="32" height="32" alt="<?php echo $str["DETSCRN_TOOLS_ZOOM_ENABLE"];?>" border="0"></a>
+    &nbsp;<a href="#" onclick="TJPzoomswitch(document.getElementById('unique1337'))" class='popup_tools'><span><?php echo $str["DETSCRN_TOOLS_ZOOM_ENABLE"];?><br><ul>
+  <li><?php echo $str["DETSCRN_TOOLS_ZOOM_COMMENT"];?></li>
+  <li><?php echo $str["DETSCRN_TOOLS_ZOOM_COMMENT_2"];?></li>
+  <li><?php echo $str["DETSCRN_TOOLS_ZOOM_COMMENT_3"];?></li>
+  <li><?php echo $str["DETSCRN_TOOLS_ZOOM_COMMENT_4"];?></li>
+</ul></span><img src="style/img/zoom_disabled.gif" width="32" height="32" alt="<?php echo $str["DETSCRN_TOOLS_ZOOM_ENABLE"];?>" border="0" onclick="changeImage()" NAME="zoomIMG"></a></td>
   </tr>
   <tr>
-    <td align="center" valign="top" class="body_bg_detailed_screen"><p><div>
+    <td align="center" valign="top" class="body_bg_detailed_screen">
     <?php 
     $IMGsrc = 'download/'.$fid.'.png';
     list($widthIMG, $heightIMG, $typeIMG, $attrIMG) = getimagesize($IMGsrc);
     
     ?>
-<img src="<?echo $IMGsrc;?>" style="width:<?php echo $widthIMG;?>px; height: <?php echo $heightIMG;?>px;" onmouseover="TJPzoomif(this);" id="unique1337"" alt="<?echo $fid.'png';?>">>
-</div>
-</p></td>
+    
+    <table cellspacing="0" cellpadding="0" border="0"><tr><td width="50%"></td><td>
+<img src="<?echo $IMGsrc;?>" style="width:<?php echo $widthIMG;?>px; height: <?php echo $heightIMG;?>px;" onmouseover="TJPzoomif(this);" id="unique1337"" alt="<?echo $fid.'png';?>">
+</td><td width="50%"></td></tr></table>
+</td>
   </tr>
   <tr>
     <td align="center"><table width="100%" border="0" align="center">
@@ -747,13 +749,13 @@ function template_copyright()
 	{
 		echo $nfo_data[1].'<br>';
 		echo 'V '.$version[0].' ';
-		echo 'Powered by <a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank">PBSViewer</a>';
+		echo 'Powered by <a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank">PBSViewer</a>';
 	}
 	else
 	{
 		echo 'Copyright &copy; '.date('Y').', BandAhr, <a href="http://www.beesar.com" target="_blank">www.beesar.com</a><br>';
 		echo 'V '.$version[0].' ';
-		echo 'Powered by <a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank">PBSViewer</a>';
+		echo 'Powered by <a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank">PBSViewer</a>';
 	}
 
 }
@@ -891,5 +893,136 @@ function template_footer_detailed_page()
 	
 	<?
 }
+
+//	new since version 2.0.1.0
+// 	show this template when visitor's IP is not on the allowed List
+function template_denied_IP()
+{
+	?>
+	
+	
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="See captured punkbuster screenshots online with punkbuster (PB) Screenshot Viewer (PBSViewer).">
+<meta name="keywords" content="pb, view, viewer, punkbuster, php, parser, screens, capture, gaming, cheat">
+<meta name="robot" content="index,follow">
+<meta name="copyright" content="Copyright &copy; 2009 B.S. Rijnders aka BandAhr. All rights reserved">
+<meta name="author" content="B.S. Rijnders">
+<meta name="revisit-after" content="7">
+<title>Punkbuster (PB) Screenshot Viewer (PBSViewer)</title>
+
+<link href="style/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="style/img/favicon.ico"> 
+</head>
+
+<body>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+		<table width="60%" border="0" align="center">
+  <tr>
+    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+<br><br>
+<br></td>
+  </tr>
+  <tr>
+    <td align="center"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_msg_bg">
+      <tr>
+        <td align="center"><span class="txt_light">::</span> <span class="header_msg_txt"><strong>Access Denied!</strong></span> <span class="txt_light">::</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" class="body_msg_bg" align="center"><br>
+You are not allowed to access this page. Your IP address (<strong><?php echo $_SERVER['REMOTE_ADDR'];?></strong>) is not known by <a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank">PBSViewer</a>. Please contact the webmaster if you want to access this page. He/She can add your IP address (<strong><?php echo $_SERVER['REMOTE_ADDR'];?></strong>) to the '<em>allowed visitors</em>' list.<br><br>
+
+</td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?template_copyright();?></span></td>
+  </tr>
+
+  </tr>
+</table>
+<br>
+</body>
+</html>	
+	
+	<?
+}
+
+//	new since version 2.0.1.0
+// 	show this template when visitor's is accessing a page
+function template_denied()
+{
+	?>
+	
+	
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="See captured punkbuster screenshots online with punkbuster (PB) Screenshot Viewer (PBSViewer).">
+<meta name="keywords" content="pb, view, viewer, punkbuster, php, parser, screens, capture, gaming, cheat">
+<meta name="robot" content="index,follow">
+<meta name="copyright" content="Copyright &copy; 2009 B.S. Rijnders aka BandAhr. All rights reserved">
+<meta name="author" content="B.S. Rijnders">
+<meta name="revisit-after" content="7">
+<title>Punkbuster (PB) Screenshot Viewer (PBSViewer)</title>
+
+<link href="style/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="style/img/favicon.ico"> 
+</head>
+
+<body>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+		<table width="60%" border="0" align="center">
+  <tr>
+    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+<br><br>
+<br></td>
+  </tr>
+  <tr>
+    <td align="center"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_msg_bg">
+      <tr>
+        <td align="center"><span class="txt_light">::</span> <span class="header_msg_txt"><strong>Access Denied!</strong></span> <span class="txt_light">::</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" class="body_msg_bg" align="center"><br>
+You are not allowed to access this page, please contact the webmaster for more information.<br><br>
+
+</td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?template_copyright();?></span></td>
+  </tr>
+
+  </tr>
+</table>
+<br>
+</body>
+</html>	
+	
+	<?
+}
+
 
 ?>

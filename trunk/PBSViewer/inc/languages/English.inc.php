@@ -31,7 +31,7 @@
 $language								=	"English";
 
 //----------------PAGE INFO-------------------
-$str["TITLE"] 							=	"PB Screenshot Viewer (PBSViewer) of ".CLAN_TAG." capturing screens of ".CLAN_GAME;
+$str["TITLE"] 							=	"Punkbuster (PB) Screenshot Viewer (PBSViewer) of ".CLAN_TAG." capturing screens of ".CLAN_GAME;
 $str["META_DESC"] 						=	"See captured punkbuster screenshots online with PBsViewer. Those screens are captured on gameserver of ".CLAN_NAME." which runs ".CLAN_GAME;
 
 
@@ -88,6 +88,15 @@ $str["DETSCRN_MD5_SCREEN"]				=	$str["POP_MD5_SCREEN"];
 $str["DETSCRN_MD5_LOG"]					=	$str["POP_MD5_LOG"];
 $str["DETSCRN_MD5_HASH"]				=	$str["POP_MD5_HASH"];
 $str["DETSCRN_BACK"]					=	"Go back";
+
+//----------------DETAILED SCREEN INFO TOOLS-------------------
+$str["DETSCRN_TOOLS_SAVE"]				=	"Save As...";
+$str["DETSCRN_TOOLS_ZOOM_ENABLE"]		=	"Enable/Disable Zoom";
+$str["DETSCRN_TOOLS_ZOOM_COMMENT"]		=	"Increase zoom ratio by dragging mouse upwards";
+$str["DETSCRN_TOOLS_ZOOM_COMMENT_2"]	=	"Decrease zoom ratio by dragging mouse downwards";
+$str["DETSCRN_TOOLS_ZOOM_COMMENT_3"]	=	"Increase zoom window by dragging mouse to the right";
+$str["DETSCRN_TOOLS_ZOOM_COMMENT_4"]	=	"Decrease zoom window by dragging mouse to the left";
+
 
 //----------------FOOTER-------------------
 $str["FOOTER_GO_UP"] 					= 	"^^^ go up ^^^";

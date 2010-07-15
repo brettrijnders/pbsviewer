@@ -245,6 +245,6 @@ template_header();
 }
 else 
 {
-	die("You are now allowed!");
+	die(template_denied_IP());
 }
 ?>

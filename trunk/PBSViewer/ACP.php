@@ -620,7 +620,8 @@ if($ACP==true)
 }
 else 
 {
-	echo "ACCES DENIED!";
+	require_once('inc/templates.inc.php');
+	die(template_denied());
 }
 }
 

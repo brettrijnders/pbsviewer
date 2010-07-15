@@ -1,4 +1,6 @@
-
 changelog 2.0.1.0:
 ------------------------------------
+- Added 'Access Denied' template: if visitor's IP is not on the 'allowed list' or visitor is not an admin then the visitor will see this template instead of a simple txt saying 'access denied!'.
+- Implemented issue 6: Zoom feature for screen shots
+- Added 'Save As...' feature for screen shots
 - Implemented Issue 7: Allow specified visitors by ip
