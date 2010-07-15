@@ -106,7 +106,8 @@ if($update==true)
 }
 else 
 {
-	echo $str["MISC_ACCESS_DENIED"];
+	require_once('inc/templates.inc.php');
+	die(template_denied());
 }
 
 ?>
