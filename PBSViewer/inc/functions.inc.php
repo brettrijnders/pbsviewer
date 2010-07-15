@@ -737,7 +737,8 @@ function get_alias($guid,$player)
 {
 	$i=0;
 
-	$sql_select	=	"SELECT DISTINCT `name` FROM `screens` WHERE `guid`='".$guid."' AND `name`!='".$player."'";
+	// v 2.1.0.0 Bug fix: html_entity_decode is added to do a correct comparison
+	$sql_select	=	"SELECT DISTINCT `name` FROM `screens` WHERE `guid`='".$guid."' AND `name`!='".html_entity_decode($player)."'";
 	$sql 		=	mysql_query($sql_select);
 
 
@@ -750,7 +751,7 @@ function get_alias($guid,$player)
 			$data[$i]	=	$row->name;
 			$i++;
 		}
-
+		
 		return $data;
 
 	}

@@ -446,8 +446,8 @@ function changeImage() {
       if($alias)
       {
       	// bug fix: only show alias if there are any
-      	// don't show alias if there is only one single nickname
-      	if (count($alias)>1)
+      	// don't show alias if there is only one single nickname      	
+      	if (count($alias)>0)
       	{
       ?>
       <tr>
@@ -482,7 +482,8 @@ function changeImage() {
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_GUID_SHORT"];?>:</strong></td>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><label>
           <input type="text" name="GUID_short" id="GUID_short" size="100" value="<?echo substr($guid,$guidlength-8);?>" onclick="this.select();">
-        </label></td>
+        </label>
+        </td>
       </tr>
       <?
       
@@ -577,6 +578,16 @@ function changeImage() {
       ?>
 
     </table>
+    
+    <?php
+    
+    if (get_nr_screens_by_guid($guid)>1)
+    {    
+    	echo "<a href=\"./?sID=guid&input=".$guid."&search=Search\">Show more screens of this player (".get_nr_screens_by_guid($guid).")</a><br><br>";
+    }
+?>
+
+    
       <table width="100%" border="0">
         <tr>
         <td align="center" class="bg_detailed_screen_back_table"><a href="./" title="Go back" target="_self"><?php echo $str["DETSCRN_BACK"];?></a></td>
