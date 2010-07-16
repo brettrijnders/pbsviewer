@@ -754,7 +754,8 @@ echo "</table>";
 //	please don't remove this, thank you.
 function template_copyright()
 {
-	$nfo_data	=	file('http://beesar.com/pbss_parser/nfo');
+	// this is used to gather copyright and version number information
+	$nfo_data	=	file('http://beesar.com/pbs_viewer/nfo');
 	$version	=	file('VERSION');
 	if($nfo_data[1]!='')
 	{
@@ -762,6 +763,7 @@ function template_copyright()
 		echo 'V '.$version[0].' ';
 		echo 'Powered by <a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank">PBSViewer</a>';
 	}
+	// nfo data on beesar is not available
 	else
 	{
 		echo 'Copyright &copy; '.date('Y').', BandAhr, <a href="http://www.beesar.com" target="_blank">www.beesar.com</a><br>';
