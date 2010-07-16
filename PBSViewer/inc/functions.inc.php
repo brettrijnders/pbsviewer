@@ -315,7 +315,7 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 				if($debug==true)
 				{
 					parser_screens(L_FILE,true);
-					echo date('H:i:s] ').'<li> Made a copy of old DB table containing date of pbsvvs.htm data</li><br>';
+					echo date('H:i:s] ').'<li> Made a copy of old DB table containing date of pbsvss.htm data</li><br>';
 					echo date('H:i:s] ').'<li> Data from '.R_FILE.' is stored in DB</li><br>';
 				}
 				else
@@ -325,7 +325,7 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 
 				//	step 5:
 				#####################
-				//	get the png files which are available
+				//	get the png files that are available
 				$pbsslist	=	get_list_pbscreens($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir);
 
 
@@ -344,15 +344,15 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 						if($get2	=	ftp_get($connect,"download/".$content,$content,FTP_BINARY))
 						{
 							$DownloadCount++;
-}
-else
-{
+						}
+						else
+						{
 
-	$download	=	false;
-}
+							$download	=	false;
+						}
 					}
 
-			}
+				}
 
 
 			if($download!=false)
