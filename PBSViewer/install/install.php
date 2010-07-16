@@ -911,7 +911,7 @@ function template_ftp_settings()
         <tr>
           <td class="bg_table_body"><strong>Punkbuster directory</strong></td>
           <td class="bg_table_body"><input name="pb_dir" type="text" id="pb_dir" value="games/pb" size="40" /></td>
-          <td class="bg_table_body"><em>Use '/' and don't use 'pb/' with a trailing slash.</em></td>
+          <td class="bg_table_body"><em>Use '/' and don't use 'pb/' with a trailing slash. This is your punkbuster directory on your gameserver.</em></td>
         </tr>
         <tr>
           <td colspan="3" align="center" class="bg_table_body"><input type="submit" name="next_ftp" id="next_ftp" value="Next" /></td>
