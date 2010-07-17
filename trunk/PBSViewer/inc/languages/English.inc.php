@@ -90,7 +90,7 @@ $str["DETSCRN_MD5_HASH"]				=	$str["POP_MD5_HASH"];
 $str["DETSCRN_BACK"]					=	"Go back";
 
 //----------------DETAILED SCREEN INFO TOOLS-------------------
-$str["DETSCRN_TOOLS_SAVE"]				=	"Save As...";
+$str["DETSCRN_TOOLS_SAVE"]				=	"Save As... (save original screen)";
 $str["DETSCRN_TOOLS_ZOOM_ENABLE"]		=	"Enable/Disable Zoom";
 $str["DETSCRN_TOOLS_ZOOM_COMMENT"]		=	"Increase zoom ratio by dragging mouse upwards";
 $str["DETSCRN_TOOLS_ZOOM_COMMENT_2"]	=	"Decrease zoom ratio by dragging mouse downwards";

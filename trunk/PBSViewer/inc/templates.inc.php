@@ -379,17 +379,14 @@ function template_detailed_screen($fid)
 	?>
 	
 
-<!--
-	
-	
--->
-
 <SCRIPT>
 
 var imageURL = "style/img/zoom_disabled.gif";
 
-function changeImage() {
-     if (document.images) {
+function changeImage() 
+{
+     if (document.images) 
+     {
           if (imageURL == "style/img/zoom.gif") imageURL = "style/img/zoom_disabled.gif";
           else imageURL = "style/img/zoom.gif";
 
@@ -407,7 +404,11 @@ function changeImage() {
   <li><?php echo $str["DETSCRN_TOOLS_ZOOM_COMMENT_2"];?></li>
   <li><?php echo $str["DETSCRN_TOOLS_ZOOM_COMMENT_3"];?></li>
   <li><?php echo $str["DETSCRN_TOOLS_ZOOM_COMMENT_4"];?></li>
-</ul></span><img src="style/img/zoom_disabled.gif" width="32" height="32" alt="<?php echo $str["DETSCRN_TOOLS_ZOOM_ENABLE"];?>" border="0" onclick="changeImage()" NAME="zoomIMG"></a></td>
+</ul></span><img src="style/img/zoom_disabled.gif" width="32" height="32" alt="<?php echo $str["DETSCRN_TOOLS_ZOOM_ENABLE"];?>" border="0" onclick="changeImage()" NAME="zoomIMG"></a>
+&nbsp;<a href="#"><img src="style/img/gamma_min.png" width="32" height="32" alt="" border="0" NAME="gamma_min"></a>
+&nbsp;<a href="#"><img src="style/img/gamma_plus.png" width="32" height="32" alt="" border="0" NAME="gamma_plus"></a>
+&nbsp;<a href="#"><img src="style/img/negative.png" width="32" height="32" alt="" border="0" NAME="negative"></a>
+</td>
   </tr>
   <tr>
     <td align="center" valign="top" class="body_bg_detailed_screen">
