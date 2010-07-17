@@ -21,7 +21,7 @@ Here you will find Frequently Asked Questions (FAQ).
 Those ftp login details are needed to download the screenshots from your gameserver and store them on your webserver. Once they are stored you can easily browse through your screens using PBSViewer.
 
 ==I have a gameserver running on windows, can I use PBSViewer?==
-Yes it should be possible, though you need to [http://code.google.com/p/pbsviewer/downloads/detail?name=functions.inc_windows_fix.zip download a minor fix]. Please upload this functions.inc.php file to your webserver and try to update, it should work now.
+Yes it should be possible, though you need to [http://code.google.com/p/pbsviewer/downloads/detail?name=functions.inc_windows_fix.zip download a minor fix]. Please upload this functions.inc.php file to your webserver (just overwrite the old one) and try to update, it should work now.
 
 ==What do I need to fill in for 'PB path'?==
 During install PB path needs to be filled in. The PB path is referring to the pb directory on your game server. PBSViewer is going to connect through ftp to your gameserver to download the latest screenshots. Those screenshots are then stored on your webserver. 
