@@ -1,5 +1,7 @@
 #labels Featured,Phase-Deploy
-[FAQ#help_it_is_not_working_blabla]
+Here you will find Frequently Asked Questions (FAQ).
+
+    * [FAQ#help_it_is_not_working_blabla]
 
 
 ----
