@@ -729,7 +729,10 @@ PRIMARY KEY(`optionID`)
 				mysql_query($sql_insert) or die(mysql_error());
 
 				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('language','English');";
-				mysql_query($sql_insert) or die(mysql_error());				
+				mysql_query($sql_insert) or die(mysql_error());
+
+				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('AllowedList','');";
+				mysql_query($sql_insert) or die(mysql_error());			
 
 				session_destroy();
 				template_final();
