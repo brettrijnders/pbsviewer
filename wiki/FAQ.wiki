@@ -1,9 +1,23 @@
 #labels Featured,Phase-Deploy
 Here you will find Frequently Asked Questions (FAQ).
 
+=Install=
+    * [FAQ#Why_do_you_need_my_ftp_login_details_during_install?]
+=Misc=
     * [FAQ#help_it_is_not_working_blabla]
 
 
 ----
 
-==help it is not working blabla==
+==Why do you need my ftp login details during install?==
+Those ftp login details are needed to download the screenshots from your gameserver and store them on your webserver. Once they are stored you can easily browse through your screens using PBSViewer.
+
+==What do I need to fill in for 'PB path'?==
+During install PB path needs to be filled in. The PB path is referring to the pb directory on your game server. PBSViewer is going to connect through ftp to your gameserver to download the latest screenshots. Those screenshots are then stored on your webserver. 
+
+==Who are you, who is BandAhr?==
+So you want to know more about me? I would like to refer you to my personal blog:
+[http://www.beesar.com/about/]
+
+==I can not find my answer, I need further help==
+In case you can not find your answer here please try to [http://www.beesar.com/contact/ contact BandAhr] and ask him for help. Please use the [http://www.beesar.com/contact/ contact form] to ask your question(s).
