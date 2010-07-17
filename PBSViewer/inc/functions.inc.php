@@ -93,18 +93,29 @@ function get_list_pbscreens ($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir)
 	if($connect && $login)
 	{
 
+		//	return array of files from ssdir
 		$fileList	=	ftp_nlist($connect,$ssdir);
 		$i	=	0;
+		
+		if (DEBUG==true)
+		{
+			echo date('H:i:s] ')."<li>Retreiving file list from directory: ".$ssdir."</li><br>";
+		}
 
 		//	before updating table dl_screens, first truncate old data
 		$sql_del	=	"TRUNCATE TABLE `dl_screens`";
 		mysql_query($sql_del);
+		
+		$debugCount = 0;
 
 		foreach ($fileList as $i_nr=>$content)
 		{
 			//	find all the .png files
 			if(eregi('.png',$content))
 			{
+				
+				// dirty fix, for those who are running windows gameserver, windows provides backwards slashes (\) instead of forward (/)
+				$content	=	str_replace("\\","/",$content);
 				
 				// new in version 1.2.2.3
 				// if .png file is smaller than 10 kB then do not include it in download list
@@ -115,6 +126,22 @@ function get_list_pbscreens ($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir)
 					// this feature will save some bandwith
 					if (ftp_size($connect,$content)>MIN_SCREEN_SIZE)
 					{
+						
+						
+						if (DEBUG==true)
+						{
+							if ($debugCount<2)
+							{
+								echo date('H:i:s] ')."<li>Current file (\$content): ".$content."</li><br>";
+								$debugCount++;
+								
+								if ($debugCount==2)
+								{
+									echo date('H:i:s] ')."<li>And some more files...</li><br>";
+								}
+							}
+						}
+						
 						//	alter png index url
 						$pos	=	strrpos($content,"/");
 						$length	=	strlen($content);
@@ -139,25 +166,42 @@ function get_list_pbscreens ($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir)
 				// error has occurred, stop using ftp_size and just store all .png images
 				else 
 				{
-						//	alter png index url
-						$pos	=	strrpos($content,"/");
-						$length	=	strlen($content);
-						$content		=	substr($content,$pos+1,$length-$pos);
+					// dirty fix, for those who are running windows gameserver, windows provides backwards slashes (\) instead of forward (/)
+					$content	=	str_replace("\\","/",$content);
+					
+					if (DEBUG==true)
+					{
+						if ($debugCount<2)
+						{
+							echo date('H:i:s] ')."<li>Current file (\$content): ".$content."</li><br>";
+							$debugCount++;
+								
+							if ($debugCount==2)
+							{
+								echo date('H:i:s] ')."<li>And some more files...</li><br>";
+							}
+						}
+					}
+					
+					//	alter png index url
+					$pos	=	strrpos($content,"/");
+					$length	=	strlen($content);
+					$content		=	substr($content,$pos+1,$length-$pos);
 
 
-						//	store png file into array and in DB
-						//	those are the png files that can be downloaded
-						//	if they are downloaded extra information can be obtained from parser_screens
-						$png_files[$i]	=	$content;
+					//	store png file into array and in DB
+					//	those are the png files that can be downloaded
+					//	if they are downloaded extra information can be obtained from parser_screens
+					$png_files[$i]	=	$content;
 
-						//	store in file names without extension in DB
-						$posStart	=	strpos($content,'.');
-						$fileID		=	substr($content,0,$posStart);
+					//	store in file names without extension in DB
+					$posStart	=	strpos($content,'.');
+					$fileID		=	substr($content,0,$posStart);
 
-						$sql_insert	=	"INSERT INTO `dl_screens` (`fid`) VALUES ('".$fileID."')";
-						$sql 		=	mysql_query($sql_insert);
+					$sql_insert	=	"INSERT INTO `dl_screens` (`fid`) VALUES ('".$fileID."')";
+					$sql 		=	mysql_query($sql_insert);
 
-						$i++;
+					$i++;
 				}
 			}
 
