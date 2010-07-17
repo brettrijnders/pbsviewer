@@ -336,11 +336,27 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 				$reqDownloadCount	=	count($pbsslist);
 
 
+				$debugCount = 0;
 				foreach ($pbsslist as $i_nr=>$content)
 				{
 					//	since version 1.2.2.1 this function also looks if the files were already downloaded
 					if(!is_same($content,$connect))
 					{
+						if($debug==true)
+						{
+							if ($debugCount<2)
+							{						
+								echo date('H:i:s] ').'<li>Local file path: download/'.$content.'</li><br>';
+								echo date('H:i:s] ').'<li>Remote file path: '.ftp_pwd($connect).'/'.$content.'</li><br>';
+								$debugCount++;
+								
+								if ($debugCount==2)
+								{
+									echo date('H:i:s] ').'<li>And some more Local files and Remote files...</li><br>';
+								}
+							}
+						}
+						
 						if($get2	=	ftp_get($connect,"download/".$content,$content,FTP_BINARY))
 						{
 							$DownloadCount++;
@@ -353,22 +369,16 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 					}
 
 				}
+				
 
-
-			if($download!=false)
-
-{
-
-
-
-
-
-	if($reqDownloadCount==$DownloadCount)
-{
+				if($download!=false)
+				{
+					if($reqDownloadCount==$DownloadCount)
+					{
 						if($debug==true)
 						{
 							echo date('H:i:s] ').'<li> All PNG files ('.$DownloadCount.') were downloaded succesfully!</li><br>';
-			}
+						}
 					}
 					else
 					{
