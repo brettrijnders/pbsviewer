@@ -9,7 +9,7 @@ Here you will find Frequently Asked Questions (FAQ).
 =Usage=
     * [FAQ#After_update_the_download_folder_is_still_empty,_what_is_wrong? After update the download folder is still empty, what is wrong?]
 
-=Misc=
+=Miscellaneous=
     * [FAQ#Who_are_you? Who are you?]
     * [FAQ#I_can_not_find_my_answer,_I_need_further_help I can not find my answer, I need further help]
 
@@ -17,17 +17,17 @@ Here you will find Frequently Asked Questions (FAQ).
 ----
 
 =Install=
-==Why do you need my ftp login details during install?==
+===Why do you need my ftp login details during install?===
 Those ftp login details are needed to download the screenshots from your gameserver and store them on your webserver. Once they are stored you can easily browse through your screens using PBSViewer.
 
-==I have a gameserver running on windows, can I use PBSViewer?==
+===I have a gameserver running on windows, can I use PBSViewer?===
 Yes it should be possible, though you need to [http://code.google.com/p/pbsviewer/downloads/detail?name=functions.inc_windows_fix.zip download a minor fix]. Please upload this functions.inc.php file to your webserver (just overwrite the old one) and try to update, it should work now.
 
-==What do I need to fill in for 'PB path'?==
+===What do I need to fill in for 'PB path'?===
 During install PB path needs to be filled in. The PB path is referring to the pb directory on your game server. PBSViewer is going to connect through ftp to your gameserver to download the latest screenshots. Those screenshots are then stored on your webserver. 
 
 =Usage=
-==After update the download folder is still empty, what is wrong?==
+===After update the download folder is still empty, what is wrong?===
 That is hard to say, multiple things can be wrong. In case you are running your gameserver on windows you might want to check the FAQ:
 [FAQ#I_have_a_gameserver_running_on_windows,_can_I_use_PBSViewer? I have a gameserver running on windows, can I use PBSViewer?].
 
@@ -36,10 +36,10 @@ Here is a list of things that can go wrong:
     * You are running old version of PHP, PBSViewer is made for PHP 5
     * Something went wrong with CHMODDING, please check if all the files and directories are CHMODDED correctly
 
-=Misc=
-==Who are you?==
+=Miscellaneous=
+===Who are you?===
 So you want to know more about me? I would like to refer you to my personal blog:
 [http://www.beesar.com/about/]
 
-==I can not find my answer, I need further help==
+===I can not find my answer, I need further help===
 In case you can not find your answer here please try to [http://www.beesar.com/contact/ contact BandAhr] and ask him for help. Please use the [http://www.beesar.com/contact/ contact form] to ask your question(s).
