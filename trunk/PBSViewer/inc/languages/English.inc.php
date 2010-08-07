@@ -160,10 +160,6 @@ $str["ACP_BACK"]						=	"Click here to go back";
 $str["ACP_USER"]						=	"User";
 $str["ACP_ADMIN_MAIL"]					=	"Admin mail";
 $str["ACP_ADMIN_MAIL_COMMENT"]			=	"Only fill in  if you want to be notified when someone has requested an update";
-$str["ACP_ALLOWEDVISITORS"]				=	"Allowed visitors";
-$str["ACP_ALLOWEDVISITORS_COMMENT"]		=	"Give the IP addresses of visitors that are allowed to use PBSViewer. You do not need to fill in IP addresses of admins (they can access all pages), those need to be configured in config.inc.php";
-$str["ACP_ALLOWEDVISITORS_COMMENT_2"]	=	"Use , as separator. Example input:";
-$str["ACP_ALLOWEDVISITORS_COMMENT_3"]	=	"Leave empty if you want to allow everyone.";
 $str["ACP_CLAN"]						=	"Clan";
 $str["ACP_CLAN_NAME"]					=	"Clan name";
 $str["ACP_CLAN_NAME_COMMENT"]			=	"What is your full clan name?";
@@ -242,6 +238,8 @@ $str["ACP_FALSE"]						=	"False";
 //----------------DEBUG MESSAGES-------------------
 
 //----------------MISC-------------------
-$str["MISC_ACCESS_DENIED"] 				= 	"ACCES DENIED!";
+$str['MISC_ACCESS_DENIED_ADMIN']	=	"You are not allowed to access this page, only admins are allowed to access this page. Please contact the webmaster for more information.";
+$str['MISC_ACCESS_DENIED_NO_PERM']	=	"You are not allowed to access this page. Please contact the webmaster if you want to access this page.";
+
 
 ?>

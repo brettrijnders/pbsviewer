@@ -405,9 +405,13 @@ function changeImage()
   <li><?php echo $str["DETSCRN_TOOLS_ZOOM_COMMENT_3"];?></li>
   <li><?php echo $str["DETSCRN_TOOLS_ZOOM_COMMENT_4"];?></li>
 </ul></span><img src="style/img/zoom_disabled.gif" width="32" height="32" alt="<?php echo $str["DETSCRN_TOOLS_ZOOM_ENABLE"];?>" border="0" onclick="changeImage()" NAME="zoomIMG"></a>
+<!--
+Will be implemented later on, probably version 2.2.0.0
 &nbsp;<a href="#"><img src="style/img/gamma_min.png" width="32" height="32" alt="" border="0" NAME="gamma_min"></a>
 &nbsp;<a href="#"><img src="style/img/gamma_plus.png" width="32" height="32" alt="" border="0" NAME="gamma_plus"></a>
 &nbsp;<a href="#"><img src="style/img/negative.png" width="32" height="32" alt="" border="0" NAME="negative"></a>
+
+-->
 </td>
   </tr>
   <tr>
@@ -909,8 +913,8 @@ function template_footer_detailed_page()
 }
 
 //	new since version 2.0.1.0
-// 	show this template when visitor's IP is not on the allowed List
-function template_denied_IP()
+// 	show this template when visitor is not allowed to access page
+function template_denied_no_perm()
 {
 	?>
 	
@@ -954,7 +958,7 @@ function template_denied_IP()
       </tr>
       <tr>
         <td colspan="3" class="body_msg_bg" align="center"><br>
-You are not allowed to access this page. Your IP address (<strong><?php echo $_SERVER['REMOTE_ADDR'];?></strong>) is not known by <a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank">PBSViewer</a>. Please contact the webmaster if you want to access this page. He/She can add your IP address (<strong><?php echo $_SERVER['REMOTE_ADDR'];?></strong>) to the '<em>allowed visitors</em>' list.<br><br>
+<?php echo $str['MISC_ACCESS_DENIED_NO_PERM'];?><br><br>
 
 </td>
       </tr>
@@ -974,7 +978,7 @@ You are not allowed to access this page. Your IP address (<strong><?php echo $_S
 }
 
 //	new since version 2.0.1.0
-// 	show this template when visitor's is accessing a page
+// 	show this template when visitor is accessing a forbidden page
 function template_denied()
 {
 	?>
@@ -1019,7 +1023,7 @@ function template_denied()
       </tr>
       <tr>
         <td colspan="3" class="body_msg_bg" align="center"><br>
-You are not allowed to access this page, please contact the webmaster for more information.<br><br>
+<?php echo $str['MISC_ACCESS_DENIED_ADMIN'];?><br><br>
 
 </td>
       </tr>
