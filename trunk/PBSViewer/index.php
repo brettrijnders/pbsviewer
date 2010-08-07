@@ -27,6 +27,7 @@
 
 */
 //	prepare unique key
+session_start();
 $key	=	$_SERVER['SERVER_SIGNATURE'].' '.php_uname();
 $key=md5($key);
 
@@ -55,9 +56,7 @@ if(DEBUG==false)
 }
 
 
-// check if user is allowed to use PBSViewer
-if (is_admin($admin_ip))
-{
+
 
 //	this is new in version 1.1.2.1
 //	it will show a detailed screen info on a seperate page
@@ -138,35 +137,35 @@ template_header();
 		
 		if($_GET['sID']=='filename')
 		{
-			template_show_fid(NR,$input,$admin_ip,1);
+			template_show_fid(NR,$input,1);
 			template_footer(UPDATE_TIME,$lastUpdateTime,$startTime);
 			
 		}
 		else if($_GET['sID']=='name')
 		{
-			template_show_name(NR,$input,$admin_ip,get_nr_screens_by_name($input));
+			template_show_name(NR,$input,get_nr_screens_by_name($input));
 			template_footer(UPDATE_TIME,$lastUpdateTime,$startTime);
 		}
 		else if($_GET['sID']=='guid') 
 		{
-			template_show_guid(NR,$input,$admin_ip,get_nr_screens_by_guid($input));
+			template_show_guid(NR,$input,get_nr_screens_by_guid($input));
 			template_footer(UPDATE_TIME,$lastUpdateTime,$startTime);
 		}
 		else 
 		{
-			template_show_all(NR,$admin_ip,get_total_nr_screens());
+			template_show_all(NR,get_total_nr_screens());
 			template_footer(UPDATE_TIME,$lastUpdateTime,$startTime);
 		}
 		
 	}
 	elseif (isset($_GET['show_all']))
 	{
-		template_show_all(NR,$admin_ip,get_total_nr_screens());
+		template_show_all(NR,get_total_nr_screens());
 		template_footer(UPDATE_TIME,$lastUpdateTime,$startTime);
 	}
 	elseif (isset($_GET['show_available']))
 	{
-		template_show_available(NR,$admin_ip,get_total_nr_screens());
+		template_show_available(NR,get_total_nr_screens());
 		template_footer(UPDATE_TIME,$lastUpdateTime,$startTime);
 	}
 	//	this select option is new since 1.2.2.1
@@ -199,7 +198,7 @@ template_header();
 		//	put dates in array
 		$data	=	array($year,$month,$day,$hour);
 		
-		template_show_date_selection(NR,$admin_ip,$data,get_nr_screens_by_date($data));
+		template_show_date_selection(NR,$data,get_nr_screens_by_date($data));
 		template_footer(UPDATE_TIME,$lastUpdateTime,$startTime);
 		
 	}
@@ -221,31 +220,33 @@ template_header();
 		
 		
 	}
-	elseif (isset($_GET['Update']) && is_admin($admin_ip))
+	elseif (isset($_GET['Update']) && is_admin())
 	{
 		echo "<meta http-equiv='refresh' content='0;URL=update.php' />";
 	}
-	elseif (isset($_GET['reset']) && is_admin($admin_ip))
+	elseif (isset($_GET['reset']) && is_admin())
 	{
 		echo "<meta http-equiv='refresh' content='0;URL=reset.php' />";
 	}	
-	elseif (isset($_GET['ACP']) && is_admin($admin_ip))
+	elseif (isset($_GET['ACP']) && is_admin())
 	{
 		echo "<meta http-equiv='refresh' content='0;URL=ACP.php' />";
+	}
+	elseif (isset($_GET['logout']))
+	{
+		logout();
+		template_logout_success();
+		echo "<meta http-equiv='refresh' content='5;URL=./' />";
 	}
 	else 
 	{
 		//	show all pics with 4 pics per row
 		//	templated on main page has changed since v 1.2.2.1
 		//	now it only will show x latest screens. Number of screens can be configured in config
-		template_show_main(NR,$admin_ip);
+		template_show_main(NR);
 		template_footer(UPDATE_TIME,$lastUpdateTime,$startTime);
 	}
 
 }
-}
-else 
-{
-	die(template_denied_no_perm());
-}
+
 ?>

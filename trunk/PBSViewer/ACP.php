@@ -25,22 +25,20 @@
     mail:		brettrijnders@gmail.com
     website:	http://www.beesar.com       
 */
-
+session_start();
 $key=md5(($_SERVER['SERVER_SIGNATURE'].' '.php_uname()));
 require_once('inc/config.inc.php');
 require_once('inc/functions.inc.php');
 require_once('inc/templates.inc.php');
 $ACP=false;
 
-//	check if user's ip is on the list
-foreach ($admin_ip as $ip)
-{
-	if($ip==$_SERVER['REMOTE_ADDR']) $ACP=true;
-}
-
 //	connect to DB
 connect_DB();
 require_once('inc/init.inc.php');
+
+//	check if user's ip is on the list
+if (is_admin()==true) $ACP=true;
+echo $ACP;
 
 //load correct language
 include("inc/load_language.inc.php");

@@ -26,7 +26,6 @@ mail:		brettrijnders@gmail.com
 website:	http://www.beesar.com
 
 */
-
 function connect_DB()
 {
 	$connect	=	mysql_connect(DB_HOST,DB_USER,DB_PASS);
@@ -1542,16 +1541,176 @@ function get_loadTime($startTime,$precision)
 }
 
 //	check if person is admin or not
-function is_admin($admin_ip)
+function is_admin()
 {
-	$admin=false;
-
-	foreach ($admin_ip as $ip)
+	//	check if session is available, ie user has logged in
+	if (isset($_SESSION['ADMIN_ID']))
 	{
-		if($_SERVER['REMOTE_ADDR']==$ip) $admin=true;
+		//	for security reasons, regenerate ids
+		session_regenerate_id('ADMIN_ID');
+		
+		if(isset($_SESSION['Ukey']))
+		{
+			session_regenerate_id('Ukey');
+					
+			$sql_select	=	"SELECT * FROM `access` WHERE `memberID`='".$_SESSION['ADMIN_ID']."'";
+			$sql		=	mysql_query($sql_select) or die(mysql_error()."<br> mysql ERROR SESSION <br>".$_SESSION['ADMIN_ID']);
+	
+			if (mysql_num_rows($sql)>0)
+			{
+				while($row	=	mysql_fetch_object($sql))
+				{
+					$admin_id		=	$row->memberID;
+					$admin_mail		=	$row->mail;
+					$admin_name		=	$row->name;
+					$admin_pass		=	$row->pass;
+				}
+		
+				if ($_SESSION['Ukey'] == md5(md5($admin_id.$admin_mail.$admin_name.$admin_pass.$key)))
+				{
+					return true;
+				}
+				else 
+				{
+					return false;
+				}
+			}
+			else 
+			{
+				return false;
+			}
+		}
+		else 
+		{
+			return false;
+		}
+		
 	}
+	else 
+	{
 
-	return $admin;
+		if (isset($_COOKIE['IDCookie']))
+		{
+			//	check if cookies are available
+			if(isset($_COOKIE['UkeyCookie']))
+			{
+				// check if cookie has correct key
+				$sql_select	=	"SELECT `memberID`,`pass`,`name`,`mail` FROM `access` WHERE `memberID`='".$_COOKIE['IDCookie']."'";
+				$sql		=	mysql_query($sql_select) or die("login failed");
+	
+				if (mysql_num_rows($sql)>0)
+				{
+					while($row	=	mysql_fetch_object($sql))
+					{
+						$admin_id		=	$row->memberID;
+						$admin_mail		=	$row->mail;
+						$admin_name		=	$row->name;
+						$admin_pass		=	$row->pass;
+					}
+		
+					if ($_COOKIE['UkeyCookie'] == md5(md5($admin_id.$admin_mail.$admin_name.$admin_pass.$key)))
+					{
+						return true;
+					}
+					else 
+					{
+						return false;
+					}	
+				}
+				else 
+				{
+					return false;
+				}
+			}
+		}
+		else 
+		{
+			return false;
+		}
+	}
+}
+
+//	new since version 2.1.0.0
+//	checks whether user uses correct login values
+function check_login($name,$password)
+{
+	global $str;
+	
+	mysql_real_escape_string($name);
+	mysql_real_escape_string($password);
+	
+	//	check if name and password matches
+	//	also check if level of user is admin level,	i.e. admin level == 1
+	$sql_select	=	"SELECT `memberID`,`pass`,`name`,`mail` FROM `access` WHERE `name`='".$name."' AND `pass`='".md5($password)."' AND `level`='1'";
+	$sql		=	mysql_query($sql_select) or die("login failed");
+	
+	if (mysql_num_rows($sql)>0)
+	{
+		while($row	=	mysql_fetch_object($sql))
+		{
+			$admin_id		=	$row->memberID;
+			$admin_mail		=	$row->mail;
+			$admin_name		=	$row->name;
+			$admin_pass		=	$row->pass;
+		}
+		
+		//	store data temporarily
+		$uniqueKey	= md5(md5($admin_id.$admin_mail.$admin_name.$admin_pass.$key));
+		
+		//	store cookie
+		$expTime	=	3600*24*7;
+		setcookie('IDCookie',$admin_id,time()+$expTime);
+		setcookie('UkeyCookie',$uniqueKey,time()+$expTime);
+		
+		//	store session
+		$_SESSION['ADMIN_ID']	=	$admin_id;
+		$_SESSION['Ukey']		=	$uniqueKey;
+						
+		return true;
+	}
+	else 
+	{
+		return false;
+	}
+	
+}
+
+//	get admin name
+function get_admin_name()
+{
+	
+	$memberID	=	false;
+	if(isset($_SESSION['ADMIN_ID'])) $memberID = $_SESSION['ADMIN_ID'];
+	if(isset($_COOKIE['IDCookie'])) $memberID = $_COOKIE['IDCookie'];
+	
+	if ($memberID!=false)
+	{
+		$sql_select	=	"SELECT `name` FROM `access` WHERE `memberID`='".$memberID."'";
+		$sql 		=	mysql_query($sql_select);
+		if (mysql_num_rows($sql)>0)
+		{
+			while($row	=	mysql_fetch_object($sql))
+			{
+				$admin_name	=	$row->name;
+			}
+		
+			return $admin_name;
+		}
+	}
+	
+}
+
+//	let user logout
+function logout()
+{
+	//	see $expTime
+	$expTimeCookie	= 3600*24*7;
+	//	remove cookies, by letting them expire. Browser will remove them automatically
+	setcookie('IDCookie',$admin_id,time()-$expTimeCookie);
+	setcookie('UkeyCookie',$admin_id,time()-$expTimeCookie);
+	
+	session_unset();
+	session_destroy();
 }
 
 // new since version 2.0.0.0
