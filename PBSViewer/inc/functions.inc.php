@@ -84,7 +84,7 @@ function update_check($fileLastUpdate)
 
 
 //	get available pbscreens
-function get_list_pbscreens ($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir)
+function get_list_pbscreens ($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$main=false)
 {
 	//	ftp connect
 	$connect	=	ftp_connect($ftp_host,$ftp_port);
@@ -99,7 +99,10 @@ function get_list_pbscreens ($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir)
 		
 		if (DEBUG==true)
 		{
-			echo date('H:i:s] ')."<li>Retreiving file list from directory: ".$ssdir."</li><br>";
+			if ($main==false)
+			{
+				echo date('H:i:s] ')."<li>Retreiving file list from directory: ".$ssdir."</li><br>";
+			}
 		}
 
 		//	before updating table dl_screens, first truncate old data
@@ -130,14 +133,18 @@ function get_list_pbscreens ($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir)
 						
 						if (DEBUG==true)
 						{
-							if ($debugCount<2)
+							if ($main==false)
 							{
-								echo date('H:i:s] ')."<li>Current file (\$content): ".$content."</li><br>";
-								$debugCount++;
-								
-								if ($debugCount==2)
+							
+								if ($debugCount<2)
 								{
-									echo date('H:i:s] ')."<li>And some more files...</li><br>";
+									echo date('H:i:s] ')."<li>Current file (\$content): ".$content."</li><br>";
+									$debugCount++;
+								
+									if ($debugCount==2)
+									{
+										echo date('H:i:s] ')."<li>And some more files...</li><br>";
+									}
 								}
 							}
 						}
@@ -171,14 +178,18 @@ function get_list_pbscreens ($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir)
 					
 					if (DEBUG==true)
 					{
-						if ($debugCount<2)
+						if ($main==false)
 						{
-							echo date('H:i:s] ')."<li>Current file (\$content): ".$content."</li><br>";
-							$debugCount++;
-								
-							if ($debugCount==2)
+						
+							if ($debugCount<2)
 							{
-								echo date('H:i:s] ')."<li>And some more files...</li><br>";
+								echo date('H:i:s] ')."<li>Current file (\$content): ".$content."</li><br>";
+								$debugCount++;
+								
+								if ($debugCount==2)
+								{
+									echo date('H:i:s] ')."<li>And some more files...</li><br>";
+								}
 							}
 						}
 					}
@@ -273,7 +284,7 @@ function get_detailed_screen_info($fid)
 
 //	function needed to update the file
 //	and update pbsvss.htm (if needed) from preventing the file keep on growing for ever
-function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP,$fileLastUpdate,$SsCeiling,$debug)
+function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP,$fileLastUpdate,$SsCeiling,$debug,$main=false)
 {
 	#####################
 	//	steps:
@@ -292,7 +303,10 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 	{
 		if($debug==true)
 		{
-			echo date('H:i:s] ').'<li> Connected to: '.$ftp_host.':'.$ftp_port.'</li><br>';
+			if ($main==false)
+			{
+				echo date('H:i:s] ').'<li> Connected to: '.$ftp_host.':'.$ftp_port.'</li><br>';
+			}
 		}
 
 		//	change dir
@@ -301,7 +315,10 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 
 			if($debug==true)
 			{
-				echo date('H:i:s] ')."<li> Directory changed to: ".ftp_pwd($connect).'</li><br>';
+				if ($main==false)
+				{
+					echo date('H:i:s] ')."<li> Directory changed to: ".ftp_pwd($connect).'</li><br>';
+				}
 			}
 
 			//	first get main file 'pbsvss.htm' which contains all the data about players
@@ -310,7 +327,10 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 
 				if($debug==true)
 				{
-					echo date('H:i:s] ').'<li> Downloaded file:'.R_FILE.'</li><br>';
+					if ($main==false)
+					{
+						echo date('H:i:s] ').'<li> Downloaded file:'.R_FILE.'</li><br>';
+					}
 				}
 
 				//	check if update is needed
@@ -329,7 +349,10 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 
 						if($debug==true)
 						{
-							echo date('H:i:s] ').'<li> Editing file: '.R_FILE.'</li><br>';
+							if ($main==false)
+							{
+								echo date('H:i:s] ').'<li> Editing file: '.R_FILE.'</li><br>';
+							}
 						}
 					}
 
@@ -340,7 +363,14 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 					{
 						if($put	=	ftp_put($connect,R_FILE,L_FILE,FTP_BINARY))
 						{
-							if($debug==true) echo date('H:i:s] ')."<li> pbsvss.htm on your gameserver(".$ftp_host.':'.$ftp_port.") is updated!</li><br>";
+							if($debug==true) 
+							{
+								if ($main==false)
+								{
+									echo date('H:i:s] ')."<li> pbsvss.htm on your gameserver(".$ftp_host.':'.$ftp_port.") is updated!</li><br>";
+								}
+							}
+							
 						}
 					}
 
@@ -358,9 +388,16 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 				//	debug feature is new since 1.1.2.1
 				if($debug==true)
 				{
-					parser_screens(L_FILE,true);
-					echo date('H:i:s] ').'<li> Made a copy of old DB table containing date of pbsvss.htm data</li><br>';
-					echo date('H:i:s] ').'<li> Data from '.R_FILE.' is stored in DB</li><br>';
+					if ($main==false)
+					{
+						parser_screens(L_FILE,true);
+						echo date('H:i:s] ').'<li> Made a copy of old DB table containing date of pbsvss.htm data</li><br>';
+						echo date('H:i:s] ').'<li> Data from '.R_FILE.' is stored in DB</li><br>';
+					}
+					else 
+					{
+						parser_screens(L_FILE);
+					}
 				}
 				else
 				{
@@ -370,7 +407,7 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 				//	step 5:
 				#####################
 				//	get the png files that are available
-				$pbsslist	=	get_list_pbscreens($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir);
+				$pbsslist	=	get_list_pbscreens($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$main);
 
 
 				//	needed for check after download if there is an inconsistency
@@ -388,15 +425,18 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 					{
 						if($debug==true)
 						{
-							if ($debugCount<2)
-							{						
-								echo date('H:i:s] ').'<li>Local file path: download/'.$content.'</li><br>';
-								echo date('H:i:s] ').'<li>Remote file path: '.ftp_pwd($connect).'/'.$content.'</li><br>';
-								$debugCount++;
+							if ($main==false)
+							{
+								if ($debugCount<2)
+								{						
+									echo date('H:i:s] ').'<li>Local file path: download/'.$content.'</li><br>';
+									echo date('H:i:s] ').'<li>Remote file path: '.ftp_pwd($connect).'/'.$content.'</li><br>';
+									$debugCount++;
 								
-								if ($debugCount==2)
-								{
-									echo date('H:i:s] ').'<li>And some more Local files and Remote files...</li><br>';
+									if ($debugCount==2)
+									{
+										echo date('H:i:s] ').'<li>And some more Local files and Remote files...</li><br>';
+									}
 								}
 							}
 						}
@@ -421,7 +461,10 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 					{
 						if($debug==true)
 						{
-							echo date('H:i:s] ').'<li> All PNG files ('.$DownloadCount.') were downloaded succesfully!</li><br>';
+							if ($main==false)
+							{
+								echo date('H:i:s] ').'<li> All PNG files ('.$DownloadCount.') were downloaded succesfully!</li><br>';
+							}
 						}
 					}
 					else
@@ -430,21 +473,30 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 						{
 							if($debug==true)
 							{
+								if ($main==false)
+								{
 								echo date('H:i:s] ').'<li>No PNG files were downloaded, same PNG files were already located on your website</li><br>';
+								}
 							}
 						}
 						elseif ($DownloadCount==1)
 						{
 							if($debug==true)
 							{
-								echo date('H:i:s] ').'<li> Only '.$DownloadCount.' PNG file was downloaded</li><br>';
+								if ($main==false)
+								{
+									echo date('H:i:s] ').'<li> Only '.$DownloadCount.' PNG file was downloaded</li><br>';
+								}
 							}
 						}
 						else
 						{
 							if($debug==true)
 							{
-								echo date('H:i:s] ').'<li> Only '.$DownloadCount.' PNG files were downloaded</li><br>';
+								if ($main==false)
+								{
+									echo date('H:i:s] ').'<li> Only '.$DownloadCount.' PNG files were downloaded</li><br>';
+								}
 							}
 						}
 					}

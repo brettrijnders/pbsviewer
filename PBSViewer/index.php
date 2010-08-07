@@ -119,7 +119,8 @@ $lastUpdate		=	update_check($fileLastUpdate);
 
 if(time()>$lastUpdate+UPDATE_TIME)
 {	
-	update_file(FTP_HOST,FTP_PORT,FTP_USER,FTP_PASS,PBDIR.'/svss',L_FILE_TEMP,$fileLastUpdate,pb_sv_SsCeiling,false);
+	//	don't show messages about updating ($main=true)
+	update_file(FTP_HOST,FTP_PORT,FTP_USER,FTP_PASS,PBDIR.'/svss',L_FILE_TEMP,$fileLastUpdate,pb_sv_SsCeiling,false,true);
 }
 
 
