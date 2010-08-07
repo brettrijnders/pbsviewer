@@ -26,7 +26,7 @@
     website:	http://www.beesar.com       
 
 */
-
+session_start();
 $key=md5(($_SERVER['SERVER_SIGNATURE'].' '.php_uname()));
 require_once('inc/config.inc.php');
 require_once('inc/functions.inc.php');
@@ -41,10 +41,7 @@ include("inc/load_language.inc.php");
 $reset=false;
 
 //	check if user's ip is on the list
-foreach ($admin_ip as $ip)
-{
-	if($ip==$_SERVER['REMOTE_ADDR']) $reset=true;
-}
+if (is_admin()==true) $reset=true;
 
 if(isset($_POST['reset'])&&$reset==true&&RESET==true)
 {

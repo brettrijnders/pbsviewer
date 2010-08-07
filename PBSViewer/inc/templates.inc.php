@@ -51,7 +51,7 @@ function template_header()
 <a name="start"></a>
 	<?
 
-	
+template_login_top_menu();	
 	
 //	first check if install map is gone
 if(!check_install_del()) template_install_del();
@@ -177,11 +177,11 @@ function template_new_version()
 		<?	
 }
 
-function template_admin_tools($admin_ip)
+function template_admin_tools()
 {
 	global $str;
 	
-	if(is_admin($admin_ip))
+	if(is_admin())
 	{
 	?>
 	
@@ -216,7 +216,7 @@ function template_admin_tools($admin_ip)
 	}	
 }
 
-function template_search($admin_ip,$current_scrn_nr)
+function template_search($current_scrn_nr)
 {
 	global $str;
 	
@@ -299,7 +299,7 @@ function template_search($admin_ip,$current_scrn_nr)
        <br>
        <?template_info_screens($current_scrn_nr);?>
        <br>       
-	             <?template_admin_tools($admin_ip);?>
+	             <?template_admin_tools();?>
           </form>        </td>
       </tr>
     </table>
@@ -663,10 +663,10 @@ function template_detailed_screen_error($error,$result,$hint)
 
 //	new template added since version 1.2.2.1
 //	this one is used on main page
-function template_show_main($nr,$admin_ip,$current_scrn_nr=nr_screens_main)
+function template_show_main($nr,$current_scrn_nr=nr_screens_main)
 {
 
-	template_search($admin_ip,$current_scrn_nr);
+	template_search($current_scrn_nr);
 ?>
 	      <table width="100%" border="0" cellspacing="10" cellpadding="0" align="center">
 	       
@@ -676,10 +676,10 @@ echo "</table>";
 
 }
 
-function template_show_all($nr,$admin_ip,$current_scrn_nr=nr_screens_main)
+function template_show_all($nr,$current_scrn_nr=nr_screens_main)
 {
 
-	template_search($admin_ip,$current_scrn_nr);
+	template_search($current_scrn_nr);
 ?>
 	      <table width="100%" border="0" cellspacing="10" cellpadding="0" align="center">
 	       
@@ -691,10 +691,10 @@ echo "</table>";
 
 // this template is new since 1.2.2.3
 // only show available screens
-function template_show_available($nr,$admin_ip,$current_scrn_nr=nr_screens_main)
+function template_show_available($nr,$current_scrn_nr=nr_screens_main)
 {
 
-	template_search($admin_ip,$current_scrn_nr);
+	template_search($current_scrn_nr);
 ?>
 	      <table width="100%" border="0" cellspacing="10" cellpadding="0" align="center">
 	       
@@ -706,10 +706,10 @@ echo "</table>";
 }
 
 //	this template is new since 1.2.2.1
-function template_show_date_selection($nr,$admin_ip,$data,$current_scrn_nr)
+function template_show_date_selection($nr,$data,$current_scrn_nr)
 {
 
-	template_search($admin_ip,$current_scrn_nr);
+	template_search($current_scrn_nr);
 ?>
 	      <table width="100%" border="0" cellspacing="10" cellpadding="0" align="center">
 	       
@@ -719,9 +719,9 @@ echo "</table>";
 
 }
 
-function template_show_fid($nr,$fileName,$admin_ip,$current_scrn_nr)
+function template_show_fid($nr,$fileName,$current_scrn_nr)
 {
-	template_search($admin_ip,$current_scrn_nr);
+	template_search($current_scrn_nr);
 
 		?>
 	      <table width="100%" border="0" cellspacing="10" cellpadding="0">
@@ -731,9 +731,9 @@ show_fid_screens($nr,$fileName);
 echo "</table>";
 }
 
-function template_show_guid($nr,$guid,$admin_ip,$current_scrn_nr)
+function template_show_guid($nr,$guid,$current_scrn_nr)
 {
-	template_search($admin_ip,$current_scrn_nr);
+	template_search($current_scrn_nr);
 
 		?>
 	      <table width="100%" border="0" cellspacing="10" cellpadding="0">
@@ -744,9 +744,9 @@ echo "</table>";
 }
 
 
-function template_show_name($nr,$name,$admin_ip,$current_scrn_nr)
+function template_show_name($nr,$name,$current_scrn_nr)
 {
-	template_search($admin_ip,$current_scrn_nr);
+	template_search($current_scrn_nr);
 
 		?>
 	      <table width="100%" border="0" cellspacing="10" cellpadding="0">
@@ -912,10 +912,291 @@ function template_footer_detailed_page()
 	<?
 }
 
-//	new since version 2.0.1.0
+//	new since version 2.1.0.0
+// login template for admin
+function template_login()
+{
+	?>
+	
+	
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="See captured punkbuster screenshots online with punkbuster (PB) Screenshot Viewer (PBSViewer).">
+<meta name="keywords" content="pb, view, viewer, punkbuster, php, parser, screens, capture, gaming, cheat">
+<meta name="robot" content="index,follow">
+<meta name="copyright" content="Copyright &copy; 2009 B.S. Rijnders aka BandAhr. All rights reserved">
+<meta name="author" content="B.S. Rijnders">
+<meta name="revisit-after" content="7">
+<title>Punkbuster (PB) Screenshot Viewer (PBSViewer) - Login</title>
+
+<link href="style/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="style/img/favicon.ico"> 
+</head>
+
+<body>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+		<table width="60%" border="0" align="center">
+  <tr>
+    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+<br><br>
+<br></td>
+  </tr>
+  <tr>
+    <td align="center"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_msg_bg">
+      <tr>
+        <td align="center"><span class="txt_light">::</span><span class="header_msg_txt"><strong> Login </strong></span><span class="txt_light">::</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" class="body_msg_bg" align="center"><br>
+          <form name="login" method="post" action="">
+            <table width="50%" border="0">
+              <tr>
+                <td><strong>name</strong></td>
+                <td align="center"><label>
+                  <input type="text" name="name" id="name">
+                </label></td>
+              </tr>
+              <tr>
+                <td><strong>password</strong></td>
+                <td align="center"><label>
+                  <input type="password" name="password" id="password">
+                </label></td>
+              </tr>
+              <tr>
+                <td colspan="2" align="center"><label>
+                  <input type="submit" name="login" id="login" value="Login">
+                </label></td>
+                </tr>
+            </table>
+          </form>
+          <br>
+          Forgot password or name?<br>
+
+</td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?template_copyright();?></span></td>
+  </tr>
+
+  </tr>
+</table>
+<br>
+</body>
+</html>		
+	
+	<?php
+}
+
+function template_login_failed()
+{
+	?>
+	
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="See captured punkbuster screenshots online with punkbuster (PB) Screenshot Viewer (PBSViewer).">
+<meta name="keywords" content="pb, view, viewer, punkbuster, php, parser, screens, capture, gaming, cheat">
+<meta name="robot" content="index,follow">
+<meta name="copyright" content="Copyright &copy; 2009 B.S. Rijnders aka BandAhr. All rights reserved">
+<meta name="author" content="B.S. Rijnders">
+<meta name="revisit-after" content="7">
+<title>Punkbuster (PB) Screenshot Viewer (PBSViewer) - Login</title>
+
+<link href="style/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="style/img/favicon.ico"> 
+</head>
+
+<body>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+		<table width="60%" border="0" align="center">
+  <tr>
+    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+<br><br>
+<br></td>
+  </tr>
+  <tr>
+    <td align="center"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_msg_bg">
+      <tr>
+        <td align="center"><span class="txt_light">::</span><span class="header_msg_txt"><strong> Login failed</strong></span><span class="txt_light">::</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" class="body_msg_bg" align="center">Failed to login, please check your username and/or password. <a href="" target="_self" onclick="history.go(-1)">Click here to go back.</a><br>
+          <br>
+          Forgot password or name?<br>
+
+</td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?template_copyright();?></span></td>
+  </tr>
+
+  </tr>
+</table>
+<br>
+</body>
+</html>	
+	
+	<?php	
+}
+
+//	template for when user has logged in successfully
+function template_login_success()
+{
+	?>
+	
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="See captured punkbuster screenshots online with punkbuster (PB) Screenshot Viewer (PBSViewer).">
+<meta name="keywords" content="pb, view, viewer, punkbuster, php, parser, screens, capture, gaming, cheat">
+<meta name="robot" content="index,follow">
+<meta name="copyright" content="Copyright &copy; 2009 B.S. Rijnders aka BandAhr. All rights reserved">
+<meta name="author" content="B.S. Rijnders">
+<meta name="revisit-after" content="7">
+<title>Punkbuster (PB) Screenshot Viewer (PBSViewer) - Login</title>
+
+<link href="style/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="style/img/favicon.ico"> 
+
+<meta http-equiv="refresh" content="5;URL=./" />
+
+</head>
+
+<body>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+		<table width="60%" border="0" align="center">
+  <tr>
+    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+<br><br>
+<br></td>
+  </tr>
+  <tr>
+    <td align="center"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_msg_bg">
+      <tr>
+        <td align="center"><span class="txt_light">::</span><span class="header_msg_txt"><strong> Logged in</strong></span><span class="txt_light">::</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" class="body_msg_bg" align="center">You are now logged in successfully, you will be redirected to the main page or <a href="./" target="_self">click here to go to your main page</a>.<br>          
+          <br>
+
+</td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?template_copyright();?></span></td>
+  </tr>
+
+  </tr>
+</table>
+<br>
+</body>
+</html>	
+	
+	<?php
+	
+}
+
+//	template for when user has logged in successfully
+function template_logout_success()
+{
+	?>
+	
+
+		<table width="60%" border="0" align="center">
+  <tr>
+    <td align="center"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_msg_bg">
+      <tr>
+        <td align="center"><span class="txt_light">::</span><span class="header_msg_txt"><strong> Logged out</strong></span><span class="txt_light">::</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" class="body_msg_bg" align="center">You are logged out successfully, you will be redirected to the main page or <a href="./" target="_self">click here to go to your main page</a>.<br>          
+          <br>
+
+</td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?template_copyright();?></span></td>
+  </tr>
+
+  </tr>
+</table>
+
+	
+	<?php
+	
+}
+
+//	small menu for user to login
+function template_login_top_menu()
+{
+	//	first check if user already is logged in
+	if(is_admin())
+	{
+		?>
+		
+		<table width="100%" border="0">
+  <tr>
+    <td align="right">Welcome <?php echo get_admin_name();?> | <a href="?logout=1">Logout</a></td>
+  </tr>
+</table>
+		
+		<?php
+	}
+	else 
+	{
+		?>
+		
+		<table width="100%" border="0">
+  <tr>
+    <td align="right"><a href="login.php" target="_self">Login</a></td>
+  </tr>
+</table>
+		
+		<?php
+	}
+}
+
+//	new since version 2.1.0.0
 // 	show this template when visitor is not allowed to access page
 function template_denied_no_perm()
 {
+	global $str;
+	
 	?>
 	
 	
@@ -977,10 +1258,11 @@ function template_denied_no_perm()
 	<?
 }
 
-//	new since version 2.0.1.0
+//	new since version 2.1.0.0
 // 	show this template when visitor is accessing a forbidden page
 function template_denied()
 {
+	global $str;
 	?>
 	
 	

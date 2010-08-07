@@ -26,7 +26,7 @@
     website:	http://www.beesar.com       
 
 */
-
+session_start();
 $key=md5(($_SERVER['SERVER_SIGNATURE'].' '.php_uname()));
 require_once('inc/config.inc.php');
 require_once('inc/functions.inc.php');
@@ -47,11 +47,8 @@ ini_set('max_execution_time',script_load_time);
 //	get time wrt to Unix
 $startTime	=	get_microtime();
 
-//	check if user's ip is on the list
-foreach ($admin_ip as $ip)
-{
-	if($ip==$_SERVER['REMOTE_ADDR']) $update=true;
-}
+//	check if user is admin
+if (is_admin()==true) $update=true;
 
 $fileLastUpdate	=	'lastUpdate.txt';
 if($update==true) 
