@@ -1,5 +1,6 @@
 changelog 2.1.0.0:
 ------------------------------------
+- Bug fix: visitor doesn't see update messages anymore when 'custom update' is set to False
 - Bug fix: updating process should work on windows gameservers as well
 - More detailed debug messages for updating process
 - Implemented issue 9 and issue 10: added a 'Show more screens of this player' link on detailed screen page.
