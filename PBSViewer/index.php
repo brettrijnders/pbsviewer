@@ -56,7 +56,7 @@ if(DEBUG==false)
 
 
 // check if user is allowed to use PBSViewer
-if (is_admin($admin_ip)||is_user_on_allowed_list())
+if (is_admin($admin_ip))
 {
 
 //	this is new in version 1.1.2.1
@@ -245,6 +245,6 @@ template_header();
 }
 else 
 {
-	die(template_denied_IP());
+	die(template_denied_no_perm());
 }
 ?>
