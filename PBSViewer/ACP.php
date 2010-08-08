@@ -315,6 +315,7 @@ if($ACP==true)
 <title><?php echo $str["ACP_TITLE"];?></title>
 <link href="style/style.css" rel="stylesheet" type="text/css">
 <link rel="shortcut icon" href="style/img/favicon.ico"> 
+
 </head>
 
 <body>
@@ -329,7 +330,7 @@ if($ACP==true)
     <td align="center" class="bg_reset_table_row1"><span class="txt_light">:: <?php echo $str["ACP_TITLE_MENU"];?> ::</span></td>
   </tr>
   <tr>
-    <td class="bg_reset_table_row2"><form name="form1" method="post" action=""><table width="90%" border="0" align="center">
+    <td class="bg_reset_table_row2"><form name="ACPForm" method="post" action="" autocomplete="off"><table width="90%" border="0" align="center">
       <tr>
         <td colspan="3" align="center"><strong><?php echo $str["ACP_WELCOME"];?><br>
             <br>
@@ -358,7 +359,7 @@ if($ACP==true)
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_PASS"];
 ?></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
-          <input type="password" name="password" id="password" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
+        <input type="password" name="password" id="password" value="" class="search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_PASS_COMMENT"];?></td>
       </tr>
