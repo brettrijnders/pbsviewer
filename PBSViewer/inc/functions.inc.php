@@ -1175,7 +1175,7 @@ function show_fid_screens($nr=4,$fileName)
 	}
 	else
 	{
-		template_error_msg('No screens in DB','No images are downloaded','Ask admin for an update. If this doesn\'t do the trick then probably something is not configured correctly');
+		template_error_msg('Could not find screen','Could not find the screen you are looking for','Please try to search for something else or ask admin for an update if needed.');
 	}
 
 }
@@ -1243,7 +1243,7 @@ function show_guid_screens($nr=4,$guid)
 	}
 	else
 	{
-		template_error_msg('No screens in DB','No images are downloaded','Ask admin for an update. If this doesn\'t do the trick then probably something is not configured correctly');
+		template_error_msg('Could not find screen','Could not find the screen you are looking for','Please try to search for something else or ask admin for an update if needed.');
 	}
 
 }
@@ -1313,7 +1313,7 @@ function show_name_screens($nr=4,$name)
 	}
 	else
 	{
-		template_error_msg('No screens in DB','No images are downloaded','Ask admin for an update. If this doesn\'t do the trick then probably something is not configured correctly');
+		template_error_msg('Could not find screen','Could not find the screen you are looking for','Please try to search for something else or ask admin for an update if needed.');
 	}
 
 }
