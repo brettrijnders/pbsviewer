@@ -962,15 +962,15 @@ function template_login()
           <form name="login" method="post" action="">
             <table width="50%" border="0">
               <tr>
-                <td><strong>name</strong></td>
+                <td><strong>username</strong></td>
                 <td align="center"><label>
-                  <input type="text" name="name" id="name">
+                  <input type="text" name="name" id="name" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
                 </label></td>
               </tr>
               <tr>
                 <td><strong>password</strong></td>
                 <td align="center"><label>
-                  <input type="password" name="password" id="password">
+                  <input type="password" name="password" id="password" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
                 </label></td>
               </tr>
               <tr>

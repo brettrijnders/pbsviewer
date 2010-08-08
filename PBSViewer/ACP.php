@@ -38,7 +38,6 @@ require_once('inc/init.inc.php');
 
 //	check if user's ip is on the list
 if (is_admin()==true) $ACP=true;
-echo $ACP;
 
 //load correct language
 include("inc/load_language.inc.php");
@@ -50,6 +49,20 @@ if(isset($_POST['save'])&&$ACP==true)
 	$saving = true;
 	$error_msg = "";
 	
+	//	get member ID
+	if(isset($_SESSION['ADMIN_ID'])) $memberID = $_SESSION['ADMIN_ID'];
+	if(isset($_COOKIE['IDCookie'])) $memberID = $_COOKIE['IDCookie'];
+	
+	if ($_POST['name']=='')
+	{
+		$error_msg .= "<li>name field is empty, please enter a valid username</li>";
+		$saving = false;
+	}
+	if ($_POST['mail']=='')
+	{
+		$error_msg .= "<li>mail field is empty, you need to fill in your mail</li>";
+		$saving = false;
+	}
 	if ($_POST['pb_dir']=='')
 	{
 		$error_msg .= "<li>PB directory field is empty</li>";
@@ -173,77 +186,103 @@ if(isset($_POST['save'])&&$ACP==true)
 	{
 		
 		// update one by one
-		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['admin_mail'])."' WHERE `name`='admin_mail'";
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['admin_mail'])."' WHERE `name`='admin_mail'";
 		$sql     	=	mysql_query($sql_update);
 		
-		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['clan_name'])."' WHERE `name`='clan_name'";
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['clan_name'])."' WHERE `name`='clan_name'";
 		$sql     	=	mysql_query($sql_update);
 		
-		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['clan_tag'])."' WHERE `name`='clan_tag'";
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['clan_tag'])."' WHERE `name`='clan_tag'";
 		$sql     	=	mysql_query($sql_update);
 		
-		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['clan_game'])."' WHERE `name`='clan_game';";
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['clan_game'])."' WHERE `name`='clan_game';";
 		$sql     	=	mysql_query($sql_update);
 		
-		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['clan_game_short'])."' WHERE `name`='clan_game_short'";
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['clan_game_short'])."' WHERE `name`='clan_game_short'";
 		$sql     	=	mysql_query($sql_update);
 		
-		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['pb_dir'])."' WHERE `name`='pb_dir'";
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['pb_dir'])."' WHERE `name`='pb_dir'";
 		$sql     	=	mysql_query($sql_update);
 		
-		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['custom_update'])."' WHERE `name`='custom_update'";
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['custom_update'])."' WHERE `name`='custom_update'";
 		$sql     	=	mysql_query($sql_update);
 		
-		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['update_time'])."' WHERE `name`='update_time'";
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['update_time'])."' WHERE `name`='update_time'";
 		$sql     	=	mysql_query($sql_update);
 		
-		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['pb_sv_ssceiling'])."' WHERE `name`='pb_sv_ssceiling'";
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['pb_sv_ssceiling'])."' WHERE `name`='pb_sv_ssceiling'";
 		$sql     	=	mysql_query($sql_update);
 		
-		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['pbsv_download_dir'])."' WHERE `name`='pbsv_download_dir'";
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['pbsv_download_dir'])."' WHERE `name`='pbsv_download_dir'";
 		$sql     	=	mysql_query($sql_update);
 		
-		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['reset'])."' WHERE `name`='reset'";
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['reset'])."' WHERE `name`='reset'";
 		$sql     	=	mysql_query($sql_update);
 		
-		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['pbsvss_updater'])."' WHERE `name`='pbsvss_updater';";
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['pbsvss_updater'])."' WHERE `name`='pbsvss_updater';";
 		$sql     	=	mysql_query($sql_update);
 		
-		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['pb_log'])."' WHERE `name`='pb_log';";
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['pb_log'])."' WHERE `name`='pb_log';";
 		$sql     	=	mysql_query($sql_update);
 		
-		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['auto_del_count'])."' WHERE `name`='auto_del_count'";
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['auto_del_count'])."' WHERE `name`='auto_del_count'";
 		$sql     	=	mysql_query($sql_update);
 		
-		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['nr_screens_main'])."' WHERE `name`='nr_screens_main'";
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['nr_screens_main'])."' WHERE `name`='nr_screens_main'";
 		$sql     	=	mysql_query($sql_update);
 		
-		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['screens_per_row'])."' WHERE `name`='screens_per_row'";
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['screens_per_row'])."' WHERE `name`='screens_per_row'";
 		$sql     	=	mysql_query($sql_update);
 		
-		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['width'])."' WHERE `name`='width'";
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['width'])."' WHERE `name`='width'";
 		$sql     	=	mysql_query($sql_update);
 		
-		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['height'])."' WHERE `name`='height'";
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['height'])."' WHERE `name`='height'";
 		$sql     	=	mysql_query($sql_update);
 		
-		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['language'])."' WHERE `name`='language'";
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['language'])."' WHERE `name`='language'";
 		$sql     	=	mysql_query($sql_update);
 		
-		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['CB_game'])."' WHERE `name`='CB_game'";
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['CB_game'])."' WHERE `name`='CB_game'";
 		$sql     	=	mysql_query($sql_update);
 		
-		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['min_screen_size'])."' WHERE `name`='min_screen_size'";
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['min_screen_size'])."' WHERE `name`='min_screen_size'";
 		$sql     	=	mysql_query($sql_update);
 		
-		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['script_load_time'])."' WHERE `name`='script_load_time'";
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['script_load_time'])."' WHERE `name`='script_load_time'";
 		$sql     	=	mysql_query($sql_update);
 		
-		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['weblog_dir'])."' WHERE `name`='weblog_dir'";
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['weblog_dir'])."' WHERE `name`='weblog_dir'";
 		$sql     	=	mysql_query($sql_update);
 		
-		$sql_update = "UPDATE `settings` SET `value`='".addslashes($_POST['debug'])."' WHERE `name`='debug'";
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['debug'])."' WHERE `name`='debug'";
 		$sql     	=	mysql_query($sql_update);
+				
+		$sql_update = "UPDATE `access` SET `name`='".mysql_real_escape_string($_POST['name'])."' WHERE md5(`memberID`)='".$memberID."'";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `access` SET `mail`='".mysql_real_escape_string($_POST['mail'])."' WHERE md5(`memberID`)='".$memberID."'";
+		$sql     	=	mysql_query($sql_update);
+		
+		if($_POST['password']!='')
+		{
+			$sql_update = "UPDATE `access` SET `pass`='".mysql_real_escape_string(md5($_POST['password']))."' WHERE md5(`memberID`)='".$memberID."'";
+			$sql     	=	mysql_query($sql_update);
+		}
+		
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['private_password'])."' WHERE `name`='private_password'";
+		$sql     	=	mysql_query($sql_update);
+		
+		if(isset($_POST['notify_update']))
+		{
+			$sql_update = "UPDATE `settings` SET `value`='1' WHERE `name`='notify_update'";
+			$sql     	=	mysql_query($sql_update);
+		}
+		else 
+		{
+			$sql_update = "UPDATE `settings` SET `value`='0' WHERE `name`='notify_update'";
+			$sql     	=	mysql_query($sql_update);
+		}
 				
 		
 		//save data
@@ -302,11 +341,51 @@ if($ACP==true)
         <td colspan="3" align="center" class="bg_reset_table_row3"><span class="txt_light"><strong><?php echo $str["ACP_USER"];?></strong></span></td>
       </tr>
       <tr>
-        <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_ADMIN_MAIL"];?></td>
-        <td width="45%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
-          <input type="text" name="admin_mail" id="admin_mail" value="<?php echo $admin_mail;?>" onclick="this.focus();" size="40" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_USERNAME"];?></td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
+          <input type="text" name="name" id="name" value="<?php echo get_admin_name();?>" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
+        </label></td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">&nbsp;</td>
+      </tr>
+      <tr>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_ADMIN_MAIL"];?></td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
+          <input type="text" name="mail" id="mail" value="<?php echo get_admin_mail();?>" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
         <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_ADMIN_MAIL_COMMENT"];?></td>
+      </tr>
+      <tr>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_PASS"];
+?></td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
+          <input type="password" name="password" id="password" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
+        </label></td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_PASS_COMMENT"];?></td>
+      </tr>
+      <tr>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_PRIV_PASS"];
+?></td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
+          <input type="text" name="private_password" id="private_password" value="<?php echo $private_password;?>" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
+        </label></td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_PRIV_PASS_COMMENT"];?></td>
+      </tr>
+      <tr>
+        <td width="20%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_NOTIFY_UPDATE"];?></td>
+        <td width="45%" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
+          <?php
+          if ($notify_update==1)
+          {
+          	echo "<input type=\"checkbox\" name=\"notify_update\" id=\"notify_update\" checked>";
+          }
+          else 
+          {
+          	echo "<input type=\"checkbox\" name=\"notify_update\" id=\"notify_update\">";
+          }
+          ?>
+          
+        </label></td>
+        <td class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_NOTIFY_UPDATE_COMMENT"];?></td>
       </tr>
       <tr>
         <td colspan="3" align="center" class="bg_reset_table_row3"><span class="txt_light"><strong><?php echo $str["ACP_CLAN"];?></strong></span></td>
