@@ -1,5 +1,6 @@
 changelog 2.1.0.0:
 ------------------------------------
+- Fix: a more appropriate message is shown when user can't find what he is looking for.
 - Security fix: replaced addslashes by mysql_real_escape_string, addslashes is unreliable.
 - Implemented login feature see issue 19.
 - Bug fix: visitor doesn't see update messages anymore when 'custom update' is set to False.
