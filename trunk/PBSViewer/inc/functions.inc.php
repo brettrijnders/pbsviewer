@@ -1546,33 +1546,70 @@ function is_admin()
 	//	check if session is available, ie user has logged in
 	if (isset($_SESSION['ADMIN_ID']))
 	{
-		//	for security reasons, regenerate ids
+		//	For security reasons, regenerate ids
+		//	This in order to eliminate the risk of session hijacking (or session fixation attack).
+		//	See http://phpsec.org/projects/guide/4.html for more information
 		session_regenerate_id('ADMIN_ID');
 		
 		if(isset($_SESSION['Ukey']))
 		{
 			session_regenerate_id('Ukey');
-					
-			$sql_select	=	"SELECT * FROM `access` WHERE `memberID`='".$_SESSION['ADMIN_ID']."'";
-			$sql		=	mysql_query($sql_select) or die(mysql_error()."<br> mysql ERROR SESSION <br>".$_SESSION['ADMIN_ID']);
-	
-			if (mysql_num_rows($sql)>0)
+			
+			if(isset($_SESSION['ADMIN_IP']))
 			{
-				while($row	=	mysql_fetch_object($sql))
+				session_regenerate_id('ADMIN_IP');
+				
+				//	check if no-one messed with the session
+				// 	IP address still should be the same as the one who logged in
+				if($_SESSION['ADMIN_IP']==md5($_SERVER['REMOTE_ADDR']))
 				{
-					$admin_id		=	$row->memberID;
-					$admin_mail		=	$row->mail;
-					$admin_name		=	$row->name;
-					$admin_pass		=	$row->pass;
-				}
-		
-				if ($_SESSION['Ukey'] == md5(md5($admin_id.$admin_mail.$admin_name.$admin_pass.$key)))
-				{
-					return true;
+					if(isset($_SESSION['userAgent']))
+					{		
+						session_regenerate_id('userAgent');
+						
+						if($_SESSION['userAgent']==md5($_SERVER['HTTP_USER_AGENT']))
+						{	
+				
+							$sql_select	=	"SELECT `memberID`,`mail`,`name`,`pass` FROM `access` WHERE md5(`memberID`)='".$_SESSION['ADMIN_ID']."'";
+							$sql		=	mysql_query($sql_select) or die(mysql_error()."<br> mysql ERROR SESSION <br>".$_SESSION['ADMIN_ID']);
+						
+							if (mysql_num_rows($sql)>0)
+							{
+								while($row	=	mysql_fetch_object($sql))
+								{
+									$admin_id		=	$row->memberID;
+									$admin_mail		=	$row->mail;
+									$admin_name		=	$row->name;
+									$admin_pass		=	$row->pass;
+								}
+
+								if ($_SESSION['Ukey'] == md5(md5($admin_id.$admin_mail.$admin_name.$admin_pass.$key.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT'])))
+								{
+									return true;
+								}
+								else
+								{
+									return false;
+								}
+							}
+							else
+							{
+								return false;
+							}
+						}
+						else 
+						{
+							return false;
+						}
+					}
+					else 
+					{
+						return false;
+					}
 				}
 				else 
 				{
-					return false;
+					return  false;
 				}
 			}
 			else 
@@ -1594,33 +1631,55 @@ function is_admin()
 			//	check if cookies are available
 			if(isset($_COOKIE['UkeyCookie']))
 			{
-				// check if cookie has correct key
-				$sql_select	=	"SELECT `memberID`,`pass`,`name`,`mail` FROM `access` WHERE `memberID`='".$_COOKIE['IDCookie']."'";
-				$sql		=	mysql_query($sql_select) or die("login failed");
-	
-				if (mysql_num_rows($sql)>0)
+				if(isset($_COOKIE['userAgentCookie']))
 				{
-					while($row	=	mysql_fetch_object($sql))
+					//	Check if cookie about user agent that has been stored during login 
+					//	is the same after user returns to his/her page
+					if($_COOKIE['userAgentCookie']==md5($_SERVER['HTTP_USER_AGENT']))
 					{
-						$admin_id		=	$row->memberID;
-						$admin_mail		=	$row->mail;
-						$admin_name		=	$row->name;
-						$admin_pass		=	$row->pass;
-					}
+					
+						// check if cookie has correct key
+						$sql_select	=	"SELECT `memberID`,`pass`,`name`,`mail` FROM `access` WHERE md5(`memberID`)='".$_COOKIE['IDCookie']."'";
+						$sql		=	mysql_query($sql_select) or die("login failed");
+	
+						if (mysql_num_rows($sql)>0)
+						{
+							while($row	=	mysql_fetch_object($sql))
+							{
+								$admin_id		=	$row->memberID;
+								$admin_mail		=	$row->mail;
+								$admin_name		=	$row->name;
+								$admin_pass		=	$row->pass;
+							}
 		
-					if ($_COOKIE['UkeyCookie'] == md5(md5($admin_id.$admin_mail.$admin_name.$admin_pass.$key)))
-					{
-						return true;
+							if ($_COOKIE['UkeyCookie'] == md5(md5($admin_id.$admin_mail.$admin_name.$admin_pass.$key.$_SERVER['HTTP_USER_AGENT'])))
+							{
+								return true;
+							}
+							else 
+							{
+							return false;
+							}	
+						}
+						else 
+						{
+							return false;
+						}
 					}
 					else 
 					{
 						return false;
-					}	
+					}
 				}
 				else 
 				{
 					return false;
 				}
+				
+			}
+			else 
+			{
+				return false;
 			}
 		}
 		else 
@@ -1655,16 +1714,25 @@ function check_login($name,$password)
 		}
 		
 		//	store data temporarily
-		$uniqueKey	= md5(md5($admin_id.$admin_mail.$admin_name.$admin_pass.$key));
+		//	create a special keys, which depends on admin login details, server fingerprint ($key), user fingerprint (type of user agent)
+		$uniqueKey	= md5(md5($admin_id.$admin_mail.$admin_name.$admin_pass.$key.$_SERVER['HTTP_USER_AGENT']));
 		
 		//	store cookie
 		$expTime	=	3600*24*7;
-		setcookie('IDCookie',$admin_id,time()+$expTime);
+		setcookie('IDCookie',md5($admin_id),time()+$expTime);
 		setcookie('UkeyCookie',$uniqueKey,time()+$expTime);
+		setcookie('userAgentCookie',md5($_SERVER['HTTP_USER_AGENT']),time()+$expTime);
 		
+
+		//	create a special keys, which depends on admin login details, server fingerprint ($key), user fingerprint (IP and type of user agent)	
+		$uniqueKey	= md5(md5($admin_id.$admin_mail.$admin_name.$admin_pass.$key.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']));
 		//	store session
-		$_SESSION['ADMIN_ID']	=	$admin_id;
+		$_SESSION['ADMIN_ID']	=	md5($admin_id);
 		$_SESSION['Ukey']		=	$uniqueKey;
+		//	To improve security store IP address as well, only used for sessions (so not for cookies).
+		//	User can have dynamic IP, which changes after each restart of PC (it probably won't change during browsing).
+		$_SESSION['ADMIN_IP']	=	md5($_SERVER['REMOTE_ADDR']);
+		$_SESSION['userAgent']	=	md5($_SERVER['HTTP_USER_AGENT']);
 						
 		return true;
 	}
@@ -1685,7 +1753,7 @@ function get_admin_name()
 	
 	if ($memberID!=false)
 	{
-		$sql_select	=	"SELECT `name` FROM `access` WHERE `memberID`='".$memberID."'";
+		$sql_select	=	"SELECT `name` FROM `access` WHERE md5(`memberID`)='".$memberID."'";
 		$sql 		=	mysql_query($sql_select);
 		if (mysql_num_rows($sql)>0)
 		{
@@ -1706,8 +1774,9 @@ function logout()
 	//	see $expTime
 	$expTimeCookie	= 3600*24*7;
 	//	remove cookies, by letting them expire. Browser will remove them automatically
-	setcookie('IDCookie',$admin_id,time()-$expTimeCookie);
-	setcookie('UkeyCookie',$admin_id,time()-$expTimeCookie);
+	setcookie('IDCookie','',time()-$expTimeCookie);
+	setcookie('UkeyCookie','',time()-$expTimeCookie);
+	setcookie('userAgentCookie','',time()-$expTimeCookie);
 	
 	session_unset();
 	session_destroy();
