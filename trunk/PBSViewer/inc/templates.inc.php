@@ -374,7 +374,8 @@ function template_detailed_screen($fid)
 		$date	=	$data[2];
 
 	//	get aliases of player
-	$alias	=	get_alias($guid,addslashes($name));
+	//	$alias	=	get_alias($guid,addslashes($name));
+	$alias	=	get_alias($guid,mysql_real_escape_string($name));
 			
 	?>
 	

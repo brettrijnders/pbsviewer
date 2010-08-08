@@ -894,7 +894,8 @@ function parser_screens ($file,$debug=false)
 		$name = substr($newMatch,1,strlen($newMatch)-2);
 
 		//	if user uses forbidden characters, this is new since version 1.1.2.1
-		$name		=	addslashes($name);
+		//$name		=	addslashes($name);
+		$name		=	mysql_real_escape_string($name);
 		
 			
 		//	get guide

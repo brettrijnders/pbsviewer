@@ -42,9 +42,7 @@ include("inc/load_language.inc.php");
 
 if (is_admin()==true)
 {
-	?>
-	<meta http-equiv="refresh" content="0;URL=./" />
-	<?php
+	header("LOCATION: ./");
 }
 else 
 {

@@ -133,7 +133,8 @@ template_header();
 	if(isset($_GET['search']))
 	{
 		//	security against sql injection
-		$input	=	addslashes($_GET['input']);
+		//$input	=	addslashes($_GET['input']);
+		$input	=	mysql_real_escape_string($_GET['input']);
 		
 		if($_GET['sID']=='filename')
 		{
