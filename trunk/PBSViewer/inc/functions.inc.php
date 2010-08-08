@@ -1769,6 +1769,30 @@ function get_admin_name()
 	
 }
 
+function get_admin_mail()
+{
+	
+	$memberID	=	false;
+	if(isset($_SESSION['ADMIN_ID'])) $memberID = $_SESSION['ADMIN_ID'];
+	if(isset($_COOKIE['IDCookie'])) $memberID = $_COOKIE['IDCookie'];
+	
+	if ($memberID!=false)
+	{
+		$sql_select	=	"SELECT `mail` FROM `access` WHERE md5(`memberID`)='".$memberID."'";
+		$sql 		=	mysql_query($sql_select);
+		if (mysql_num_rows($sql)>0)
+		{
+			while($row	=	mysql_fetch_object($sql))
+			{
+				$admin_mail	=	$row->mail;
+			}
+		
+			return $admin_mail;
+		}
+	}
+	
+}
+
 //	let user logout
 function logout()
 {
@@ -2580,8 +2604,9 @@ function set_request()
 		$sql		=	mysql_query($sql_insert);
 	}
 	
-	// send mail if someone requested an update
-	if (ADMIN_MAIL!='')
+	//	send mail if someone requested an update
+	//	only send mail if admin wants it, can be configured in ACP
+	if (NOTIFY_UPDATE==1)
 	{
 		$subj = "PBSViewer: Update Requested";
 		$msg  = "Dear Admin,\n\n";
@@ -2601,10 +2626,22 @@ function set_request()
 		$msg .= "Click on the link below to go directly to your ACP:\n";
 		$msg .= $_SERVER["SERVER_NAME"].dirname($_SERVER['PHP_SELF'])."/ACP.php";
 		
-		$headers = 'From: PBSViewer@ '.substr($_SERVER['SERVER_NAME'],4).' ' . "\r\n" .
-    	'Reply-To: '.ADMIN_MAIL.' ' . "\r\n" .
-    	'X-Mailer: PHP/' . phpversion();
+		//	get mail of MAIN admin, ie user with memberID=1
+		$sql_select	=	"SELECT `mail` FROM `access` WHERE `memberID`='1'";
+		$sql 		=	mysql_query($sql_select);
+		// only send mail if mail address exist
+		if (mysql_num_rows($sql)>0)
+		{
+			while($row	=	mysql_fetch_object($sql))
+			{
+				$admin_mail	=	$row->mail;
+			}
+		}
 		
+		$headers = 'From: PBSViewer@ '.substr($_SERVER['SERVER_NAME'],4).' ' . "\r\n" .
+    	'Reply-To: '.$admin_mail.' ' . "\r\n" .
+    	'X-Mailer: PHP/' . phpversion();
+		    	
 		send_mail($subj,$msg,$headers);
 	}
 
@@ -3026,9 +3063,22 @@ function get_browser_info()
 // this function is new since version 2.0.0.0
 function send_mail($subject,$msg,$headers)
 {
-
-	$to      = ADMIN_MAIL;
-	mail($to, $subject, $msg,$headers);
+	//	get mail of MAIN admin, ie user with memberID=1
+	$sql_select	=	"SELECT `mail` FROM `access` WHERE `memberID`='1'";
+	$sql 		=	mysql_query($sql_select);
+	
+	// only send mail if mail address exist
+	if (mysql_num_rows($sql)>0)
+	{
+		while($row	=	mysql_fetch_object($sql))
+		{
+			$admin_mail	=	$row->mail;
+		}
+		
+		$to      = $admin_mail;
+		mail($to, $subject, $msg,$headers);
+	}		
+	
 }
 
 // get languages

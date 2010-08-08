@@ -718,17 +718,20 @@ PRIMARY KEY(`optionID`)
 				
 				$mysql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('weblog_dir','".$_SESSION['weblog_dir']."');";
 				mysql_query($mysql_insert) or die(mysql_error());
-							
-				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('admin_mail','');";
-				mysql_query($sql_insert) or die(mysql_error());
-				
+										
 				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('CB_game','none');";
 				mysql_query($sql_insert) or die(mysql_error());
-				
+							
 				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('min_screen_size','10000');";
 				mysql_query($sql_insert) or die(mysql_error());
 
 				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('language','English');";
+				mysql_query($sql_insert) or die(mysql_error());
+				
+				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('notify_update','0');";
+				mysql_query($sql_insert) or die(mysql_error());
+				
+				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('private_password','');";
 				mysql_query($sql_insert) or die(mysql_error());
 
 				session_destroy();

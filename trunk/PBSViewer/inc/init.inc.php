@@ -37,7 +37,8 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 	
 	
 	// default values
-	$admin_mail			= '';
+	$notify_update		= '';
+	$private_password	= '';	
 	$clan_name			= '';
 	$clan_tag			= '';
 	$clan_game			= '';
@@ -66,9 +67,13 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 	$sql = mysql_query($sql_select) or die(mysql_error());
 	while ($row = mysql_fetch_object($sql))
 	{
-		if ($row->name=='admin_mail')
+		if ($row->name=='private_password')
 		{
-			$admin_mail = $row->value;
+			$private_password	=	$row->value;
+		}
+		elseif($row->name=='notify_update') 
+		{
+			$notify_update	=	$row->value;
 		}
 		elseif ($row->name=='clan_name')
 		{
@@ -178,7 +183,12 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 	define('UPDATE_TIME',$update_time) ;						//	Update every 3600*24 s, every day. Use a small update time if gameserver is crowded (since a lot of new screens are captured), for example a public gameserver. However keep in mind that bandwith will also increase if UPDATE_TIME is smaller.
 	
 
-
+	//	used for making PBSViewer private
+	define('PRIVATE_PASSWORD',$private_password);
+	
+	//	when true, user will receive mail notification about this
+	define('NOTIFY_UPDATE',$notify_update);
+	
 	//	parser settings (required) (IMPORTANT!)
 	//	If you do not set this correct then,
 	//	one can get wrong results.
@@ -196,8 +206,6 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 
 	//---------------------]	OPTIONAL	[---------------------\
 
-	// admin mail
-	define('ADMIN_MAIL',$admin_mail);
 	
 	//	gather more info about screens, like md5 check
 	//	or ip address of players, with help of logs
