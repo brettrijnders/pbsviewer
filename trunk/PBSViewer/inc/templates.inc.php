@@ -1063,6 +1063,67 @@ function template_login_failed()
 	<?php	
 }
 
+function template_login_visitor_failed()
+{
+	?>
+	
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="See captured punkbuster screenshots online with punkbuster (PB) Screenshot Viewer (PBSViewer).">
+<meta name="keywords" content="pb, view, viewer, punkbuster, php, parser, screens, capture, gaming, cheat">
+<meta name="robot" content="index,follow">
+<meta name="copyright" content="Copyright &copy; 2009 B.S. Rijnders aka BandAhr. All rights reserved">
+<meta name="author" content="B.S. Rijnders">
+<meta name="revisit-after" content="7">
+<title>Punkbuster (PB) Screenshot Viewer (PBSViewer)</title>
+
+<link href="style/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="style/img/favicon.ico"> 
+</head>
+
+<body>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+		<table width="60%" border="0" align="center">
+  <tr>
+    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+<br><br>
+<br></td>
+  </tr>
+  <tr>
+    <td align="center"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_msg_bg">
+      <tr>
+        <td align="center"><span class="txt_light">::</span> <span class="header_msg_txt"><strong>Access Denied - Private PBSViewer</strong></span><span class="txt_light">::</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" class="body_msg_bg" align="center"><p>Password is invalid, please check your password. <a href="" target="_self" onclick="history.go(-1)">Click here to go back.</a><br>
+
+</p></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?template_copyright();?></span></td>
+  </tr>
+
+  </tr>
+</table>
+<br>
+</body>
+</html>	
+	
+	<?php
+}
+
 //	template for when user has logged in successfully
 function template_login_success()
 {
@@ -1241,6 +1302,82 @@ function template_denied_no_perm()
       <tr>
         <td colspan="3" class="body_msg_bg" align="center"><br>
 <?php echo $str['MISC_ACCESS_DENIED_NO_PERM'];?><br><br>
+
+</td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?template_copyright();?></span></td>
+  </tr>
+
+  </tr>
+</table>
+<br>
+</body>
+</html>	
+	
+	<?
+}
+
+//	show this page when PBSViewer is private
+function template_denied_private()
+{
+	global $str;
+	
+	template_login_top_menu();
+	?>
+	
+	
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="See captured punkbuster screenshots online with punkbuster (PB) Screenshot Viewer (PBSViewer).">
+<meta name="keywords" content="pb, view, viewer, punkbuster, php, parser, screens, capture, gaming, cheat">
+<meta name="robot" content="index,follow">
+<meta name="copyright" content="Copyright &copy; 2009 B.S. Rijnders aka BandAhr. All rights reserved">
+<meta name="author" content="B.S. Rijnders">
+<meta name="revisit-after" content="7">
+<title>Punkbuster (PB) Screenshot Viewer (PBSViewer)</title>
+
+<link href="style/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="style/img/favicon.ico"> 
+</head>
+
+<body>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+		<table width="60%" border="0" align="center">
+  <tr>
+    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+<br><br>
+<br></td>
+  </tr>
+  <tr>
+    <td align="center"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_msg_bg">
+      <tr>
+        <td align="center"><span class="txt_light">::</span> <span class="header_msg_txt"><strong>Access Denied - Private PBSViewer</strong></span><span class="txt_light">::</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" class="body_msg_bg" align="center"><p><br> 
+          This is a private page, only those who know the private password can use PBSViewer. Admin can login by clicking on login (see 'Login' upper right)</p>
+          <p>
+          </p>
+          <form name='login' method='post' action=''>
+            <label><strong>Password</strong>:
+<input type='password' name='password' id='password' class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
+            </label>
+            <label>
+            <input type='submit' name='login' id='login' value='Login'></label></form>
+<br>
 
 </td>
       </tr>

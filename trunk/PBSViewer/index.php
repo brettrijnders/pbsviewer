@@ -55,8 +55,26 @@ if(DEBUG==false)
 	error_reporting(0);
 }
 
+$access = false;
+
+//	check if admin set PBSViewer to private
+if(is_private())
+{
+	//	If PBSViewer is private than you can only use PBSViewer 
+	//	if you are admin or allowed visitor, ie you logged in with valid login details
+	if(is_admin()||is_allowed_visitor())
+	{
+		$access=true;
+	}
+}
+else 
+{
+	$access=true;
+}
 
 
+if($access==true)
+{
 
 //	this is new in version 1.1.2.1
 //	it will show a detailed screen info on a seperate page
@@ -248,6 +266,32 @@ template_header();
 		template_footer(UPDATE_TIME,$lastUpdateTime,$startTime);
 	}
 
+}
+}
+else 
+{
+	if(isset($_POST['login']))
+	{
+		if($_POST['password']!='')
+		{
+			if(check_login_visitor($_POST['password']))
+			{
+				echo "<meta http-equiv='refresh' content='0;URL=./' />";
+			}
+			else 
+			{
+				template_login_visitor_failed();
+			}
+		}
+		else 
+		{
+			template_login_visitor_failed();
+		}
+	}
+	else 
+	{
+		template_denied_private();
+	}
 }
 
 ?>
