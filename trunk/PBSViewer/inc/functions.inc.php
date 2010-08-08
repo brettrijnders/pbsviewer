@@ -1557,9 +1557,116 @@ function is_private()
 	}
 }
 
+//	Check if mail is a valid mail, 
+//	it's valid when there is an admin in database who has that mail address
+function is_valid_admin_mail($mail)
+{
+	$mail	=	mysql_real_escape_string($mail);
+	$sql_select	=	"SELECT `mail` FROM `access` WHERE `mail`='".$mail."'";
+	$sql 		=	mysql_query($sql_select);
+	if (mysql_num_rows($sql)>0)
+	{
+		return true;
+	}
+	else 
+	{
+		return false;
+	}
+}
+
+//	get username by mail, this function is used for resetting password
+function get_username_by_mail ($mail)
+{
+	$mail	=	mysql_real_escape_string($mail);
+	$sql_select	=	"SELECT `name` FROM `access` WHERE `mail`='".$mail."'";
+	$sql 		=	mysql_query($sql_select);
+	if (mysql_num_rows($sql)>0)
+	{
+		while ($row = mysql_fetch_object($sql))
+		{
+			$username	=	$row->name;	
+		}
+		
+		return $username;
+	}
+	else 
+	{
+		return false;
+	}
+}
+
+//	create a unique key for resetting password and store it in database
+function create_Ukey_pass_reset($mail)
+{	
+	$Ukey	=	md5(get_username_by_mail($mail).$mail.time().$key.rand());
+	
+	$mail	=	mysql_real_escape_string($mail);
+	$sql_update	=	"UPDATE `access` SET `ResetCode`='".$Ukey."' WHERE `mail`='".$mail."'";
+	$sql 		=	mysql_query($sql_update);
+	
+	return $Ukey;
+}
+
+//	check if user is the one who asked for resetting password
+function is_password_resetter($code)
+{
+	$code	=	mysql_real_escape_string($code);
+	
+	$sql_select	=	"SELECT `ResetCode` FROM `access` WHERE `ResetCode`='".$code."'";
+	$sql 		=	mysql_query($sql_select);
+	if(mysql_num_rows($sql)>0)
+	{
+		return true;
+	}
+	else 
+	{
+		return false;
+	}
+	
+}
+
+//	create random password for password reset and update database
+function generate_new_pass($Ukey)
+{
+	$Ukey	=	mysql_real_escape_string($Ukey);
+	
+	$password	=	 substr(md5(time().rand()),0,8);
+	$sql_update =	"UPDATE `access` SET `pass`='".md5($password)."' WHERE `ResetCode`='".$Ukey."'";
+	$sql 		=	mysql_query($sql_update);
+	
+	return $password;
+}
+
+//	get username by Ukey when admin has requested a reset
+function get_name_user($Ukey)
+{
+	$Ukey	=	mysql_real_escape_string($Ukey);
+	
+	$sql_select	=	"SELECT `name` FROM `access` WHERE `ResetCode`='".$Ukey."'";
+	$sql 		=	mysql_query($sql_select);
+	if(mysql_num_rows($sql)>0)
+	{
+		while($row	=	mysql_fetch_object($sql))
+		{
+			$username	=	$row->name;
+		}
+		
+		return $username;
+	}
+}
+
+//	Make field 'ResetCode' empty in case user is going to forget his/her password again
+function empty_ResetCode($Ukey)
+{
+	$sql_update	=	"UPDATE `access` SET `ResetCode`='' WHERE `ResetCode`='".$Ukey."'";
+	$sql 		=	mysql_query($sql_update);
+}
+
 //	check if person is admin or not
 function is_admin()
 {
+	echo $key;
+	
 	//	check if session is available, ie user has logged in
 	if (isset($_SESSION['ADMIN_ID']))
 	{

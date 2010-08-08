@@ -959,7 +959,7 @@ function template_login()
       </tr>
       <tr>
         <td colspan="3" class="body_msg_bg" align="center"><br>
-          <form name="login" method="post" action="">
+          <form name="login" method="post" action="" autocomplete="off">
             <table width="50%" border="0">
               <tr>
                 <td><strong>username</strong></td>
@@ -981,9 +981,259 @@ function template_login()
             </table>
           </form>
           <br>
-          Forgot password or name?<br>
+          <a href="?reset=1" target="_self">Forgot password or name?</a><br>
 
 </td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?template_copyright();?></span></td>
+  </tr>
+
+  </tr>
+</table>
+<br>
+</body>
+</html>		
+	
+	<?php
+}
+
+function template_reset_password()
+{
+	?>
+	
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="See captured punkbuster screenshots online with punkbuster (PB) Screenshot Viewer (PBSViewer).">
+<meta name="keywords" content="pb, view, viewer, punkbuster, php, parser, screens, capture, gaming, cheat">
+<meta name="robot" content="index,follow">
+<meta name="copyright" content="Copyright &copy; 2009 B.S. Rijnders aka BandAhr. All rights reserved">
+<meta name="author" content="B.S. Rijnders">
+<meta name="revisit-after" content="7">
+<title>Punkbuster (PB) Screenshot Viewer (PBSViewer) - Login</title>
+
+<link href="style/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="style/img/favicon.ico"> 
+</head>
+
+<body>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+		<table width="60%" border="0" align="center">
+  <tr>
+    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+<br><br>
+<br></td>
+  </tr>
+  <tr>
+    <td align="center"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_msg_bg">
+      <tr>
+        <td align="center"><span class="txt_light">::</span><span class="header_msg_txt"><strong> Reset password</strong></span><span class="txt_light">::</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" class="body_msg_bg" align="center"><p>Fill in your mail address in case you forgot your username and/or password. This mail will contain your username and a link that can be used to reset your password</p>
+          <form name="reset" method="post" action="" autocomplete="off">
+            <label>
+              <input type="text" name="mail_reset" id="mail_reset" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
+            </label>
+            <label> 
+              <input type="submit" name="submit" id="Submit" value="Submit">
+            </label>
+          </form>
+          <p>&nbsp;</p></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?template_copyright();?></span></td>
+  </tr>
+
+  </tr>
+</table>
+<br>
+</body>
+</html>		
+	
+	<?php
+}
+
+function template_reset_invalid_mail()
+{
+	?>
+	
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="See captured punkbuster screenshots online with punkbuster (PB) Screenshot Viewer (PBSViewer).">
+<meta name="keywords" content="pb, view, viewer, punkbuster, php, parser, screens, capture, gaming, cheat">
+<meta name="robot" content="index,follow">
+<meta name="copyright" content="Copyright &copy; 2009 B.S. Rijnders aka BandAhr. All rights reserved">
+<meta name="author" content="B.S. Rijnders">
+<meta name="revisit-after" content="7">
+<title>Punkbuster (PB) Screenshot Viewer (PBSViewer) - Login</title>
+
+<link href="style/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="style/img/favicon.ico"> 
+</head>
+
+<body>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+		<table width="60%" border="0" align="center">
+  <tr>
+    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+<br><br>
+<br></td>
+  </tr>
+  <tr>
+    <td align="center"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_msg_bg">
+      <tr>
+        <td align="center"><span class="txt_light">::</span><span class="header_msg_txt"><strong> Reset - Invalid mail</strong></span><span class="txt_light">::</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" class="body_msg_bg" align="center"><p>Sorry could not find your mail, please check if you used the correct mail address.<a href="" target="_self" onclick="history.go(-1)">Click here to go back.</a></p></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?template_copyright();?></span></td>
+  </tr>
+
+  </tr>
+</table>
+<br>
+</body>
+</html>		
+	
+	
+	<?php	
+}
+
+function template_reset_correct_mail($mail)
+{
+	?>
+	
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="See captured punkbuster screenshots online with punkbuster (PB) Screenshot Viewer (PBSViewer).">
+<meta name="keywords" content="pb, view, viewer, punkbuster, php, parser, screens, capture, gaming, cheat">
+<meta name="robot" content="index,follow">
+<meta name="copyright" content="Copyright &copy; 2009 B.S. Rijnders aka BandAhr. All rights reserved">
+<meta name="author" content="B.S. Rijnders">
+<meta name="revisit-after" content="7">
+<title>Punkbuster (PB) Screenshot Viewer (PBSViewer) - Login</title>
+
+<link href="style/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="style/img/favicon.ico"> 
+</head>
+
+<body>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+		<table width="60%" border="0" align="center">
+  <tr>
+    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+<br><br>
+<br></td>
+  </tr>
+  <tr>
+    <td align="center"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_msg_bg">
+      <tr>
+        <td align="center"><span class="txt_light">::</span><span class="header_msg_txt"><strong> Reset </strong></span><span class="txt_light">::</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" class="body_msg_bg" align="center"><p>Mail has been sent to '<?php echo $mail;?>'<a href="" target="_self" onclick="history.go(-1)"></a>. Click on the link in your mail to reset your password.</p></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?template_copyright();?></span></td>
+  </tr>
+
+  </tr>
+</table>
+<br>
+</body>
+</html>		
+	
+	<?php
+}
+
+function template_reset_password_succesfully($user,$password)
+{
+	?>
+	
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="See captured punkbuster screenshots online with punkbuster (PB) Screenshot Viewer (PBSViewer).">
+<meta name="keywords" content="pb, view, viewer, punkbuster, php, parser, screens, capture, gaming, cheat">
+<meta name="robot" content="index,follow">
+<meta name="copyright" content="Copyright &copy; 2009 B.S. Rijnders aka BandAhr. All rights reserved">
+<meta name="author" content="B.S. Rijnders">
+<meta name="revisit-after" content="7">
+<title>Punkbuster (PB) Screenshot Viewer (PBSViewer) - Login</title>
+
+<link href="style/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="style/img/favicon.ico"> 
+</head>
+
+<body>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+		<table width="60%" border="0" align="center">
+  <tr>
+    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+<br><br>
+<br></td>
+  </tr>
+  <tr>
+    <td align="center"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_msg_bg">
+      <tr>
+        <td align="center"><span class="txt_light">::</span><span class="header_msg_txt"><strong> Password Resetted</strong></span><span class="txt_light">::</span></td>
+      </tr>
+      <tr>
+        <td colspan="3" class="body_msg_bg" align="center"><p>Your password have been resetted succesfully. Please <a href="login.php" target="_blank">login</a> with the following username and password:</p>
+          <p>Username: <?php echo $user;?><br>
+            Password:<?php echo $password;?>
+          </p>
+          <p>Once you are logged in please change your password in the ACP.</p></td>
       </tr>
     </table></td>
   </tr>
@@ -1044,7 +1294,7 @@ function template_login_failed()
       <tr>
         <td colspan="3" class="body_msg_bg" align="center">Failed to login, please check your username and/or password. <a href="" target="_self" onclick="history.go(-1)">Click here to go back.</a><br>
           <br>
-          Forgot password or name?<br>
+          <a href="?reset=1" target="_self">Forgot password or name?</a><br>
 
 </td>
       </tr>
@@ -1339,7 +1589,7 @@ function template_denied_private()
 <meta name="copyright" content="Copyright &copy; 2009 B.S. Rijnders aka BandAhr. All rights reserved">
 <meta name="author" content="B.S. Rijnders">
 <meta name="revisit-after" content="7">
-<title>Punkbuster (PB) Screenshot Viewer (PBSViewer)</title>
+<title>Punkbuster (PB) Screenshot Viewer (PBSViewer) - Private</title>
 
 <link href="style/style.css" rel="stylesheet" type="text/css">
 <link rel="shortcut icon" href="style/img/favicon.ico"> 
@@ -1371,7 +1621,7 @@ function template_denied_private()
           This is a private page, only those who know the private password can use PBSViewer. Admin can login by clicking on login (see 'Login' upper right)</p>
           <p>
           </p>
-          <form name='login' method='post' action=''>
+          <form name='login' method='post' action='' autocomplete="off">
             <label><strong>Password</strong>:
 <input type='password' name='password' id='password' class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
             </label>
