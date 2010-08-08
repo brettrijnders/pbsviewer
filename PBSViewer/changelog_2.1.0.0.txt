@@ -1,5 +1,6 @@
 changelog 2.1.0.0:
 ------------------------------------
+- Admin can make PBSViewer private by configuring an password in ACP.
 - Fix: a more appropriate message is shown when user can't find what he is looking for.
 - Security fix: replaced addslashes by mysql_real_escape_string, addslashes is unreliable.
 - Implemented login feature see issue 19.

@@ -1541,6 +1541,22 @@ function get_loadTime($startTime,$precision)
 	return round($endTime-$startTime,$precision);
 }
 
+//	check if PBSViewer is set to private
+function is_private()
+{
+	$sql_select	=	"SELECT `value` FROM `settings` WHERE `name`='private_password' AND `value`!=''";
+	$sql 		=	mysql_query($sql_select);
+	
+	if(mysql_num_rows($sql)>0)
+	{
+		return true;
+	}
+	else 
+	{
+		return false;
+	}
+}
+
 //	check if person is admin or not
 function is_admin()
 {
@@ -1688,6 +1704,186 @@ function is_admin()
 			return false;
 		}
 	}
+}
+
+//	check if person is allowed to use PBSViewer in case PBSViewer is set to private
+function is_allowed_visitor ()
+{		
+			
+		if(isset($_SESSION['Ukey_Visitor']))
+		{
+			//	For security reasons, regenerate ids
+			//	This in order to eliminate the risk of session hijacking (or session fixation attack).
+			//	See http://phpsec.org/projects/guide/4.html for more information
+			session_regenerate_id('Ukey_Visitor');
+			
+			if(isset($_SESSION['VISITOR_IP']))
+			{
+				session_regenerate_id('VISITOR_IP');
+				
+				//	check if no-one messed with the session
+				// 	IP address still should be the same as the one who logged in
+				if($_SESSION['VISITOR_IP']==md5($_SERVER['REMOTE_ADDR']))
+				{
+					if(isset($_SESSION['userAgent_visitor']))
+					{		
+						session_regenerate_id('userAgent_visitor');
+						
+						if($_SESSION['userAgent_visitor']==md5($_SERVER['HTTP_USER_AGENT']))
+						{	
+				
+							//	check if password matches
+							$sql_select	=	"SELECT `value` FROM `settings` WHERE `name`='private_password'";
+							$sql		=	mysql_query($sql_select) or die("login failed");
+	
+							if (mysql_num_rows($sql)>0)
+							{
+								while($row	=	mysql_fetch_object($sql))
+								{
+									$private_pass		=	$row->value;
+								}
+							
+								if ($_SESSION['Ukey_Visitor'] == md5(md5($private_pass.$key.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT'])))
+								{
+									return true;
+								}
+								else
+								{
+									return false;
+								}
+							
+							}
+							else 
+							{
+								return false;
+							}
+
+						}
+						else 
+						{
+							return false;
+						}
+					}
+					else 
+					{
+						return false;
+					}
+				}
+				else 
+				{
+					return  false;
+				}
+			}
+			else 
+			{
+				return false;
+			}
+
+		
+	}
+	else 
+	{
+			//	check if cookies are available
+			if(isset($_COOKIE['UkeyCookie_Visitor']))
+			{
+				if(isset($_COOKIE['userAgentCookie_Visitor']))
+				{
+					//	Check if cookie about user agent that has been stored during login 
+					//	is the same after user returns to his/her page
+					if($_COOKIE['userAgentCookie_Visitor']==md5($_SERVER['HTTP_USER_AGENT']))
+					{
+					
+						//	check if password matches
+						$sql_select	=	"SELECT `value` FROM `settings` WHERE `name`='private_password'";
+						$sql		=	mysql_query($sql_select) or die("login failed");
+	
+						if (mysql_num_rows($sql)>0)
+						{
+							while($row	=	mysql_fetch_object($sql))
+							{
+								$private_pass		=	$row->value;
+							}
+							
+							if ($_COOKIE['UkeyCookie_Visitor'] == md5(md5($private_pass.$key.$_SERVER['HTTP_USER_AGENT'])))
+							{
+								return true;
+							}
+							else 
+							{
+							return false;
+							}	
+						}
+						else 
+						{
+							return false;
+						}
+
+					}
+					else 
+					{
+						return false;
+					}
+				}
+				else 
+				{
+					return false;
+				}
+				
+			}
+			else 
+			{
+				return false;
+			}
+		}
+
+	
+}
+
+//	new since version 2.1.0.0
+//	checks whether visitor uses correct login values
+function check_login_visitor($password)
+{
+	global $str;
+	
+	mysql_real_escape_string($password);
+	
+	//	check if password matches
+	$sql_select	=	"SELECT `value` FROM `settings` WHERE `name`='private_password' AND `value`='".$password."'";
+	$sql		=	mysql_query($sql_select) or die("login failed");
+	
+	if (mysql_num_rows($sql)>0)
+	{
+		while($row	=	mysql_fetch_object($sql))
+		{
+			$private_pass		=	$row->value;
+		}
+		
+		//	store data temporarily
+		//	create a special key, which depends on private password, server fingerprint ($key), user fingerprint (type of user agent)
+		$uniqueKey	= md5(md5($private_pass.$key.$_SERVER['HTTP_USER_AGENT']));
+		
+		//	store cookie
+		$expTime	=	3600*24*7;
+		setcookie('UkeyCookie_Visitor',$uniqueKey,time()+$expTime);
+		setcookie('userAgentCookie_Visitor',md5($_SERVER['HTTP_USER_AGENT']),time()+$expTime);
+		
+
+		//	create a special key, which depends on private password, server fingerprint ($key), user fingerprint (IP and type of user agent)	
+		$uniqueKey	= md5(md5($private_pass.$key.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']));
+		//	store session
+		$_SESSION['Ukey_Visitor']			=	$uniqueKey;
+		//	To improve security store IP address as well, only used for sessions (so not for cookies).
+		//	User can have dynamic IP, which changes after each restart of PC (it probably won't change during browsing).
+		$_SESSION['VISITOR_IP']				=	md5($_SERVER['REMOTE_ADDR']);
+		$_SESSION['userAgent_visitor']		=	md5($_SERVER['HTTP_USER_AGENT']);
+						
+		return true;
+	}
+	else 
+	{
+		return false;
+	}
+	
 }
 
 //	new since version 2.1.0.0
@@ -2622,7 +2818,7 @@ function set_request()
 		
 		$msg .= "\n";
 		$msg .= "---------------------------------";
-		$msg .= "\n\nThis message was generated automatically. If you do not wish to receive those notifications,\nplease go to your ACP and leave the 'admin mail' field empty.\n";
+		$msg .= "\n\nThis message was generated automatically. If you do not wish to receive those notifications,\nplease go to your ACP and uncheck 'Notify on update request'.\n";
 		$msg .= "Click on the link below to go directly to your ACP:\n";
 		$msg .= $_SERVER["SERVER_NAME"].dirname($_SERVER['PHP_SELF'])."/ACP.php";
 		
