@@ -297,6 +297,10 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 	define('L_FILE_TEMP','download/pbsvss_temp.htm'); 			//	Local file to temporary save remote data to. Only change this if you know what you are doing
 	define('R_FILE','pbsvss.htm');								//	Remote file, only change this if you know what you are doing
 	define('weblogs_dir',$weblog_dir);							//	directory where the log files are stored
+	
+	//	define the fingerprint key of server
+	//	will be used for login
+	define('KEY',$key);
 
 }
 else
