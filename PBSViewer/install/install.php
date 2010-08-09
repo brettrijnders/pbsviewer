@@ -589,7 +589,7 @@ CREATE TABLE `screens`
 `fid` TEXT NOT NULL,
 `name` TEXT NOT NULL,
 `guid` TEXT NOT NULL,
-`filesize` INT(8) NOT NULL,
+`filesize` INT(8) DEFAULT '0',
 `date` datetime,
 PRIMARY KEY(`id`)
 );
@@ -603,7 +603,7 @@ CREATE TABLE `screens_old`
 `fid` TEXT NOT NULL,
 `name` TEXT NOT NULL,
 `guid` TEXT NOT NULL,
-`filesize` INT(8) NOT NULL,
+`filesize` INT(8) DEFAULT '0',
 `date` datetime,
 PRIMARY KEY(`id`)
 );

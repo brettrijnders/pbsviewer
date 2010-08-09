@@ -1389,19 +1389,19 @@ function show_screens_body($fid,$name,$guid,$date,$ip_player='',$md5_screen='',$
 				if($md5_valid)
 				{
 					echo "<tr>\n";
-					echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str['POP_IP']."</strong>: ".$ip_player."<br><strong>".$str["POP_MD5_VALID"]."</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
+					echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' title=\"Screen info - <strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str['POP_IP']."</strong>: ".$ip_player."<br><strong>".$str["POP_MD5_VALID"]."</strong>: ".get_md5("download/".$fid.".png")."\"><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
 				}
 				//	mismatch!
 				else 
 				{
 					echo "<tr>\n";
-					echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str['POP_IP']."</strong>: ".$ip_player."<br><strong>".$str["POP_MD5_INVALID"]."</strong><br><strong>".$str["POP_MD5_SCREEN"]."</strong>:".get_md5("download/".$fid.".png")."<br><strong>md5 hash log</strong>: ".$md5_screen."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' class='md5_mismatch_border'></a></td>\n";
+					echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' title=\"Screen info - <strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str['POP_IP']."</strong>: ".$ip_player."<br><strong>".$str["POP_MD5_INVALID"]."</strong><br><strong>".$str["POP_MD5_SCREEN"]."</strong>:".get_md5("download/".$fid.".png")."<br><strong>md5 hash log</strong>: ".$md5_screen."\"><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' class='md5_mismatch_border'></a></td>\n";
 				}
 			}
 			else 
 			{
 				echo "<tr>\n";
-				echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str["POP_MD5_HASH"]."</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
+				echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' title=\"Screen info - <strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str["POP_MD5_HASH"]."</strong>: ".get_md5("download/".$fid.".png")."\"><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
 			}
 					
 
@@ -1414,19 +1414,19 @@ function show_screens_body($fid,$name,$guid,$date,$ip_player='',$md5_screen='',$
 				if($md5_valid)
 				{
 							
-					echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str['POP_IP']."</strong>: ".$ip_player."<br><strong>".$str["POP_MD5_VALID"]."</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
+					echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' title=\"Screen info - <strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str['POP_IP']."</strong>: ".$ip_player."<br><strong>".$str["POP_MD5_VALID"]."</strong>: ".get_md5("download/".$fid.".png")."\"><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
 				}
 				//	mismatch!
 				else 
 				{
 							
-					echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str['POP_IP']."</strong>: ".$ip_player."<br><strong>".$str["POP_MD5_INVALID"]."</strong><br><strong>".$str["POP_MD5_SCREEN"]."</strong>:".get_md5("download/".$fid.".png")."<br><strong>md5 hash log</strong>: ".$md5_screen."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' class='md5_mismatch_border'></a></td>\n";					
+					echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' title=\"Screen info - <strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str['POP_IP']."</strong>: ".$ip_player."<br><strong>".$str["POP_MD5_INVALID"]."</strong><br><strong>".$str["POP_MD5_SCREEN"]."</strong>:".get_md5("download/".$fid.".png")."<br><strong>md5 hash log</strong>: ".$md5_screen."\"><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' class='md5_mismatch_border'></a></td>\n";					
 				}
 			}
 			else 
 			{
 						
-				echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str["POP_MD5_HASH"]."</strong>: ".get_md5("download/".$fid.".png")."</span><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
+				echo "<td align='center'><br><a href='?fid=".$fid."' target='_self' title=\"Screen info - <strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str["POP_MD5_HASH"]."</strong>: ".get_md5("download/".$fid.".png")."\"><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0'></a></td>\n";					
 			}
 					
 
@@ -1449,13 +1449,13 @@ function show_screens_body($fid,$name,$guid,$date,$ip_player='',$md5_screen='',$
 				if($nr_counter==0)
 				{
 					echo "<tr>\n";
-					echo "<td align='center'><br><a href='#' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$str["POP_NOT_AVAILABLE"]."<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."</span><img src='style/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0'></a></td>\n";
+					echo "<td align='center'><br><a href='#' target='_self' title=\"Screen info - <strong>".$str['POP_FILE']."</strong>: ".$str["POP_NOT_AVAILABLE"]."<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."\"><img src='style/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0'></a></td>\n";
 
 
 				}
 				else
 				{
-					echo "<td align='center'><br><a href='#' target='_self' class='popup'><span><strong>".$str['POP_FILE']."</strong>: ".$str["POP_NOT_AVAILABLE"]."<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."</span><img src='style/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0'></a></td>\n";
+					echo "<td align='center'><br><a href='#' target='_self' title=\"Screen info - <strong>".$str['POP_FILE']."</strong>: ".$str["POP_NOT_AVAILABLE"]."<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."\"><img src='style/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0'></a></td>\n";
 
 				}
 
@@ -1465,7 +1465,8 @@ function show_screens_body($fid,$name,$guid,$date,$ip_player='',$md5_screen='',$
 				}
 			}
 
-		}			
+		}
+		
 			
 }
 
@@ -3319,24 +3320,28 @@ function is_reset()
 }
 
 
-//new in version 1.2.2.3
-// get browser info
+//	new in version 1.2.2.3
+// 	get browser info
 function get_browser_info()
 {
 	$browser = "unknown";
 	
 	$user_agent = $_SERVER['HTTP_USER_AGENT'];
-	if (eregi("firefox",$user_agent))
+	if (preg_match("~Firefox~",$user_agent))
 	{
 		$browser = "firefox";
 	}
-	elseif (eregi("chrome",$user_agent))
+	elseif (preg_match("~Chrome~",$user_agent))
 	{
 		$browser = "chrome";
 	}
-	elseif (eregi("MSIE",$user_agent))
+	elseif (preg_match("~MSIE~",$user_agent))
 	{
-		$browser = "IE";
+		$browser = "ie";
+	}
+	elseif (preg_match("~Opera~",$user_agent))
+	{
+		$browser = "opera";
 	}
 	else 
 	{
