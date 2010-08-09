@@ -69,10 +69,8 @@ else
 	$access=true;
 }
 
-
 if($access==true)
 {
-
 //	this is new in version 1.1.2.1
 //	it will show a detailed screen info on a seperate page
 	if(isset($_GET['fid']))

@@ -1585,7 +1585,7 @@ function get_username_by_mail ($mail)
 //	create a unique key for resetting password and store it in database
 function create_Ukey_pass_reset($mail)
 {	
-	$Ukey	=	md5(get_username_by_mail($mail).$mail.time().$key.rand());
+	$Ukey	=	md5(get_username_by_mail($mail).$mail.time().KEY.rand());
 	
 	$mail	=	mysql_real_escape_string($mail);
 	$sql_update	=	"UPDATE `access` SET `ResetCode`='".$Ukey."' WHERE `mail`='".$mail."'";
@@ -1652,7 +1652,6 @@ function empty_ResetCode($Ukey)
 //	check if person is admin or not
 function is_admin()
 {
-	echo $key;
 	
 	//	check if session is available, ie user has logged in
 	if (isset($_SESSION['ADMIN_ID']))
@@ -1694,7 +1693,7 @@ function is_admin()
 									$admin_pass		=	$row->pass;
 								}
 
-								if ($_SESSION['Ukey'] == md5(md5($admin_id.$admin_mail.$admin_name.$admin_pass.$key.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT'])))
+								if ($_SESSION['Ukey'] == md5(md5($admin_id.$admin_mail.$admin_name.$admin_pass.KEY.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT'])))
 								{
 									return true;
 								}
@@ -1763,7 +1762,7 @@ function is_admin()
 								$admin_pass		=	$row->pass;
 							}
 		
-							if ($_COOKIE['UkeyCookie'] == md5(md5($admin_id.$admin_mail.$admin_name.$admin_pass.$key.$_SERVER['HTTP_USER_AGENT'])))
+							if ($_COOKIE['UkeyCookie'] == md5(md5($admin_id.$admin_mail.$admin_name.$admin_pass.KEY.$_SERVER['HTTP_USER_AGENT'])))
 							{
 								return true;
 							}
@@ -1837,7 +1836,7 @@ function is_allowed_visitor ()
 									$private_pass		=	$row->value;
 								}
 							
-								if ($_SESSION['Ukey_Visitor'] == md5(md5($private_pass.$key.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT'])))
+								if ($_SESSION['Ukey_Visitor'] == md5(md5($private_pass.KEY.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT'])))
 								{
 									return true;
 								}
@@ -1898,7 +1897,7 @@ function is_allowed_visitor ()
 								$private_pass		=	$row->value;
 							}
 							
-							if ($_COOKIE['UkeyCookie_Visitor'] == md5(md5($private_pass.$key.$_SERVER['HTTP_USER_AGENT'])))
+							if ($_COOKIE['UkeyCookie_Visitor'] == md5(md5($private_pass.KEY.$_SERVER['HTTP_USER_AGENT'])))
 							{
 								return true;
 							}
@@ -1953,16 +1952,16 @@ function check_login_visitor($password)
 		}
 		
 		//	store data temporarily
-		//	create a special key, which depends on private password, server fingerprint ($key), user fingerprint (type of user agent)
-		$uniqueKey	= md5(md5($private_pass.$key.$_SERVER['HTTP_USER_AGENT']));
+		//	create a special key, which depends on private password, server fingerprint (KEY), user fingerprint (type of user agent)
+		$uniqueKey	= md5(md5($private_pass.KEY.$_SERVER['HTTP_USER_AGENT']));
 		
 		//	store cookie
 		setcookie('UkeyCookie_Visitor',$uniqueKey,time()+COOKIE_EXP_TIME);
 		setcookie('userAgentCookie_Visitor',md5($_SERVER['HTTP_USER_AGENT']),time()+COOKIE_EXP_TIME);
 		
 
-		//	create a special key, which depends on private password, server fingerprint ($key), user fingerprint (IP and type of user agent)	
-		$uniqueKey	= md5(md5($private_pass.$key.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']));
+		//	create a special key, which depends on private password, server fingerprint (KEY), user fingerprint (IP and type of user agent)	
+		$uniqueKey	= md5(md5($private_pass.KEY.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']));
 		//	store session
 		$_SESSION['Ukey_Visitor']			=	$uniqueKey;
 		//	To improve security store IP address as well, only used for sessions (so not for cookies).
@@ -2004,8 +2003,8 @@ function check_login($name,$password)
 		}
 		
 		//	store data temporarily
-		//	create a special keys, which depends on admin login details, server fingerprint ($key), user fingerprint (type of user agent)
-		$uniqueKey	= md5(md5($admin_id.$admin_mail.$admin_name.$admin_pass.$key.$_SERVER['HTTP_USER_AGENT']));
+		//	create a special keys, which depends on admin login details, server fingerprint (KEY), user fingerprint (type of user agent)
+		$uniqueKey	= md5(md5($admin_id.$admin_mail.$admin_name.$admin_pass.KEY.$_SERVER['HTTP_USER_AGENT']));
 		
 		//	store cookie
 		setcookie('IDCookie',md5($admin_id),time()+COOKIE_EXP_TIME);
@@ -2013,8 +2012,8 @@ function check_login($name,$password)
 		setcookie('userAgentCookie',md5($_SERVER['HTTP_USER_AGENT']),time()+COOKIE_EXP_TIME);
 		
 
-		//	create a special keys, which depends on admin login details, server fingerprint ($key), user fingerprint (IP and type of user agent)	
-		$uniqueKey	= md5(md5($admin_id.$admin_mail.$admin_name.$admin_pass.$key.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']));
+		//	create a special keys, which depends on admin login details, server fingerprint (KEY), user fingerprint (IP and type of user agent)	
+		$uniqueKey	= md5(md5($admin_id.$admin_mail.$admin_name.$admin_pass.KEY.$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']));
 		//	store session
 		$_SESSION['ADMIN_ID']	=	md5($admin_id);
 		$_SESSION['Ukey']		=	$uniqueKey;
