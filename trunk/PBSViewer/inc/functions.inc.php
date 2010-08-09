@@ -26,19 +26,6 @@ mail:		brettrijnders@gmail.com
 website:	http://www.beesar.com
 
 */
-function connect_DB()
-{
-	$connect	=	mysql_connect(DB_HOST,DB_USER,DB_PASS);
-	if(DEBUG==true)
-	{
-		mysql_select_db(DB_NAME,$connect) or die('cannot connect to db');
-	}
-	else
-	{
-		mysql_select_db(DB_NAME,$connect) or die();
-	}
-}
-
 //	check if install is deleted
 function check_install_del()
 {
@@ -1970,9 +1957,8 @@ function check_login_visitor($password)
 		$uniqueKey	= md5(md5($private_pass.$key.$_SERVER['HTTP_USER_AGENT']));
 		
 		//	store cookie
-		$expTime	=	3600*24*7;
-		setcookie('UkeyCookie_Visitor',$uniqueKey,time()+$expTime);
-		setcookie('userAgentCookie_Visitor',md5($_SERVER['HTTP_USER_AGENT']),time()+$expTime);
+		setcookie('UkeyCookie_Visitor',$uniqueKey,time()+COOKIE_EXP_TIME);
+		setcookie('userAgentCookie_Visitor',md5($_SERVER['HTTP_USER_AGENT']),time()+COOKIE_EXP_TIME);
 		
 
 		//	create a special key, which depends on private password, server fingerprint ($key), user fingerprint (IP and type of user agent)	
@@ -2022,10 +2008,9 @@ function check_login($name,$password)
 		$uniqueKey	= md5(md5($admin_id.$admin_mail.$admin_name.$admin_pass.$key.$_SERVER['HTTP_USER_AGENT']));
 		
 		//	store cookie
-		$expTime	=	3600*24*7;
-		setcookie('IDCookie',md5($admin_id),time()+$expTime);
-		setcookie('UkeyCookie',$uniqueKey,time()+$expTime);
-		setcookie('userAgentCookie',md5($_SERVER['HTTP_USER_AGENT']),time()+$expTime);
+		setcookie('IDCookie',md5($admin_id),time()+COOKIE_EXP_TIME);
+		setcookie('UkeyCookie',$uniqueKey,time()+COOKIE_EXP_TIME);
+		setcookie('userAgentCookie',md5($_SERVER['HTTP_USER_AGENT']),time()+COOKIE_EXP_TIME);
 		
 
 		//	create a special keys, which depends on admin login details, server fingerprint ($key), user fingerprint (IP and type of user agent)	
@@ -2099,12 +2084,11 @@ function get_admin_mail()
 //	let user logout
 function logout()
 {
-	//	see $expTime
-	$expTimeCookie	= 3600*24*7;
+		
 	//	remove cookies, by letting them expire. Browser will remove them automatically
-	setcookie('IDCookie','',time()-$expTimeCookie);
-	setcookie('UkeyCookie','',time()-$expTimeCookie);
-	setcookie('userAgentCookie','',time()-$expTimeCookie);
+	setcookie('IDCookie','',time()-COOKIE_EXP_TIME);
+	setcookie('UkeyCookie','',time()-COOKIE_EXP_TIME);
+	setcookie('userAgentCookie','',time()-COOKIE_EXP_TIME);
 	
 	session_unset();
 	session_destroy();

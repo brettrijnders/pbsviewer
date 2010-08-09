@@ -225,6 +225,8 @@ $str["ACP_CB_NONE"]						=	"none";
 $str["ACP_ADVANCED"]					=	"Advanced";
 $str["ACP_MIN_SCRN_SIZE"]				=	"Minimal screen download size";
 $str["ACP_MIN_SCRN_SIZE_COMMENT"]		=	"Screens with a size smaller than the 'Minimal screen download size' are not downloaded, the size is in bytes.";
+$str["ACP_CookieExpTime"]				=	"Cookie experiment time";
+$str["ACP_CookieExpTime_COMMENT"]		=	"Sensitive encrypted information for login are stored in cookies. In this field you can specify after how many seconds the cookies should be automatically removed from client's PC. Default is 1 week: 3600*24*7 = 604800 seconds.";
 $str["ACP_SCRIPT_LOAD"]					=	"Script load time";
 $str["ACP_SCRIPT_LOAD_COMMENT"]			=	"After this the script stops running, if you for instance need to download a lot of screens then it is recommended to have a high script load time. If you are not sure, then use default setting. Default=600 seconds or 10 minutes, after 600 Maximum execution time error will be shown.";
 $str["ACP_WEB_LOG_DIR"]					=	"Web log dir";

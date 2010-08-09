@@ -28,13 +28,12 @@
 session_start();
 $key=md5(($_SERVER['SERVER_SIGNATURE'].' '.php_uname()));
 require_once('inc/config.inc.php');
+require_once('inc/init.inc.php');
 require_once('inc/functions.inc.php');
 require_once('inc/templates.inc.php');
 $ACP=false;
 
-//	connect to DB
-connect_DB();
-require_once('inc/init.inc.php');
+
 
 //	check if user's ip is on the list
 if (is_admin()==true) $ACP=true;
@@ -55,71 +54,76 @@ if(isset($_POST['save'])&&$ACP==true)
 	
 	if ($_POST['name']=='')
 	{
-		$error_msg .= "<li>name field is empty, please enter a valid username</li>";
+		$error_msg .= "<li>name field is empty, please enter a valid username.</li>";
 		$saving = false;
 	}
 	if ($_POST['mail']=='')
 	{
-		$error_msg .= "<li>mail field is empty, you need to fill in your mail</li>";
+		$error_msg .= "<li>mail field is empty, you need to fill in your mail.</li>";
 		$saving = false;
 	}
 	if ($_POST['pb_dir']=='')
 	{
-		$error_msg .= "<li>PB directory field is empty</li>";
+		$error_msg .= "<li>PB directory field is empty.</li>";
 		$saving = false;
 	}
 	if($_POST['update_time']<60 && $_POST['update_time']=='')
 	{
-		$error_msg .= "<li>update time should be larger than 60 seconds</li>";
+		$error_msg .= "<li>update time should be larger than 60 seconds.</li>";
 		$saving = false;
 	}
 	if ($_POST['pb_sv_ssceiling']<=0 && $_POST['pb_sv_ssceiling']=='')
 	{
 		// something for feature release:
 		// a check should be done to check if ceiling number is correct
-		$error_msg .= "<li>pb_sv_ssceiling should be positive and larger than 0</li>";
+		$error_msg .= "<li>pb_sv_ssceiling should be positive and larger than 0.</li>";
 		$saving = false;
 	}
 	if ($_POST['pbsv_download_dir']=='')				
 	{
 		// something for feature release:
 		// a check should be done to check if download dir is correct		
-		$error_msg .= "<li>PBSV download dir field is empty</li>";
+		$error_msg .= "<li>PBSV download dir field is empty.</li>";
 		$saving = false;
 	}
 	if (!($_POST['auto_del_count']==-1 || $_POST['auto_del_count']>=0))
 	{
-		$error_msg .= "<li>Valid values for field 'max logs on webserver' are -1 or 0 and larger</li>";
+		$error_msg .= "<li>Valid values for field 'max logs on webserver' are -1 or 0 and larger.</li>";
 		$saving = false;
 	}
 	if ($_POST['nr_screens_main']<=0 && $_POST['nr_screens_main']=='')
 	{
-		$error_msg .= "<li>nr of screens on main should be larger than 0</li>";
+		$error_msg .= "<li>nr of screens on main should be larger than 0.</li>";
 		$saving = false;
 	}
 	if ($_POST['width']=='')
 	{
-		$error_msg .= "<li>width field in template is empty</li>";
+		$error_msg .= "<li>width field in template is empty.</li>";
 		$saving = false;
 	}
 	if ($_POST['height']=='')
 	{
-		$error_msg .= "<li>Height field in template is empty</li>";
+		$error_msg .= "<li>Height field in template is empty.</li>";
 		$saving = false;
 	}
 	if ($_POST['min_screen_size']=='' && $_POST['min_screen_size']<=0)
 	{
-		$error_msg .= "<li>field 'Minimal screen download size' is empty or has a negative value</li>";
+		$error_msg .= "<li>field 'Minimal screen download size' is empty or has a negative value.</li>";
+		$saving = false;
+	}
+	if ($_POST['cookieExpTime']<0||$_POST['cookieExpTime']=='')
+	{
+		$error_msg .= "<li>Please use a valid value for the field Cookie experiment time. It should be positive and not empty.</li>";
 		$saving = false;
 	}
 	if ($_POST['script_load_time']<30 && $_POST['script_load_time']=='')
 	{
-		$error_msg .= "<li>The script load time should be 30 seconds or larger</li>";
+		$error_msg .= "<li>The script load time should be 30 seconds or larger.</li>";
 		$saving = false;
 	}
 	if ($_POST['weblog_dir']=='')
 	{
-		$error_msg .= "<li>The weblog directory is empty</li>";
+		$error_msg .= "<li>The weblog directory is empty.</li>";
 		$saving = false;
 	}
 	
@@ -136,19 +140,19 @@ if(isset($_POST['save'])&&$ACP==true)
 				//	check if PB directory does not exist
 				if(!$check_ftp[2])
 				{
-					$error_msg .= "<li>In order to use the pb_log setting first the ftp login details needs to be correct (check config.inc.php). Can't find directory, please specify right directory</li>";
+					$error_msg .= "<li>In order to use the pb_log setting first the ftp login details needs to be correct (check config.inc.php). Can't find directory, please specify right directory.</li>";
 					$saving = false;
 				}
 			}
 			else 
 			{
-				$error_msg .= "<li>In order to use the pb_log setting first the ftp login details needs to be correct (check config.inc.php). FTP login failed, check username and password please</li>";
+				$error_msg .= "<li>In order to use the pb_log setting first the ftp login details needs to be correct (check config.inc.php). FTP login failed, check username and password please.</li>";
 				$saving = false;
 			}
 		}
 		else 
 		{
-			$error_msg .= "<li>In order to use the pb_log setting first the ftp login details needs to be correct (check config.inc.php). Can't connect to ftp server, please check ip and port</li>";
+			$error_msg .= "<li>In order to use the pb_log setting first the ftp login details needs to be correct (check config.inc.php). Can't connect to ftp server, please check ip and port.</li>";
 			$saving = false;
 		}
 	}
@@ -165,19 +169,19 @@ if(isset($_POST['save'])&&$ACP==true)
 				//	check if PB directory does not exist
 				if(!$check_ftp[2])
 				{
-					$error_msg .= "<li>In order to use the reset option first the ftp login details needs to be correct (check config.inc.php). Can't find directory, please specify right directory</li>";
+					$error_msg .= "<li>In order to use the reset option first the ftp login details needs to be correct (check config.inc.php). Can't find directory, please specify right directory.</li>";
 					$saving = false;
 				}
 			}
 			else 
 			{
-				$error_msg .= "<li>In order to use the reset option first the ftp login details needs to be correct (check config.inc.php). FTP login failed, check username and password please</li>";
+				$error_msg .= "<li>In order to use the reset option first the ftp login details needs to be correct (check config.inc.php). FTP login failed, check username and password please.</li>";
 				$saving = false;
 			}
 		}
 		else 
 		{
-			$error_msg .= "<li>In order to use the reset option first the ftp login details needs to be correct (check config.inc.php). Can't connect to ftp server, please check ip and port</li>";
+			$error_msg .= "<li>In order to use the reset option first the ftp login details needs to be correct (check config.inc.php). Can't connect to ftp server, please check ip and port.</li>";
 			$saving = false;
 		}
 	}
@@ -247,6 +251,9 @@ if(isset($_POST['save'])&&$ACP==true)
 		$sql     	=	mysql_query($sql_update);
 		
 		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['min_screen_size'])."' WHERE `name`='min_screen_size'";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['cookieExpTime'])."' WHERE `name`='cookieExpTime'";
 		$sql     	=	mysql_query($sql_update);
 		
 		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['script_load_time'])."' WHERE `name`='script_load_time'";
@@ -622,6 +629,13 @@ if($ACP==true)
           <input type="text" name="min_screen_size" id="min_screen_size" value="<?php echo $min_screen_size;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_MIN_SCRN_SIZE_COMMENT"];?></td>
+      </tr>
+      <tr>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_CookieExpTime"];?></td>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
+          <input name="cookieExpTime" type="text" id="cookieExpTime" value="<?php echo $cookieExpTime;?>" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
+        </label></td>
+        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_CookieExpTime_COMMENT"];?></td>
       </tr>
       <tr>
         <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_SCRIPT_LOAD"];?></td>

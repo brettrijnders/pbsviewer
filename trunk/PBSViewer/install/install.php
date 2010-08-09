@@ -733,6 +733,9 @@ PRIMARY KEY(`optionID`)
 				
 				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('private_password','');";
 				mysql_query($sql_insert) or die(mysql_error());
+				
+				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('cookieExpTime','604800');";
+				mysql_query($sql_insert) or die(mysql_error());
 
 				session_destroy();
 				template_final();
