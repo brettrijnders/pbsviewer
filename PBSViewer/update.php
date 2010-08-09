@@ -29,11 +29,9 @@
 session_start();
 $key=md5(($_SERVER['SERVER_SIGNATURE'].' '.php_uname()));
 require_once('inc/config.inc.php');
-require_once('inc/functions.inc.php');
-
-//	connect to DB
-connect_DB();
 require_once('inc/init.inc.php');
+
+require_once('inc/functions.inc.php');
 
 //load correct language
 include("inc/load_language.inc.php");

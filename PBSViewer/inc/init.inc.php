@@ -35,6 +35,7 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 	//change argument separator to &amp instead of &, because & is not valid
 	ini_set('arg_separator.output','&amp;'); 
 	
+	connect_DB();
 	
 	// default values
 	$notify_update		= '';
@@ -58,6 +59,7 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 	$height 			= 200;
 	$CB_game			= 'none';
 	$min_screen_size 	= 10000;
+	$cookieExpTime		= 604800;
 	$script_load_time	= 600;
 	$weblog_dir 		= 'download';
 	$debug				= 0;
@@ -150,6 +152,10 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 		elseif ($row->name=='min_screen_size')
 		{
 			$min_screen_size	 = $row->value;
+		}
+		elseif ($row->name=='cookieExpTime')
+		{
+			$cookieExpTime	 = $row->value;
 		}
 		elseif ($row->name=='script_load_time')
 		{
@@ -267,6 +273,9 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 		
 	//	script load time (optional)
 	define('script_load_time',$script_load_time);				//	Default=600 seconds or 10 minutes, after 600 Maximum execution time error will be shown.
+	
+	//	cookie expirement time
+	define('COOKIE_EXP_TIME',$cookieExpTime);
 
 	//	guid length (optional)
 	define('guidlength',32);									//	Default should be 32
@@ -295,5 +304,16 @@ else
 	die('Acces denied!');
 }
 
-
+function connect_DB()
+{
+	$connect	=	mysql_connect(DB_HOST,DB_USER,DB_PASS);
+	if(DEBUG==true)
+	{
+		mysql_select_db(DB_NAME,$connect) or die('cannot connect to db');
+	}
+	else
+	{
+		mysql_select_db(DB_NAME,$connect) or die();
+	}
+}
 ?>
