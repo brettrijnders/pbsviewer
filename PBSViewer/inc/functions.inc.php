@@ -1939,7 +1939,7 @@ function check_login_visitor($password)
 {
 	global $str;
 	
-	mysql_real_escape_string($password);
+	$password	=	mysql_real_escape_string($password);
 	
 	//	check if password matches
 	$sql_select	=	"SELECT `value` FROM `settings` WHERE `name`='private_password' AND `value`='".$password."'";
@@ -1985,8 +1985,8 @@ function check_login($name,$password)
 {
 	global $str;
 	
-	mysql_real_escape_string($name);
-	mysql_real_escape_string($password);
+	$name	=	mysql_real_escape_string($name);
+	$password	=	mysql_real_escape_string($password);
 	
 	//	check if name and password matches
 	//	also check if level of user is admin level,	i.e. admin level == 1
