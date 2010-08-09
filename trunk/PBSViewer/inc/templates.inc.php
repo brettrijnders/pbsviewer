@@ -44,7 +44,27 @@ function template_header()
 <title><?echo $str["TITLE"];?></title>
 
 <link href="style/style.css" rel="stylesheet" type="text/css">
-<link rel="shortcut icon" href="style/img/favicon.ico"> 
+<link rel="shortcut icon" href="style/img/favicon.ico">
+<script type="text/javascript" src="inc/js/jquery/jquery-1.4.2.js"></script>
+<script src="inc/js/jquery/plugins/tooltip/lib/jquery.bgiframe.js" type="text/javascript"></script>
+<script src="inc/js/jquery/plugins/tooltip/lib/jquery.dimensions.js" type="text/javascript"></script>
+<script src="inc/js/jquery/plugins/tooltip/jquery.tooltip.js" type="text/javascript"></script> 
+
+<!-- This script is used to show extra screen info during hover-->
+<script type="text/javascript">
+$(function() {
+	
+$('#scrnInfo a').tooltip({
+	track: true,
+	delay: 0,
+	showURL: false,
+	showBody: " - ",
+	fade: 250
+});
+
+});
+</script>
+
 </head>
 
 <body onload="document.search_form.input.focus(); document.search_form.input.select();">
@@ -668,12 +688,20 @@ function template_show_main($nr,$current_scrn_nr=nr_screens_main)
 {
 
 	template_search($current_scrn_nr);
+
+	echo "<!-- div is used to support multiple tooltips-->
+<div id=\"scrnInfo\">";
+
 ?>
+
 	      <table width="100%" border="0" cellspacing="10" cellpadding="0" align="center">
-	       
+	      
 <?
 show_main_screens($nr);
 echo "</table>";
+
+	echo "</div>";
+
 
 }
 
@@ -681,12 +709,18 @@ function template_show_all($nr,$current_scrn_nr=nr_screens_main)
 {
 
 	template_search($current_scrn_nr);
+	echo "<!-- div is used to support multiple tooltips-->
+<div id=\"scrnInfo\">";
+
 ?>
+
 	      <table width="100%" border="0" cellspacing="10" cellpadding="0" align="center">
 	       
 <?
 show_all_screens($nr);
 echo "</table>";
+echo "</div>";
+
 
 }
 
@@ -696,6 +730,10 @@ function template_show_available($nr,$current_scrn_nr=nr_screens_main)
 {
 
 	template_search($current_scrn_nr);
+	
+	echo "<!-- div is used to support multiple tooltips-->
+<div id=\"scrnInfo\">";
+
 ?>
 	      <table width="100%" border="0" cellspacing="10" cellpadding="0" align="center">
 	       
@@ -704,6 +742,9 @@ function template_show_available($nr,$current_scrn_nr=nr_screens_main)
 show_all_screens($nr,true);
 echo "</table>";
 
+	echo "</div>";
+
+
 }
 
 //	this template is new since 1.2.2.1
@@ -711,6 +752,11 @@ function template_show_date_selection($nr,$data,$current_scrn_nr)
 {
 
 	template_search($current_scrn_nr);
+	
+	echo "<!-- div is used to support multiple tooltips-->
+<div id=\"scrnInfo\">";
+
+		
 ?>
 	      <table width="100%" border="0" cellspacing="10" cellpadding="0" align="center">
 	       
@@ -718,30 +764,51 @@ function template_show_date_selection($nr,$data,$current_scrn_nr)
 show_date_selection($nr,$data);
 echo "</table>";
 
+	echo "</div>";
+
+
 }
 
 function template_show_fid($nr,$fileName,$current_scrn_nr)
 {
 	template_search($current_scrn_nr);
 
+
+	echo "<!-- div is used to support multiple tooltips-->
+<div id=\"scrnInfo\">";
+
+	
 		?>
 	      <table width="100%" border="0" cellspacing="10" cellpadding="0">
 <?
 
 show_fid_screens($nr,$fileName);
 echo "</table>";
+
+
+	echo "</div>";
+
 }
 
 function template_show_guid($nr,$guid,$current_scrn_nr)
 {
 	template_search($current_scrn_nr);
 
+
+	echo "<!-- div is used to support multiple tooltips-->
+<div id=\"scrnInfo\">";
+
+	
 		?>
 	      <table width="100%" border="0" cellspacing="10" cellpadding="0">
 <?
 
 show_guid_screens($nr,$guid);
 echo "</table>";
+
+
+	echo "</div>";
+
 }
 
 
@@ -749,12 +816,21 @@ function template_show_name($nr,$name,$current_scrn_nr)
 {
 	template_search($current_scrn_nr);
 
+
+	echo "<!-- div is used to support multiple tooltips-->
+<div id=\"scrnInfo\">";
+
+	
 		?>
 	      <table width="100%" border="0" cellspacing="10" cellpadding="0">
 <?
 
 show_name_screens($nr,$name);
 echo "</table>";
+
+
+	echo "</div>";
+
 }
 
 //	please don't remove this, thank you.
