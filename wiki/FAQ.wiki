@@ -5,6 +5,7 @@ Here you will find Frequently Asked Questions (FAQ).
     * [FAQ#Why_do_you_need_my_ftp_login_details_during_install? Why do you need my ftp login details during install?]
     * [FAQ#What_do_I_need_to_fill_in_for_'PB_path'? What do I need to fill in for 'PB path'?]
     * [FAQ#I_have_a_gameserver_running_on_windows,_can_I_use_PBSViewer? I have a gameserver running on windows, can I use PBSViewer?]
+    * [FAQ#What_do_you_mean_with_CHMOD? What do you mean with CHMOD?]
 
 =Usage=
     * [FAQ#After_update_the_download_folder_is_still_empty,_what_is_wrong? After update the download folder is still empty, what is wrong?]
@@ -30,6 +31,11 @@ Yes it should be possible, though you need to [http://code.google.com/p/pbsviewe
 
 ===What do I need to fill in for 'PB path'?===
 During install PB path needs to be filled in. The PB path is referring to the pb directory on your game server. PBSViewer is going to connect through ftp to your gameserver to download the latest screenshots. Those screenshots are then stored on your webserver. 
+
+===What do you mean with CHMOD?===
+With CHMOD you set the permissions of your file or directory. You can CHMOD by using FTP, there are a lot of tutorials about how to CHMOD. A couple of those tutorials are shown below:
+    * http://www.stadtaus.com/en/tutorials/chmod-ftp-file-permissions.php
+    * http://www.siteground.com/tutorials/ftp/ftp_chmod.htm
 
 =Usage=
 ===After update the download folder is still empty, what is wrong?===
