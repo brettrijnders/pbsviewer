@@ -263,40 +263,13 @@ if(\$key==md5(\$_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 				{
 					if($_POST['update_time']!=''||$_POST['update_time']<0)
 					{
-						if($_POST['admin']!='')
-						{
-							$admins	=	$_POST['admin'];
-							$admin_ip	=	explode(',',$admins);
-							
-							//	everything is correct
-							$data_app	=	"	
-	//	Fill in your ip, to find your ip one can use www.cmyip.com, you can have more than one ip if your want. With your ip, this program knows wether you are an admin or not.\n";
-							
-							for ($i=0;$i<count($admin_ip);$i++)
-							{
-								//	user can give an empty ip if they use default input
-								if($admin_ip[$i]!='')
-								{
-									$data_app.="	\$admin_ip[".$i."]	=	'".$admin_ip[$i]."';\n";
-								}
-							}
-							
-							$data_app.=	"\n\n";
-							
-							append_config($data_app);
-							
 							$_POST['custom_update']=='true' ? $_SESSION['custom_update'] = 1: $_SESSION['custom_update'] = 0;
 							$_SESSION['update_time']	=	addslashes($_POST['update_time']);
 							
 
 							
 							template_pb_settings();
-			
-						}	
-						else 
-						{
-							template_error('<li>You need at least one admin</li>');
-						}			
+					
 					}
 					else 
 					{
@@ -543,11 +516,16 @@ if(\$key==md5(\$_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 				}
 	
 	break;
-	
+
+	//	place the admin creation near end, because then the user can easily remember his/her username and password after the installation
 	case 12:
-	
 				if($_POST['script_load_time']>30)
 				{
+					$_SESSION['pbsvss_updater']	=	addslashes($_POST['pbsvss_updater']);									
+					$_SESSION['script_load_time']	=	addslashes($_POST['script_load_time']);
+					$_SESSION['debug']	=	0;
+					$_SESSION['weblog_dir']	=	'download';
+					
 					$data_app	=	"
 }
 else
@@ -559,24 +537,40 @@ else
 ?>";
 					append_config($data_app);
 					
-					$_SESSION['pbsvss_updater']	=	addslashes($_POST['pbsvss_updater']);									
-					$_SESSION['script_load_time']	=	addslashes($_POST['script_load_time']);
-					$_SESSION['debug']	=	0;
-					$_SESSION['weblog_dir']	=	'download';
-										
-					template_create_db();				
+					template_admin_setting();
+	
 				}
 				else 
 				{
 					template_error('<li>It is recommended to have a script load time larger than 30</li>');
 				}
 	
-	break;
+	break;	
 	
 	case 13:
 	
+if ($_POST['admin_username']!='' && $_POST['admin_password']!='' && $_POST['admin_mail']!='')
+{					
+					$_SESSION['admin_username']	=	$_POST['admin_username'];
+					$_SESSION['admin_password']	=	md5($_POST['admin_password']);
+					$_SESSION['admin_mail']		=	$_POST['admin_mail'];
+										
+					template_create_db();				
+}
+else 
+{
+	template_error('<li>All fields should be filled in, please fill in all fields.</li>');
+}
+	
+	break;
+	
+	
+	case 14:
+	
 					$key	=	md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname());
 				include("../inc/config.inc.php");
+				
+				//echo DB_HOST."<br>".DB_USER."<br>".DB_PASS."<br>".DB_NAME;
 				
 				//	connect to DB
 				connect_DB_config();
@@ -648,6 +642,22 @@ PRIMARY KEY(`id`)
 				
 				mysql_query($sql_create);
 				
+				//	create access table for admin
+				$sql_create	=	"CREATE TABLE `access` 
+(
+`memberID` INT(3) NOT NULL AUTO_INCREMENT,
+`name` varchar(20) NOT NULL,
+`mail` TEXT NOT NULL,
+`pass` varchar(32) NOT NULL,
+`level` INT(1) NOT NULL,
+`ResetCode` varchar(32),
+PRIMARY KEY(`memberID`)
+);";
+				
+				mysql_query($sql_create) or die (mysql_error());
+				
+				$mysql_insert	=	"INSERT INTO `access` (`name`,`mail`,`pass`,`level`) VALUES ('".$_SESSION['admin_username']."','".$_SESSION['admin_mail']."','".$_SESSION['admin_password']."','1')";
+				mysql_query($mysql_insert) or die(mysql_error());				
 
 				//	create mysql table to insert values that are being configured during install
 				$sql_create	=	"CREATE TABLE `settings`
@@ -1077,17 +1087,6 @@ function template_update_settings()
           <td class="bg_table_body"><strong>Update time</strong></td>
           <td class="bg_table_body"><input name="update_time" type="text" id="update_time" value="86400" size="40" /></td>
           <td class="bg_table_body"><em>Default is 86400 seconds, which is equal to 1 day</em></td>
-        </tr>
-        <tr>
-          <td colspan="3" class="bg_table_body"><p>&nbsp;</p>
-            <p>Fill in your ip, to find your ip one can use <a href="www.cmyip.com" title="ip adres of user" target="_blank">www.cmyip.com</a>, you can have more than one ip if your want. Separate with comma for multiple admins. The first ip address is your ip address. With your ip the program knows whether you are an admin or not.</p></td>
-          </tr>
-        <tr>
-          <td class="bg_table_body">admin(s)</td>
-          <td class="bg_table_body"><label>
-            <textarea name="admin" id="admin" cols="45" rows="5"><?php echo $_SERVER['REMOTE_ADDR'];?>,</textarea>
-          </label></td>
-          <td class="bg_table_body">&nbsp;</td>
         </tr>
         <tr>
           <td colspan="3" align="center" class="bg_table_body"><input type="submit" name="next_custom_update" id="next_custom_update" value="Next" /></td>
@@ -1574,6 +1573,67 @@ function template_reset_option()
 	<?php 	
 }
 
+function template_admin_setting()
+{
+	?>
+	
+			<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Installation of pbsviewer</title>
+<link href="install.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="bg_table_main">
+  <tr>
+    <td><table width="50%" border="0" align="center" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center"><strong><span class="txt_light">Admin account setting</span></strong></td>
+      </tr>
+    </table>
+    <form id="admin_setting" name="admin_setting" method="post" action="install.php?step=13">
+      <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+          <td colspan="3" class="bg_table_body">Please specify the username and password you want for login. All fields are required to fill in.</td>
+          </tr>
+        <tr>
+          <td width="25%" class="bg_table_body"><strong>Username?</strong></td>
+          <td width="50%" class="bg_table_body"><input name="admin_username" type="text" id="admin_username" value="admin" size="40" /></td>
+          <td class="bg_table_body"><em>Default is admin</em></td>
+        </tr>
+        <tr>
+          <td colspan="3" class="bg_table_body">&nbsp;</td>
+          </tr>
+        <tr>
+          <td class="bg_table_body"><strong>Password</strong></td>
+          <td class="bg_table_body"><input name="admin_password" type="password" id="admin_password2" size="40" /></td>
+          <td class="bg_table_body"><em>Please use a strong complex password that you can easily remember</em></td>
+        </tr>
+        <tr>
+          <td colspan="3" class="bg_table_body"><p><br />
+            Mail will be used for resetting your password if needed (in case you forgot your password or username). Your mail will also be used for notification messages. After installation you can turn notification on or off in ACP.</p></td>
+          </tr>
+        <tr>
+          <td class="bg_table_body"><strong>Mail</strong></td>
+          <td class="bg_table_body"><input name="admin_mail" type="text" id="admin_mail" size="40" /></td>
+          <td class="bg_table_body">&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="3" align="center" class="bg_table_body"><input type="submit" name="next_admin_account" id="next_admin_account" value="Next" /></td>
+        </tr>
+      </table>
+      </form>
+      <br /></td>
+  </tr>
+</table>
+</body>
+</html>
+	
+	<?php
+}
+
 function template_create_db()
 {
 	?>
@@ -1594,7 +1654,7 @@ function template_create_db()
         <td align="center"><strong>Create the remaining database tables</strong></td>
       </tr>
     </table>
-    <form id="Install_DB" name="Install_DB" method="post" action="install.php?step=13">
+    <form id="Install_DB" name="Install_DB" method="post" action="install.php?step=14">
       <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
         <tr>
           <td align="center" class="bg_table_body"><p>Everything is configured now. Please press on next button to create the database tables</p></td>
@@ -1613,7 +1673,7 @@ function template_create_db()
 	<?php 
 }
 
-function template_error($msg,$back_page='./')
+function template_error($msg)
 {
 ?>
 	
@@ -1648,7 +1708,7 @@ function template_error($msg,$back_page='./')
                 <td><em><?php echo $msg?></em></td>
               </tr>
             </table>
-            <p align="center"><a href="<?php echo $back_page;?>" target="_self">click here to go back</a></p></td>
+            <p align="center"><a href="javascript:history.go(-1)" target="_self">click here to go back</a></p></td>
         </tr>
       </table>
       <br /></td>
@@ -1800,7 +1860,7 @@ function check_ftp_web_connection($FTP_HOST,$FTP_PORT,$FTP_USER,$FTP_PASS,$DIR)
 
 function connect_DB_config()
 {
-	$connect	=	mysql_connect(DB_HOST,DB_USER,DB_PASS);
+	$connect	=	mysql_connect(DB_HOST,DB_USER,DB_PASS) or die ('invalid login details');
 	if(DEBUG==true)
 	{
 		mysql_select_db(DB_NAME,$connect) or die('cannot connect to db');
