@@ -1,5 +1,6 @@
 changelog 2.1.0.0:
 ------------------------------------
+- Use long php tag: <?php instead of short php tag <?, see issue 22.
 - Implemented tooltip plugin of jquery to create fancy tooltips (tested browsers: internet explorer, firefox, google chrome, opera). In opera the pop-up with additional info does not pop-up somewhere outside of screen.
 - Admin can make PBSViewer private by configuring an password in ACP.
 - Fix: a more appropriate message is shown when user can't find what he is looking for.

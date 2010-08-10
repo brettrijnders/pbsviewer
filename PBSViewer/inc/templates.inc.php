@@ -36,12 +36,12 @@ function template_header()
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="<?php echo $str["META_DESC"];?>">
-<meta name="keywords" content="pb, view, viewer, punkbuster, php, parser, screens, capture, gaming, <?echo CLAN_NAME.', '.CLAN_TAG.', '.CLAN_GAME;?>">
+<meta name="keywords" content="pb, view, viewer, punkbuster, php, parser, screens, capture, gaming, <?php echo CLAN_NAME.', '.CLAN_TAG.', '.CLAN_GAME;?>">
 <meta name="robot" content="index,follow">
 <meta name="copyright" content="Copyright &copy; 2009 B.S. Rijnders aka BandAhr. All rights reserved">
 <meta name="author" content="B.S. Rijnders">
 <meta name="revisit-after" content="7">
-<title><?echo $str["TITLE"];?></title>
+<title><?php echo $str["TITLE"];?></title>
 
 <link href="style/style.css" rel="stylesheet" type="text/css">
 <link rel="shortcut icon" href="style/img/favicon.ico">
@@ -69,7 +69,7 @@ $('#scrnInfo a').tooltip({
 
 <body onload="document.search_form.input.focus(); document.search_form.input.select();">
 <a name="start"></a>
-	<?
+	<?php 
 
 template_login_top_menu();	
 	
@@ -98,7 +98,7 @@ function template_logo_header()
 </table>
 <br>
 	
-	<?
+	<?php 
 }
 
 //	new header added since version 1.1.2.1
@@ -111,12 +111,12 @@ function template_header_detailed_page()
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="<?php echo $str["META_DESC"];?>">
-<meta name="keywords" content="pb, view, viewer, punkbuster, php, parser, screens, capture, gaming, <?echo CLAN_NAME.', '.CLAN_TAG.', '.CLAN_GAME;?>">
+<meta name="keywords" content="pb, view, viewer, punkbuster, php, parser, screens, capture, gaming, <?php echo CLAN_NAME.', '.CLAN_TAG.', '.CLAN_GAME;?>">
 <meta name="robot" content="index,follow">
 <meta name="copyright" content="Copyright &copy; 2009 B.S. Rijnders aka BandAhr. All rights reserved">
 <meta name="author" content="B.S. Rijnders">
 <meta name="revisit-after" content="7">
-<title><?echo $str["TITLE"];?></title>
+<title><?php echo $str["TITLE"];?></title>
 
 <link href="style/style.css" rel="stylesheet" type="text/css">
 <link rel="shortcut icon" href="style/img/favicon.ico"> 
@@ -130,7 +130,7 @@ function template_header_detailed_page()
 <body>
 <a name="start"></a>
 	
-	<?
+	<?php 
 	
 //	first check if install map is gone
 if(!check_install_del()) template_install_del();
@@ -151,7 +151,7 @@ if(!is_CHMOD_755()) template_chmod_755();
 </table>
 <br>
 	
-	<?
+	<?php 
 }
 
 //	templated appears when map install does exist
@@ -166,7 +166,7 @@ function template_install_del()
 </table>
 <br>
 	
-	<?
+	<?php 
 }
 
 //	new since version 2.0.0.0
@@ -181,7 +181,7 @@ function template_chmod_755()
 </table>
 <br>
 	
-	<?	
+	<?php 	
 }
 
 function template_new_version()
@@ -194,7 +194,7 @@ function template_new_version()
   </tr>
 </table>
 <br>
-		<?	
+		<?php 	
 }
 
 function template_admin_tools()
@@ -205,7 +205,7 @@ function template_admin_tools()
 	{
 	?>
 	
-<?if(get_request_status()==1)
+<?php if(get_request_status()==1)
 {?>
                                 <table width="100%" border="0" class="header_menu_bg_admin">
                                   <tr>
@@ -213,18 +213,18 @@ function template_admin_tools()
                                     <td><span class="txt_admin_message"><strong><?php echo $str['ADM_UPDATE_REQ'];?></strong></span></td>
                                   </tr>
                                 </table>
-<?}?>                                
+<?php }?>                                
                                 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="header_menu_bg_admin" align="center">
                                   
                                 <tr>
                                     <td width="20%" align="left"><br><span class="txt_light"><strong><?php echo $str['ADM_ADMIN'];?>:</strong></span></td>
                                   <td align="left"><br><input type="submit" name="Update" id="Update" value="<?php echo $str['ADM_UPDATE'];?>" class="buttons" onmouseover="this.className='buttons_hover'" onmouseout="this.className='buttons'">
-                                  <? if (RESET){?>
+                                  <?php  if (RESET){?>
                                   &nbsp;
                                   
                                     <input type="submit" name="reset" id="reset" value="<?php echo $str['ADM_RESET'];?>" class="buttons" onmouseover="this.className='buttons_hover'" onmouseout="this.className='buttons'">
                                   
-                                  <?}?>
+                                  <?php }?>
                                   &nbsp;
                                   <input type="submit" name="ACP" id="ACP" value="<?php echo $str['ADM_ACP'];?>" class="buttons" onmouseover="this.className='buttons_hover'" onmouseout="this.className='buttons'">
                                   </td>
@@ -232,7 +232,7 @@ function template_admin_tools()
                                   
 </table>
 	
-	<?
+	<?php 
 	}	
 }
 
@@ -270,7 +270,7 @@ function template_search($current_scrn_nr)
               <td width="20%" align="center">&nbsp;</td>
               <td width="50%" align="center"><select name="year" id="year">
                 <option value="all_years"><?php echo $str['SM_ALL_YEARS'];?></option>
-                <?
+                <?php 
                 $dates	=	get_dates();
                 foreach ($dates[0] as $year)
                 {
@@ -281,7 +281,7 @@ function template_search($current_scrn_nr)
                 -
                 <select name="month" id="month">
                   <option value="all_months" selected><?php echo $str['SM_ALL_MONTHS'];?></option>
-                  <?
+                  <?php 
                   foreach ($dates[1] as $month)
                   {
                   	//	seperate the month names and numbers
@@ -294,7 +294,7 @@ function template_search($current_scrn_nr)
                 -
                 <select name="day" id="day">
                   <option value="all_days"><?php echo $str['SM_ALL_DAYS'];?></option>
-                  <?
+                  <?php 
                   foreach ($dates[2] as $day)
                   {
                   	echo "<option value=".$day.">".$day."</option>";
@@ -304,7 +304,7 @@ function template_search($current_scrn_nr)
                 -
                 <select name="hour" id="hour">
                   <option value="all_hours"><?php echo $str['SM_ALL_HOURS'];?></option>
-                  <?
+                  <?php 
                   foreach ($dates[3] as $hour)
                   {
                   	echo "<option value=".$hour.">".$hour."</option>";
@@ -317,14 +317,14 @@ function template_search($current_scrn_nr)
             </tr>
             </table>
        <br>
-       <?template_info_screens($current_scrn_nr);?>
+       <?php template_info_screens($current_scrn_nr);?>
        <br>       
-	             <?template_admin_tools();?>
+	             <?php template_admin_tools();?>
           </form>        </td>
       </tr>
     </table>
     
-	<?
+	<?php 
 }
 
 //	info about the gathered screens
@@ -338,13 +338,13 @@ function template_info_screens($current_scrn_nr)
 <table width="100%" border="0" align="center" class="header_info_screen_bg">
   <tr>
     <td class="header_info_screen_row1"><span class="txt_light"><strong><?php echo $str['STAT_UNIQUE_PLAYERS'];?>:</strong></span></td>
-    <td class="header_info_screen_row1"><span class="txt_light"><?echo get_nr_unique_players();?></span></td>
+    <td class="header_info_screen_row1"><span class="txt_light"><?php echo get_nr_unique_players();?></span></td>
     <td class="header_info_screen_row1"><span class="txt_light"><strong><?php echo $str['STAT_TOTAL_COMPLETE'];?>:</strong></span></td>
-    <td class="header_info_screen_row1"><span class="txt_light"><?echo get_nr_complete_screens();?></span></td>
+    <td class="header_info_screen_row1"><span class="txt_light"><?php echo get_nr_complete_screens();?></span></td>
   </tr>
   <tr>
     <td width="25%" class="header_info_screen_row2"><span class="txt_light"><strong><?php echo $str['STAT_MOST_SCREENS'];?>:</strong></span></td>
-    <td width="25%" class="header_info_screen_row2"><span class="txt_light"><?
+    <td width="25%" class="header_info_screen_row2"><span class="txt_light"><?php 
     
     $guid	=	get_player_most_complete_screens();
     $name	=	get_player_name_by_guid($guid);
@@ -352,11 +352,11 @@ function template_info_screens($current_scrn_nr)
     
     ?></span></td>
     <td width="25%" class="header_info_screen_row2"><span class="txt_light"><strong><?php echo $str['STAT_TOTAL_INCOMPLETE'];?>:</strong></span></td>
-    <td width="25%" class="header_info_screen_row2"><span class="txt_light"><?echo get_nr_incomplete_screens();?></span></td>
+    <td width="25%" class="header_info_screen_row2"><span class="txt_light"><?php echo get_nr_incomplete_screens();?></span></td>
   </tr>
   <tr>
     <td class="header_info_screen_row1"><span class="txt_light"><strong><?php echo $str['STAT_MOST_INC_SCREENS'];?>:</strong></span></td>
-    <td class="header_info_screen_row1"><span class="txt_light"><?
+    <td class="header_info_screen_row1"><span class="txt_light"><?php 
     
     $guid	=	get_player_most_incomplete_screens();
     $name	=	get_player_name_by_guid($guid);
@@ -364,13 +364,13 @@ function template_info_screens($current_scrn_nr)
     
     ?></span></td>
     <td class="header_info_screen_row1"><span class="txt_light"><strong><?php echo $str['STAT_CURRENT_WIN_SCREENS'];?>:</strong></span></td>
-    <td class="header_info_screen_row1"><span class="txt_light"><?echo $current_scrn_nr;?></span></td>
+    <td class="header_info_screen_row1"><span class="txt_light"><?php echo $current_scrn_nr;?></span></td>
   </tr>
 </table>
 
 	
 	
-	<?
+	<?php 
 }
 
 
@@ -419,7 +419,7 @@ function changeImage()
 	
 <table width="90%" border="0" align="center">
   <tr>
-    <td align="center" valign="top" class="bg_detailed_screen_tools"><a href="<?echo "inc/imgSave.inc.php?saveIMG=".$fid;?>" class='popup_tools'><span><?php echo $str["DETSCRN_TOOLS_SAVE"];?></span><img src="style/img/save.gif" width="32" height="32" alt="<?php echo $str["DETSCRN_TOOLS_ZOOM_ENABLE"];?>" border="0"></a>
+    <td align="center" valign="top" class="bg_detailed_screen_tools"><a href="<?php echo "inc/imgSave.inc.php?saveIMG=".$fid;?>" class='popup_tools'><span><?php echo $str["DETSCRN_TOOLS_SAVE"];?></span><img src="style/img/save.gif" width="32" height="32" alt="<?php echo $str["DETSCRN_TOOLS_ZOOM_ENABLE"];?>" border="0"></a>
     &nbsp;<a href="#" onclick="TJPzoomswitch(document.getElementById('unique1337'))" class='popup_tools'><span><?php echo $str["DETSCRN_TOOLS_ZOOM_ENABLE"];?><br><ul>
   <li><?php echo $str["DETSCRN_TOOLS_ZOOM_COMMENT"];?></li>
   <li><?php echo $str["DETSCRN_TOOLS_ZOOM_COMMENT_2"];?></li>
@@ -444,19 +444,19 @@ Will be implemented later on, probably version 2.2.0.0
     ?>
     
     <table cellspacing="0" cellpadding="0" border="0"><tr><td width="50%"></td><td>
-<img src="<?echo $IMGsrc;?>" style="width:<?php echo $widthIMG;?>px; height: <?php echo $heightIMG;?>px;" onmouseover="TJPzoomif(this);" id="unique1337"" alt="<?echo $fid.'png';?>">
+<img src="<?php echo $IMGsrc;?>" style="width:<?php echo $widthIMG;?>px; height: <?php echo $heightIMG;?>px;" onmouseover="TJPzoomif(this);" id="unique1337"" alt="<?php echo $fid.'png';?>">
 </td><td width="50%"></td></tr></table>
 </td>
   </tr>
   <tr>
     <td align="center"><table width="100%" border="0" align="center">
       <tr>
-        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_FILE"];?>:</strong></td>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?echo $fid.'.png';?></td>
+        <td width="15%" align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_FILE"];?>:</strong></td>
+        <td align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $fid.'.png';?></td>
       </tr>
       <tr>
-        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_PLAYER"];?>:</strong></td>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?echo $name;?></td>
+        <td width="15%" align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_PLAYER"];?>:</strong></td>
+        <td align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $name;?></td>
       </tr>
       <?php 
       //	only show clanbase information if admin has configured it in ACP
@@ -464,10 +464,10 @@ Will be implemented later on, probably version 2.2.0.0
       {
       ?>
       <tr>
-        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_CB"];?>:</strong></td>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?echo "<a href=\"http://clanbase.ggl.com/personlist.php?guidid=".CBGAMEID."&amp;guidvalue=".substr($guid,$guidlength-8)."\" target=\"_blank\">".$name."</a>";?></td>
+        <td width="15%" align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_CB"];?>:</strong></td>
+        <td align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo "<a href=\"http://clanbase.ggl.com/personlist.php?guidid=".CBGAMEID."&amp;guidvalue=".substr($guid,$guidlength-8)."\" target=\"_blank\">".$name."</a>";?></td>
       </tr>
-      <?
+      <?php 
       }
       if($alias)
       {
@@ -477,9 +477,9 @@ Will be implemented later on, probably version 2.2.0.0
       	{
       ?>
       <tr>
-        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_ALIASES"];?>:</strong></td>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">
-        <?
+        <td width="15%" align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_ALIASES"];?>:</strong></td>
+        <td align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">
+        <?php 
 
         echo "<p>".$str["DETSCRN_ALIASES_2"]." ".count($alias)." ".$str["DETSCRN_ALIASES_3"].":</p>";
         
@@ -495,23 +495,23 @@ Will be implemented later on, probably version 2.2.0.0
       }
       ?>
       <tr>
-        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_TAKEN"];?>:</strong></td>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?echo $date;?></td>
+        <td width="15%" align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_TAKEN"];?>:</strong></td>
+        <td align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $date;?></td>
       </tr>
       <tr>
-        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_GUID"];?>:</strong></td>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><label>
-          <input type="text" name="GUID" id="GUID" size="100" value="<?echo $guid;?>" onclick="this.select();">
+        <td width="15%" align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_GUID"];?>:</strong></td>
+        <td align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><label>
+          <input type="text" name="GUID" id="GUID" size="100" value="<?php echo $guid;?>" onclick="this.select();">
         </label></td>
       </tr>
       <tr>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_GUID_SHORT"];?>:</strong></td>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><label>
-          <input type="text" name="GUID_short" id="GUID_short" size="100" value="<?echo substr($guid,$guidlength-8);?>" onclick="this.select();">
+        <td align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_GUID_SHORT"];?>:</strong></td>
+        <td align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><label>
+          <input type="text" name="GUID_short" id="GUID_short" size="100" value="<?php echo substr($guid,$guidlength-8);?>" onclick="this.select();">
         </label>
         </td>
       </tr>
-      <?
+      <?php 
       
       			$md5_valid	=	false;
 				$logged		=	false;
@@ -534,20 +534,20 @@ Will be implemented later on, probably version 2.2.0.0
 						?>
 						
 											      <tr>
-        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_IP"];?>:</strong></td>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><label>
-          <input type="text" name="IP" id="IP" size="100" value="<?echo $ip_player;?>" onclick="this.select();">
+        <td width="15%" align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_IP"];?>:</strong></td>
+        <td align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><label>
+          <input type="text" name="IP" id="IP" size="100" value="<?php echo $ip_player;?>" onclick="this.select();">
         </label></td>
       </tr>
 						
 											      <tr>
-        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><span class="md5_valid"><?php echo $str["DETSCRN_MD5_VALID"];?>:</span></strong></td>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><label>
-          <input type="text" name="MD5" id="MD5" size="100" value="<?echo get_md5('download/'.$fid.'.png')?>" onclick="this.select();">
+        <td width="15%" align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><span class="md5_valid"><?php echo $str["DETSCRN_MD5_VALID"];?>:</span></strong></td>
+        <td align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><label>
+          <input type="text" name="MD5" id="MD5" size="100" value="<?php echo get_md5('download/'.$fid.'.png')?>" onclick="this.select();">
         </label></td>
       </tr>
 						
-						<?
+						<?php 
 						
 					}
 					//	mismatch!
@@ -555,34 +555,34 @@ Will be implemented later on, probably version 2.2.0.0
 					{
 					?>
 																      <tr>
-        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_IP"];?>:</strong></td>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><label>
-          <input type="text" name="IP" id="IP" size="100" value="<?echo $ip_player;?>" onclick="this.select();">
+        <td width="15%" align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_IP"];?>:</strong></td>
+        <td align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><label>
+          <input type="text" name="IP" id="IP" size="100" value="<?php echo $ip_player;?>" onclick="this.select();">
         </label></td>
       </tr>
 					
 					      <tr>
-        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><span class="md5_mismatch"><?php echo $str["DETSCRN_MD5_INVALID"];?></span></strong></td>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">
+        <td width="15%" align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><span class="md5_mismatch"><?php echo $str["DETSCRN_MD5_INVALID"];?></span></strong></td>
+        <td align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">
         </td>
       </tr>
 					
 					
 					      <tr>
-        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_MD5_SCREEN"];?>:</strong></td>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><label>
-          <input type="text" name="MD5" id="MD5" size="100" value="<?echo get_md5('download/'.$fid.'.png')?>" onclick="this.select();">
+        <td width="15%" align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_MD5_SCREEN"];?>:</strong></td>
+        <td align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><label>
+          <input type="text" name="MD5" id="MD5" size="100" value="<?php echo get_md5('download/'.$fid.'.png')?>" onclick="this.select();">
         </label></td>
       </tr>
       
             <tr>
-        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_MD5_LOG"];?>:</strong></td>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><label>
-          <input type="text" name="MD5" id="MD5" size="100" value="<?echo $md5_screen;?>" onclick="this.select();">
+        <td width="15%" align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_MD5_LOG"];?>:</strong></td>
+        <td align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><label>
+          <input type="text" name="MD5" id="MD5" size="100" value="<?php echo $md5_screen;?>" onclick="this.select();">
         </label></td>
       </tr>
 					
-					<?
+					<?php 
 							
 						
 					}
@@ -593,12 +593,12 @@ Will be implemented later on, probably version 2.2.0.0
 					?>
 					
 					      <tr>
-        <td width="15%" align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_MD5_HASH"];?>:</strong></td>
-        <td align="left" class="<?if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><label>
-          <input type="text" name="MD5" id="MD5" size="100" value="<?echo get_md5('download/'.$fid.'.png')?>" onclick="this.select();">
+        <td width="15%" align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_MD5_HASH"];?>:</strong></td>
+        <td align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><label>
+          <input type="text" name="MD5" id="MD5" size="100" value="<?php echo get_md5('download/'.$fid.'.png')?>" onclick="this.select();">
         </label></td>
       </tr>
-					<?
+					<?php 
 				}
       
       ?>
@@ -625,12 +625,12 @@ Will be implemented later on, probably version 2.2.0.0
 <br>
 <table width="80%" border="0" align="center">
   <tr>
-    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?template_copyright();?></span></td>
+    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?php template_copyright();?></span></td>
   </tr>
 </table>
 
 
-	<?
+	<?php 
 	}
 	//	show error msg if screen does not exist
 	else 
@@ -654,11 +654,11 @@ function template_detailed_screen_error($error,$result,$hint)
     <td align="center" valign="top" class="body_bg_detailed_screen">	<table width="80%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_error_bg">
   <tr>
     
-    <td align="center"><span class="txt_light">::</span> <span class="header_error_txt"> Error: <?echo $error;?></span> <span class="txt_light">::</span></td>
+    <td align="center"><span class="txt_light">::</span> <span class="header_error_txt"> Error: <?php echo $error;?></span> <span class="txt_light">::</span></td>
 
   </tr>
   <tr>
-    <td colspan="3" class="body_error_bg"><?echo $result.'<br>'.$hint;?></td>
+    <td colspan="3" class="body_error_bg"><?php echo $result.'<br>'.$hint;?></td>
   </tr>
 </table></td>
   </tr>
@@ -674,12 +674,12 @@ function template_detailed_screen_error($error,$result,$hint)
 <br>
 <table width="80%" border="0" align="center">
   <tr>
-    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?template_copyright();?></span></td>
+    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?php template_copyright();?></span></td>
   </tr>
 </table>
 		
 	 
-	<?
+	<?php 
 }
 
 //	new template added since version 1.2.2.1
@@ -696,7 +696,7 @@ function template_show_main($nr,$current_scrn_nr=nr_screens_main)
 
 	      <table width="100%" border="0" cellspacing="10" cellpadding="0" align="center">
 	      
-<?
+<?php 
 show_main_screens($nr);
 echo "</table>";
 
@@ -716,7 +716,7 @@ function template_show_all($nr,$current_scrn_nr=nr_screens_main)
 
 	      <table width="100%" border="0" cellspacing="10" cellpadding="0" align="center">
 	       
-<?
+<?php 
 show_all_screens($nr);
 echo "</table>";
 echo "</div>";
@@ -737,7 +737,7 @@ function template_show_available($nr,$current_scrn_nr=nr_screens_main)
 ?>
 	      <table width="100%" border="0" cellspacing="10" cellpadding="0" align="center">
 	       
-<?
+<?php 
 // show all available screens by setting 2nd parameter to true
 show_all_screens($nr,true);
 echo "</table>";
@@ -760,7 +760,7 @@ function template_show_date_selection($nr,$data,$current_scrn_nr)
 ?>
 	      <table width="100%" border="0" cellspacing="10" cellpadding="0" align="center">
 	       
-<?
+<?php 
 show_date_selection($nr,$data);
 echo "</table>";
 
@@ -780,7 +780,7 @@ function template_show_fid($nr,$fileName,$current_scrn_nr)
 	
 		?>
 	      <table width="100%" border="0" cellspacing="10" cellpadding="0">
-<?
+<?php 
 
 show_fid_screens($nr,$fileName);
 echo "</table>";
@@ -801,7 +801,7 @@ function template_show_guid($nr,$guid,$current_scrn_nr)
 	
 		?>
 	      <table width="100%" border="0" cellspacing="10" cellpadding="0">
-<?
+<?php 
 
 show_guid_screens($nr,$guid);
 echo "</table>";
@@ -823,7 +823,7 @@ function template_show_name($nr,$name,$current_scrn_nr)
 	
 		?>
 	      <table width="100%" border="0" cellspacing="10" cellpadding="0">
-<?
+<?php 
 
 show_name_screens($nr,$name);
 echo "</table>";
@@ -866,17 +866,17 @@ function template_error_msg($error,$result,$hint='')
 	<table width="80%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_error_bg">
   <tr>
     
-    <td align="center"><span class="txt_light">::</span> <span class="header_error_txt"> Error: <?echo $error;?></span> <span class="txt_light">::</span></td>
+    <td align="center"><span class="txt_light">::</span> <span class="header_error_txt"> Error: <?php echo $error;?></span> <span class="txt_light">::</span></td>
 
   </tr>
   <tr>
-    <td colspan="3" class="body_error_bg"><?echo $result.'<br>'.$hint;?></td>
+    <td colspan="3" class="body_error_bg"><?php echo $result.'<br>'.$hint;?></td>
   </tr>
 </table>
 	<br>
 	</td>
                 </tr>
-	<?
+	<?php 
 	
 }
 
@@ -890,18 +890,18 @@ function template_custom_msg($title, $msg)
 		<table width="80%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_msg_bg">
   <tr>
     
-    <td align="center"><span class="txt_light">::</span> <span class="header_msg_txt"><?echo $title;?></span> <span class="txt_light">::</span></td>
+    <td align="center"><span class="txt_light">::</span> <span class="header_msg_txt"><?php echo $title;?></span> <span class="txt_light">::</span></td>
 
   </tr>
   <tr>
-    <td colspan="3" class="body_msg_bg"><?echo $msg;?></td>
+    <td colspan="3" class="body_msg_bg"><?php echo $msg;?></td>
   </tr>
 </table>
 
 	</body>
 </html>
 	
-	<?
+	<?php 
 	
 }
 
@@ -911,18 +911,18 @@ function template_request()
 {
 ?>
 
-<form action="" method="get">                <?
+<form action="" method="get">                <?php 
                 if(get_request_status()==0)
                 {
                 	?>
                 	<label><input type="submit" name="request_update" id="request_update" value="Request update" class="req_button" onmouseover="this.className='buttons_hover'" onmouseout="this.className='req_button'">
                 </label>
-                	<?
+                	<?php 
                 	
                 }
                 ?></form>
 
-<?
+<?php 
 }
 
 function template_footer($update_time,$lastUpdate,$startTime)
@@ -937,16 +937,16 @@ function template_footer($update_time,$lastUpdate,$startTime)
   <tr>
     <td align="center" class="footer_main_bg_1">
     <br>
-    <?template_request();?>
+    <?php template_request();?>
     <br>
       <table width="40%" border="0" cellpadding="0" cellspacing="0" class="footer_main_bg_1_row_1">
         <tr>
-          <td align="center"><?echo $str["FOOTER_PAGE_GENERATED"]." ".get_loadTime($startTime,4)." ".$str["FOOTER_SECONDS"];?></td>
+          <td align="center"><?php echo $str["FOOTER_PAGE_GENERATED"]." ".get_loadTime($startTime,4)." ".$str["FOOTER_SECONDS"];?></td>
         </tr>
       </table>
       <table width="40%" border="0" cellpadding="0" cellspacing="0" class="footer_main_bg_1_row_2">
         <tr>
-          <td align="center" class="bg_main_table"><? update_info($update_time,$lastUpdate);?></td>
+          <td align="center" class="bg_main_table"><?php  update_info($update_time,$lastUpdate);?></td>
         </tr>
       </table>
       
@@ -967,14 +967,14 @@ function template_footer($update_time,$lastUpdate,$startTime)
     </td>
     </tr>
   <tr>
-    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?template_copyright();?></span></td>
+    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?php template_copyright();?></span></td>
     </tr>
 </table>
  
 </body>
 </html>
 	
-	<?
+	<?php 
 
 }
 
@@ -986,7 +986,7 @@ function template_footer_detailed_page()
 	</body>
 </html>
 	
-	<?
+	<?php 
 }
 
 //	new since version 2.1.0.0
@@ -1064,7 +1064,7 @@ function template_login()
     </table></td>
   </tr>
   <tr>
-    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?template_copyright();?></span></td>
+    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?php template_copyright();?></span></td>
   </tr>
 
   </tr>
@@ -1132,7 +1132,7 @@ function template_reset_password()
     </table></td>
   </tr>
   <tr>
-    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?template_copyright();?></span></td>
+    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?php template_copyright();?></span></td>
   </tr>
 
   </tr>
@@ -1191,7 +1191,7 @@ function template_reset_invalid_mail()
     </table></td>
   </tr>
   <tr>
-    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?template_copyright();?></span></td>
+    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?php template_copyright();?></span></td>
   </tr>
 
   </tr>
@@ -1251,7 +1251,7 @@ function template_reset_correct_mail($mail)
     </table></td>
   </tr>
   <tr>
-    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?template_copyright();?></span></td>
+    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?php template_copyright();?></span></td>
   </tr>
 
   </tr>
@@ -1314,7 +1314,7 @@ function template_reset_password_succesfully($user,$password)
     </table></td>
   </tr>
   <tr>
-    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?template_copyright();?></span></td>
+    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?php template_copyright();?></span></td>
   </tr>
 
   </tr>
@@ -1377,7 +1377,7 @@ function template_login_failed()
     </table></td>
   </tr>
   <tr>
-    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?template_copyright();?></span></td>
+    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?php template_copyright();?></span></td>
   </tr>
 
   </tr>
@@ -1438,7 +1438,7 @@ function template_login_visitor_failed()
     </table></td>
   </tr>
   <tr>
-    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?template_copyright();?></span></td>
+    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?php template_copyright();?></span></td>
   </tr>
 
   </tr>
@@ -1504,7 +1504,7 @@ function template_login_success()
     </table></td>
   </tr>
   <tr>
-    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?template_copyright();?></span></td>
+    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?php template_copyright();?></span></td>
   </tr>
 
   </tr>
@@ -1538,7 +1538,7 @@ function template_logout_success()
     </table></td>
   </tr>
   <tr>
-    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?template_copyright();?></span></td>
+    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?php template_copyright();?></span></td>
   </tr>
 
   </tr>
@@ -1634,7 +1634,7 @@ function template_denied_no_perm()
     </table></td>
   </tr>
   <tr>
-    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?template_copyright();?></span></td>
+    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?php template_copyright();?></span></td>
   </tr>
 
   </tr>
@@ -1643,7 +1643,7 @@ function template_denied_no_perm()
 </body>
 </html>	
 	
-	<?
+	<?php 
 }
 
 //	show this page when PBSViewer is private
@@ -1710,7 +1710,7 @@ function template_denied_private()
     </table></td>
   </tr>
   <tr>
-    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?template_copyright();?></span></td>
+    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?php template_copyright();?></span></td>
   </tr>
 
   </tr>
@@ -1719,7 +1719,7 @@ function template_denied_private()
 </body>
 </html>	
 	
-	<?
+	<?php 
 }
 
 //	new since version 2.1.0.0
@@ -1776,7 +1776,7 @@ function template_denied()
     </table></td>
   </tr>
   <tr>
-    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?template_copyright();?></span></td>
+    <td align="center" class="footer_main_bg_2"><span class="txt_light"><?php template_copyright();?></span></td>
   </tr>
 
   </tr>
@@ -1785,7 +1785,7 @@ function template_denied()
 </body>
 </html>	
 	
-	<?
+	<?php 
 }
 
 

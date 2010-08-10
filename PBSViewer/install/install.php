@@ -796,7 +796,7 @@ function template_start()
 </body>
 </html>
 	
-	<?
+	<?php 
 }
 
 function template_install_DB()
@@ -861,7 +861,7 @@ function template_install_DB()
 </body>
 </html>
 	
-	<?
+	<?php 
 }
 
 function template_ftp_settings()
@@ -930,7 +930,7 @@ function template_ftp_settings()
 </body>
 </html>	
 	
-	<?
+	<?php 
 }
 
 function template_update_settings()
@@ -986,7 +986,7 @@ function template_update_settings()
         <tr>
           <td class="bg_table_body">admin(s)</td>
           <td class="bg_table_body"><label>
-            <textarea name="admin" id="admin" cols="45" rows="5"><?echo $_SERVER['REMOTE_ADDR'];?>,</textarea>
+            <textarea name="admin" id="admin" cols="45" rows="5"><?php echo $_SERVER['REMOTE_ADDR'];?>,</textarea>
           </label></td>
           <td class="bg_table_body">&nbsp;</td>
         </tr>
@@ -1001,7 +1001,7 @@ function template_update_settings()
 </body>
 </html>
 	
-	<?
+	<?php 
 }
 
 function template_pb_settings()
@@ -1050,7 +1050,7 @@ PB default is 100</em></td>
 </body>
 </html>
 	
-	<?
+	<?php 
 }
 
 function template_seo_settings()
@@ -1109,7 +1109,7 @@ function template_seo_settings()
 </body>
 </html>
 	
-	<?
+	<?php 
 }
 
 function template_ftp_web_log()
@@ -1178,7 +1178,7 @@ Only fill in if you are going to use logging option</p></td>
 </body>
 </html>
 	
-	<?
+	<?php 
 }
 
 function template_template_settings()
@@ -1249,7 +1249,7 @@ function template_template_settings()
 </body>
 </html>
 	
-	<?
+	<?php 
 }
 
 function template_log_option()
@@ -1300,7 +1300,7 @@ function template_log_option()
 </body>
 </html>
 	
-	<?
+	<?php 
 }
 
 function template_log_settings()
@@ -1362,7 +1362,7 @@ If you don't want to delete the logs from your webserver leave this field empty<
 </body>
 </html>
 	
-	<?
+	<?php 
 }
 
 function template_additional_settings()
@@ -1422,7 +1422,7 @@ function template_additional_settings()
 </body>
 </html>
 	
-	<?
+	<?php 
 }
 
 function template_reset_option()
@@ -1472,7 +1472,7 @@ function template_reset_option()
 </body>
 </html>
 	
-	<?	
+	<?php 	
 }
 
 function template_create_db()
@@ -1511,7 +1511,7 @@ function template_create_db()
 </body>
 </html>
 	
-	<?
+	<?php 
 }
 
 function template_error($msg,$back_page='./')
@@ -1546,10 +1546,10 @@ function template_error($msg,$back_page='./')
                 </p>
             <table width="90%" border="0" align="center" cellpadding="0" cellspacing="0" class="bg_table_error">
               <tr>
-                <td><em><?echo $msg?></em></td>
+                <td><em><?php echo $msg?></em></td>
               </tr>
             </table>
-            <p align="center"><a href="<?echo $back_page;?>" target="_self">click here to go back</a></p></td>
+            <p align="center"><a href="<?php echo $back_page;?>" target="_self">click here to go back</a></p></td>
         </tr>
       </table>
       <br /></td>
@@ -1559,7 +1559,7 @@ function template_error($msg,$back_page='./')
 </html>	
 
 
-<?
+<?php 
 }
 
 function template_final()
@@ -1601,7 +1601,7 @@ function template_final()
 </body>
 </html>	
 	
-	<?
+	<?php 
 }
 
 function append_config($data)
