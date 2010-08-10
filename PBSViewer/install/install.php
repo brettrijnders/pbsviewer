@@ -753,6 +753,21 @@ PRIMARY KEY(`optionID`)
 
 function template_start()
 {
+	
+$phpversion	=	phpversion();
+$versions	=	explode('.',$phpversion);
+$requiredVersion	=	5;
+
+//	check if GD is supported on server
+if (function_exists("gd_info"))
+{
+	$gd 	=	true;
+}
+else 
+{
+	$gd 	=	false;
+}
+	
 	?>
 	
 	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -777,9 +792,93 @@ function template_start()
             Please check the following  first:
               </p>
             <ol>
-              <li>Did you CHMOD <em>'download'</em> to '<strong>777</strong>', '<em>lastUpdate.txt</em>' to '<strong>666</strong>' and <em>'inc'</em> to <strong>777</strong>? If your don't know what it is, it is just changing the properties/permissions of a file through ftp for example</li>
+              <li>Did you CHMOD <em>'download'</em> to '<strong>777</strong>', '<em>lastUpdate.txt</em>' to '<strong>666</strong>' and <em>'inc'</em> to <strong>777</strong>? If your don't know what it is, it is just changing the properties/permissions of a file through ftp for example. If you still don't know how to CHMOD, please visit the <a href="http://code.google.com/p/pbsviewer/wiki/FAQ#What_do_you_mean_with_CHMOD?" target="_blank">FAQ page</a>. There you will find more info about how to CHMOD.</li>
+              <li>Please check below if your server is able to run PBSViewer:</li>
             </ol>
-            <p align="center">If you are sure everything is correct, please click on install<br />
+            <p><fieldset id="set1"><legend style="font-weight:bold;">Server information</legend>
+                     
+           <?php 
+           
+           if($versions[0]>=$requiredVersion)
+			{
+				echo "<p><span style=\"font-size: 130%;font-weight: bold;\">PHP version:</span><span style=\"position:absolute; left:40%;\">".$phpversion."</span></p>";
+				echo "<p><span style=\"color: green\">Correct PHP version</span></p>";
+			}
+			else 
+			{
+				echo "<p><span style=\"font-size: 130%;font-weight: bold;\">PHP version:</span><span style=\"position:absolute; left:40%;\">".$phpversion."</span></p>";
+				echo "<p><span style=\"color: red\">PBSViewer requires php version ".$requiredVersion." or higher</p>";
+			}
+           
+           ?>
+                  
+           <br>
+            
+           <p style="font-size: 130%; font-weight: bold;">GD is <?php
+           if($gd==true) 
+           {
+           echo "<span style=\"color: green;\">supported</span>";
+           }
+           else 
+           {
+           echo "<span style=\"color: red;\">not supported</span>";
+           }
+           	?> by your server</p>
+
+           <?php 
+           
+           if($gd==true)
+           {
+           		$gd_data	=	gd_info();
+	
+				foreach ($gd_data as $key=>$value)
+				{
+					if (is_string($value))
+					{
+						echo "<p<span style=\"font-weight: bold;\">".$key.":</span><span style=\"position:absolute; left:40%;\">".$value."</span></p>";
+					}
+					else 
+					{
+		
+						if ($value==true)
+						{
+							echo "<p<span style=\"font-weight: bold;\">".$key.":</span><span style=\"position:absolute; left:40%; color: green;\">True</span></p>";
+						}
+						else
+						{
+							echo "<p<span style=\"font-weight: bold;\">".$key.":</span><span style=\"position:absolute; left:40%; color: red;\">False</span></p>";
+						}
+					}	
+				}
+           }
+           
+           
+           ?>
+           <span style="position:absolute; left:60%;">+</span>
+           <div style="width: 59%; border-bottom: 1px solid black; padding: 10px;">           
+           </div>
+           
+           <?php 
+           
+           if ($versions[0]>=$requiredVersion)
+           {
+				echo "<p><span style=\"font-size: 140%; font-weight: bold;\">Verdict: </span><span style=\"color: green;font-size: 140%;\">Your server is able to run PBSViewer!</span></p>";           	
+           }
+           elseif ($versions[0]>=$requiredVersion && $gd==true)
+           {
+           		echo "<p><span style=\"font-size: 140%; font-weight: bold;\">Verdict: </span><span style=\"color: green;font-size: 140%;\">Your server is able to run PBSViewer!</span></p>";           	
+           }
+           else 
+           {
+           		echo "<p><span style=\"font-size: 140%; font-weight: bold;\">Verdict: </span><span style=\"color: red;font-size: 140%;\">Your server is NOT able to run PBSViewer!</span></p>";           	
+           }
+           
+           ?>
+           
+           
+           
+           </fieldset></p>
+            <p align="center">If you are sure everything is correct, please click on install.<br />
             </p>
             <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="bg_table_install">
               <tr>
