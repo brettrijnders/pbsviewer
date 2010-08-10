@@ -1,5 +1,6 @@
 changelog 2.1.0.0:
 ------------------------------------
+- Created new logo for PBSViewer
 - Installer update: now it shows some server information during install.
 - Use long php tag: <?php instead of short php tag <?, see issue 22.
 - Implemented tooltip plugin of jquery to create fancy tooltips (tested browsers: internet explorer, firefox, google chrome, opera). In opera the pop-up with additional info does not pop-up somewhere outside of screen.
