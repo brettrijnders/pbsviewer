@@ -125,6 +125,25 @@ function template_header_detailed_page()
 -->
 <script type="text/javascript" src="inc/js/zoom/tjpzoom.js"></script> 
 <script type="text/javascript" src="inc/js/zoom/tjpzoom_config_PBSViewer.js"></script>
+<script type="text/javascript" src="inc/js/jquery/jquery-1.4.2.js"></script>
+<script src="inc/js/jquery/plugins/tooltip/lib/jquery.bgiframe.js" type="text/javascript"></script>
+<script src="inc/js/jquery/plugins/tooltip/lib/jquery.dimensions.js" type="text/javascript"></script>
+<script src="inc/js/jquery/plugins/tooltip/jquery.tooltip.js" type="text/javascript"></script> 
+
+<!-- This script is used to show extra screen info during hover-->
+<script type="text/javascript">
+$(function() {
+	
+$('#scrnInfo a').tooltip({
+	track: true,
+	delay: 0,
+	showURL: false,
+	showBody: " - ",
+	fade: 250
+});
+
+});
+</script>
 </head>
 
 <body>
@@ -416,16 +435,22 @@ function changeImage()
 }
 
 </SCRIPT>
-	
+
 <table width="90%" border="0" align="center">
   <tr>
-    <td align="center" valign="top" class="bg_detailed_screen_tools"><a href="<?php echo "inc/imgSave.inc.php?saveIMG=".$fid;?>" class='popup_tools'><span><?php echo $str["DETSCRN_TOOLS_SAVE"];?></span><img src="style/img/save.gif" width="32" height="32" alt="<?php echo $str["DETSCRN_TOOLS_ZOOM_ENABLE"];?>" border="0"></a>
-    &nbsp;<a href="#" onclick="TJPzoomswitch(document.getElementById('unique1337'))" class='popup_tools'><span><?php echo $str["DETSCRN_TOOLS_ZOOM_ENABLE"];?><br><ul>
+  <td align="center" valign="top" class="bg_detailed_screen_tools" id="scrnInfo"><a href="<?php echo "inc/imgSave.inc.php?saveIMG=".$fid;?>" title="<?php echo $str["DETSCRN_TOOLS_SAVE_TITLE"];?> - <?php echo $str["DETSCRN_TOOLS_SAVE_COMMENT"];?>"><img src="style/img/save.gif" width="32" height="32" alt="<?php echo $str["DETSCRN_TOOLS_ZOOM_ENABLE"];?>" border="0"></a>
+    &nbsp;<a href="#" onclick="TJPzoomswitch(document.getElementById('unique1337'))" title="<?php echo $str["DETSCRN_TOOLS_ZOOM_TITLE"];?> - <br><ul>
   <li><?php echo $str["DETSCRN_TOOLS_ZOOM_COMMENT"];?></li>
   <li><?php echo $str["DETSCRN_TOOLS_ZOOM_COMMENT_2"];?></li>
   <li><?php echo $str["DETSCRN_TOOLS_ZOOM_COMMENT_3"];?></li>
   <li><?php echo $str["DETSCRN_TOOLS_ZOOM_COMMENT_4"];?></li>
-</ul></span><img src="style/img/zoom_disabled.gif" width="32" height="32" alt="<?php echo $str["DETSCRN_TOOLS_ZOOM_ENABLE"];?>" border="0" onclick="changeImage()" NAME="zoomIMG"></a>
+</ul>
+<?php if (get_browser_info()=='opera')
+{
+	echo "<strong>You are using Opera, probably this zoom fuction will not work when you activate it.</strong>";
+}?>
+
+"><img src="style/img/zoom_disabled.gif" width="32" height="32" alt="<?php echo $str["DETSCRN_TOOLS_ZOOM_ENABLE"];?>" border="0" onclick="changeImage()" NAME="zoomIMG"></a>
 <!--
 Will be implemented later on, probably version 2.2.0.0
 &nbsp;<a href="#"><img src="style/img/gamma_min.png" width="32" height="32" alt="" border="0" NAME="gamma_min"></a>
@@ -433,8 +458,11 @@ Will be implemented later on, probably version 2.2.0.0
 &nbsp;<a href="#"><img src="style/img/negative.png" width="32" height="32" alt="" border="0" NAME="negative"></a>
 
 -->
+
 </td>
+
   </tr>
+  
   <tr>
     <td align="center" valign="top" class="body_bg_detailed_screen">
     <?php 

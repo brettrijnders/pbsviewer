@@ -135,71 +135,6 @@ text-decoration:blink;}
 .header_info_screen_bg
 {background-color:#272727;}
 
-/* pop-up screen for used for screenshots, is only used for google chrome.
- * For other browsers the plugin tooltip of Jquery is used */
-a.popup {
-	position: relative;;
-}
-
-a.popup span {
-	display: none;
-	position: absolute;
-	top: -200%;
-	left: -25%;
-	width: 300px;
-	padding: 5px;
-	z-index: 100;
-	background: #F5F5F5;
-	border: double;
-	border-color:#333333;
-	color: #333333;
-	text-align:left;
-	-moz-border-radius: 5px; /* this works only in camino/firefox */
-	-webkit-border-radius: 5px; /* this is just for Safari */
-    -moz-opacity: 0.8;
-    opacity:.80;
-    filter: alpha(opacity=80);
-
-}
-
-
-
-a:hover.popup span {
-	display: table;
-}
-
-/* pop-up screen for used for tools */
-a.popup_tools {
-	position: relative;;
-}
-
-a.popup_tools span {
-	display: none;
-	position: absolute;
-	top: 25%;
-	left: 125%;
-	width: 300px;
-	padding: 5px;
-	z-index: 100;
-	background: #F5F5F5;
-	border: double;
-	border-color:#333333;
-	color: #333333;
-	text-align:left;
-	-moz-border-radius: 5px; /* this works only in camino/firefox */
-	-webkit-border-radius: 5px; /* this is just for Safari */
-    -moz-opacity: 0.8;
-    opacity:.80;
-    filter: alpha(opacity=80);
-
-}
-
-
-
-a:hover.popup_tools span {
-	display: table;
-}
-
 #tooltip {
 	position: absolute;
 	z-index: 3000;
@@ -207,9 +142,10 @@ a:hover.popup_tools span {
 	background-color: #eee;
 	padding: 5px;
 	opacity: 0.85;
+	text-align: ;
 }
 #tooltip h3 {text-align: center;}
-#tooltip div { margin: 0; }
+#tooltip div { margin: 0;}
 
 /* error style */
 .header_error_bg
