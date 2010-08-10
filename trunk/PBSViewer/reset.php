@@ -77,26 +77,26 @@ $startTime	=	get_microtime();
   <tr>
     <td class="bg_reset_table_row2"><table width="90%" border="0" align="center">
       <tr>
-        <td><br><?reset_pbsviewer(true);?></td>
+        <td><br><?php reset_pbsviewer(true);?></td>
       </tr>
     </table>
       <br>
       <table width="50%" border="0" align="center">
         <tr>
-          <td align="center"><?echo '<br>'.$str["RESET_FINISHED"].'<br>';
+          <td align="center"><?php echo '<br>'.$str["RESET_FINISHED"].'<br>';
 	echo $str["RESET_DURATION"].' '.get_loadTime($startTime,4).' '.$str["RESET_DURATION_2"].'<br>';?></td>
         </tr>
     </table></td>
   </tr>
   <tr>
-    <td class="bg_reset_table_row3" align="center"><span class="txt_light"><?echo '<a href="./" target="_parent">'.$str["RESET_GO_BACK"].'</a>';?></span></td>
+    <td class="bg_reset_table_row3" align="center"><span class="txt_light"><?php echo '<a href="./" target="_parent">'.$str["RESET_GO_BACK"].'</a>';?></span></td>
   </tr>
 </table>
 </body>
 </html>
 
 
-<?
+<?php
 
 }
 else 
@@ -150,14 +150,14 @@ if($reset==true&&RESET==true)
     </table></td>
   </tr>
   <tr>
-    <td class="bg_reset_table_row3" align="center"><span class="txt_light"><?echo '<a href="./" target="_parent">'.$str["RESET_GO_BACK"].'</a>';?></span></td>
+    <td class="bg_reset_table_row3" align="center"><span class="txt_light"><?php echo '<a href="./" target="_parent">'.$str["RESET_GO_BACK"].'</a>';?></span></td>
   </tr>
 </table>
 </body>
 </html>
 
 	
-	<?
+	<?php 
 	
 	
 }
