@@ -93,7 +93,7 @@ function template_logo_header()
 	
 		<table width="100%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a></td>
+    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a></td>
   </tr>
 </table>
 <br>
@@ -165,7 +165,7 @@ if(!is_CHMOD_755()) template_chmod_755();
 	
 	<table width="100%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a></td>
+    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a></td>
   </tr>
 </table>
 <br>
@@ -209,7 +209,7 @@ function template_new_version()
 		
 		<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="bg_new_version">
   <tr>
-    <td align="center"><strong>There is a new version available, check <a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><em>www.beesar.com</em></a> for more info! </strong></td>
+    <td align="center"><strong>There is a new version available, check <a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><em>www.beesar.com</em></a> for more info! </strong></td>
   </tr>
 </table>
 <br>
@@ -447,7 +447,7 @@ function changeImage()
 </ul>
 <?php if (get_browser_info()=='opera')
 {
-	echo "<strong>You are using Opera, probably this zoom fuction will not work when you activate it.</strong>";
+	echo "<strong>".$str["DETSCRN_TOOLS_ZOOM_COMMENT_5"]."</strong>";
 }?>
 
 "><img src="style/img/zoom_disabled.gif" width="32" height="32" alt="<?php echo $str["DETSCRN_TOOLS_ZOOM_ENABLE"];?>" border="0" onclick="changeImage()" NAME="zoomIMG"></a>
@@ -637,7 +637,7 @@ Will be implemented later on, probably version 2.2.0.0
     
     if (get_nr_screens_by_guid($guid)>1)
     {    
-    	echo "<a href=\"./?sID=guid&input=".$guid."&search=Search\">Show more screens of this player (".get_nr_screens_by_guid($guid).")</a><br><br>";
+    	echo "<a href=\"./?sID=guid&input=".$guid."&search=Search\">".$str["DETSCRN_SHOW_MORE"]." (".get_nr_screens_by_guid($guid).")</a><br><br>";
     }
 ?>
 
@@ -937,13 +937,15 @@ function template_custom_msg($title, $msg)
 //	this will give a request button on page
 function template_request()
 {
+	
+	global $str;
 ?>
 
 <form action="" method="get">                <?php 
                 if(get_request_status()==0)
                 {
                 	?>
-                	<label><input type="submit" name="request_update" id="request_update" value="Request update" class="req_button" onmouseover="this.className='buttons_hover'" onmouseout="this.className='req_button'">
+                	<label><input type="submit" name="request_update" id="request_update" value="<?php echo $str["FOOTER_REQUEST_UPDATE"];?>" class="req_button" onmouseover="this.className='buttons_hover'" onmouseout="this.className='req_button'">
                 </label>
                 	<?php 
                 	
@@ -1021,6 +1023,8 @@ function template_footer_detailed_page()
 // login template for admin
 function template_login()
 {
+	global $str;
+	
 	?>
 	
 	
@@ -1052,40 +1056,40 @@ function template_login()
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
   <tr>
     <td align="center"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_msg_bg">
       <tr>
-        <td align="center"><span class="txt_light">::</span><span class="header_msg_txt"><strong> Login </strong></span><span class="txt_light">::</span></td>
+        <td align="center"><span class="txt_light">::</span><span class="header_msg_txt"><strong> <?php echo $str["LOGIN_MENU_TITLE"];?> </strong></span><span class="txt_light">::</span></td>
       </tr>
       <tr>
         <td colspan="3" class="body_msg_bg" align="center"><br>
           <form name="login" method="post" action="" autocomplete="off">
             <table width="50%" border="0">
               <tr>
-                <td><strong>username</strong></td>
+                <td><strong><?php echo $str["LOGIN_MENU_USERNAME"];?></strong></td>
                 <td align="center"><label>
                   <input type="text" name="name" id="name" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
                 </label></td>
               </tr>
               <tr>
-                <td><strong>password</strong></td>
+                <td><strong><?php echo $str["LOGIN_MENU_PASSWORD"];?></strong></td>
                 <td align="center"><label>
                   <input type="password" name="password" id="password" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
                 </label></td>
               </tr>
               <tr>
                 <td colspan="2" align="center"><label>
-                  <input type="submit" name="login" id="login" value="Login">
+                  <input type="submit" name="login" id="login" value="<?php echo $str["LOGIN_MENU_BUTTON"];?>">
                 </label></td>
                 </tr>
             </table>
           </form>
           <br>
-          <a href="?reset=1" target="_self">Forgot password or name?</a><br>
+          <a href="?reset=1" target="_self"><?php echo $str["LOGIN_MENU_FORGOT"];?></a><br>
 
 </td>
       </tr>
@@ -1106,6 +1110,8 @@ function template_login()
 
 function template_reset_password()
 {
+	global $str;
+	
 	?>
 	
 	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -1136,23 +1142,23 @@ function template_reset_password()
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
   <tr>
     <td align="center"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_msg_bg">
       <tr>
-        <td align="center"><span class="txt_light">::</span><span class="header_msg_txt"><strong> Reset password</strong></span><span class="txt_light">::</span></td>
+        <td align="center"><span class="txt_light">::</span><span class="header_msg_txt"><strong> <?php echo $str["LOGIN_RESET_TITLE"];?> </strong></span><span class="txt_light">::</span></td>
       </tr>
       <tr>
-        <td colspan="3" class="body_msg_bg" align="center"><p>Fill in your mail address in case you forgot your username and/or password. This mail will contain your username and a link that can be used to reset your password</p>
+        <td colspan="3" class="body_msg_bg" align="center"><p><?php echo $str["LOGIN_RESET_MSG"];?></p>
           <form name="reset" method="post" action="" autocomplete="off">
             <label>
               <input type="text" name="mail_reset" id="mail_reset" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
             </label>
             <label> 
-              <input type="submit" name="submit" id="Submit" value="Submit">
+              <input type="submit" name="submit" id="Submit" value="<?php echo $str["LOGIN_RESET_SUBMIT"];?>">
             </label>
           </form>
           <p>&nbsp;</p></td>
@@ -1174,6 +1180,8 @@ function template_reset_password()
 
 function template_reset_invalid_mail()
 {
+	global $str;
+	
 	?>
 	
 	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -1204,17 +1212,17 @@ function template_reset_invalid_mail()
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
   <tr>
     <td align="center"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_msg_bg">
       <tr>
-        <td align="center"><span class="txt_light">::</span><span class="header_msg_txt"><strong> Reset - Invalid mail</strong></span><span class="txt_light">::</span></td>
+        <td align="center"><span class="txt_light">::</span><span class="header_msg_txt"><strong> <?php echo $str["LOGIN_INVALID_MAIL_TITLE"];?> </strong></span><span class="txt_light">::</span></td>
       </tr>
       <tr>
-        <td colspan="3" class="body_msg_bg" align="center"><p>Sorry could not find your mail, please check if you used the correct mail address.<a href="" target="_self" onclick="history.go(-1)">Click here to go back.</a></p></td>
+        <td colspan="3" class="body_msg_bg" align="center"><p><?php echo $str["LOGIN_INVALID_MAIL_MSG"];?><a href="" target="_self" onclick="history.go(-1)"> <?php echo $str["LOGIN_GO_BACK"];?></a></p></td>
       </tr>
     </table></td>
   </tr>
@@ -1234,6 +1242,8 @@ function template_reset_invalid_mail()
 
 function template_reset_correct_mail($mail)
 {
+	global $str;
+	
 	?>
 	
 	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -1264,17 +1274,17 @@ function template_reset_correct_mail($mail)
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
   <tr>
     <td align="center"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_msg_bg">
       <tr>
-        <td align="center"><span class="txt_light">::</span><span class="header_msg_txt"><strong> Reset </strong></span><span class="txt_light">::</span></td>
+        <td align="center"><span class="txt_light">::</span><span class="header_msg_txt"><strong> <?php echo $str["LOGIN_CORRECT_MAIL_TITLE"];?> </strong></span><span class="txt_light">::</span></td>
       </tr>
       <tr>
-        <td colspan="3" class="body_msg_bg" align="center"><p>Mail has been sent to '<?php echo $mail;?>'<a href="" target="_self" onclick="history.go(-1)"></a>. Click on the link in your mail to reset your password.</p></td>
+        <td colspan="3" class="body_msg_bg" align="center"><p><?php echo $str["LOGIN_CORRECT_MAIL_MSG"];?> '<?php echo $mail;?>'. <?php echo $str["LOGIN_CORRECT_MAIL_MSG_2"];?></p></td>
       </tr>
     </table></td>
   </tr>
@@ -1293,6 +1303,8 @@ function template_reset_correct_mail($mail)
 
 function template_reset_password_succesfully($user,$password)
 {
+	
+	global $str;
 	?>
 	
 	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -1323,21 +1335,21 @@ function template_reset_password_succesfully($user,$password)
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
   <tr>
     <td align="center"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_msg_bg">
       <tr>
-        <td align="center"><span class="txt_light">::</span><span class="header_msg_txt"><strong> Password Resetted</strong></span><span class="txt_light">::</span></td>
+        <td align="center"><span class="txt_light">::</span><span class="header_msg_txt"><strong><?php echo $str["LOGIN_RESET_TITLE"];?></strong></span><span class="txt_light">::</span></td>
       </tr>
       <tr>
-        <td colspan="3" class="body_msg_bg" align="center"><p>Your password have been resetted succesfully. Please <a href="login.php" target="_blank">login</a> with the following username and password:</p>
-          <p>Username: <?php echo $user;?><br>
-            Password:<?php echo $password;?>
+        <td colspan="3" class="body_msg_bg" align="center"><p><?php echo $str["LOGIN_RESET_SUCC_MSG"];?> <?php echo $str["LOGIN_RESET_SUCC_MSG_2"];?> <a href="login.php" target="_blank"><?php echo $str["LOGIN_RESET_SUCC_MSG_3"];?></a> <?php echo $str["LOGIN_RESET_SUCC_MSG_4"];?>:</p>
+          <p><?php echo $str["LOGIN_MENU_USERNAME"];?>: <?php echo $user;?><br>
+            <?php echo $str["LOGIN_MENU_PASSWORD"];?>:<?php echo $password;?>
           </p>
-          <p>Once you are logged in please change your password in the ACP.</p></td>
+          <p><?php echo $str["LOGIN_RESET_SUCC_MSG_5"];?></p></td>
       </tr>
     </table></td>
   </tr>
@@ -1356,6 +1368,8 @@ function template_reset_password_succesfully($user,$password)
 
 function template_login_failed()
 {
+	global $str;
+	
 	?>
 	
 	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -1386,19 +1400,19 @@ function template_login_failed()
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
   <tr>
     <td align="center"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_msg_bg">
       <tr>
-        <td align="center"><span class="txt_light">::</span><span class="header_msg_txt"><strong> Login failed</strong></span><span class="txt_light">::</span></td>
+        <td align="center"><span class="txt_light">::</span><span class="header_msg_txt"><strong><?php echo $str["LOGIN_FAIL_TITLE"];?></strong></span><span class="txt_light">::</span></td>
       </tr>
       <tr>
-        <td colspan="3" class="body_msg_bg" align="center">Failed to login, please check your username and/or password. <a href="" target="_self" onclick="history.go(-1)">Click here to go back.</a><br>
+        <td colspan="3" class="body_msg_bg" align="center"><?php echo $str["LOGIN_FAIL_MSG"];?> <a href="" target="_self" onclick="history.go(-1)"><?php echo $str["LOGIN_GO_BACK"];?></a><br>
           <br>
-          <a href="?reset=1" target="_self">Forgot password or name?</a><br>
+          <a href="?reset=1" target="_self"><?php echo $str["LOGIN_MENU_FORGOT"];?></a><br>
 
 </td>
       </tr>
@@ -1419,6 +1433,8 @@ function template_login_failed()
 
 function template_login_visitor_failed()
 {
+	global $str;
+	
 	?>
 	
 	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -1449,17 +1465,17 @@ function template_login_visitor_failed()
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
   <tr>
     <td align="center"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_msg_bg">
       <tr>
-        <td align="center"><span class="txt_light">::</span> <span class="header_msg_txt"><strong>Access Denied - Private PBSViewer</strong></span><span class="txt_light">::</span></td>
+        <td align="center"><span class="txt_light">::</span> <span class="header_msg_txt"><strong> <?php echo $str["LOGIN_VISITOR_TITLE"];?> </strong></span><span class="txt_light">::</span></td>
       </tr>
       <tr>
-        <td colspan="3" class="body_msg_bg" align="center"><p>Password is invalid, please check your password. <a href="" target="_self" onclick="history.go(-1)">Click here to go back.</a><br>
+        <td colspan="3" class="body_msg_bg" align="center"><p><?php echo $str["LOGIN_VISITOR_INVALID_MSG"];?> <a href="" target="_self" onclick="history.go(-1)"><?php echo $str["LOGIN_GO_BACK"];?></a><br>
 
 </p></td>
       </tr>
@@ -1481,6 +1497,8 @@ function template_login_visitor_failed()
 //	template for when user has logged in successfully
 function template_login_success()
 {
+	global $str;
+	
 	?>
 	
 	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -1514,17 +1532,17 @@ function template_login_success()
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
   <tr>
     <td align="center"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_msg_bg">
       <tr>
-        <td align="center"><span class="txt_light">::</span><span class="header_msg_txt"><strong> Logged in</strong></span><span class="txt_light">::</span></td>
+        <td align="center"><span class="txt_light">::</span><span class="header_msg_txt"><strong> <?php echo $str["LOGIN_SUCCESS_TITLE"];?> </strong></span><span class="txt_light">::</span></td>
       </tr>
       <tr>
-        <td colspan="3" class="body_msg_bg" align="center">You are now logged in successfully, you will be redirected to the main page or <a href="./" target="_self">click here to go to your main page</a>.<br>          
+        <td colspan="3" class="body_msg_bg" align="center"><?php echo $str["LOGIN_SUCCESS_MSG"];?> <a href="./" target="_self"><?php echo $str["LOGIN_SUCCESS_MSG_2"];?></a><br>          
           <br>
 
 </td>
@@ -1548,17 +1566,52 @@ function template_login_success()
 //	template for when user has logged in successfully
 function template_logout_success()
 {
+	global $str;
+	
 	?>
 	
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="See captured punkbuster screenshots online with punkbuster (PB) Screenshot Viewer (PBSViewer).">
+<meta name="keywords" content="pb, view, viewer, punkbuster, php, parser, screens, capture, gaming, cheat">
+<meta name="robot" content="index,follow">
+<meta name="copyright" content="Copyright &copy; 2009 B.S. Rijnders aka BandAhr. All rights reserved">
+<meta name="author" content="B.S. Rijnders">
+<meta name="revisit-after" content="7">
+<title>Punkbuster (PB) Screenshot Viewer (PBSViewer) - Login</title>
 
+<link href="style/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="style/img/favicon.ico"> 
+
+<meta http-equiv="refresh" content="5;URL=./" />
+
+</head>
+
+<body>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 		<table width="60%" border="0" align="center">
+		  <tr>
+    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+<br><br>
+<br></td>
+  </tr>
   <tr>
     <td align="center"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_msg_bg">
       <tr>
-        <td align="center"><span class="txt_light">::</span><span class="header_msg_txt"><strong> Logged out</strong></span><span class="txt_light">::</span></td>
+        <td align="center"><span class="txt_light">::</span><span class="header_msg_txt"><strong> <?php echo $str["LOGOUT_TITLE"];?> </strong></span><span class="txt_light">::</span></td>
       </tr>
       <tr>
-        <td colspan="3" class="body_msg_bg" align="center">You are logged out successfully, you will be redirected to the main page or <a href="./" target="_self">click here to go to your main page</a>.<br>          
+        <td colspan="3" class="body_msg_bg" align="center"><?php echo $str["LOGOUT_MSG"];?> <a href="./" target="_self"><?php echo $str["LOGOUT_MSG_2"];?></a><br>          
           <br>
 
 </td>
@@ -1571,7 +1624,9 @@ function template_logout_success()
 
   </tr>
 </table>
-
+<br>
+</body>
+</html>
 	
 	<?php
 	
@@ -1580,6 +1635,8 @@ function template_logout_success()
 //	small menu for user to login
 function template_login_top_menu()
 {
+	global $str;
+	
 	//	first check if user already is logged in
 	if(is_admin())
 	{
@@ -1587,7 +1644,7 @@ function template_login_top_menu()
 		
 		<table width="100%" border="0">
   <tr>
-    <td align="right">Welcome <?php echo get_admin_name();?> | <a href="?logout=1">Logout</a></td>
+    <td align="right"><?php echo $str["LOGIN_WELCOME"]." ".get_admin_name();?> | <a href="login.php?logout=1"><?php echo $str["LOGOUT_HEADER_MAIN"];?></a></td>
   </tr>
 </table>
 		
@@ -1599,7 +1656,7 @@ function template_login_top_menu()
 		
 		<table width="100%" border="0">
   <tr>
-    <td align="right"><a href="login.php" target="_self">Login</a></td>
+    <td align="right"><a href="login.php" target="_self"><?php echo $str["LOGIN_HEADER_MAIN"];?></a></td>
   </tr>
 </table>
 		
@@ -1644,14 +1701,14 @@ function template_denied_no_perm()
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
   <tr>
     <td align="center"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_msg_bg">
       <tr>
-        <td align="center"><span class="txt_light">::</span> <span class="header_msg_txt"><strong>Access Denied!</strong></span> <span class="txt_light">::</span></td>
+        <td align="center"><span class="txt_light">::</span> <span class="header_msg_txt"><strong> <?php echo $str['MISC_ACCESS_DENIED_NO_PERM_TITLE'];?> </strong></span> <span class="txt_light">::</span></td>
       </tr>
       <tr>
         <td colspan="3" class="body_msg_bg" align="center"><br>
@@ -1711,26 +1768,26 @@ function template_denied_private()
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
   <tr>
     <td align="center"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_msg_bg">
       <tr>
-        <td align="center"><span class="txt_light">::</span> <span class="header_msg_txt"><strong>Access Denied - Private PBSViewer</strong></span><span class="txt_light">::</span></td>
+        <td align="center"><span class="txt_light">::</span> <span class="header_msg_txt"><strong> <?php echo $str['PRIVATE_TITLE'];?> </strong></span><span class="txt_light">::</span></td>
       </tr>
       <tr>
         <td colspan="3" class="body_msg_bg" align="center"><p><br> 
-          This is a private page, only those who know the private password can use PBSViewer. Admin can login by clicking on login (see 'Login' upper right)</p>
+          <?php echo $str['PRIVATE_MSG'];?></p>
           <p>
           </p>
           <form name='login' method='post' action='' autocomplete="off">
-            <label><strong>Password</strong>:
+            <label><strong><?php echo $str['PRIVATE_PASSWORD'];?></strong>:
 <input type='password' name='password' id='password' class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
             </label>
             <label>
-            <input type='submit' name='login' id='login' value='Login'></label></form>
+            <input type='submit' name='login' id='login' value='<?php echo $str['PRIVATE_LOGIN'];?>'></label></form>
 <br>
 
 </td>
@@ -1786,14 +1843,14 @@ function template_denied()
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
   <tr>
     <td align="center"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_msg_bg">
       <tr>
-        <td align="center"><span class="txt_light">::</span> <span class="header_msg_txt"><strong>Access Denied!</strong></span> <span class="txt_light">::</span></td>
+        <td align="center"><span class="txt_light">::</span> <span class="header_msg_txt"><strong> <?php echo $str['MISC_ACCESS_DENIED_ADMIN_TITLE'];?> </strong></span> <span class="txt_light">::</span></td>
       </tr>
       <tr>
         <td colspan="3" class="body_msg_bg" align="center"><br>

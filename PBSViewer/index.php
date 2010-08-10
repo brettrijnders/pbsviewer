@@ -246,12 +246,6 @@ template_header();
 	{
 		echo "<meta http-equiv='refresh' content='0;URL=ACP.php' />";
 	}
-	elseif (isset($_GET['logout']))
-	{
-		logout();
-		template_logout_success();
-		echo "<meta http-equiv='refresh' content='5;URL=./' />";
-	}
 	else 
 	{
 		//	show all pics with 4 pics per row

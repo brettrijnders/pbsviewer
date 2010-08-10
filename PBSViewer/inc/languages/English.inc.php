@@ -34,6 +34,41 @@ $language								=	"English";
 $str["TITLE"] 							=	"Punkbuster (PB) Screenshot Viewer (PBSViewer) of ".CLAN_TAG." capturing screens of ".CLAN_GAME;
 $str["META_DESC"] 						=	"See captured punkbuster screenshots online with PBsViewer. Those screens are captured on gameserver of ".CLAN_NAME." which runs ".CLAN_GAME;
 
+//----------------LOGIN-------------------
+$str["LOGIN_WELCOME"]					=	"Welcome";
+$str["LOGOUT_HEADER_MAIN"]				=	"Logout";
+$str["LOGIN_HEADER_MAIN"]				=	"Login";
+$str["LOGIN_MENU_TITLE"]				=	"Login";
+$str["LOGIN_MENU_USERNAME"]				=	"Username";
+$str["LOGIN_MENU_PASSWORD"]				=	"Password";
+$str["LOGIN_MENU_BUTTON"]				=	"Login";
+$str["LOGIN_MENU_FORGOT"]				=	"Forgot password or name?";
+$str["LOGIN_FAIL_TITLE"]				=	"Login failed";
+$str["LOGIN_FAIL_MSG"]					=	"Failed to login, please check your username and/or password.";
+$str["LOGIN_GO_BACK"]					=	"Click here to go back.";
+$str["LOGOUT_TITLE"]					=	"Logged out";
+$str["LOGOUT_MSG"]						=	"You are logged out successfully, you will be redirected to the main page.";
+$str["LOGOUT_MSG_2"]					=	"If you can not wait then click here to go to the main page.";
+$str["LOGIN_RESET_TITLE"]				=	"Reset password";
+$str["LOGIN_RESET_MSG"]					=	"Fill in your mail address in case you forgot your username and/or password. This mail will contain your username and a link that can be used to reset your password";
+$str["LOGIN_RESET_SUBMIT"]				=	"Submit";
+$str["LOGIN_CORRECT_MAIL_TITLE"]		=	"Reset";
+$str["LOGIN_CORRECT_MAIL_MSG"]			=	"Mail has been sent to";
+$str["LOGIN_CORRECT_MAIL_MSG_2"]		=	"Click on the link in your mail to reset your password.";
+$str["LOGIN_INVALID_MAIL_TITLE"]		=	"Reset - Invalid mail";
+$str["LOGIN_INVALID_MAIL_MSG"]			=	"Sorry could not find your mail, please check if you used the correct mail address.";
+$str["LOGIN_RESET_SUCC_TITLE"]			=	"Password Resetted";
+$str["LOGIN_RESET_SUCC_MSG"]			=	"Your password have been resetted succesfully.";
+$str["LOGIN_RESET_SUCC_MSG_2"]			=	"Please";
+$str["LOGIN_RESET_SUCC_MSG_3"]			=	"login";
+$str["LOGIN_RESET_SUCC_MSG_4"]			=	"with the following username and password";
+$str["LOGIN_RESET_SUCC_MSG_5"]			=	"Once you are logged in please change your password in the ACP.";
+$str["LOGIN_VISITOR_TITLE"]				=	"Access Denied - Private PBSViewer";
+$str["LOGIN_VISITOR_INVALID_MSG"]		=	"Password is invalid, please check your password.";
+$str["LOGIN_SUCCESS_TITLE"]				=	"Logged in";
+$str["LOGIN_SUCCESS_MSG"]				=	"You are now logged in successfully, you will be redirected to the main page.";
+$str["LOGIN_SUCCESS_MSG_2"]				=	"If you can not wait then click here to go to the main page.";
+
 
 //----------------SEARCH MENU-------------------
 $str["SM_NAME"] 						=	"name";
@@ -59,6 +94,7 @@ $str["STAT_TOTAL_INCOMPLETE"]			= 	"Total incomplete screens";
 $str["STAT_CURRENT_WIN_SCREENS"]		= 	"Screens shown in current window";
 
 //----------------POPUP SCREEN INFO-------------------
+$str["POP_FILE_TITLE"]					= 	"Screen info";
 $str["POP_FILE"] 						= 	"File";
 $str["POP_PLAYER"] 						= 	"Player";
 $str["POP_GUID"] 						= 	"GUID";
@@ -87,6 +123,7 @@ $str["DETSCRN_MD5_INVALID"]				=	$str["POP_MD5_INVALID"];
 $str["DETSCRN_MD5_SCREEN"]				=	$str["POP_MD5_SCREEN"];
 $str["DETSCRN_MD5_LOG"]					=	$str["POP_MD5_LOG"];
 $str["DETSCRN_MD5_HASH"]				=	$str["POP_MD5_HASH"];
+$str["DETSCRN_SHOW_MORE"]				=	"Show more screens of this player";
 $str["DETSCRN_BACK"]					=	"Go back";
 
 //----------------DETAILED SCREEN INFO TOOLS-------------------
@@ -97,6 +134,7 @@ $str["DETSCRN_TOOLS_ZOOM_COMMENT"]		=	"Increase zoom ratio by dragging mouse upw
 $str["DETSCRN_TOOLS_ZOOM_COMMENT_2"]	=	"Decrease zoom ratio by dragging mouse downwards";
 $str["DETSCRN_TOOLS_ZOOM_COMMENT_3"]	=	"Increase zoom window by dragging mouse to the right";
 $str["DETSCRN_TOOLS_ZOOM_COMMENT_4"]	=	"Decrease zoom window by dragging mouse to the left";
+$str["DETSCRN_TOOLS_ZOOM_COMMENT_5"]	=	"You are using Opera, probably this zoom fuction will not work when you activate it.";
 
 
 //----------------FOOTER-------------------
@@ -238,6 +276,12 @@ $str["ACP_SAVE"]						=	"Save settings";
 $str["ACP_TRUE"]						=	"True";
 $str["ACP_FALSE"]						=	"False";
 
+//----------------PRIVATE PBSViewer-------------------
+$str['PRIVATE_TITLE']					=	"Access Denied - Private PBSViewer";
+$str['PRIVATE_MSG']						=	"This is a private page, only those who know the private password can use PBSViewer. Admin can login by clicking on login (see 'Login' upper right)";
+$str['PRIVATE_PASSWORD']				=	"Password";
+$str['PRIVATE_LOGIN']					=	"Login";
+
 //---------------------------------------------
 //REMAINING MESSAGES
 //---------------------------------------------
@@ -248,8 +292,11 @@ $str["ACP_FALSE"]						=	"False";
 //----------------DEBUG MESSAGES-------------------
 
 //----------------MISC-------------------
-$str['MISC_ACCESS_DENIED_ADMIN']	=	"You are not allowed to access this page, only admins are allowed to access this page. Please contact the webmaster for more information.";
-$str['MISC_ACCESS_DENIED_NO_PERM']	=	"You are not allowed to access this page. Please contact the webmaster if you want to access this page.";
+$str['MISC_ACCESS_DENIED_ADMIN']			=	"You are not allowed to access this page, only admins are allowed to access this page. Please contact the webmaster for more information.";
+$str['MISC_ACCESS_DENIED_ADMIN_TITLE']		=	"Access Denied!";
+$str['MISC_ACCESS_DENIED_NO_PERM_TITLE']	=	"Access Denied!";
+$str['MISC_ACCESS_DENIED_NO_PERM']			=	"You are not allowed to access this page. Please contact the webmaster if you want to access this page.";
+
 
 
 ?>

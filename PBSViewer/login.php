@@ -39,7 +39,8 @@ require_once('inc/templates.inc.php');
 //load correct language
 include("inc/load_language.inc.php");
 
-if (is_admin()==true)
+//	if admin is trying to visit this page without wanting to logout then just redirect to main page
+if (is_admin()==true&&!isset($_GET['logout']))
 {
 	header("LOCATION: ./");
 }
@@ -116,6 +117,19 @@ else
 				template_login();
 			}
 		}	
+	}
+	elseif ($_GET['logout'])
+	{
+		if($_GET['logout']==1)
+		{
+			logout();
+			template_logout_success();
+			echo "<meta http-equiv='refresh' content='5;URL=./' />";
+		}
+		else 
+		{
+			header("LOCATION: ./");
+		}
 	}
 	else 
 	{
