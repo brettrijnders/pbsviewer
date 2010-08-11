@@ -281,6 +281,7 @@ $str['PRIVATE_TITLE']					=	"Access Denied - Private PBSViewer";
 $str['PRIVATE_MSG']						=	"This is a private page, only those who know the private password can use PBSViewer. Admin can login by clicking on login (see 'Login' upper right)";
 $str['PRIVATE_PASSWORD']				=	"Password";
 $str['PRIVATE_LOGIN']					=	"Login";
+$str['PRIVATE_CLICK_HERE']				=	"Click here to enter your password";
 
 //---------------------------------------------
 //REMAINING MESSAGES
