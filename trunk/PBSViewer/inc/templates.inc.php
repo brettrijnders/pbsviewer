@@ -50,19 +50,54 @@ function template_header()
 <script src="inc/js/jquery/plugins/tooltip/lib/jquery.dimensions.js" type="text/javascript"></script>
 <script src="inc/js/jquery/plugins/tooltip/jquery.tooltip.js" type="text/javascript"></script> 
 
-<!-- This script is used to show extra screen info during hover-->
-<script type="text/javascript">
-$(function() {
-	
-$('#scrnInfo a').tooltip({
-	track: true,
-	delay: 0,
-	showURL: false,
-	showBody: " - ",
-	fade: 250
-});
 
-});
+<style type="text/css">
+	
+.large-size {
+	width:250px;
+    height:250px;
+    }	
+</style>
+
+<script type="text/javascript">
+
+//	after document has loaded
+$(document).ready(function()
+	{
+		
+			
+		//	when hovering over an image, make image a bit larger
+		$("img.hoverZoom").hover(
+			
+          function () {
+          	//	stop() is used to prevent animation Queue Buildup, see following sites for more information:
+          	//	http://api.jquery.com/stop/
+          	//	http://www.learningjquery.com/2009/01/quick-tip-prevent-animation-queue-buildup
+          	$(this).stop(true,true).fadeTo('fast',0.5);
+            $(this).addClass("large-size").stop(true,true).fadeTo('slow',1);            
+          },
+          function () {
+            $(this).removeClass("large-size");
+          }
+        );
+		
+		// used for tooltips
+		$(function() 
+		{
+	
+			$('#scrnInfo a').tooltip({
+			track: true,
+			delay: 0,
+			showURL: false,
+			showBody: " - ",
+			fade: 250
+			});
+
+		});
+	}
+)
+
+
 </script>
 
 </head>
@@ -1753,10 +1788,25 @@ function template_denied_private()
 <title>Punkbuster (PB) Screenshot Viewer (PBSViewer) - Private</title>
 
 <link href="style/style.css" rel="stylesheet" type="text/css">
-<link rel="shortcut icon" href="style/img/favicon.ico"> 
+<link rel="shortcut icon" href="style/img/favicon.ico">
+<script type="text/javascript" src="inc/js/jquery/jquery-1.4.2.js"></script> 
 </head>
 
 <body>
+
+
+<script type="text/javascript">
+//	used to show login form
+$(document).ready(function()
+						   {
+							   $("#login_form").hide()
+							   $("a").click(function()
+													 {
+														 $("#login_form").show("slow")
+													 })
+						   }
+						   )
+  </script>
 
 <br>
 <br>
@@ -1781,13 +1831,16 @@ function template_denied_private()
         <td colspan="3" class="body_msg_bg" align="center"><p><br> 
           <?php echo $str['PRIVATE_MSG'];?></p>
           <p>
+          <a href="#" target="_self"><?php echo $str['PRIVATE_CLICK_HERE'];?></a>
           </p>
+          <div id="login_form">
           <form name='login' method='post' action='' autocomplete="off">
             <label><strong><?php echo $str['PRIVATE_PASSWORD'];?></strong>:
 <input type='password' name='password' id='password' class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
             </label>
             <label>
             <input type='submit' name='login' id='login' value='<?php echo $str['PRIVATE_LOGIN'];?>'></label></form>
+            </div>
 <br>
 
 </td>
