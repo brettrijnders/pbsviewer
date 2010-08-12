@@ -45,7 +45,7 @@ function template_header()
 
 <link href="style/style.css" rel="stylesheet" type="text/css">
 <link rel="shortcut icon" href="style/img/favicon.ico">
-<script type="text/javascript" src="inc/js/jquery/jquery-1.4.2.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="inc/js/jquery/plugins/tooltip/lib/jquery.bgiframe.js" type="text/javascript"></script>
 <script src="inc/js/jquery/plugins/tooltip/lib/jquery.dimensions.js" type="text/javascript"></script>
 <script src="inc/js/jquery/plugins/tooltip/jquery.tooltip.js" type="text/javascript"></script> 
@@ -160,7 +160,7 @@ function template_header_detailed_page()
 -->
 <script type="text/javascript" src="inc/js/zoom/tjpzoom.js"></script> 
 <script type="text/javascript" src="inc/js/zoom/tjpzoom_config_PBSViewer.js"></script>
-<script type="text/javascript" src="inc/js/jquery/jquery-1.4.2.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="inc/js/jquery/plugins/tooltip/lib/jquery.bgiframe.js" type="text/javascript"></script>
 <script src="inc/js/jquery/plugins/tooltip/lib/jquery.dimensions.js" type="text/javascript"></script>
 <script src="inc/js/jquery/plugins/tooltip/jquery.tooltip.js" type="text/javascript"></script> 
@@ -1789,7 +1789,7 @@ function template_denied_private()
 
 <link href="style/style.css" rel="stylesheet" type="text/css">
 <link rel="shortcut icon" href="style/img/favicon.ico">
-<script type="text/javascript" src="inc/js/jquery/jquery-1.4.2.js"></script> 
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script> 
 </head>
 
 <body>
