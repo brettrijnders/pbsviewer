@@ -51,13 +51,7 @@ function template_header()
 <script src="inc/js/jquery/plugins/tooltip/jquery.tooltip.js" type="text/javascript"></script> 
 
 
-<style type="text/css">
-	
-.large-size {
-	width:250px;
-    height:250px;
-    }	
-</style>
+
 
 <script type="text/javascript">
 
@@ -67,18 +61,16 @@ $(document).ready(function()
 		
 			
 		//	when hovering over an image, make image a bit larger
-		$("img.hoverZoom").hover(
+		$("img.hover").hover(
 			
           function () {
           	//	stop() is used to prevent animation Queue Buildup, see following sites for more information:
           	//	http://api.jquery.com/stop/
           	//	http://www.learningjquery.com/2009/01/quick-tip-prevent-animation-queue-buildup
           	$(this).stop(true,true).fadeTo('fast',0.5);
-            $(this).addClass("large-size").stop(true,true).fadeTo('slow',1);            
+            $(this).stop(true,true).fadeTo('slow',1);            
           },
-          function () {
-            $(this).removeClass("large-size");
-          }
+          function () {}
         );
 		
 		// used for tooltips
@@ -314,7 +306,7 @@ function template_search($current_scrn_nr)
                 <option value="name" selected><?php echo $str['SM_NAME'];?></option>
                 <option value="guid"><?php echo $str['SM_GUID'];?></option>
                 </select>              </td>
-              <td width="50%" align="center"><input name="input" type="text" id="input" value="" onclick="this.focus();" size="70" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';"></td>
+              <td width="50%" align="center"><input name="input" type="text" id="input_search" value="" onclick="this.focus();" size="70" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';"></td>
                 <td width="10%" align="left">&nbsp;<input type="submit" name="search" id="search" value="<?php echo $str['SM_SEARCH'];?>" class="buttons" onmouseover="this.className='buttons_hover'" onmouseout="this.className='buttons'"></td>
                 <td align="left"><input type="submit" name="show_all" id="show_all" value="<?php echo $str['SM_SHOW_ALL'];?>" class="buttons" onmouseover="this.className='buttons_hover'" onmouseout="this.className='buttons'"></td>
                 <td align="left"> 
