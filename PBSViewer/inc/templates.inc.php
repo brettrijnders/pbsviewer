@@ -45,19 +45,62 @@ function template_header()
 
 <link href="style/style.css" rel="stylesheet" type="text/css">
 <link rel="shortcut icon" href="style/img/favicon.ico">
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="inc/js/jquery/plugins/tooltip/lib/jquery.bgiframe.js" type="text/javascript"></script>
-<script src="inc/js/jquery/plugins/tooltip/lib/jquery.dimensions.js" type="text/javascript"></script>
-<script src="inc/js/jquery/plugins/tooltip/jquery.tooltip.js" type="text/javascript"></script> 
 
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+
+<!--
+	For the 2 plugins tooltips and autocomplete it needs 2 .js scripts:
+	- jquery.bgiframe.min.js
+	- jquery.dimensions.js
+	
+	those can be found on dev.jquery.com trunk location or in 'inc/js/jquery/plugins/tooltip/lib'
+	
+	Scripts used for autocomplete
+	jquery.bgiframe.min.js is also used by tooltip plugin
+	
+-->
+<link rel="stylesheet" href="http://dev.jquery.com/view/trunk/plugins/autocomplete/jquery.autocomplete.css" type="text/css" />
+<script type="text/javascript" src="http://dev.jquery.com/view/trunk/plugins/autocomplete/lib/jquery.bgiframe.min.js"></script>
+<script type="text/javascript" src="http://dev.jquery.com/view/trunk/plugins/autocomplete/jquery.autocomplete.js"></script>
+
+<!-- 
+Scripts used for tooltip
+jquery.dimensions.js is also used by autocomplete plugin	
+-->
+<script type="text/javascript" src="inc/js/jquery/plugins/tooltip/lib/jquery.dimensions.js"></script>
+<script type="text/javascript" src="inc/js/jquery/plugins/tooltip/jquery.tooltip.js"></script>
 
 
 
 <script type="text/javascript">
 
+
 //	after document has loaded
 $(document).ready(function()
-	{
+	{	
+		
+		
+		function EnableAutoComplete() 
+		{
+			var sID = $("#sID").val();	
+								
+			var data = "<?php echo auto_complete_data_names();?>".split(" ");
+				
+			
+			if (sID!='name')
+			{	
+				data = "";		
+				$("#input_search").flushCache();	
+			}	
+
+			$("#input_search").autocomplete(data);
+			
+			
+		}
+		
+		$("select").change(EnableAutoComplete);
+		EnableAutoComplete();
+		
 		
 			
 		//	when hovering over an image, make image a bit larger
@@ -73,10 +116,11 @@ $(document).ready(function()
           function () {}
         );
 		
-		// used for tooltips
+		
+        
+        // used for tooltips
 		$(function() 
-		{
-	
+		{		
 			$('#scrnInfo a').tooltip({
 			track: true,
 			delay: 0,
@@ -86,6 +130,10 @@ $(document).ready(function()
 			});
 
 		});
+		
+		
+		
+		
 	}
 )
 

@@ -1086,15 +1086,15 @@ function get_wildcard($search)
 	return $search;
 }
 
-// get all data (filename,names,guids) from database that can be used for autocomplete
-function auto_complete_data_fid()
+// get all data (names) from database that can be used for autocomplete
+function auto_complete_data_names()
 {
 	
 	$i	=	1;
-	$data = "source: [\n";
+	$data = "";
 
 	//	those fids are unique
-	$sql_select	=	"SELECT `fid` FROM `screens`";
+	$sql_select	=	"SELECT DISTINCT(`name`) FROM `screens`";
 	$sql 		=	mysql_query($sql_select);
 	$countRows	=	mysql_num_rows($sql);
 	if(mysql_num_rows($sql)>0)
@@ -1103,18 +1103,18 @@ function auto_complete_data_fid()
 		{
 			if ($countRows==$i)
 			{
-				$data .= "\"".$row->fid."\"\n";
+				$data .= $row->name;
 			}
 			else 
 			{
-				$data .= "\"".$row->fid."\",\n";
+				$data .= $row->name." ";
 			}
 			
 			$i++;
 		}
 	}
 	
-	$data .= "]";
+
 		
 	return $data;
 }
