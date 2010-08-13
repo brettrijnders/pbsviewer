@@ -46,29 +46,11 @@ function template_header()
 <link href="style/style.css" rel="stylesheet" type="text/css">
 <link rel="shortcut icon" href="style/img/favicon.ico">
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="http://cdn.jquerytools.org/1.2.3/full/jquery.tools.min.js"></script>
+  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
 
-<!--
-	For the 2 plugins tooltips and autocomplete it needs 2 .js scripts:
-	- jquery.bgiframe.min.js
-	- jquery.dimensions.js
-	
-	those can be found on dev.jquery.com trunk location or in 'inc/js/jquery/plugins/tooltip/lib'
-	
-	Scripts used for autocomplete
-	jquery.bgiframe.min.js is also used by tooltip plugin
-	
--->
-<link rel="stylesheet" href="http://dev.jquery.com/view/trunk/plugins/autocomplete/jquery.autocomplete.css" type="text/css" />
-<script type="text/javascript" src="http://dev.jquery.com/view/trunk/plugins/autocomplete/lib/jquery.bgiframe.min.js"></script>
-<script type="text/javascript" src="http://dev.jquery.com/view/trunk/plugins/autocomplete/jquery.autocomplete.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 
-<!-- 
-Scripts used for tooltip
-jquery.dimensions.js is also used by autocomplete plugin	
--->
-<script type="text/javascript" src="inc/js/jquery/plugins/tooltip/lib/jquery.dimensions.js"></script>
-<script type="text/javascript" src="inc/js/jquery/plugins/tooltip/jquery.tooltip.js"></script>
 
 
 
@@ -83,17 +65,26 @@ $(document).ready(function()
 		function EnableAutoComplete() 
 		{
 			var sID = $("#sID").val();	
-								
-			var data = "<?php echo auto_complete_data_names();?>".split(" ");
-				
+							
+			var data	=	<?php echo auto_complete_data_names();?>	
+			$("#input_search").autocomplete({
+				source: data
+
+    });
+						
 			
 			if (sID!='name')
 			{	
 				data = "";		
-				$("#input_search").flushCache();	
+				$("#input_search").autocomplete( "option", "disabled", true );	
+			}
+			else
+			{
+				$("#input_search").autocomplete( "option", "disabled", false );
 			}	
+			
 
-			$("#input_search").autocomplete(data);
+			
 			
 			
 		}
@@ -101,7 +92,12 @@ $(document).ready(function()
 		$("select").change(EnableAutoComplete);
 		EnableAutoComplete();
 		
-		
+		$("img.hover").tooltip({ 
+						   
+						   effect: 'slide',
+						   opacity: 0.7,
+						   position: ['bottom','center']});
+
 			
 		//	when hovering over an image, make image a bit larger
 		$("img.hover").hover(
@@ -115,22 +111,7 @@ $(document).ready(function()
           },
           function () {}
         );
-		
-		
-        
-        // used for tooltips
-		$(function() 
-		{		
-			$('#scrnInfo a').tooltip({
-			track: true,
-			delay: 0,
-			showURL: false,
-			showBody: " - ",
-			fade: 250
-			});
-
-		});
-		
+			
 		
 		
 		
