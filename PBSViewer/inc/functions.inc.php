@@ -1102,7 +1102,7 @@ function auto_complete_data_names()
 		{
 			if ($countRows==$i)
 			{
-				$data .= "\"".addslashes($row->name)."\"]";
+				$data .= "\"".addslashes($row->name)."\"";
 			}
 			else 
 			{
@@ -1113,7 +1113,7 @@ function auto_complete_data_names()
 		}
 	}
 	
-
+	$data	.=	"]";
 		
 	return $data;
 }
