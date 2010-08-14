@@ -1,6 +1,6 @@
 changelog 2.1.0.0:
 ------------------------------------
-- autocomplete functionality if you search for names
+- Added autocomplete functionality if you search for names
 - Added nice thumbnail hover effect for screens.
 - Created new logo for PBSViewer.
 - Installer update: now it shows some server information during install.
