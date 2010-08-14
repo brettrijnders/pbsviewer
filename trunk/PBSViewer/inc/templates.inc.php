@@ -115,8 +115,7 @@ $(document).ready(function()
 		
 		
 		
-	}
-)
+	});
 
 
 </script>
@@ -1824,8 +1823,7 @@ $(document).ready(function()
 													 {
 														 $("#login_form").show("slow")
 													 })
-						   }
-						   )
+						   });
   </script>
 
 <br>
