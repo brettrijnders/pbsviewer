@@ -94,7 +94,6 @@ $str["STAT_TOTAL_INCOMPLETE"]			= 	"Total incomplete screens";
 $str["STAT_CURRENT_WIN_SCREENS"]		= 	"Screens shown in current window";
 
 //----------------POPUP SCREEN INFO-------------------
-$str["POP_FILE_TITLE"]					= 	"Screen info";
 $str["POP_FILE"] 						= 	"File";
 $str["POP_PLAYER"] 						= 	"Player";
 $str["POP_GUID"] 						= 	"GUID";
@@ -127,7 +126,6 @@ $str["DETSCRN_SHOW_MORE"]				=	"Show more screens of this player";
 $str["DETSCRN_BACK"]					=	"Go back";
 
 //----------------DETAILED SCREEN INFO TOOLS-------------------
-$str["DETSCRN_TOOLS_SAVE_TITLE"]		=	"Save As...";
 $str["DETSCRN_TOOLS_SAVE_COMMENT"]		=	"Save original screen";
 $str["DETSCRN_TOOLS_ZOOM_TITLE"]		=	"Enable/Disable Zoom";
 $str["DETSCRN_TOOLS_ZOOM_COMMENT"]		=	"Increase zoom ratio by dragging mouse upwards";

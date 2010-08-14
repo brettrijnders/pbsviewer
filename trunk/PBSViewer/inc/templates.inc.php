@@ -181,22 +181,21 @@ function template_header_detailed_page()
 -->
 <script type="text/javascript" src="inc/js/zoom/tjpzoom.js"></script> 
 <script type="text/javascript" src="inc/js/zoom/tjpzoom_config_PBSViewer.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="inc/js/jquery/plugins/tooltip/lib/jquery.bgiframe.js" type="text/javascript"></script>
-<script src="inc/js/jquery/plugins/tooltip/lib/jquery.dimensions.js" type="text/javascript"></script>
-<script src="inc/js/jquery/plugins/tooltip/jquery.tooltip.js" type="text/javascript"></script> 
+
+<script src="http://cdn.jquerytools.org/1.2.3/full/jquery.tools.min.js"></script>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 
 <!-- This script is used to show extra screen info during hover-->
 <script type="text/javascript">
-$(function() {
+//	after document has loaded
+$(document).ready(function() {
 	
-$('#scrnInfo a').tooltip({
-	track: true,
-	delay: 0,
-	showURL: false,
-	showBody: " - ",
-	fade: 250
-});
+$("img.hover").tooltip({ 
+						   
+						   effect: 'slide',
+						   opacity: 0.7,
+						   position: ['bottom','center']});
 
 });
 </script>
@@ -494,8 +493,8 @@ function changeImage()
 
 <table width="90%" border="0" align="center">
   <tr>
-  <td align="center" valign="top" class="bg_detailed_screen_tools" id="scrnInfo"><a href="<?php echo "inc/imgSave.inc.php?saveIMG=".$fid;?>" title="<?php echo $str["DETSCRN_TOOLS_SAVE_TITLE"];?> - <?php echo $str["DETSCRN_TOOLS_SAVE_COMMENT"];?>"><img src="style/img/save.gif" width="32" height="32" alt="<?php echo $str["DETSCRN_TOOLS_ZOOM_ENABLE"];?>" border="0"></a>
-    &nbsp;<a href="#" onclick="TJPzoomswitch(document.getElementById('unique1337'))" title="<?php echo $str["DETSCRN_TOOLS_ZOOM_TITLE"];?> - <br><ul>
+  <td align="center" valign="top" class="bg_detailed_screen_tools"><a href="<?php echo "inc/imgSave.inc.php?saveIMG=".$fid;?>"><img src="style/img/save.gif" width="32" height="32" alt="<?php echo $str["DETSCRN_TOOLS_ZOOM_ENABLE"];?>" border="0" class="hover"></a><div class="tooltip"><?php echo $str["DETSCRN_TOOLS_SAVE_COMMENT"];?></div>
+    &nbsp;<a href="#" onclick="TJPzoomswitch(document.getElementById('unique1337'))"><img src="style/img/zoom_disabled.gif" width="32" height="32" alt="<?php echo $str["DETSCRN_TOOLS_ZOOM_ENABLE"];?>" border="0" onclick="changeImage()" NAME="zoomIMG" class="hover"></a><div class="tooltip"><strong><?php echo $str["DETSCRN_TOOLS_ZOOM_TITLE"];?></strong><br><ul>
   <li><?php echo $str["DETSCRN_TOOLS_ZOOM_COMMENT"];?></li>
   <li><?php echo $str["DETSCRN_TOOLS_ZOOM_COMMENT_2"];?></li>
   <li><?php echo $str["DETSCRN_TOOLS_ZOOM_COMMENT_3"];?></li>
@@ -506,7 +505,7 @@ function changeImage()
 	echo "<strong>".$str["DETSCRN_TOOLS_ZOOM_COMMENT_5"]."</strong>";
 }?>
 
-"><img src="style/img/zoom_disabled.gif" width="32" height="32" alt="<?php echo $str["DETSCRN_TOOLS_ZOOM_ENABLE"];?>" border="0" onclick="changeImage()" NAME="zoomIMG"></a>
+</div>
 <!--
 Will be implemented later on, probably version 2.2.0.0
 &nbsp;<a href="#"><img src="style/img/gamma_min.png" width="32" height="32" alt="" border="0" NAME="gamma_min"></a>
