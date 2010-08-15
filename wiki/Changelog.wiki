@@ -1,4 +1,6 @@
 #labels Featured,Phase-Design
+#sidebar TableOfContents
+
 =Changelog=
 
 ==changelog 2.1.0.0==
