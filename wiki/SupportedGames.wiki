@@ -1,4 +1,6 @@
 #labels Featured
+#sidebar TableOfContents
+
 This page contains a full list of punkbuster related games that are supported by PBSViewer:
     * Battlefield 2
     * Battlefield Bad company 2
