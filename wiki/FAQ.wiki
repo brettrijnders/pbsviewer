@@ -10,9 +10,6 @@ Here you will find Frequently Asked Questions (FAQ).
     * [FAQ#After_update_the_download_folder_is_still_empty,_what_is_wrong? After update the download folder is still empty, what is wrong?]
     * [FAQ#Why_are_all_pages_are_blank? Why are all pages are blank?]
     * [FAQ#My_update_page_ran_for_a_while_and_timed_out,_what_to_do? My update page ran for a while and timed out, what to do?]
-    * [FAQ#How_does_PBSViewer_recognize_me_as_an_admin? How does PBSViewer recognize me as an admin?]
-    * [FAQ#I_want_to_modify_admin_IP,_how_should_I_do_that? I want to modify admin IP, how should I do that?]
-    * [FAQ#How_can_I_add_an_admin? How can I add an admin?]
 
 =Miscellaneous=
     * [FAQ#Who_are_you? Who are you?]
@@ -49,43 +46,6 @@ Probably this has to do with the PHP version you are using. PBSViewer is designe
 There are 2 things you can do actually. The first solution is to increase the time limit in ACP, increase the 'Script load time' value. 
 
 The second solution is that you make a back-up of your logs and screens on your gameserver. Then delete those screens and logs and play in your game server for a while (to get some screens and logs) and then start updating. The amount of files you have to download now is probably smaller, so it should work right now.
-
-
-===How does PBSViewer recognize me as an admin?===
-Well during installation you had to fill in your IP address. This IP address is stored in '_config.inc.php_' in the '_inc_' directory. If this IP address matches your IP then you will have admin access. To add an admin please check the FAQ:
-[FAQ#How_can_I_add_an_admin? How can I add an admin?]
-
-===I want to modify admin IP, how should I do that?===
-To modify your admin IP, please edit the '_config.inc.php_' file. There you will find the following line of code:
-{{{
-$admin_ip[0]	=	'YOUR_IP';
-}}}
-
-Just change the 'YOUR_IP' value.
-
-===How can I add an admin?===
-To add an admin, you need to add an IP address of the new admin, please edit the '_config.inc.php_' file, you can find it in the '_inc_' directory. There you will find the following line of code:
-{{{
-$admin_ip[0]	=	'YOUR_IP';
-}}}
-
-Just add the following code on the next line:
-{{{
-$admin_ip[1]	=	'IP OF SECOND ADMIN';
-}}}
-
-If you want to add a third admin as well, all you have to add is the following code:
-{{{
-$admin_ip[2]	=	'IP OF THIRD ADMIN';
-}}}
-
-Notice that the index number increases (changed from 1 to 2) for each new admin you want to add. The final result for 3 admins looks like this:
-{{{
-$admin_ip[0]	=	'YOUR_IP';
-$admin_ip[1]	=	'IP OF SECOND ADMIN';
-$admin_ip[2]	=	'IP OF THIRD ADMIN';
-}}}
-
 
 =Miscellaneous=
 ===Who are you?===
