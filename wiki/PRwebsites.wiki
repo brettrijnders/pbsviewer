@@ -13,3 +13,4 @@ This page is meant for project members and PR people. Below you will find a list
     * [http://battletracker.com/forum/other/offtopic-forum/200759-pb-screenshot-viewer-pbsviewer-php-script/ Battletracker forum: Offtopic]
     * [http://battletracker.com/forum/bad-company-forums/bad-company-2-discussions/200763-pb-screenshot-viewer-pbsviewer-php-script/ Battletracker forum: Bad Company 2]
     * [http://www.airdaleops.com/index.php?topic=55961.0 airdaleops forum]
+    * [http://www.unitedgamerscommunity.com/index.php?topic=50.0 unitedgamerscommunity (Gaming Clan)]
