@@ -1,4 +1,6 @@
 #labels Featured,Phase-Deploy
+#sidebar TableOfContents
+
 Here you will find Frequently Asked Questions (FAQ).
 
 =Install=
