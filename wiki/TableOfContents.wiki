@@ -1,5 +1,5 @@
 #labels Deprecated
     * [Changelog See latest changes]
-    * [FAQ Frequently Asked Questions]
+    * [FAQ Frequently Asked Questions (FAQ)]
     * [FeatureRequest Request a new feature]
     * [SupportedGames Supported Games]
