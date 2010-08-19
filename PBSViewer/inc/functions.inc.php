@@ -2476,6 +2476,9 @@ if($debug==true)
 		
 		foreach ($fileList	as $file)
 		{
+			// dirty fix, for those who are running windows gameserver, windows provides backwards slashes (\) instead of forward (/)
+			$file	=	str_replace("\\","/",$file);
+					
 			//	only do something(parsing and deleting files) if files are downloaded
 			if(ftp_get($connect,'download/'.$file,$file,FTP_BINARY))
 			{
@@ -2764,8 +2767,10 @@ function parse_log($logfile)
 	if($file	=	file($logfile))
 	{
 		
-		//	get logid
-		$logid	=	substr($logfile,9);
+	//	get logid
+	//$logid	=	substr($logfile,9);	
+	preg_match("~[0-9]+~",$logfile,$matches);
+	$logid	=	$matches[0];
 	
 	for($i=0;$i<count($file);$i++)
 	{
