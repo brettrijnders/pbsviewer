@@ -133,7 +133,7 @@ if(!isset(\$key)) die('Acces denied!');
 
 if(\$key==md5(\$_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 {
-	if(eregi(\"config.inc.php\", \$_SERVER[\"PHP_SELF\"])) die('Acces denied!');
+	if(preg_match(\"~config.inc.php~\", \$_SERVER[\"PHP_SELF\"])) die('Acces denied!');
 
 	//---------------------]	REQUIRED	[---------------------\\ \n";
 	

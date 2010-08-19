@@ -895,6 +895,15 @@ function parser_screens ($file,$debug=false)
 		preg_match("~\[[0-9]+\.[0-9]{2}\.[0-9]{2}\ [0-9]{2}\:[0-9]{2}\:[0-9]{2}\]~",$line,$matches);
 		$date = substr($matches[0],1,strlen($matches[0])-2);
 
+		//	if gamer is a hacker and knows how to to sql injection by 
+		//	changing his/her gamename to an sql injection code
+		if (get_magic_quotes_gpc())
+  		{
+  			$name	=	stripslashes($name);			
+  		}
+  		
+  		$name	=	mysql_real_escape_string($name);
+		
 		if($debug==false)
 		{
 			//	store in DB
@@ -1582,7 +1591,6 @@ function is_private()
 //	it's valid when there is an admin in database who has that mail address
 function is_valid_admin_mail($mail)
 {
-	$mail	=	mysql_real_escape_string($mail);
 	$sql_select	=	"SELECT `mail` FROM `access` WHERE `mail`='".$mail."'";
 	$sql 		=	mysql_query($sql_select);
 	if (mysql_num_rows($sql)>0)
@@ -1598,7 +1606,7 @@ function is_valid_admin_mail($mail)
 //	get username by mail, this function is used for resetting password
 function get_username_by_mail ($mail)
 {
-	$mail	=	mysql_real_escape_string($mail);
+	
 	$sql_select	=	"SELECT `name` FROM `access` WHERE `mail`='".$mail."'";
 	$sql 		=	mysql_query($sql_select);
 	if (mysql_num_rows($sql)>0)
@@ -1621,7 +1629,6 @@ function create_Ukey_pass_reset($mail)
 {	
 	$Ukey	=	md5(get_username_by_mail($mail).$mail.time().KEY.rand());
 	
-	$mail	=	mysql_real_escape_string($mail);
 	$sql_update	=	"UPDATE `access` SET `ResetCode`='".$Ukey."' WHERE `mail`='".$mail."'";
 	$sql 		=	mysql_query($sql_update);
 	
@@ -1631,8 +1638,6 @@ function create_Ukey_pass_reset($mail)
 //	check if user is the one who asked for resetting password
 function is_password_resetter($code)
 {
-	$code	=	mysql_real_escape_string($code);
-	
 	$sql_select	=	"SELECT `ResetCode` FROM `access` WHERE `ResetCode`='".$code."'";
 	$sql 		=	mysql_query($sql_select);
 	if(mysql_num_rows($sql)>0)
@@ -1649,9 +1654,7 @@ function is_password_resetter($code)
 //	create random password for password reset and update database
 function generate_new_pass($Ukey)
 {
-	$Ukey	=	mysql_real_escape_string($Ukey);
-	
-	$password	=	 substr(md5(time().rand()),0,8);
+	$password	=	 substr(md5(time().rand()));
 	$sql_update =	"UPDATE `access` SET `pass`='".md5($password)."' WHERE `ResetCode`='".$Ukey."'";
 	$sql 		=	mysql_query($sql_update);
 	
@@ -1661,8 +1664,6 @@ function generate_new_pass($Ukey)
 //	get username by Ukey when admin has requested a reset
 function get_name_user($Ukey)
 {
-	$Ukey	=	mysql_real_escape_string($Ukey);
-	
 	$sql_select	=	"SELECT `name` FROM `access` WHERE `ResetCode`='".$Ukey."'";
 	$sql 		=	mysql_query($sql_select);
 	if(mysql_num_rows($sql)>0)
@@ -1972,8 +1973,6 @@ function check_login_visitor($password)
 {
 	global $str;
 	
-	$password	=	mysql_real_escape_string($password);
-	
 	//	check if password matches
 	$sql_select	=	"SELECT `value` FROM `settings` WHERE `name`='private_password' AND `value`='".$password."'";
 	$sql		=	mysql_query($sql_select) or die("login failed");
@@ -2017,9 +2016,6 @@ function check_login_visitor($password)
 function check_login($name,$password)
 {
 	global $str;
-	
-	$name	=	mysql_real_escape_string($name);
-	$password	=	mysql_real_escape_string($password);
 	
 	//	check if name and password matches
 	//	also check if level of user is admin level,	i.e. admin level == 1
