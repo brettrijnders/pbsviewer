@@ -100,7 +100,7 @@ function get_list_pbscreens ($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$mai
 		foreach ($fileList as $i_nr=>$content)
 		{
 			//	find all the .png files
-			if(eregi('.png',$content))
+			if(preg_match("~pb[0-9]+\.png~",$content))
 			{
 				
 				// dirty fix, for those who are running windows gameserver, windows provides backwards slashes (\) instead of forward (/)
@@ -1135,7 +1135,7 @@ function show_fid_screens($nr=4,$fileName)
 	$nr_counter	=	0;
 
 	//	check if added .png, which is not needed
-	if(eregi('.png',$fileName))
+	if(preg_match("~pb[0-9]+\.png~",$fileName))
 	{
 		//	get file name without extension
 		$posStart	=	strpos($fileName,'.');
