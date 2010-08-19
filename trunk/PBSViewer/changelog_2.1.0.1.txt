@@ -1,0 +1,6 @@
+changelog 2.1.0.1:
+------------------------------------
+
+- Improved sql injection protection.
+- Replaced eregi by preg_match.
+- Bug fix: omitted DEBUG variable in database connection, it was not defined yet.

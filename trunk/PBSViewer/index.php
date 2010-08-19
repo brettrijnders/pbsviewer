@@ -75,6 +75,14 @@ if($access==true)
 //	it will show a detailed screen info on a seperate page
 	if(isset($_GET['fid']))
 	{
+		$requestedFID	=	$_GET['fid'];		
+		if (get_magic_quotes_gpc())
+  		{
+  			$requestedFID	=	stripslashes($requestedFID);
+  		}
+  		
+  		$requestedFID	=	mysql_real_escape_string($requestedFID);
+		
 		//	get file ids aka fids
 		$fids	=	get_fids();
 		$fid_valid	=	false;
@@ -85,7 +93,7 @@ if($access==true)
 			//	go find if screen is availabe
 			foreach ($fids	as $id)	
 			{
-				if($_GET['fid']==$id)
+				if($requestedFID==$id)
 				{
 					$fid_valid	=true;
 				}	
@@ -95,7 +103,7 @@ if($access==true)
 			{
 			
 					template_header_detailed_page();
-					template_detailed_screen($_GET['fid']);
+					template_detailed_screen($requestedFID);
 					template_footer_detailed_page();
 			}
 			else 
@@ -146,8 +154,13 @@ template_header();
 	if(isset($_GET['search']))
 	{
 		//	security against sql injection
-		//$input	=	addslashes($_GET['input']);
-		$input	=	mysql_real_escape_string($_GET['input']);
+		$input	=	$_GET['input'];
+		if (get_magic_quotes_gpc())
+  		{
+  			$input	=	stripslashes($input);	
+  		}
+		
+		$input	=	mysql_real_escape_string($input);
 		
 		if($_GET['sID']=='filename')
 		{
@@ -209,6 +222,20 @@ template_header();
 		if(isset($_GET['day']) && $_GET['day']=='all_days') $day="__";
 		if(isset($_GET['hour']) && $_GET['hour']=='all_hours') $hour="__";
 		
+		//	added to prevent sql injection
+		if (get_magic_quotes_gpc())
+  		{
+  			$year	=	stripslashes($year);
+  			$month	=	stripslashes($month);
+  			$day	=	stripslashes($day);
+  			$hour	=	stripslashes($hour);	
+  		}
+  		
+  		$year	=	mysql_real_escape_string($year);
+  		$month	=	mysql_real_escape_string($month);
+  		$day	=	mysql_real_escape_string($day);
+  		$hour	=	mysql_real_escape_string($hour);
+		
 		//	put dates in array
 		$data	=	array($year,$month,$day,$hour);
 		
@@ -263,7 +290,15 @@ else
 	{
 		if($_POST['password']!='')
 		{
-			if(check_login_visitor($_POST['password']))
+			$visPass	=	$_POST['password'];
+			if (get_magic_quotes_gpc())
+  			{
+  				$visPass	=	stripslashes($visPass);
+  			}
+			
+  			$visPass	=	mysql_real_escape_string($visPass);
+  			
+			if(check_login_visitor($visPass))
 			{
 				echo "<meta http-equiv='refresh' content='0;URL=./' />";
 			}

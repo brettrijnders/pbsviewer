@@ -30,7 +30,7 @@ if(!isset($key)) die('Acces denied!');
 
 if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 {
-	if(eregi("init.inc.php", $_SERVER["PHP_SELF"])) die('Acces denied!');
+	if(preg_match("~init.inc.php~", $_SERVER["PHP_SELF"])) die('Acces denied!');
 	
 	//change argument separator to &amp instead of &, because & is not valid
 	ini_set('arg_separator.output','&amp;'); 
@@ -309,15 +309,9 @@ else
 }
 
 function connect_DB()
-{
+{	
 	$connect	=	mysql_connect(DB_HOST,DB_USER,DB_PASS);
-	if(DEBUG==true)
-	{
-		mysql_select_db(DB_NAME,$connect) or die('cannot connect to db');
-	}
-	else
-	{
-		mysql_select_db(DB_NAME,$connect) or die();
-	}
+	mysql_select_db(DB_NAME,$connect) or die('cannot connect to db');
+
 }
 ?>

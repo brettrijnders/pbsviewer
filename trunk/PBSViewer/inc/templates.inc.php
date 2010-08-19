@@ -465,10 +465,20 @@ function template_detailed_screen($fid)
 		$name	=	$data[0];
 		$guid	=	$data[1];
 		$date	=	$data[2];
+		
+		
+		//	if gamer is a hacker and knows how to to sql injection by 
+		//	changing his/her gamename to an sql injection code
+		if (get_magic_quotes_gpc())
+  		{
+  			$name	=	stripslashes($name);
+  		}
+  		
+  		$name	=	mysql_real_escape_string($name);
 
 	//	get aliases of player
 	//	$alias	=	get_alias($guid,addslashes($name));
-	$alias	=	get_alias($guid,mysql_real_escape_string($name));
+	$alias	=	get_alias($guid,$name);
 			
 	?>
 	
