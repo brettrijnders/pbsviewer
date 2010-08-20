@@ -3,6 +3,13 @@
 
 =Changelog=
 
+==changelog 2.1.0.1==
+
+    * Only download screens starting with 'pb', see issue 31.
+    * Improved sql injection protection, see issue 34.
+    * Replaced eregi by preg_match.
+    * Bug fix: omitted 'DEBUG' variable in database connection, it was not defined yet.
+
 ==changelog 2.1.0.0==
     * Added autocomplete functionality if you search for names
     * Added nice thumbnail hover effect for screens.
