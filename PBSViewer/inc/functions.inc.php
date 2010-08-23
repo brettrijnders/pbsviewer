@@ -943,6 +943,31 @@ function get_latest_fid	($fid)
 	}
 }
 
+//	new in version 2.2.0.0
+//	get the number of pages after the number of screens that needs to be shown are known
+//	$limit is the maximum number of screens that can be shown on 1 page
+function get_nr_pages($nr_result)
+{
+	$pageNR	=	intval($nr_result/SEARCH_LIMIT);
+	
+	if (($nr_result % SEARCH_LIMIT) !=0) $pageNR++;
+	
+	return $pageNR;
+}
+
+function get_limits_by_page_nr($page_nr)
+{
+	$start	=	0;
+	$nr_results	=	SEARCH_LIMIT;
+	
+	if($page_nr!=''&&$page_nr>0)
+	{
+		$start 	=	$page_nr*SEARCH_LIMIT-SEARCH_LIMIT;
+	}
+	
+	return array($start,$nr_results);
+}
+
 // if $available = true, then it will only show available screens
 function show_all_screens($nr=4,$available=false)
 {
@@ -950,8 +975,10 @@ function show_all_screens($nr=4,$available=false)
 	
 	$nr_counter	=	0;
 
+	$limits	=	get_limits_by_page_nr(1);
+		
 	//	only select unique fids
-	$sql_select	=	"SELECT DISTINCT `fid` FROM `screens` ORDER BY `date` DESC";
+	$sql_select	=	"SELECT DISTINCT `fid` FROM `screens` ORDER BY `date` DESC LIMIT ".$limits[0].",".$limits[1]."";
 	$sql 		=	mysql_query($sql_select);
 
 	//	check if there are screens in DB

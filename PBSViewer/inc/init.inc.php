@@ -54,6 +54,7 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 	$pb_log				= 1;
 	$auto_del_count 	= -1;
 	$nr_screens_main 	= 10;
+	$search_limit		= 10;
 	$screens_per_row	= 4;
 	$width 				= 200;
 	$height 			= 200;
@@ -132,6 +133,10 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 		elseif ($row->name=='nr_screens_main')
 		{
 			$nr_screens_main	 = $row->value;
+		}
+		elseif ($row->name=='search_limit')
+		{
+			$search_limit	 = $row->value;
 		}
 		elseif ($row->name=='screens_per_row')
 		{
@@ -255,6 +260,7 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 
 	//	template settings (optional)
 	define('nr_screens_main',$nr_screens_main);					//	Default=10, on the main page the latest x screens are shown to save some bandwith
+	define('SEARCH_LIMIT',$search_limit);
 	define('NR',$screens_per_row);								//	Amount of pictures you want to have on each row
 	define('IMG_W',$width);										//	Thumbnail image width
 	define('IMG_H',$height);									//	Thumbnail image height
