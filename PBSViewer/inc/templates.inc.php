@@ -929,7 +929,7 @@ echo "</table>";
 function template_copyright()
 {
 	// this is used to gather copyright and version number information
-	$nfo_data	=	file('http://beesar.com/pbs_viewer/nfo');
+	$nfo_data	=	file('http://beesar.com/download/PBSViewer/nfo');
 	$version	=	file('VERSION');
 	if($nfo_data[1]!='')
 	{
