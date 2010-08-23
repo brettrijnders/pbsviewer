@@ -67,12 +67,12 @@ if(isset($_POST['save'])&&$ACP==true)
 		$error_msg .= "<li>PB directory field is empty.</li>";
 		$saving = false;
 	}
-	if($_POST['update_time']<60 && $_POST['update_time']=='')
+	if($_POST['update_time']<60 || $_POST['update_time']=='')
 	{
 		$error_msg .= "<li>update time should be larger than 60 seconds.</li>";
 		$saving = false;
 	}
-	if ($_POST['pb_sv_ssceiling']<=0 && $_POST['pb_sv_ssceiling']=='')
+	if ($_POST['pb_sv_ssceiling']<=0 || $_POST['pb_sv_ssceiling']=='')
 	{
 		// something for feature release:
 		// a check should be done to check if ceiling number is correct
@@ -91,10 +91,15 @@ if(isset($_POST['save'])&&$ACP==true)
 		$error_msg .= "<li>Valid values for field 'max logs on webserver' are -1 or 0 and larger.</li>";
 		$saving = false;
 	}
-	if ($_POST['nr_screens_main']<=0 && $_POST['nr_screens_main']=='')
+	if ($_POST['nr_screens_main']<=0 || $_POST['nr_screens_main']=='')
 	{
 		$error_msg .= "<li>nr of screens on main should be larger than 0.</li>";
 		$saving = false;
+	}
+	if($_POST['search_limit']<=0 || $_POST['search_limit']=='')
+	{
+		$error_msg	.=	"<li>The search limit should be larger than 0.</li>";
+		$saving	=	false;
 	}
 	if ($_POST['width']=='')
 	{
@@ -106,7 +111,7 @@ if(isset($_POST['save'])&&$ACP==true)
 		$error_msg .= "<li>Height field in template is empty.</li>";
 		$saving = false;
 	}
-	if ($_POST['min_screen_size']=='' && $_POST['min_screen_size']<=0)
+	if ($_POST['min_screen_size']=='' || $_POST['min_screen_size']<=0)
 	{
 		$error_msg .= "<li>field 'Minimal screen download size' is empty or has a negative value.</li>";
 		$saving = false;
@@ -116,7 +121,7 @@ if(isset($_POST['save'])&&$ACP==true)
 		$error_msg .= "<li>Please use a valid value for the field Cookie experiment time. It should be positive and not empty.</li>";
 		$saving = false;
 	}
-	if ($_POST['script_load_time']<30 && $_POST['script_load_time']=='')
+	if ($_POST['script_load_time']<30 || $_POST['script_load_time']=='')
 	{
 		$error_msg .= "<li>The script load time should be 30 seconds or larger.</li>";
 		$saving = false;
@@ -233,6 +238,9 @@ if(isset($_POST['save'])&&$ACP==true)
 		$sql     	=	mysql_query($sql_update);
 		
 		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['nr_screens_main'])."' WHERE `name`='nr_screens_main'";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['search_limit'])."' WHERE `name`='search_limit'";
 		$sql     	=	mysql_query($sql_update);
 		
 		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['screens_per_row'])."' WHERE `name`='screens_per_row'";
@@ -532,6 +540,13 @@ if($ACP==true)
           <input type="text" name="nr_screens_main" id="nr_screens_main" value="<?php echo $nr_screens_main;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
         <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_SCREENS_MAIN_COMMENT"];?></td>
+      </tr>
+      <tr>
+        <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_SCREENS_SEARCH"];?></td>
+        <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
+          <input name="search_limit" type="text" id="search_limit" value="<?php echo $search_limit;?>">
+        </label></td>
+        <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><span class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"></span><?php echo $str["ACP_SCREENS_SEARCH_COMMENT"];?></td>
       </tr>
       <tr>
         <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_SCREENS_PER_ROW"];?></td>

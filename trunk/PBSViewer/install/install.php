@@ -741,6 +741,9 @@ PRIMARY KEY(`optionID`)
 				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('notify_update','0');";
 				mysql_query($sql_insert) or die(mysql_error());
 				
+				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('search_limit','10')";
+				mysql_query($sql_insert) or die(mysql_error());				
+				
 				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('private_password','');";
 				mysql_query($sql_insert) or die(mysql_error());
 				

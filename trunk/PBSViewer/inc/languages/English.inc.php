@@ -248,7 +248,9 @@ $str["ACP_MAX_LOGS_COMMENT_2"]			=	"If you choose 0, then log files are deleted 
 $str["ACP_MAX_LOGS_COMMENT_3"]			=	"If you don't want to delete the logs from your webserver then enter -1";
 $str["ACP_TEMPLATE"]					=	"Template";
 $str["ACP_SCREENS_MAIN"]				=	"Screens on main page";
-$str["ACP_SCREENS_MAIN_COMMENT"]		=	"Default=10, on the main page the latest x screens are shown to save some bandwith";
+$str["ACP_SCREENS_MAIN_COMMENT"]		=	"Default=10, on the main page the latest x screens are shown to save some bandwith.";
+$str["ACP_SCREENS_SEARCH"]				=	"Show nr of screens per page";
+$str["ACP_SCREENS_SEARCH_COMMENT"]		=	"Enter the number of screens you want to show on each page for each search result.";
 $str["ACP_SCREENS_PER_ROW"]				=	"Screens per row";
 $str["ACP_SCREENS_PER_ROW_COMMENT"]		=	"Amount of screens you want to have on each row";
 $str["ACP_IMG_W"]						=	"Image width";
