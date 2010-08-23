@@ -1019,10 +1019,70 @@ function template_request()
 <?php 
 }
 
+//	this page navigation template is new since version 2.2.0.0
+function template_page_nav($current_page,$nr_results)
+{
+	$maxPage	=	get_nr_pages($nr_results);
+	?>
+	
+	<div align="center">
+	
+	<a href="?page=1" target="_self">«</a> <a href="?page=<?php if($current_page==1){echo 1;}else{echo $current_page-1;}?>" target="_self">&lt;</a>
+	 
+	<?php 
+	
+	//	max nr of pages that are shown
+	$max_show_pages	=	7;
+	
+	for($page=1;$page<=$maxPage;$page++)
+	{
+		//	only show page numbers that are 3 pages away from current page
+		//	for instance if there are 10 pages:
+		//	1 2 3 4 5 6 7 8 9 10 and current page is 6
+		//	then show something like
+		//	... 3 4 5 6 7 8 9 ...
+		//	
+		//	in this case max_show_pages = 7 in order to get the 3 pages away from current page thing.
+		//	this means 2 times 3 pages left and right of current page and current page itself, so:
+		//	3+1+3=7, therefore the following is done:
+		//	($max_show_pages-1)/2
+		//	page numbers that are shown
+
+		//	if page number is near current page and is within allowed range of ($max_show_pages-1)/2 pages
+		if(abs($page-$current_page)<=($max_show_pages-1)/2)	
+		{
+				//	mark the current page
+				if ($current_page==$page)
+				{
+					echo "<strong>".$page."</strong> ";
+				}
+				else 
+				{
+					echo "<a href=\"?page=".$page."\" target=\"_self\">".$page."</a> ";
+				}
+		}
+		else 
+		{
+			//	only show ... at begin and/or last page number
+			if ($page==1||$page==$maxPage)	echo "... ";
+		}	
+		
+
+	}
+	?>
+		 
+	 <a href="?page=<?php echo $current_page+1;?>" target="_self">&gt;</a> <a href="?page=<?php echo $maxPage;?>" target="_self">»</a>
+	
+	</div>
+	
+	<?php
+}
+
 function template_footer($update_time,$lastUpdate,$startTime)
 {
 	global $str;
 	
+	template_page_nav(8,200);
 	?>
 	<div align="center"><a href="#start" target="_self"><strong><?php echo $str['FOOTER_GO_UP'];?></strong></a>
 </div>
