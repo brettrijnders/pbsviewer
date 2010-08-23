@@ -3498,7 +3498,7 @@ function check_version()
 {
 	$new=1;
 
-	$nfo_data	=	file('http://beesar.com/pbs_viewer/nfo');
+	$nfo_data	=	file('http://beesar.com/download/PBSViewer/nfo');
 	$version	=	file('VERSION');
 	
 	if($nfo_data[2]!='')
