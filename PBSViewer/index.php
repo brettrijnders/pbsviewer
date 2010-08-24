@@ -102,7 +102,7 @@ if($access==true)
 			if($fid_valid==true)
 			{
 			
-					template_header_detailed_page();
+					template_header_detailed_page($requestedFID);
 					template_detailed_screen($requestedFID);
 					template_footer_detailed_page();
 			}
