@@ -968,18 +968,42 @@ function get_limits_by_page_nr($page_nr)
 	return array($start,$nr_results);
 }
 
+//	is valid page number?
+function is_valid_page($page_nr,$nr_results)
+{
+	$maxPageNr	=	get_nr_pages($nr_results);
+	if($page_nr>$maxPageNr)
+	{
+		return false;
+	}
+	else 
+	{
+		return true;
+	}
+}
+
 // if $available = true, then it will only show available screens
-function show_all_screens($nr=4,$available=false)
+function show_all_screens($nr=4,$page_nr,$available=false)
 {
 	global $str;
 	
 	$nr_counter	=	0;
 
-	$limits	=	get_limits_by_page_nr(1);
-		
-	//	only select unique fids
-	$sql_select	=	"SELECT DISTINCT `fid` FROM `screens` ORDER BY `date` DESC LIMIT ".$limits[0].",".$limits[1]."";
-	$sql 		=	mysql_query($sql_select);
+	$limits	=	get_limits_by_page_nr($page_nr);
+
+	if ($available==false)
+	{
+		//	only select unique fids
+		$sql_select	=	"SELECT DISTINCT `fid` FROM `screens` ORDER BY `date` DESC LIMIT ".$limits[0].",".$limits[1]."";
+		$sql 		=	mysql_query($sql_select);
+	}
+	else 
+	//	only select those that are available
+	{
+		//	only select unique fids
+		$sql_select	=	"SELECT DISTINCT `fid` FROM `screens` WHERE `fid` IN (SELECT `fid` FROM `dl_screens`) ORDER BY `date` DESC LIMIT ".$limits[0].",".$limits[1]."";
+		$sql 		=	mysql_query($sql_select) or die(mysql_error());
+	}
 
 	//	check if there are screens in DB
 	if(mysql_num_rows($sql)>=1)
@@ -1037,6 +1061,7 @@ function show_all_screens($nr=4,$available=false)
 
 
 		}
+		
 	}
 	else
 	{
@@ -1045,16 +1070,18 @@ function show_all_screens($nr=4,$available=false)
 
 }
 
-function show_date_selection ($nr=4,$data)
+function show_date_selection ($nr=4,$page_nr,$data)
 {
 	
 	global $str;
 
 	$nr_counter	=	0;
+	
+	$limits	=	get_limits_by_page_nr($page_nr);
 
 	//	only select unique fids
 
-	$sql_select	=	"SELECT DISTINCT `fid` FROM `screens` WHERE `date` LIKE '".$data[0]."-".$data[1]."-".$data[2]." ".$data[3].":%:%' ORDER BY `date` DESC";
+	$sql_select	=	"SELECT DISTINCT `fid` FROM `screens` WHERE `date` LIKE '".$data[0]."-".$data[1]."-".$data[2]." ".$data[3].":%:%' ORDER BY `date` DESC LIMIT ".$limits[0].",".$limits[1]."";
 	$sql 		=	mysql_query($sql_select);
 
 	//	check if there are screens in DB
@@ -1236,16 +1263,18 @@ function show_fid_screens($nr=4,$fileName)
 
 }
 
-function show_guid_screens($nr=4,$guid)
+function show_guid_screens($nr=4,$page_nr,$guid)
 {
 	global $str;
 	
 	$nr_counter	=	0;
+	
+	$limits	=	get_limits_by_page_nr($page_nr);
 
 	$guid		=	get_wildcard($guid);
 
 	//	only select unique fids
-	$sql_select	=	"SELECT DISTINCT `fid` FROM `screens` where `guid` LIKE '".$guid."' ORDER BY `date` DESC";
+	$sql_select	=	"SELECT DISTINCT `fid` FROM `screens` where `guid` LIKE '".$guid."' ORDER BY `date` DESC LIMIT ".$limits[0].",".$limits[1]."";
 	$sql 		=	mysql_query($sql_select);
 
 	if(mysql_num_rows($sql)>=1)
@@ -1304,16 +1333,18 @@ function show_guid_screens($nr=4,$guid)
 
 }
 
-function show_name_screens($nr=4,$name)
+function show_name_screens($nr=4,$page_nr,$name)
 {
 	global $str;
+	
+	$limits	=	get_limits_by_page_nr($page_nr);
 	
 	$nr_counter	=	0;
 
 	$name		=	get_wildcard($name);
 
 	//	only select unique fids
-	$sql_select	=	"SELECT DISTINCT `fid` FROM `screens` where `name` LIKE '".$name."' ORDER BY `date` DESC";
+	$sql_select	=	"SELECT DISTINCT `fid` FROM `screens` where `name` LIKE '".$name."' ORDER BY `date` DESC LIMIT ".$limits[0].",".$limits[1]."";
 	$sql 		=	mysql_query($sql_select);
 
 
