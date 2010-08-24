@@ -1,4 +1,5 @@
 changelog 2.2.0.0:
 ------------------------------------
 
+- Get negative picture in detailed screen, see issue 14.
 - Added multiple page support, see issue 32.

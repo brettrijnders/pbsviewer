@@ -157,9 +157,11 @@ function template_logo_header()
 }
 
 //	new header added since version 1.1.2.1
-function template_header_detailed_page()
+function template_header_detailed_page($fid)
 {
 	global $str;
+	
+	
 	?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
@@ -195,6 +197,32 @@ $("img.hover").tooltip({
 						   effect: 'slide',
 						   opacity: 0.7,
 						   position: ['bottom','center']});
+						   
+	$.ajaxSetup ({		
+		cache: false
+	});
+	
+	var ajax_load = "<img src='style/img/ajax-loader.gif' alt='loading...' />";
+	var loadUrl = "inc/GD/GD_ajax.inc.php";
+	var negate	=	false;						   
+	
+	//$("img.negative").click(function(){alert("test")});
+						   
+$("img.negative").click(function(){  
+	
+	if (negate==false)
+	{
+		$("#result").html(ajax_load).load(loadUrl, "<?php echo "imgfid=".$fid."&negate=1";?>");
+		negate = true;  
+	}
+	else
+	{
+		$("#result").html(ajax_load).load(loadUrl, "<?php echo "imgfid=".$fid."&negate=0";?>");
+		negate = false; 
+	}
+
+});
+
 
 });
 </script>
@@ -483,7 +511,7 @@ function template_detailed_screen($fid)
 	?>
 	
 
-<SCRIPT>
+<script type="text/javascript">
 
 var imageURL = "style/img/zoom_disabled.gif";
 
@@ -498,7 +526,7 @@ function changeImage()
      }
 }
 
-</SCRIPT>
+</script>
 
 <table width="90%" border="0" align="center">
   <tr>
@@ -515,13 +543,22 @@ function changeImage()
 }?>
 
 </div>
-<!--
-Will be implemented later on, probably version 2.2.0.0
+<?php 
+
+//	first check if server supports gd
+function_exists("gd_info")? $gd=true:$gd=false;
+
+if($gd)
+{
+?>
+
 &nbsp;<a href="#"><img src="style/img/gamma_min.png" width="32" height="32" alt="" border="0" NAME="gamma_min"></a>
 &nbsp;<a href="#"><img src="style/img/gamma_plus.png" width="32" height="32" alt="" border="0" NAME="gamma_plus"></a>
-&nbsp;<a href="#"><img src="style/img/negative.png" width="32" height="32" alt="" border="0" NAME="negative"></a>
+&nbsp;<a href="#"><img src="style/img/negative.png" width="32" height="32" alt="" border="0" class="negative"></a>
+<?php
+}
+?>
 
--->
 
 </td>
 
@@ -536,7 +573,9 @@ Will be implemented later on, probably version 2.2.0.0
     ?>
     
     <table cellspacing="0" cellpadding="0" border="0"><tr><td width="50%"></td><td>
+    <div id="result">
 <img src="<?php echo $IMGsrc;?>" style="width:<?php echo $widthIMG;?>px; height: <?php echo $heightIMG;?>px;" onmouseover="TJPzoomif(this);" id="unique1337"" alt="<?php echo $fid.'png';?>">
+</div>
 </td><td width="50%"></td></tr></table>
 </td>
   </tr>
