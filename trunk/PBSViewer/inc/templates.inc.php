@@ -797,7 +797,7 @@ echo "</table>";
 
 }
 
-function template_show_all($nr,$current_scrn_nr=nr_screens_main)
+function template_show_all($nr,$page_nr,$current_scrn_nr=nr_screens_main)
 {
 
 	template_search($current_scrn_nr);
@@ -809,16 +809,17 @@ function template_show_all($nr,$current_scrn_nr=nr_screens_main)
 	      <table width="100%" border="0" cellspacing="10" cellpadding="0" align="center">
 	       
 <?php 
-show_all_screens($nr);
+show_all_screens($nr,$page_nr);
 echo "</table>";
 echo "</div>";
 
+//	$data contains the number of results
 
 }
 
 // this template is new since 1.2.2.3
 // only show available screens
-function template_show_available($nr,$current_scrn_nr=nr_screens_main)
+function template_show_available($nr,$page_nr,$current_scrn_nr=nr_screens_main)
 {
 
 	template_search($current_scrn_nr);
@@ -831,16 +832,16 @@ function template_show_available($nr,$current_scrn_nr=nr_screens_main)
 	       
 <?php 
 // show all available screens by setting 2nd parameter to true
-show_all_screens($nr,true);
+show_all_screens($nr,$page_nr,true);
 echo "</table>";
 
 	echo "</div>";
 
-
+//	$data contains the number of results
 }
 
 //	this template is new since 1.2.2.1
-function template_show_date_selection($nr,$data,$current_scrn_nr)
+function template_show_date_selection($nr,$page_nr,$data,$current_scrn_nr)
 {
 
 	template_search($current_scrn_nr);
@@ -853,7 +854,7 @@ function template_show_date_selection($nr,$data,$current_scrn_nr)
 	      <table width="100%" border="0" cellspacing="10" cellpadding="0" align="center">
 	       
 <?php 
-show_date_selection($nr,$data);
+show_date_selection($nr,$page_nr,$data);
 echo "</table>";
 
 	echo "</div>";
@@ -882,7 +883,7 @@ echo "</table>";
 
 }
 
-function template_show_guid($nr,$guid,$current_scrn_nr)
+function template_show_guid($nr,$page_nr,$guid,$current_scrn_nr)
 {
 	template_search($current_scrn_nr);
 
@@ -895,7 +896,7 @@ function template_show_guid($nr,$guid,$current_scrn_nr)
 	      <table width="100%" border="0" cellspacing="10" cellpadding="0">
 <?php 
 
-show_guid_screens($nr,$guid);
+show_guid_screens($nr,$page_nr,$guid);
 echo "</table>";
 
 
@@ -904,7 +905,7 @@ echo "</table>";
 }
 
 
-function template_show_name($nr,$name,$current_scrn_nr)
+function template_show_name($nr,$page_nr,$name,$current_scrn_nr)
 {
 	template_search($current_scrn_nr);
 
@@ -917,7 +918,7 @@ function template_show_name($nr,$name,$current_scrn_nr)
 	      <table width="100%" border="0" cellspacing="10" cellpadding="0">
 <?php 
 
-show_name_screens($nr,$name);
+show_name_screens($nr,$page_nr,$name);
 echo "</table>";
 
 
@@ -1020,14 +1021,14 @@ function template_request()
 }
 
 //	this page navigation template is new since version 2.2.0.0
-function template_page_nav($current_page,$nr_results)
+function template_page_nav($get_var,$current_page,$nr_results)
 {
 	$maxPage	=	get_nr_pages($nr_results);
 	?>
 	
 	<div align="center">
-	
-	<a href="?page=1" target="_self">«</a> <a href="?page=<?php if($current_page==1){echo 1;}else{echo $current_page-1;}?>" target="_self">&lt;</a>
+	<p style="font-size:120%">
+	<a href="<?php echo "?".$get_var;?>&page=1" target="_self">&laquo;</a> <a href="<?php echo "?".$get_var;?>&page=<?php if($current_page==1){echo 1;}else{echo $current_page-1;}?>" target="_self">&lt;</a>
 	 
 	<?php 
 	
@@ -1058,7 +1059,7 @@ function template_page_nav($current_page,$nr_results)
 				}
 				else 
 				{
-					echo "<a href=\"?page=".$page."\" target=\"_self\">".$page."</a> ";
+					echo "<a href=\"?".$get_var."&page=".$page."\" target=\"_self\">".$page."</a> ";
 				}
 		}
 		else 
@@ -1071,18 +1072,24 @@ function template_page_nav($current_page,$nr_results)
 	}
 	?>
 		 
-	 <a href="?page=<?php echo $current_page+1;?>" target="_self">&gt;</a> <a href="?page=<?php echo $maxPage;?>" target="_self">»</a>
-	
+	 <a href="<?php echo "?".$get_var;?>&page=<?php if($current_page==$maxPage) {echo $maxPage;}else{echo $current_page+1;}?>" target="_self">&gt;</a> <a href="<?php echo "?".$get_var?>&page=<?php echo $maxPage;?>" target="_self">&raquo;</a>
+	</p>
 	</div>
 	
 	<?php
 }
 
-function template_footer($update_time,$lastUpdate,$startTime)
+function template_footer($update_time,$lastUpdate,$startTime,$page_nr,$nr_results,$get_var)
 {
 	global $str;
 	
-	template_page_nav(8,200);
+	$maxPage	=	get_nr_pages($nr_results);
+		
+	//	if there are any results and there are 2 or more pages than show page navigation template
+	if($nr_results!=0 && $maxPage>1)
+	{
+		template_page_nav($get_var,$page_nr,$nr_results);
+	}
 	?>
 	<div align="center"><a href="#start" target="_self"><strong><?php echo $str['FOOTER_GO_UP'];?></strong></a>
 </div>

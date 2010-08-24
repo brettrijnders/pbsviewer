@@ -170,30 +170,107 @@ template_header();
 		}
 		else if($_GET['sID']=='name')
 		{
-			template_show_name(NR,$input,get_nr_screens_by_name($input));
-			template_footer(UPDATE_TIME,$lastUpdateTime,$startTime);
+			$nr_results	=	get_nr_screens_by_name($input);
+			$input_var_get	=	(urlencode($input));
+			
+			if(isset($_GET['page']) && $_GET['page']>0 && is_numeric($_GET['page']))
+			{				
+				
+				if (is_valid_page($_GET['page'],$nr_results))
+				{			
+					
+					template_show_name(NR,$_GET['page'],$input,get_nr_screens_by_name($input));
+					template_footer(UPDATE_TIME,$lastUpdateTime,$startTime,$_GET['page'],$nr_results,'sID=name&search=1&input='.$input_var_get);
+				}
+				else 
+				{
+					template_error_msg('Invalid page number','Can not find any results for this page','Try another page number please');
+				}
+			}
+			else 
+			{
+				template_show_name(NR,1,$input,get_nr_screens_by_name($input));
+				template_footer(UPDATE_TIME,$lastUpdateTime,$startTime,1,$nr_results,'sID=name&search=1&input='.$input_var_get);
+			}
 		}
 		else if($_GET['sID']=='guid') 
 		{
-			template_show_guid(NR,$input,get_nr_screens_by_guid($input));
-			template_footer(UPDATE_TIME,$lastUpdateTime,$startTime);
+			$nr_results	=	get_nr_screens_by_guid($input);
+		
+			
+			if(isset($_GET['page']) && $_GET['page']>0 && is_numeric($_GET['page']))
+			{				
+				
+				if (is_valid_page($_GET['page'],$nr_results))
+				{
+					template_show_guid(NR,$_GET['page'],$input,get_nr_screens_by_guid($input));
+					template_footer(UPDATE_TIME,$lastUpdateTime,$startTime,$_GET['page'],$nr_results,'sID=guid&search=1&input='.$input);					
+				}
+				else 
+				{
+					template_error_msg('Invalid page number','Can not find any results for this page','Try another page number please');
+				}				
+			}
+			else 
+			{
+				template_show_guid(NR,1,$input,get_nr_screens_by_guid($input));
+				template_footer(UPDATE_TIME,$lastUpdateTime,$startTime,1,$nr_results,'sID=guid&search=1&input='.$input);						
+			}
+			
 		}
 		else 
 		{
-			template_show_all(NR,get_total_nr_screens());
+			template_show_main(NR);
 			template_footer(UPDATE_TIME,$lastUpdateTime,$startTime);
 		}
 		
 	}
 	elseif (isset($_GET['show_all']))
 	{
-		template_show_all(NR,get_total_nr_screens());
-		template_footer(UPDATE_TIME,$lastUpdateTime,$startTime);
+		if(isset($_GET['page']) && $_GET['page']>0 && is_numeric($_GET['page']))
+		{
+			$nr_results	=	get_total_nr_screens();
+			
+			if (is_valid_page($_GET['page'],$nr_results))
+			{
+				template_show_all(NR,$_GET['page'],get_total_nr_screens());
+				template_footer(UPDATE_TIME,$lastUpdateTime,$startTime,$_GET['page'],$nr_results,'show_all=1');
+			}
+			else 
+			{
+				template_error_msg('Invalid page number','Can not find any results for this page','Try another page number please');
+			}
+		}
+		else 
+		//	if page is not set, then assume page is set to 1
+		{
+			template_show_all(NR,1,get_total_nr_screens());
+			$nr_results	=	get_total_nr_screens();
+			template_footer(UPDATE_TIME,$lastUpdateTime,$startTime,1,$nr_results,'show_all=1');
+		}
 	}
 	elseif (isset($_GET['show_available']))
 	{
-		template_show_available(NR,get_total_nr_screens());
-		template_footer(UPDATE_TIME,$lastUpdateTime,$startTime);
+		if(isset($_GET['page']) && $_GET['page']>0 && is_numeric($_GET['page']))
+		{
+			$nr_results	=	get_nr_complete_screens();
+			if (is_valid_page($_GET['page'],$nr_results))
+			{			
+				template_show_available(NR,$_GET['page'],get_total_nr_screens());
+				template_footer(UPDATE_TIME,$lastUpdateTime,$startTime,$_GET['page'],$nr_results,'show_available=1');			
+			}
+			else 
+			{
+				template_error_msg('Invalid page number','Can not find any results for this page','Try another page number please');
+					
+			}
+		}
+		else 
+		{
+			template_show_available(NR,1,get_total_nr_screens());
+			$nr_results	=	get_nr_complete_screens();
+			template_footer(UPDATE_TIME,$lastUpdateTime,$startTime,1,$nr_results,'show_available=1');
+		}
 	}
 	//	this select option is new since 1.2.2.1
 	elseif (isset($_GET['select']))
@@ -239,8 +316,30 @@ template_header();
 		//	put dates in array
 		$data	=	array($year,$month,$day,$hour);
 		
-		template_show_date_selection(NR,$data,get_nr_screens_by_date($data));
-		template_footer(UPDATE_TIME,$lastUpdateTime,$startTime);
+		$nr_results	=	get_nr_screens_by_date($data);
+		$get_var_date	=	'select=1&year='.$_GET['year'].'&month='.$_GET['month'].'&day='.$_GET['day'].'&hour='.$_GET['hour'];
+		
+		if(isset($_GET['page']) && $_GET['page']>0 && is_numeric($_GET['page']))
+		{				
+				
+			if (is_valid_page($_GET['page'],$nr_results))
+			{
+				template_show_date_selection(NR,$_GET['page'],$data,get_nr_screens_by_date($data));
+				template_footer(UPDATE_TIME,$lastUpdateTime,$startTime,$_GET['page'],$nr_results,$get_var_date);
+			}
+			else 
+			{
+				template_error_msg('Invalid page number','Can not find any results for this page','Try another page number please');
+			}
+			
+		}
+		else 
+		{
+			template_show_date_selection(NR,1,$data,get_nr_screens_by_date($data));
+			template_footer(UPDATE_TIME,$lastUpdateTime,$startTime,1,$nr_results,$get_var_date);			
+		}
+		
+		
 		
 	}
 	//	since version 1.2.2.1 people can make a request for an update

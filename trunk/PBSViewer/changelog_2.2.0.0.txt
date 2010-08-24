@@ -1,4 +1,4 @@
 changelog 2.2.0.0:
 ------------------------------------
 
-
+- Added multiple page support, see issue 32.
