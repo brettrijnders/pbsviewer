@@ -1,7 +1,8 @@
 changelog 2.2.0.0:
 ------------------------------------
 
-- Make image brighter or darker with gamma correction, see issue 13
+- You can search for player on google or xfire, see issue 15 and issue 16.
+- Make image brighter or darker with gamma correction, see issue 13.
 - Added new option to ACP: ftp passive mode, see issue 35.
 - Get negative picture in detailed screen, see issue 14.
 - Added multiple page support, see issue 32.
