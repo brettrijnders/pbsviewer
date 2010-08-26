@@ -63,6 +63,7 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 	$cookieExpTime		= 604800;
 	$script_load_time	= 600;
 	$weblog_dir 		= 'download';
+	$ftp_passive		= 0;
 	$debug				= 0;
 	
 	// gather data
@@ -173,6 +174,10 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 		elseif ($row->name=='debug')
 		{
 			$debug	 = $row->value;
+		}
+		elseif ($row->name=='ftp_passive')
+		{
+			$ftp_passive	 = $row->value;
 		}
 		elseif ($row->name=='language')
 		{
@@ -288,6 +293,15 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 	define('guidlength_short',8);								//	Default = 8
 	
 	//	advance settings (optional)
+	if($ftp_passive==1)
+	{
+		define('FTP_PASSIVE',true);
+	}
+	else 
+	{
+		define('FTP_PASSIVE',false);
+	}
+	
 	if ($debug==1)
 	{
 		define('DEBUG',true);									//	Default is false;		

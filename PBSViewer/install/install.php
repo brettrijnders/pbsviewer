@@ -749,6 +749,9 @@ PRIMARY KEY(`optionID`)
 				
 				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('cookieExpTime','604800');";
 				mysql_query($sql_insert) or die(mysql_error());
+				
+				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('ftp_passive','0');";
+				mysql_query($sql_insert) or die(mysql_error());
 
 				session_destroy();
 				template_final();
