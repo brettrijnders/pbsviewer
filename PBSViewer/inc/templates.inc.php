@@ -202,11 +202,16 @@ $("img.hover").tooltip({
 		cache: false
 	});
 	
+	//	show this during loading
 	var ajax_load = "<img src='style/img/ajax-loader.gif' alt='loading...' />";
+	//	url to get data from
 	var loadUrl = "inc/GD/GD_ajax.inc.php";
+	
+	//	negative image filter is false as default
 	var negate	=	false;						   
 	
-	//$("img.negative").click(function(){alert("test")});
+	//	this value is used for gamma correction, default =1.0, ie. no gamma correction
+	var gammaOutValue	=	1.0;
 						   
 $("img.negative").click(function(){  
 	
@@ -221,6 +226,27 @@ $("img.negative").click(function(){
 		negate = false; 
 	}
 
+});
+
+$("img.gamma_min").click(function(){
+		
+	gammaOutValue	-=	0.1;
+	if (gammaOutValue <=0)
+	{
+		gammaOutValue	=	0;
+	}	
+	
+	$("#result").html(ajax_load).load(loadUrl, '<?php echo "imgfid=".$fid."&gammaOut='+gammaOutValue+'";?>');
+	
+});
+
+
+$("img.gamma_plus").click(function(){
+	
+	gammaOutValue	+=	0.1;	
+	
+	$("#result").html(ajax_load).load(loadUrl, '<?php echo "imgfid=".$fid."&gammaOut='+gammaOutValue+'";?>');
+	
 });
 
 
@@ -552,9 +578,9 @@ if($gd)
 {
 ?>
 
-&nbsp;<a href="#"><img src="style/img/gamma_min.png" width="32" height="32" alt="" border="0" NAME="gamma_min"></a>
-&nbsp;<a href="#"><img src="style/img/gamma_plus.png" width="32" height="32" alt="" border="0" NAME="gamma_plus"></a>
-&nbsp;<a href="#"><img src="style/img/negative.png" width="32" height="32" alt="" border="0" class="negative"></a>
+&nbsp;<a href="#"><img src="style/img/gamma_min.png" width="32" height="32" alt="" border="0" class="gamma_min hover"></a><div class="tooltip"><?php echo $str["DETSCRN_TOOLS_GAMMA_PLUS"];?></div>
+&nbsp;<a href="#"><img src="style/img/gamma_plus.png" width="32" height="32" alt="" border="0" class="gamma_plus hover"></a><div class="tooltip"><?php echo $str["DETSCRN_TOOLS_GAMMA_MIN"];?></div>
+&nbsp;<a href="#"><img src="style/img/negative.png" width="32" height="32" alt="" border="0" class="negative hover"></a><div class="tooltip"><?php echo $str["DETSCRN_TOOLS_GAMMA_NEGATIVE"];?></div>
 <?php
 }
 ?>

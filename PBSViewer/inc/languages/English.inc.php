@@ -126,13 +126,16 @@ $str["DETSCRN_SHOW_MORE"]				=	"Show more screens of this player";
 $str["DETSCRN_BACK"]					=	"Go back";
 
 //----------------DETAILED SCREEN INFO TOOLS-------------------
-$str["DETSCRN_TOOLS_SAVE_COMMENT"]		=	"Save original screen";
+$str["DETSCRN_TOOLS_SAVE_COMMENT"]		=	"Save original screen.";
 $str["DETSCRN_TOOLS_ZOOM_TITLE"]		=	"Enable/Disable Zoom";
-$str["DETSCRN_TOOLS_ZOOM_COMMENT"]		=	"Increase zoom ratio by dragging mouse upwards";
-$str["DETSCRN_TOOLS_ZOOM_COMMENT_2"]	=	"Decrease zoom ratio by dragging mouse downwards";
-$str["DETSCRN_TOOLS_ZOOM_COMMENT_3"]	=	"Increase zoom window by dragging mouse to the right";
-$str["DETSCRN_TOOLS_ZOOM_COMMENT_4"]	=	"Decrease zoom window by dragging mouse to the left";
+$str["DETSCRN_TOOLS_ZOOM_COMMENT"]		=	"Increase zoom ratio by dragging mouse upwards.";
+$str["DETSCRN_TOOLS_ZOOM_COMMENT_2"]	=	"Decrease zoom ratio by dragging mouse downwards.";
+$str["DETSCRN_TOOLS_ZOOM_COMMENT_3"]	=	"Increase zoom window by dragging mouse to the right.";
+$str["DETSCRN_TOOLS_ZOOM_COMMENT_4"]	=	"Decrease zoom window by dragging mouse to the left.";
 $str["DETSCRN_TOOLS_ZOOM_COMMENT_5"]	=	"You are using Opera, probably this zoom fuction will not work when you activate it.";
+$str["DETSCRN_TOOLS_GAMMA_PLUS"]		=	"Apply gamma correction, by clicking on this button you can increase the amount of gamma.";
+$str["DETSCRN_TOOLS_GAMMA_MIN"]			=	"Apply gamma correction, by clicking on this button you can decrease the amount of gamma.";
+$str["DETSCRN_TOOLS_GAMMA_NEGATIVE"]	=	"Reverse all the colours of the image, get a negative of the screen.";
 
 
 //----------------FOOTER-------------------
