@@ -122,6 +122,9 @@ $str["DETSCRN_MD5_INVALID"]				=	$str["POP_MD5_INVALID"];
 $str["DETSCRN_MD5_SCREEN"]				=	$str["POP_MD5_SCREEN"];
 $str["DETSCRN_MD5_LOG"]					=	$str["POP_MD5_LOG"];
 $str["DETSCRN_MD5_HASH"]				=	$str["POP_MD5_HASH"];
+$str["DETSCRN_MORE_INFO"]				=	"Search player on";
+$str["DETSCRN_MORE_INFO_GOOGLE"]		=	"Google";
+$str["DETSCRN_MORE_INFO_XFIRE"]			=	"Xfire";
 $str["DETSCRN_SHOW_MORE"]				=	"Show more screens of this player";
 $str["DETSCRN_BACK"]					=	"Go back";
 

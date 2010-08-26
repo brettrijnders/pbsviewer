@@ -641,9 +641,9 @@ if($gd)
         echo "<p>".$str["DETSCRN_ALIASES_2"]." ".count($alias)." ".$str["DETSCRN_ALIASES_3"].":</p>";
         
         echo "<ul>";
-        foreach ($alias	as $name)
+        foreach ($alias	as $name_alias)
         {
-        	 echo "<li>".$name."</li>";
+        	 echo "<li>".$name_alias."</li>";
         }
         echo "</ul>
              </td>
@@ -758,7 +758,15 @@ if($gd)
 					<?php 
 				}
       
+				//	show more player info, show google & xfire link
       ?>
+      
+      <tr>
+        <td width="15%" align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_MORE_INFO"];?>:</strong></td>
+        <td align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">
+        <a href="http://www.google.com/#q=<?php echo $name.' '.CLAN_GAME;?>" target="_blank"><?php echo $str["DETSCRN_MORE_INFO_GOOGLE"];?></a> <a href="http://www.xfire.com/people_search/?q=<?php echo $name;?>" target="_blank"><?php echo $str["DETSCRN_MORE_INFO_XFIRE"];?></a>
+        </td>
+      </tr>
 
     </table>
     
