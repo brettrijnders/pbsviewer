@@ -270,6 +270,8 @@ $str["ACP_SCRIPT_LOAD"]					=	"Script load time";
 $str["ACP_SCRIPT_LOAD_COMMENT"]			=	"After this the script stops running, if you for instance need to download a lot of screens then it is recommended to have a high script load time. If you are not sure, then use default setting. Default=600 seconds or 10 minutes, after 600 Maximum execution time error will be shown.";
 $str["ACP_WEB_LOG_DIR"]					=	"Web log dir";
 $str["ACP_WEB_LOG_DIR_COMMENT"]			=	"Directory where the log files are stored. The directory should be CHMODDED to 777.";
+$str["ACP_FTP_PASS"]					=	"FTP passive mode";
+$str["ACP_FTP_PASS_COMMENT"]			=	"Default=false, ie. non-passive mode. Sometimes it is needed to turn on passive mode to make PBSViewer work. If you are receiving errors related to FTP then you can try if it works with passive mode.";
 $str["ACP_DEBUG"]						=	"Debug";
 $str["ACP_DEBUG_COMMENT"]				=	"Default is false";
 $str["ACP_SAVE"]						=	"Save settings";

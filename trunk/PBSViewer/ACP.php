@@ -269,6 +269,9 @@ if(isset($_POST['save'])&&$ACP==true)
 		
 		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['weblog_dir'])."' WHERE `name`='weblog_dir'";
 		$sql     	=	mysql_query($sql_update);
+
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['ftp_passive'])."' WHERE `name`='ftp_passive'";
+		$sql     	=	mysql_query($sql_update);
 		
 		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['debug'])."' WHERE `name`='debug'";
 		$sql     	=	mysql_query($sql_update);
@@ -665,6 +668,17 @@ if($ACP==true)
           <input type="text" name="weblog_dir" id="weblog_dir" value="<?php echo $weblog_dir;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
         </label></td>
         <td align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_WEB_LOG_DIR_COMMENT"];?></td>
+      </tr>
+      <tr>
+        <td align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_FTP_PASS"];?></td>
+        <td align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
+          <select name="ftp_passive" id="ftp_passive">
+            <option value="1" <?php if($ftp_passive=='1') echo "selected";?>><?php echo $str["ACP_TRUE"];?></option>
+            <option value="0" <?php if($ftp_passive=='0') echo "selected";?>><?php echo $str["ACP_FALSE"];?></option>
+          </select>
+        </label></td>
+        <td align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><span class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"></span><?php echo $str["ACP_FTP_PASS_COMMENT"];
+?></td>
       </tr>
       <tr>
         <td width="20%" align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_DEBUG"];?></td>

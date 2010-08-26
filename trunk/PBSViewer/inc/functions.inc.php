@@ -79,6 +79,13 @@ function get_list_pbscreens ($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$mai
 	if($connect && $login)
 	{
 
+		//	turn on passive mode if admin wants that
+		if(FTP_PASSIVE)
+		{
+			// turn passive mode on
+			ftp_pasv($connect, true);
+		}
+		
 		//	return array of files from ssdir
 		$fileList	=	ftp_nlist($connect,$ssdir);
 		$i	=	0;
@@ -287,6 +294,13 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 	//	check connection
 	if($connect && $login)
 	{
+		//	turn on passive mode if admin wants that
+		if(FTP_PASSIVE)
+		{
+			// turn passive mode on
+			ftp_pasv($connect, true);
+		}
+		
 		if($debug==true)
 		{
 			if ($main==false)
@@ -2203,6 +2217,13 @@ function check_ftp_web_connection($FTP_HOST,$FTP_PORT,$FTP_USER,$FTP_PASS,$DIR)
 
 	if($connect && $login)
 	{
+		//	turn on passive mode if admin wants that
+		if(FTP_PASSIVE)
+		{
+			// turn passive mode on
+			ftp_pasv($connect, true);
+		}
+		
 		//	check if directory exists
 		if(ftp_chdir($connect,$DIR))	$dir=true;
 	}
@@ -2512,6 +2533,14 @@ function get_logs($debug=false,$log=false)
 		$connect	=	ftp_connect(FTP_HOST,FTP_PORT,script_load_time);
 		$login		=	ftp_login($connect,FTP_USER,FTP_PASS);
 
+		
+		//	turn on passive mode if admin wants that
+		if(FTP_PASSIVE)
+		{
+			// turn passive mode on
+			ftp_pasv($connect, true);
+		}
+		
 		//	change to log dir
 		ftp_chdir($connect,$dir);
 
@@ -2681,6 +2710,13 @@ function del_logs_webserver($count=0,$debug=false)
 	
 	if($login		=	ftp_login($connect,FTP_USER_WEB,FTP_PASS_WEB))
 	{
+		//	turn on passive mode if admin wants that
+		if(FTP_PASSIVE)
+		{
+			// turn passive mode on
+			ftp_pasv($connect, true);
+		}
+		
 		if($debug==true)	
 		{
 			echo date('H:i:s] ')."<li>Logged in on your ftp webserver</li><br>";
@@ -3125,7 +3161,14 @@ function reset_ftp_web($debug)
 	if($connect	=	ftp_connect(FTP_HOST_WEB,FTP_PORT_WEB))
 	{
 		if($login		=	ftp_login($connect,FTP_USER_WEB,FTP_PASS_WEB))
-		{				
+		{		
+			//	turn on passive mode if admin wants that
+			if(FTP_PASSIVE)
+			{
+				// turn passive mode on
+				ftp_pasv($connect, true);
+			}
+					
 			//	change dir
 			if(ftp_chdir($connect,PBSViewer_download))
 			{
@@ -3232,6 +3275,13 @@ function reset_ftp_gameserver_logs($debug)
 	{
 		if($login		=	ftp_login($connect,FTP_USER,FTP_PASS))
 		{				
+			//	turn on passive mode if admin wants that
+			if(FTP_PASSIVE)
+			{
+				// turn passive mode on
+				ftp_pasv($connect, true);
+			}
+			
 			//	change dir
 			if(ftp_chdir($connect,$dir))
 			{
@@ -3320,7 +3370,15 @@ function reset_ftp_gameserver_screens($debug)
 	if($connect	=	ftp_connect(FTP_HOST,FTP_PORT))
 	{
 		if($login		=	ftp_login($connect,FTP_USER,FTP_PASS))
-		{				
+		{		
+			
+			//	turn on passive mode if admin wants that
+			if(FTP_PASSIVE)
+			{
+				// turn passive mode on
+				ftp_pasv($connect, true);
+			}
+					
 			//	change dir
 			if(ftp_chdir($connect,$dir))
 			{
