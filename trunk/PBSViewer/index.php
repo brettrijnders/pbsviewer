@@ -31,6 +31,8 @@ session_start();
 $key	=	$_SERVER['SERVER_SIGNATURE'].' '.php_uname();
 $key=md5($key);
 
+if (!file_exists("inc/config.inc.php"))	die("Please first read the <a href=\"http://www.beesar.com/download/PBSViewer/readme.html\" target=\"_blank\">readme.html</a> file to install PBSViewer");
+
 require_once('inc/config.inc.php');
 require_once('inc/init.inc.php');
 require_once('inc/functions.inc.php');
