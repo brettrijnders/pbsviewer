@@ -46,10 +46,10 @@ function template_header()
 <link href="style/style.css" rel="stylesheet" type="text/css">
 <link rel="shortcut icon" href="style/img/favicon.ico">
 
-<script src="http://cdn.jquerytools.org/1.2.3/full/jquery.tools.min.js"></script>
-  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<script src="http://cdn.jquerytools.org/1.2.3/full/jquery.tools.min.js" type="text/javascript"></script>
+  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css">
 
-  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
 
 
 
@@ -183,9 +183,9 @@ function template_header_detailed_page($fid)
 <script type="text/javascript" src="inc/js/zoom/tjpzoom.js"></script> 
 <script type="text/javascript" src="inc/js/zoom/tjpzoom_config_PBSViewer.js"></script>
 
-<script src="http://cdn.jquerytools.org/1.2.3/full/jquery.tools.min.js"></script>
-<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<script src="http://cdn.jquerytools.org/1.2.3/full/jquery.tools.min.js" type="text/javascript"></script>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css">
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
 
 <!-- This script is used to show extra screen info during hover-->
 <script type="text/javascript">
