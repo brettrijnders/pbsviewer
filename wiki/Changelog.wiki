@@ -3,14 +3,23 @@
 
 =Changelog=
 
-==changelog 2.1.0.1==
+==Changelog 2.2.0.0==
+
+    * Refer to readme.html before install, see issue 26
+    * You can search for player on google or xfire, see issue 15 and issue 16.
+    * Make image brighter or darker with gamma correction, see issue 13.
+    * Added new option to ACP: ftp passive mode, see issue 35.
+    * Get negative picture in detailed screen, see issue 14.
+    * Added multiple page support, see issue 32.
+
+==Changelog 2.1.0.1==
 
     * Only download screens starting with 'pb', see issue 31.
     * Improved sql injection protection, see issue 34.
     * Replaced eregi by preg_match.
     * Bug fix: omitted 'DEBUG' variable in database connection, it was not defined yet.
 
-==changelog 2.1.0.0==
+==Changelog 2.1.0.0==
     * Added autocomplete functionality if you search for names
     * Added nice thumbnail hover effect for screens.
     * Created new logo for PBSViewer.
@@ -29,7 +38,7 @@
     * Implemented issue 6: Zoom feature for screen shots.
     * Added 'Save As...' feature for screen shots.
 
-==Version 2.0.0.0==
+==Changelog 2.0.0.0==
     * Bug fix: during auto-update visitor sees update debug messages, those are meant for admin, this is fixed now.
     * Bug fix: only show aliases if person has more names, don't show when there is only 1 person.
     * Check if inc dir is CHMODDED to 755 after install
@@ -47,7 +56,7 @@
     * Changed function parser_screens, now parses by using regular expression match. This results in much faster and more reliable parsing.
     * Bug fix, see issue #1: omitting 'p' of pbxxxxx.png when updating
 
-==Version 1.2.2.2==
+==Changelog 1.2.2.2==
 
     * Easy installation, added installation script
     * reset button added, to delete all screens and logs
@@ -55,7 +64,7 @@
     * Auto rewrite of special characters used by html
     * Fixed day selection field, it was not working properly
 
-==Version 1.2.2.1==
+==Changelog 1.2.2.1==
 
     * Read log files to obtain extra information like ip and md5 of original screen.
     * Extra info is given on top of screen, like player with most incomplete pb screens.
@@ -68,7 +77,7 @@
     * Changed type of field `date` to datetime field type, used to order the screens by date.
     * User can request an update: admin will be notified
 
-==Version 1.1.2.1==
+==Changelog 1.1.2.1==
 
     * Parser fix: couldn’t always find correct guid.
     * Compatible with CoD4.
@@ -84,6 +93,6 @@
     * Added a banner of PBSViewer on top of the page
     * Made a better security key to get acces to config file, security key makes a ‘fingerprint’ of server on which it is running
 
-==Version 1.0.2.1==
+==Changelog 1.0.2.1==
 
     * Security fix: check before install wether a previous version is already installed.
