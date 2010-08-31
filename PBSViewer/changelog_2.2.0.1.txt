@@ -1,0 +1,4 @@
+changelog 2.2.0.1:
+------------------------------------
+
+- Fixed warning message for template_footer() function, some arguments were missing

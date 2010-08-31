@@ -1152,7 +1152,7 @@ function template_page_nav($get_var,$current_page,$nr_results)
 	<?php
 }
 
-function template_footer($update_time,$lastUpdate,$startTime,$page_nr,$nr_results,$get_var)
+function template_footer($update_time,$lastUpdate,$startTime,$page_nr=1,$nr_results=0,$get_var='')
 {
 	global $str;
 	
