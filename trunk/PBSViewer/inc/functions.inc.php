@@ -42,7 +42,12 @@ function check_install_del()
 function is_CHMOD_755($file='inc')
 {
 	$result	=	true;
-	if(is_writable($file))		$result=false;
+	$CHMOD_INFO	=	substr(sprintf('%o', fileperms($file)), -3);
+	
+		
+	if($CHMOD_INFO!='755') $result=false;
+	
+	
 
 	return $result;
 }

@@ -1,5 +1,6 @@
 changelog 2.2.0.1:
 ------------------------------------
 
+- Altered is_CHMOD_755() function a bit, it should now work on other systems as well. 
 - Bug fix: Some users had problems with updating, function get_list_pbscreens() gave wrong list of .png files, see issue 37. 
 - Fixed warning message for template_footer() function, some arguments were missing.
