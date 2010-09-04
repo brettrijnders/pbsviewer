@@ -107,7 +107,7 @@ function get_list_pbscreens ($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$mai
 		foreach ($fileList as $i_nr=>$content)
 		{
 			//	find all the .png files
-			if(preg_match("~pb[0-9]+\.png~",$content))
+			if(preg_match("~pb[0-9]+\.png~",$content,$matches))
 			{
 				
 				// dirty fix, for those who are running windows gameserver, windows provides backwards slashes (\) instead of forward (/)
@@ -141,26 +141,22 @@ function get_list_pbscreens ($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$mai
 								}
 							}
 						}
+										
+											
+						if(preg_match("~pb[0-9]+~",$matches[0],$matches2))
+						{							
+							$fileID	=	$matches2[0];
+							
+								
+							$sql_insert	=	"INSERT INTO `dl_screens` (`fid`) VALUES ('".$fileID."')";
+							$sql 		=	mysql_query($sql_insert);
+							
+							$png_files[$i]	=	$fileID.".png";
+							
+							$i++;
+						}
 						
-						//	alter png index url
-						$pos	=	strrpos($content,"/");
-						$length	=	strlen($content);
-						$content		=	substr($content,$pos+1,$length-$pos);
-
-
-						//	store png file into array and in DB
-						//	those are the png files that can be downloaded
-						//	if they are downloaded extra information can be obtained from parser_screens
-						$png_files[$i]	=	$content;
-
-						//	store in file names without extension in DB
-						$posStart	=	strpos($content,'.');
-						$fileID		=	substr($content,0,$posStart);
-
-						$sql_insert	=	"INSERT INTO `dl_screens` (`fid`) VALUES ('".$fileID."')";
-						$sql 		=	mysql_query($sql_insert);
-
-						$i++;
+												
 					}
 				}
 				// error has occurred, stop using ftp_size and just store all .png images
@@ -187,25 +183,18 @@ function get_list_pbscreens ($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$mai
 						}
 					}
 					
-					//	alter png index url
-					$pos	=	strrpos($content,"/");
-					$length	=	strlen($content);
-					$content		=	substr($content,$pos+1,$length-$pos);
-
-
-					//	store png file into array and in DB
-					//	those are the png files that can be downloaded
-					//	if they are downloaded extra information can be obtained from parser_screens
-					$png_files[$i]	=	$content;
-
-					//	store in file names without extension in DB
-					$posStart	=	strpos($content,'.');
-					$fileID		=	substr($content,0,$posStart);
-
-					$sql_insert	=	"INSERT INTO `dl_screens` (`fid`) VALUES ('".$fileID."')";
-					$sql 		=	mysql_query($sql_insert);
-
-					$i++;
+					if(preg_match("~pb[0-9]+~",$matches[0],$matches2))
+					{							
+						$fileID	=	$matches2[0];
+							
+							
+						$sql_insert	=	"INSERT INTO `dl_screens` (`fid`) VALUES ('".$fileID."')";
+						$sql 		=	mysql_query($sql_insert);
+							
+						$png_files[$i]	=	$fileID.".png";
+							
+						$i++;
+					}
 				}
 			}
 
