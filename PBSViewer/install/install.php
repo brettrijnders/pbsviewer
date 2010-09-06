@@ -56,7 +56,7 @@ switch($step)
 	$_SESSION['nr_screens_main']	=	10;
 	$_SESSION['width']				=	200;
 	$_SESSION['height']				=	200;
-	$_SESSION['pbsvss_updater']		=	1;
+	$_SESSION['pbsvss_updater']		=	0;
 	$_SESSION['script_load_time']	=	600;
 	$_SESSION['debug']				=	0;
 	$_SESSION['weblog_dir']			=	'download';
@@ -1498,8 +1498,8 @@ function template_additional_settings()
           <td width="25%" class="bg_table_body"><strong>Auto update pbsvss? </strong></td>
           <td width="50%" class="bg_table_body"><label>
             <select name="pbsvss_updater" id="pbsvss_updater">
-<option value="false">false</option>
-<option value="true">true</option>
+<option value="0">false</option>
+<option value="1">true</option>
             </select>
           </label></td>
           <td class="bg_table_body"><em>Default	is	false</em></td>
