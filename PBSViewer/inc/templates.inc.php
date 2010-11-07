@@ -811,6 +811,7 @@ if($gd)
 //	new template function since 1.1.2.1
 function template_detailed_screen_error($error,$result,$hint)
 {
+	global $str;
 	?>
 		
 		
@@ -819,7 +820,7 @@ function template_detailed_screen_error($error,$result,$hint)
     <td align="center" valign="top" class="body_bg_detailed_screen">	<table width="80%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_error_bg">
   <tr>
     
-    <td align="center"><span class="txt_light">::</span> <span class="header_error_txt"> Error: <?php echo $error;?></span> <span class="txt_light">::</span></td>
+    <td align="center"><span class="txt_light">::</span> <span class="header_error_txt"> <?php echo $str['ERROR_TITLE'];?>: <?php echo $error;?></span> <span class="txt_light">::</span></td>
 
   </tr>
   <tr>
@@ -1023,7 +1024,7 @@ function template_copyright()
 
 function template_error_msg($error,$result,$hint='')
 {
-
+global $str;
 	?>
 	 
                  <tr>
@@ -1032,7 +1033,7 @@ function template_error_msg($error,$result,$hint='')
 	<table width="80%" border="0" align="center" cellpadding="0" cellspacing="0" class="header_error_bg">
   <tr>
     
-    <td align="center"><span class="txt_light">::</span> <span class="header_error_txt"> Error: <?php echo $error;?></span> <span class="txt_light">::</span></td>
+    <td align="center"><span class="txt_light">::</span> <span class="header_error_txt"> <?php echo $str['ERROR_TITLE'];?>: <?php echo $error;?></span> <span class="txt_light">::</span></td>
 
   </tr>
   <tr>
