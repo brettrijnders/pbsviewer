@@ -296,7 +296,10 @@ $str['PRIVATE_CLICK_HERE']				=	"Click here to enter your password";
 //---------------------------------------------
 
 //----------------ERROR MESSAGES-------------------
-
+$str['ERROR_TITLE']						= 	"Error";
+$str['ERROR_SEARCH_1']					= 	"Could not find screen";
+$str['ERROR_SEARCH_2']					= 	"Could not find the screen you are looking for";
+$str['ERROR_SEARCH_3']					= 	"Please try to search for something else or ask admin for an update if needed.";
 
 //----------------DEBUG MESSAGES-------------------
 

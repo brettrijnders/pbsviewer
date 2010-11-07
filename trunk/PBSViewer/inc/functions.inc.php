@@ -1266,7 +1266,7 @@ function show_fid_screens($nr=4,$fileName)
 	}
 	else
 	{
-		template_error_msg('Could not find screen','Could not find the screen you are looking for','Please try to search for something else or ask admin for an update if needed.');
+		template_error_msg($str['ERROR_SEARCH_1'],$str['ERROR_SEARCH_2'],$str['ERROR_SEARCH_3']);
 	}
 
 }
@@ -1336,7 +1336,7 @@ function show_guid_screens($nr=4,$page_nr,$guid)
 	}
 	else
 	{
-		template_error_msg('Could not find screen','Could not find the screen you are looking for','Please try to search for something else or ask admin for an update if needed.');
+		template_error_msg($str['ERROR_SEARCH_1'],$str['ERROR_SEARCH_2'],$str['ERROR_SEARCH_3']);
 	}
 
 }
@@ -1408,7 +1408,7 @@ function show_name_screens($nr=4,$page_nr,$name)
 	}
 	else
 	{
-		template_error_msg('Could not find screen','Could not find the screen you are looking for','Please try to search for something else or ask admin for an update if needed.');
+		template_error_msg($str['ERROR_SEARCH_1'],$str['ERROR_SEARCH_2'],$str['ERROR_SEARCH_3']);
 	}
 
 }
