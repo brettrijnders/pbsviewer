@@ -1,0 +1,4 @@
+changelog 2.2.0.2:
+------------------------------------
+
+- Short tags fix in update.php, replaced <? with <?php

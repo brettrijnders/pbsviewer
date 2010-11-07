@@ -76,26 +76,26 @@ if($update==true)
   <tr>
     <td class="bg_update_table_row2"><table width="90%" border="0" align="center">
       <tr>
-        <td><br><?update_file(FTP_HOST,FTP_PORT,FTP_USER,FTP_PASS,PBDIR.'/svss',L_FILE_TEMP,$fileLastUpdate,pb_sv_SsCeiling,true);?></td>
+        <td><br><?php update_file(FTP_HOST,FTP_PORT,FTP_USER,FTP_PASS,PBDIR.'/svss',L_FILE_TEMP,$fileLastUpdate,pb_sv_SsCeiling,true);?></td>
       </tr>
     </table>
       <br>
       <table width="50%" border="0" align="center">
         <tr>
-          <td align="center"><?echo '<br>'.$str["UPD8_FINISHED"].'<br>';
+          <td align="center"><?php echo '<br>'.$str["UPD8_FINISHED"].'<br>';
 	echo $str["UPD8_DURATION"].' '.get_loadTime($startTime,4).' '.$str["UPD8_DURATION_2"].'<br>';?></td>
         </tr>
     </table></td>
   </tr>
   <tr>
-    <td class="bg_update_table_row3" align="center"><span class="txt_light"><?echo '<a href="./" target="_parent">'.$str["UPD8_BACK"].'</a>';?></span></td>
+    <td class="bg_update_table_row3" align="center"><span class="txt_light"><?php echo '<a href="./" target="_parent">'.$str["UPD8_BACK"].'</a>';?></span></td>
   </tr>
 </table>
 </body>
 </html>
 
 	
-	<?
+	<?php
 	
 	
 }
