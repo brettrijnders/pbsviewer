@@ -2,6 +2,8 @@
 #sidebar TableOfContents
 
 This page contains a full list of punkbuster related games that are supported by PBSViewer:
+    * America's Army 2.8.5
+    * America's Army 3
     * Battlefield 2
     * Battlefield 2142
     * Battlefield Bad company 2
