@@ -3,6 +3,11 @@
 
 =Changelog=
 
+==Changelog 2.2.0.2==
+
+    * Short tags fix in update.php, replaced <? with <?php.
+    * Added German translation, made by Sölle & Sammy. Thank you very much!
+
 ==Changelog 2.2.0.1==
 
     * Altered is_CHMOD_755() function a bit, it should now work on other systems as well. 
