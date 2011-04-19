@@ -1,5 +1,0 @@
-changelog 2.2.0.2:
-------------------------------------
-
-- Short tags fix in update.php, replaced <? with <?php.
-- Added German translation, made by Sölle & Sammy. Thank you very much!

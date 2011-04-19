@@ -2547,6 +2547,13 @@ if($debug==true)
 		//	update, download the missing files
 		//	first get list
 		$fileList	=	ftp_nlist($connect,'.');
+
+if($debug==true)	
+{
+	echo date('H:i:s] ')."<li>Available files: "; 
+	print_r($fileList);
+	echo "</li><br>";
+}		
 		
 		$download_count	=	0;
 		$parse_count	=	0;
