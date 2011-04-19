@@ -1,0 +1,4 @@
+Changelog 2.2.0.3:
+------------------------------------
+
+- Added additional debug message when updating, it now shows the log files it tries to download.
