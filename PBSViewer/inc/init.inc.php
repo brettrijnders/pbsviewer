@@ -231,7 +231,7 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 	}
 	else 
 	{
-		define('PB_log',true);									//	Default	=	false, If you don't want logging use false
+		define('PB_log',false);									//	Default	=	false, If you don't want logging use false
 	}
 	
 	if ($auto_del_count==-1)
