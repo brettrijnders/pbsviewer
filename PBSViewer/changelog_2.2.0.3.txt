@@ -1,4 +1,5 @@
 Changelog 2.2.0.3:
 ------------------------------------
 
+- Bug Fix: if PB_log was set to false it now really is false and not set to true
 - Added additional debug message when updating, it now shows the log files it tries to download.
