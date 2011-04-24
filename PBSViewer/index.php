@@ -376,6 +376,11 @@ template_header();
 	}
 	else 
 	{
+		if (!isset($lastUpdateTime))
+		{
+			$lastUpdateTime = time()-10;
+		}
+		
 		//	show all pics with 4 pics per row
 		//	templated on main page has changed since v 1.2.2.1
 		//	now it only will show x latest screens. Number of screens can be configured in config

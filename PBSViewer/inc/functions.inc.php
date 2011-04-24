@@ -1430,6 +1430,13 @@ function show_main_screens($nr=4)
 	{
 		while($row	=	mysql_fetch_object($sql))
 		{
+			// initial values
+			$ip_player 	= '';
+			$md5_screen = '';
+			$logged		= false;
+			$md5_valid	= false;
+						
+			
 			//	find which screens are available and which are not available
 			//	also get latest files if there are duplicates
 			$data	=	get_latest_fid($row->fid);
@@ -1463,7 +1470,7 @@ function show_main_screens($nr=4)
 					if($md5_screen==get_md5("download/".$fid.".png")) $md5_valid=true;
 				}
 			}
-
+			
 			show_screens_body($fid,$name,$guid,$date,$ip_player,$md5_screen,$nr,$sql_result,$nr_counter,$logged,$md5_valid);
 				
 			$nr_counter++;
@@ -1760,15 +1767,15 @@ function is_admin()
 		//	For security reasons, regenerate ids
 		//	This in order to eliminate the risk of session hijacking (or session fixation attack).
 		//	See http://phpsec.org/projects/guide/4.html for more information
-		session_regenerate_id('ADMIN_ID');
+		if(!headers_sent()) session_regenerate_id('ADMIN_ID');
 		
 		if(isset($_SESSION['Ukey']))
 		{
-			session_regenerate_id('Ukey');
+			if(!headers_sent())  session_regenerate_id('Ukey');
 			
 			if(isset($_SESSION['ADMIN_IP']))
 			{
-				session_regenerate_id('ADMIN_IP');
+				if(!headers_sent()) session_regenerate_id('ADMIN_IP');
 				
 				//	check if no-one messed with the session
 				// 	IP address still should be the same as the one who logged in
@@ -1776,7 +1783,7 @@ function is_admin()
 				{
 					if(isset($_SESSION['userAgent']))
 					{		
-						session_regenerate_id('userAgent');
+						if(!headers_sent()) session_regenerate_id('userAgent');
 						
 						if($_SESSION['userAgent']==md5($_SERVER['HTTP_USER_AGENT']))
 						{	
