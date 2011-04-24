@@ -4,13 +4,14 @@
 function_exists("gd_info")? $gd=true:$gd=false;
 
 if($gd)
-{
-	
+{	
 	$download_dir	=	'../../download/';
 
 	if(isset($_GET['imgfid']))
 	{
-		$im = imagecreatefrompng($download_dir.$_GET['imgfid'].'.png');	
+		$fid			=	$_GET['imgfid'];
+		$original_img	=	$download_dir.$_GET['imgfid'].'.png';
+		$im = imagecreatefrompng($original_img);	
 
 		if(isset($_GET['gammaOut']))
 		{
@@ -29,7 +30,7 @@ if($gd)
 			imagedestroy($im);
 			
 			$IMGsrc = 'download/temp.png?'.time();
-			list($widthIMG, $heightIMG, $typeIMG, $attrIMG) = getimagesize($IMGsrc);
+			list($widthIMG, $heightIMG, $typeIMG, $attrIMG) = getimagesize($original_img);
    			echo "<img src=\"".$IMGsrc."\" style=\"width:".$widthIMG."px; height: ".$heightIMG."px;\" onmouseover=\"TJPzoomif(this);\" id=\"unique1337\" alt=\"".$fid.'png'."\">";
 
 		}
@@ -67,7 +68,7 @@ if($gd)
     				imagedestroy($im);
     
     				$IMGsrc = 'download/temp.png?'.time();
-    				list($widthIMG, $heightIMG, $typeIMG, $attrIMG) = getimagesize($IMGsrc);
+    				list($widthIMG, $heightIMG, $typeIMG, $attrIMG) = getimagesize($original_img);
 	    			echo "<img src=\"".$IMGsrc."\" style=\"width:".$widthIMG."px; height: ".$heightIMG."px;\" onmouseover=\"TJPzoomif(this);\" id=\"unique1337\" alt=\"".$fid.'png'."\">";
 				}
 				else
@@ -78,7 +79,7 @@ if($gd)
 			else 
 			{
 				$IMGsrc = 'download/'.$_GET['imgfid'].'.png?'.time();
-    			list($widthIMG, $heightIMG, $typeIMG, $attrIMG) = getimagesize($IMGsrc);
+    			list($widthIMG, $heightIMG, $typeIMG, $attrIMG) = getimagesize($original_img);
    	 			echo "<img src=\"".$IMGsrc."\" style=\"width:".$widthIMG."px; height: ".$heightIMG."px;\" onmouseover=\"TJPzoomif(this);\" id=\"unique1337\" alt=\"".$fid.'png'."\">";
 			}
 		}
