@@ -132,23 +132,23 @@ if($access==true)
 
 if(CUSTOM_UPDATE!=true)
 {
-//	check if update time elapsed?
-//	if update_time has passed then update.
-//	This is used to reduce the download bandwith
-$fileLastUpdate	=	'lastUpdate.txt';
-$lastUpdate		=	update_check($fileLastUpdate);
+	//	check if update time elapsed?
+	//	if update_time has passed then update.
+	//	This is used to reduce the download bandwith
+	$fileLastUpdate	=	'lastUpdate.txt';
+	$lastUpdate		=	update_check($fileLastUpdate);
 
 
-if(time()>$lastUpdate+UPDATE_TIME)
-{	
-	//	don't show messages about updating ($main=true)
-	update_file(FTP_HOST,FTP_PORT,FTP_USER,FTP_PASS,PBDIR.'/svss',L_FILE_TEMP,$fileLastUpdate,pb_sv_SsCeiling,false,true);
-}
+	if(time()>$lastUpdate+UPDATE_TIME)
+	{	
+		//	don't show messages about updating ($main=true)
+		update_file(FTP_HOST,FTP_PORT,FTP_USER,FTP_PASS,PBDIR.'/svss',L_FILE_TEMP,$fileLastUpdate,pb_sv_SsCeiling,false,true);
+	}
 
 
-//	FIX: for getting correct time info about update status in footer, if this is not used old information will be used from '$lastUpdate' after update
-//	get time when last update took place, this info can be put into footer.
-$lastUpdateTime	=	update_check($fileLastUpdate);
+	//	FIX: for getting correct time info about update status in footer, if this is not used old information will be used from '$lastUpdate' after update
+	//	get time when last update took place, this info can be put into footer.
+	$lastUpdateTime	=	update_check($fileLastUpdate);
 }
 
 template_header();
