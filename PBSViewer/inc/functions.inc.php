@@ -281,6 +281,18 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 	//	4]	parse main file
 	//	5]	download png files
 
+	//	FIX v2.2.0.3 (issue 38): first update local file lastUpdate in order to prevent that other users are updating simultaneously
+	if($fp2	=	fopen($fileLastUpdate,'w+'))
+	{
+		fwrite($fp2,time());
+		fclose($fp2);
+	}
+	else
+	{
+		fclose($fp2);
+		die('cannot write file lastUpdate, please CHMOD \'lastUpdate.txt\' to 666');
+	}
+	
 	//	ftp connect
 	$connect	=	ftp_connect($ftp_host,$ftp_port,script_load_time);
 	$login		=	ftp_login($connect,$ftp_user,$ftp_pass);
@@ -515,10 +527,16 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 						get_logs($debug,PB_log);
 					}
 
-					//	if file is downloaded, update local file lastUpdate
+					//	if everything went fine then set request_update back to false
+					//	When this is set to false, someone can request an update
+					set_request_false();
+				}
+				else
+				{
+					// if download failed, first update local file such that other users can try to update again after x time
 					if($fp2	=	fopen($fileLastUpdate,'w+'))
 					{
-						fwrite($fp2,time());
+						fwrite($fp2,0);
 						fclose($fp2);
 					}
 					else
@@ -526,14 +544,7 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 						fclose($fp2);
 						die('cannot write file lastUpdate, please CHMOD \'lastUpdate.txt\' to 666');
 					}
-
-
-					//	if everything went fine then set request_update back to false
-					//	When this is set to false, someone can request an update
-					set_request_false();
-				}
-				else
-				{
+					
 					die('Not all .png files were downloaded...');
 				}
 			}

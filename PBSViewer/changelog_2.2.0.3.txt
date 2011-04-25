@@ -1,6 +1,7 @@
 Changelog 2.2.0.3:
 ------------------------------------
 
+- Bug Fix: PBSViewer was crashing due to multiple FTP sessions during automatic update, see issue 38
 - Minor fix: fixed session_regenerate_id() warning.
 - Minor fix: fixed undefined variables.
 - Minor fix: fixed undefined index error 'DETSCRN_TOOLS_ZOOM_ENABLE'.
