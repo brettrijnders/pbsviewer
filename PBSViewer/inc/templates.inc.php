@@ -1015,7 +1015,7 @@ function template_copyright()
 	// nfo data on beesar is not available
 	else
 	{
-		echo 'Copyright &copy; '.date('Y').', BandAhr, <a href="http://www.beesar.com" target="_blank">www.beesar.com</a><br>';
+		echo 'Copyright &copy; '.date('Y').', Brett S. Rijnders, <a href="http://www.beesar.com" target="_blank">www.beesar.com</a><br>';
 		echo 'V '.$version[0].' ';
 		echo 'Powered by <a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank">PBSViewer</a>';
 	}
