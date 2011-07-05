@@ -1,0 +1,4 @@
+Changelog 2.2.0.4:
+------------------------------------
+
+- Added a new game to the 'supported games' list
