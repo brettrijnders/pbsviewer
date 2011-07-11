@@ -2564,7 +2564,29 @@ if($debug==true)
 		
 		//	update, download the missing files
 		//	first get list
-		$fileList	=	ftp_nlist($connect,'.');
+		// fixed since 2.2.0.4, retreiving list of all files should work
+		if($fileList	=	ftp_nlist($connect,'.'))
+		{
+			if($debug==true)	
+			{
+				echo date('H:i:s] ')."<li>Generating list of all files</li><br>";
+			}
+		}
+		elseif($fileList	=	ftp_nlist($connect,$dir))
+		{
+			if($debug==true)	
+			{
+				echo date('H:i:s] ')."<li>Generating list of all files</li><br>"; 
+			}
+		}
+		else 
+		{	
+			if($debug==true)	
+			{
+				echo date('H:i:s] ')."<li>Not able to generate a list of all files</li><br>";
+			}
+		}
+		
 
 if($debug==true)	
 {
@@ -2779,8 +2801,39 @@ function del_logs_webserver($count=0,$debug=false)
 		return false;	
 	}
 
+	
+	// fixed since 2.2.0.4, retreiving list of all files should work
+	$fileListInfo = false;
+	if($fileList	=	ftp_nlist($connect,'.'))
+	{
+		if($debug==true)	
+		{
+			echo date('H:i:s] ')."<li>Generating list of all files</li><br>";
+		}
+		
+		$fileListInfo = true;
+	}
+	elseif($fileList	=	ftp_nlist($connect,PBSViewer_download))
+	{
+		if($debug==true)	
+		{
+			echo date('H:i:s] ')."<li>Generating list of all files</li><br>";
+		}
+		
+		$fileListInfo = true; 
+	}
+	else 
+	{
+		if($debug==true)	
+		{
+			echo date('H:i:s] ')."<li>Not able to generate a list of all files</li><br>";
+		}
+		
+		$fileListInfo = false;
+	}
+	
 	//	if changed then list all the files
-	if($filelist	=	ftp_nlist($connect,'.'))
+	if($fileListInfo)
 	{
 	$nr_logs	=	0;
 
@@ -2814,7 +2867,38 @@ function find_PBSViewer_download($stream,$dir='.')
 {	
 if(ftp_chdir($stream,$dir))
 {
-			if($filelist	=	ftp_nlist($stream,'.'))
+	
+	// fixed since 2.2.0.4, retreiving list of all files should work
+	$fileListInfo = false;
+	if($fileList	=	ftp_nlist($connect,'.'))
+	{
+		if($debug==true)	
+		{
+			echo date('H:i:s] ')."<li>Generating list of all files</li><br>";
+		}
+		
+		$fileListInfo = true;
+	}
+	elseif($fileList	=	ftp_nlist($connect,$dir))
+	{
+		if($debug==true)	
+		{
+			echo date('H:i:s] ')."<li>Generating list of all files</li><br>";
+		}
+		
+		$fileListInfo = true; 
+	}
+	else 
+	{
+		if($debug==true)	
+		{
+			echo date('H:i:s] ')."<li>Not able to generate a list of all files</li><br>";
+		}
+		
+		$fileListInfo = false;
+	}
+	
+			if($fileListInfo)
 			{
 				foreach ($filelist	as $file)
 				{
@@ -2850,7 +2934,38 @@ function check_PBSViewer_download($stream,$dir='.')
 {	
 if(ftp_chdir($stream,$dir))
 {
-			if($filelist	=	ftp_nlist($stream,'.'))
+	
+	// fixed since 2.2.0.4, retreiving list of all files should work
+	$fileListInfo = false;
+	if($fileList	=	ftp_nlist($connect,'.'))
+	{
+		if($debug==true)	
+		{
+			echo date('H:i:s] ')."<li>Generating list of all files</li><br>";
+		}
+		
+		$fileListInfo = true;
+	}
+	elseif($fileList	=	ftp_nlist($connect,$dir))
+	{
+		if($debug==true)	
+		{
+			echo date('H:i:s] ')."<li>Generating list of all files</li><br>";
+		}
+		
+		$fileListInfo = true; 
+	}
+	else 
+	{
+		if($debug==true)	
+		{
+			echo date('H:i:s] ')."<li>Not able to generate a list of all files</li><br>";
+		}
+		
+		$fileListInfo = false;
+	}
+	
+			if($fileListInfo)
 			{
 				foreach ($filelist	as $file)
 				{
@@ -3191,7 +3306,38 @@ function reset_ftp_web($debug)
 			//	change dir
 			if(ftp_chdir($connect,PBSViewer_download))
 			{
-				if($list	=	ftp_nlist($connect,'.'))
+				
+				// fixed since 2.2.0.4, retreiving list of all files should work
+				$fileListInfo = false;
+				if($fileList	=	ftp_nlist($connect,'.'))
+				{
+					if($debug==true)	
+					{
+						echo date('H:i:s] ')."<li>Generating list of all files</li><br>";
+					}
+					
+					$fileListInfo = true;
+				}
+				elseif($fileList	=	ftp_nlist($connect,PBSViewer_download))
+				{
+					if($debug==true)	
+					{
+						echo date('H:i:s] ')."<li>Generating list of all files</li><br>";
+					}
+					
+					$fileListInfo = true; 
+				}
+				else 
+				{
+					if($debug==true)	
+					{
+						echo date('H:i:s] ')."<li>Not able to generate a list of all files</li><br>";
+					}
+					
+					$fileListInfo = false;
+				}
+				
+				if($fileListInfo)
 				{
 					//	first check if we are in the right dir
 					foreach ($list	as $file)
@@ -3304,7 +3450,38 @@ function reset_ftp_gameserver_logs($debug)
 			//	change dir
 			if(ftp_chdir($connect,$dir))
 			{
-				if($list	=	ftp_nlist($connect,'.'))
+				
+				// fixed since 2.2.0.4, retreiving list of all files should work
+				$fileListInfo = false;
+				if($fileList	=	ftp_nlist($connect,'.'))
+				{
+					if($debug==true)	
+					{
+						echo date('H:i:s] ')."<li>Generating list of all files</li><br>";
+					}
+					
+					$fileListInfo = true;
+				}
+				elseif($fileList	=	ftp_nlist($connect,$dir))
+				{
+					if($debug==true)	
+					{
+						echo date('H:i:s] ')."<li>Generating list of all files</li><br>";
+					}
+					
+					$fileListInfo = true; 
+				}
+				else 
+				{
+					if($debug==true)	
+					{
+						echo date('H:i:s] ')."<li>Not able to generate a list of all files</li><br>";
+					}
+					
+					$fileListInfo = false;
+				}
+				
+				if($fileListInfo)
 				{		
 						//	get req number of files which need to be deleted
 						$req_del_count	=	count($list);
@@ -3401,7 +3578,38 @@ function reset_ftp_gameserver_screens($debug)
 			//	change dir
 			if(ftp_chdir($connect,$dir))
 			{
-				if($list	=	ftp_nlist($connect,'.'))
+				
+				// fixed since 2.2.0.4, retreiving list of all files should work
+				$fileListInfo = false;
+				if($fileList	=	ftp_nlist($connect,'.'))
+				{
+					if($debug==true)	
+					{
+						echo date('H:i:s] ')."<li>Generating list of all files</li><br>";
+					}
+					
+					$fileListInfo = true;
+				}
+				elseif($fileList	=	ftp_nlist($connect,$dir))
+				{
+					if($debug==true)	
+					{
+						echo date('H:i:s] ')."<li>Generating list of all files</li><br>";
+					}
+					
+					$fileListInfo = true; 
+				}
+				else 
+				{
+					if($debug==true)	
+					{
+						echo date('H:i:s] ')."<li>Not able to generate a list of all files</li><br>";
+					}
+					
+					$fileListInfo = false;
+				}
+				
+				if($fileListInfo)
 				{		
 						//	get req number of files which need to be deleted
 						$req_del_count	=	count($list);

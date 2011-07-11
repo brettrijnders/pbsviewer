@@ -2,3 +2,4 @@ Changelog 2.2.0.4:
 ------------------------------------
 
 - Added a new game to the 'supported games' list
+- Bug fix: No empty list of log files is being returned anymore during update if logging is enabled
