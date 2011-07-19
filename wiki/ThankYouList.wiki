@@ -1,7 +1,7 @@
 #labels Featured
 On this page people are listed who have supported me. Those people helped me with testing, sending log files, made a donation or something else. If you are not listed, please [http://code.google.com/p/pbsviewer/#Contact contact me].
 
-I want to thank the following people:
+*I want to thank the following people:*
 ----
   * *[http://www.xfire.com/profile/caponx/ Corax Capone]* - _Tested PBSViewer for CoD4 and sent some log files to me._
   * *Paul rocco* - _Tested PBSViewer for BFBC2, helped with spotting/fixing update bug._
