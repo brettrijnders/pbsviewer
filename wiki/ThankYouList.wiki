@@ -1,5 +1,5 @@
 #labels Featured
-On this page people are listed who have supported me. Those people helped me with testing, sending log files or made a donation. If you are not on the list, please [file:///F:/Program%20Files/EasyPHP3.1/www/pbs_viewer/pbsviewer/PBSViewer/readme.html#contact contact me].
+On this page people are listed who have supported me. Those people helped me with testing, sending log files or made a donation. If you are not on the list, please contact me.
 
 I want to thank the following people:
 ----
