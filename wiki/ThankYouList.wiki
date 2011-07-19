@@ -1,0 +1,11 @@
+#labels Featured
+On this page people are listed who have supported me. Those people helped me with testing, sending log files or made a donation. If you are not on the list, please [file:///F:/Program%20Files/EasyPHP3.1/www/pbs_viewer/pbsviewer/PBSViewer/readme.html#contact contact me].
+
+----
+I want to thank the following people:
+
+  * *bold* Corax Capone - Tested PBSViewer for CoD4 and sent some log files to me.
+  * Paul rocco - Tested PBSViewer for BFBC2, helped with spotting/fixing update bug.
+  * Janos Pal Toth - Made TJPzoom, an image zoomer based on javascript.
+  * Sölle & Sammy - Added German translation.
+  * Michael Johnson - For donating money
