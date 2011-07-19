@@ -4,8 +4,8 @@ On this page people are listed who have supported me. Those people helped me wit
 ----
 I want to thank the following people:
 
-  * *bold* Corax Capone - Tested PBSViewer for CoD4 and sent some log files to me.
-  * Paul rocco - Tested PBSViewer for BFBC2, helped with spotting/fixing update bug.
-  * Janos Pal Toth - Made TJPzoom, an image zoomer based on javascript.
-  * Sölle & Sammy - Added German translation.
-  * Michael Johnson - For donating money
+  * *[http://www.xfire.com/profile/caponx/ Corax Capone]* - _Tested PBSViewer for CoD4 and sent some log files to me._
+  * *Paul rocco* - _Tested PBSViewer for BFBC2, helped with spotting/fixing update bug._
+  * *[http://valid.tjp.hu/tjpzoom Janos Pal Toth]* - _Made TJPzoom, an image zoomer based on javascript._
+  * *[http://www.geuner.eu/ Sölle & Sammy]* - _Added German translation._
+  * *[http://www.goosite.net/ Michael Johnson]* - _For donating money_
