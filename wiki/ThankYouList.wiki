@@ -1,5 +1,5 @@
 #labels Featured
-On this page people are listed who have supported me. Those people helped me with testing, sending log files, made a donation or something else. If you are not listed, please [http://code.google.com/p/pbsviewer/#Contact contact me].
+On this page people are listed who have supported me. Those people helped me with testing, sending log files, made a donation or did something else. If you are not listed, please [http://code.google.com/p/pbsviewer/#Contact contact me].
 
 ----
 *_I want to thank the following people:_*
