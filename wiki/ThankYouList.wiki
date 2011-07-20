@@ -4,7 +4,7 @@ On this page people are listed who have supported me. Those people helped me wit
 ----
 *_I want to thank the following people:_*
 
-  * *[http://www.goosite.net/ Michael Johnson]* - _For donating money._
+  * *[http://www.bfairmaps.com/ Michael Johnson]* - _For donating money._
   * *[http://www.geuner.eu/ Sölle & Sammy]* - _Added German translation._
   * *[http://www.xfire.com/profile/caponx/ Corax Capone]* - _Tested PBSViewer for CoD4 and sent some log files to me._
   * *Paul rocco* - _Tested PBSViewer for BFBC2, helped with spotting/fixing update bug._
