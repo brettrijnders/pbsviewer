@@ -1768,6 +1768,44 @@ function empty_ResetCode($Ukey)
 	$sql 		=	mysql_query($sql_update);
 }
 
+//	check if someone is allowed to run cron job
+function is_cron_user($cronkey)
+{
+	$sql_select	=	"SELECT `memberID`,`mail`,`name`,`pass` FROM `access` WHERE md5(`memberID`)='".md5(1)."'";
+	$sql		=	mysql_query($sql_select) or die(mysql_error()."<br> mysql ERROR mID");
+
+	if (mysql_num_rows($sql)>0)
+	{
+		while($row	=	mysql_fetch_object($sql))
+		{
+			$admin_name		=	$row->name;
+			$admin_pass		=	$row->pass;
+		}
+		
+		//	cron key needs to be md5(md5()) hash of "name-pass
+		//	note that pass needs to be md5 of password itself
+		//	i.e. that if you have the following name and pass:
+		// 	name = admin
+		// 	pass = mypass
+		// 	than you should take md5 of
+		// 	name-a029d0df84eb5549c641e04a9ef389e5
+		// 	the final cronkey should then be
+		// 	dc8db46227c3205b6cf255e708855df2
+		if ($cronkey == md5($admin_name."-".$admin_pass))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	else
+	{
+		return false;
+	}
+}
+
 //	check if person is admin or not
 function is_admin()
 {
@@ -2198,6 +2236,32 @@ function get_admin_mail()
 			}
 		
 			return $admin_mail;
+		}
+	}
+	
+}
+
+function get_cron_key()
+{
+	
+	$memberID	=	false;
+	if(isset($_SESSION['ADMIN_ID'])) $memberID = $_SESSION['ADMIN_ID'];
+	if(isset($_COOKIE['IDCookie'])) $memberID = $_COOKIE['IDCookie'];
+	
+	if ($memberID!=false)
+	{
+		$sql_select	=	"SELECT `name`,`pass` FROM `access` WHERE md5(`memberID`)='".md5(1)."'";
+		$sql 		=	mysql_query($sql_select);
+		if (mysql_num_rows($sql)>0)
+		{
+			while($row	=	mysql_fetch_object($sql))
+			{
+				$admin_name	=	$row->name;
+				$admin_pass		=	$row->pass;
+			}
+		
+			
+			return md5($admin_name."-".$admin_pass);
 		}
 	}
 	

@@ -406,6 +406,14 @@ if($ACP==true)
         </label></td>
         <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_NOTIFY_UPDATE_COMMENT"];?></td>
       </tr>
+            <tr>
+        <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_CRON_KEY"];
+?></td>
+        <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
+          <input type="text" name="cron_key" id="cron_key" size="40" value="<?php echo get_cron_key();?>" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';" onclick="this.select();">
+        </label></td>
+        <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_CRON_COMMENT"].get_cron_key();?></td>
+      </tr>
       <tr>
         <td colspan="3" align="center" class="bg_reset_table_row3"><span class="txt_light"><strong><?php echo $str["ACP_CLAN"];?></strong></span></td>
       </tr>
