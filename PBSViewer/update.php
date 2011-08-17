@@ -48,6 +48,18 @@ $startTime	=	get_microtime();
 //	check if user is admin
 if (is_admin()==true) $update=true;
 
+
+
+//	set cron key by using arguments given through a cron job
+if(count($argv)>1) 
+{
+	$cronkey = $argv[1];
+}
+else 
+{
+	$cronkey = '';
+}
+
 $fileLastUpdate	=	'lastUpdate.txt';
 if($update==true) 
 {
@@ -100,11 +112,10 @@ if($update==true)
 	
 }
 //	check if user is cron user
-elseif (isset($_GET['cronkey']))
-{
-	if (is_cron_user($_GET['cronkey']))
+elseif (is_cron_user($cronkey)==true)
 	{
-		?>
+		
+	?>
 		
 		<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 	<html>
@@ -150,13 +161,7 @@ elseif (isset($_GET['cronkey']))
 		
 		<?php
 		
-		
-	}
-	else 
-	{
-		require_once('inc/templates.inc.php');
-		die(template_denied());
-	}
+	
 	
 }
 else 

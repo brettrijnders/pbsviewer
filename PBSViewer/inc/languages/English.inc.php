@@ -211,7 +211,7 @@ $str["ACP_ADMIN_MAIL_COMMENT"]			=	"Mail address is required, will be used in ca
 $str["ACP_NOTIFY_UPDATE"]				=	"Notify on update request";
 $str["ACP_NOTIFY_UPDATE_COMMENT"]		=	"Only check if you want to be notified when someone has requested an update, you will receive a notification mail.";
 $str["ACP_CRON_KEY"]					=	"Cron user key";
-$str["ACP_CRON_COMMENT"]				=	"Use this key if you want to update through cronjob. You should use the key as follows: <br> update.php?cronkey=";
+$str["ACP_CRON_COMMENT"]				=	"Use this key if you want to update through cronjob. You should use the key as follows (including the space): <br>";
 $str["ACP_CLAN"]						=	"Clan";
 $str["ACP_CLAN_NAME"]					=	"Clan name";
 $str["ACP_CLAN_NAME_COMMENT"]			=	"What is your full clan name?";
