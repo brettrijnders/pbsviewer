@@ -213,6 +213,8 @@ $str["ACP_ADMIN_MAIL"]					=	"Admin Mail";
 $str["ACP_ADMIN_MAIL_COMMENT"]			=	"Email-Adresse ben&ouml;tigt. Diese wird bei Passwort-Verlust verwendet.";
 $str["ACP_NOTIFY_UPDATE"]				=	"Bei Update-Anfrage benachrichtigen";
 $str["ACP_NOTIFY_UPDATE_COMMENT"]		=	"Nur ausw&auml;hlen, wenn du bei einer Update-Anfrage per Mail benachrichtigt werden m&ouml;chtest.";
+$str["ACP_CRON_KEY"]					=	"Cron benutzer key";
+$str["ACP_CRON_COMMENT"]				=	"Verwenden Sie diese Schlüssel, wenn Sie mit cronjob aktualisieren möchten. Sie sollten die Schlüssel wie folgt: <br> update.php?cronkey=";
 $str["ACP_CLAN"]						=	"Clan";
 $str["ACP_CLAN_NAME"]					=	"Clan Name";
 $str["ACP_CLAN_NAME_COMMENT"]			=	"Wie lautet dein voller Clan Name?";
