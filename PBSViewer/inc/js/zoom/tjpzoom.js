@@ -1,7 +1,8 @@
-// TJPzoom 3 * János Pál Tóth
+// TJPzoom 3 * Janos P Toth
 // 2007.07.12
+// 2011.03.24 firefox 4 apparently has a style.filter attribute (which i didn't expect in 2007)
 // Docs @ http://valid.tjp.hu/tjpzoom/ 
-// News @ http://tjpzoom.blogspot.com/
+// News @ http://blog.tjp.hu/
 
 function TJPzoomswitch(obj) {
  TJPon[obj]=((TJPon[obj])?(0):(1));
@@ -34,7 +35,7 @@ function TJPzoom(obj,highres) {
  TJPstage.style.position='absolute';
  if(typeof(TJPstage.style.filter) != typeof(nosuchthing)) {
   //hi IE
-  if(navigator.appVersion.indexOf('Mac') == -1) { //hi Mac IE
+  if((navigator.appVersion + '').indexOf('Mac') == -1 && navigator.appName == 'Microsoft Internet Explorer') { //Mac IE gets out
    TJPstage.style.filter='alpha(opacity=0)';
    TJPstage.style.backgroundColor='#ffffff';
   }
@@ -325,7 +326,7 @@ var TJPborderthick=2;
 var TJPbordercolor='#888888';
 
 var TJPshadowthick=8;
-var TJPshadow='inc/js/zoom/dropshadow/';
+var TJPshadow='dropshadow/';
 
 TJPinit();
 
