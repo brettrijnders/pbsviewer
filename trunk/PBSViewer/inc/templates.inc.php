@@ -45,6 +45,7 @@ function template_header()
 
 <link href="style/style.css" rel="stylesheet" type="text/css">
 <link rel="shortcut icon" href="style/img/favicon.ico">
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 
 <script src="http://cdn.jquerytools.org/1.2.3/full/jquery.tools.min.js" type="text/javascript"></script>
   <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css">
@@ -1207,12 +1208,11 @@ function template_footer($update_time,$lastUpdate,$startTime,$page_nr=1,$nr_resu
       <a href="https://code.google.com/p/pbsviewer/" target="_blank"><img
         src="style/img/google_code_project_hosting.gif"
         alt="Google Code project hosting" height="34" width="34" border="0"></a>
-      
-      
       </p>
-  
-      
-        <br>
+      <p>
+  <iframe src="http://www.facebook.com/plugins/like.php?app_id=250036168353254&amp;href=http%3A%2F%2Fcode.google.com%2Fp%2Fpbsviewer%2F&amp;send=false&amp;layout=box_count&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font=tahoma&amp;height=90" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:50px; height:60px;" allowTransparency="true"></iframe>
+  <g:plusone size="tall" href="http://code.google.com/p/pbsviewer/"></g:plusone>
+  </p>
     </td>
     </tr>
   <tr>
