@@ -132,6 +132,7 @@ $str["DETSCRN_SHOW_MORE"]				=	"Zeige mehr Bilder von diesem Spieler";
 $str["DETSCRN_BACK"]					=	"Gehe zur&uuml;ck";
 
 //----------------DETAILED SCREEN INFO TOOLS-------------------
+$str["DETSCRN_TOOLS_PREV_COMMENT"]		=	"Gehe zum vorherigen Screenshot";
 $str["DETSCRN_TOOLS_SAVE_COMMENT"]		=	"Speichere original Bild.";
 $str["DETSCRN_TOOLS_ZOOM_TITLE"]		=	"Aktiviere/Deaktiviere Zoom";
 $str["DETSCRN_TOOLS_ZOOM_COMMENT"]		=	"Maus nach oben ziehen, um Zoom zu erh&ouml;hen.";
@@ -142,6 +143,7 @@ $str["DETSCRN_TOOLS_ZOOM_COMMENT_5"]	=	"Du benutzt Opera, wahrscheinlich funktio
 $str["DETSCRN_TOOLS_GAMMA_PLUS"]		=	"Gamma-Korrektur. Gamma-Wert erh&ouml;hen.";
 $str["DETSCRN_TOOLS_GAMMA_MIN"]			=	"Gamma_Korrektur. Gamma-Wert verringern.";
 $str["DETSCRN_TOOLS_GAMMA_NEGATIVE"]	=	"Alle Farben des Bildes umkehren, Negativ-Bild erzeugen";
+$str["DETSCRN_TOOLS_NEXT_COMMENT"]		=	"Zum nächsten Screenshot";
 
 
 //----------------FOOTER-------------------

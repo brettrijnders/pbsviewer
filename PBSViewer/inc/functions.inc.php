@@ -1424,6 +1424,59 @@ function show_name_screens($nr=4,$page_nr,$name)
 
 }
 
+//	new feature added since 2.2.0.4 
+//	get next and previous fid when you know current screenshot fid
+//	used on detailed screen page when viewing screenshot
+function get_prevAndNext_screen($current_fid)
+{	
+	$i	=	0;
+	$pfid = ''; // previous fid
+	$pfidStored = false; // keep track if fid is stored
+	$nfid = ''; // next fid
+	$nfidStored = false; // keep track if fid is stored
+
+	//	only select unique fids
+	$sql_select	=	"SELECT DISTINCT `fid` FROM `screens` ORDER BY `date` DESC";
+	$sql 		=	mysql_query($sql_select);
+
+	//	check if there are screens in DB
+	if(mysql_num_rows($sql)>=1)
+	{
+		while($row	=	mysql_fetch_object($sql))
+		{					
+			
+			//	find which screens are available and which are not available
+			//	also get latest files if there are duplicates
+			$data	=	get_latest_fid($row->fid);
+			$fid	=	$data[0];
+
+			$sql_select2	=	"SELECT * FROM `dl_screens` WHERE `fid`='".$fid."'";
+			$sql2			=	mysql_query($sql_select2);
+			
+			//	screen does exist, is downloaded
+			if(mysql_num_rows($sql2)>=1)
+			{				
+				//	store next fid
+				if ($pfidStored==true && $nfidStored==false) 
+				{
+					$nfid = $fid;
+					$nfidStored = true;
+				}
+				
+				if ($current_fid==$fid)
+				{
+					$pfidStored = true;
+				}
+					
+				// store previod fid
+				if ($pfidStored==false) $pfid = $fid;
+			}
+		}
+	}
+	
+	return array($pfid,$nfid);
+}
+
 //	new functions added since version 1.2.2.1
 //	this function will be used on main page and show x latest screens. This number can be configured in config.inc.php
 function show_main_screens($nr=4)

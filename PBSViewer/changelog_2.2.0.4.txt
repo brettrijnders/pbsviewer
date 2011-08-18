@@ -1,6 +1,7 @@
 Changelog 2.2.0.4:
 ------------------------------------
 
+- Added a new feature, see issue 21. User can now easily browse to previous or next screenshot
 - Fixed zoom feature, it was not working anymore in some browsers
 - Added 'cron user key' feature, user can now easily update through cron job
 - Added a new game to the 'supported games' list

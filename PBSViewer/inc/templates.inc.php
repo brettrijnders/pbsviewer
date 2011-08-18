@@ -556,7 +556,16 @@ function changeImage()
 
 <table width="90%" border="0" align="center">
   <tr>
-  <td align="center" valign="top" class="bg_detailed_screen_tools"><a href="<?php echo "inc/imgSave.inc.php?saveIMG=".$fid;?>"><img src="style/img/save.gif" width="32" height="32" alt="<?php echo $str["DETSCRN_TOOLS_SAVE_COMMENT"];?>" border="0" class="hover"></a><div class="tooltip"><?php echo $str["DETSCRN_TOOLS_SAVE_COMMENT"];?></div>
+  <td align="center" valign="top" class="bg_detailed_screen_tools"><?php 
+  $pnfids = get_prevAndNext_screen($fid); 
+  
+  if ($pnfids[0]!='') 
+  {
+  	echo "<a href=\"./?fid=".$pnfids[0]."\"><img src=\"style/img/prev.png\" width=\"32\" height=\"32\" border=\"0\" alt=\"".$str["DETSCRN_TOOLS_PREV_COMMENT"]."\" class=\"hover\"></a><div class=\"tooltip\">".$str["DETSCRN_TOOLS_PREV_COMMENT"]."</div>"; 
+  }
+  
+  ?>
+  <a href="<?php echo "inc/imgSave.inc.php?saveIMG=".$fid;?>"><img src="style/img/save.gif" width="32" height="32" alt="<?php echo $str["DETSCRN_TOOLS_SAVE_COMMENT"];?>" border="0" class="hover"></a><div class="tooltip"><?php echo $str["DETSCRN_TOOLS_SAVE_COMMENT"];?></div>
     &nbsp;<a href="#" onclick="TJPzoomswitch(document.getElementById('unique1337'))"><img src="style/img/zoom_disabled.gif" width="32" height="32" alt="<?php echo $str["DETSCRN_TOOLS_ZOOM_TITLE"];?>" border="0" onclick="changeImage()" NAME="zoomIMG" class="hover"></a><div class="tooltip"><strong><?php echo $str["DETSCRN_TOOLS_ZOOM_TITLE"];?></strong><br><ul>
   <li><?php echo $str["DETSCRN_TOOLS_ZOOM_COMMENT"];?></li>
   <li><?php echo $str["DETSCRN_TOOLS_ZOOM_COMMENT_2"];?></li>
@@ -583,6 +592,11 @@ if($gd)
 &nbsp;<a href="#"><img src="style/img/negative.png" width="32" height="32" alt="" border="0" class="negative hover"></a><div class="tooltip"><?php echo $str["DETSCRN_TOOLS_GAMMA_NEGATIVE"];?></div>
 <?php
 }
+
+  if ($pnfids[1]!='') 
+  {
+  	echo "<a href=\"./?fid=".$pnfids[1]."\"><img src=\"style/img/next.png\" width=\"32\" height=\"32\" border=\"0\" alt=\"".$str["DETSCRN_TOOLS_NEXT_COMMENT"]."\" class=\"hover\"></a><div class=\"tooltip\">".$str["DETSCRN_TOOLS_NEXT_COMMENT"]."</div>"; 
+  }
 ?>
 
 
