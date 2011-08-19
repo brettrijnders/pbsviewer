@@ -58,12 +58,12 @@ http://en.wikipedia.org/wiki/Cron
 ===How can I update using a cron job?===
 In order to be able to update PBSViewer using a cron job you need to do several things. The command that you should use for your cron job looks like this:
 {{{
-"/usr/bin/php SomePath/PBSViewer/update.php YourCronkey"
+/usr/bin/php SomePath/PBSViewer/update.php YourCronkey
 }}}
 
 You can find your cronkey in the ACP. An example of how a cron command looks like is given below:
 {{{
-"/usr/bin/php /var/www/vhosts/mydomain.com/httpdocs/PBSViewer/update.php 2223s46b8275bcde7e2dg6e91597af13"
+/usr/bin/php /var/www/vhosts/mydomain.com/httpdocs/PBSViewer/update.php 2223s46b8275bcde7e2dg6e91597af13
 }}}
 
 =Miscellaneous=
