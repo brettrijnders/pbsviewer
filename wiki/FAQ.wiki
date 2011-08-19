@@ -12,6 +12,8 @@ Here you will find Frequently Asked Questions (FAQ).
     * [FAQ#After_update_the_download_folder_is_still_empty,_what_is_wrong? After update the download folder is still empty, what is wrong?]
     * [FAQ#Why_are_all_pages_are_blank? Why are all pages are blank?]
     * [FAQ#My_update_page_ran_for_a_while_and_timed_out,_what_to_do? My update page ran for a while and timed out, what to do?]
+    * [FAQ#What_is_a_cron_job? What is a cron job?]
+    * [FAQ#How_can_I_update_using_a_cron_job? How can I update using a cron job?]
 
 =Miscellaneous=
     * [FAQ#Who_are_you? Who are you?]
@@ -48,6 +50,19 @@ Probably this has to do with the PHP version you are using. PBSViewer is designe
 There are 2 things you can do actually. The first solution is to increase the time limit in ACP, increase the 'Script load time' value. 
 
 The second solution is that you make a back-up of your logs and screens on your gameserver. Then delete those screens and logs and play in your game server for a while (to get some screens and logs) and then start updating. The amount of files you have to download now is probably smaller, so it should work right now.
+
+===What is a cron job?===
+A cron job is a job scheduler that can be used to update PBSViewer periodically. More information can be found here:
+http://en.wikipedia.org/wiki/Cron 
+
+===How can I update using a cron job?===
+In order to be able to update PBSViewer using a cron job you need to do several things. The command that you should use for your cron job looks like this:
+"/usr/bin/php SomePath/PBSViewer/update.php YourCronkey"
+
+You can find your cronkey in the ACP
+
+An example of how a cron command looks like is given below:
+"/usr/bin/php /var/www/vhosts/mydomain.com/httpdocs/PBSViewer/update.php 2223s46b8275bcde7e2dg6e91597af13"
 
 =Miscellaneous=
 ===Who are you?===
