@@ -3457,7 +3457,7 @@ function reset_ftp_web($debug)
 				if($fileListInfo)
 				{
 					//	first check if we are in the right dir
-					foreach ($list	as $file)
+					foreach ($fileList	as $file)
 					{
 						if($file==md5('download_pbsviewer')) $right_dir=true;
 					}
@@ -3466,10 +3466,10 @@ function reset_ftp_web($debug)
 					{
 						//	get req number of files which need to be deleted
 						//	don't take the md5 identifier file into account!
-						$req_del_count	=	count($list)-1;
+						$req_del_count	=	count($fileList)-1;
 						
 						//	now remove the files in it
-						foreach ($list	as $file)
+						foreach ($fileList	as $file)
 						{
 							if($file!=md5('download_pbsviewer'))
 							{
@@ -3601,10 +3601,10 @@ function reset_ftp_gameserver_logs($debug)
 				if($fileListInfo)
 				{		
 						//	get req number of files which need to be deleted
-						$req_del_count	=	count($list);
+						$req_del_count	=	count($fileList);
 						
 						//	now remove the files in it
-						foreach ($list	as $file)
+						foreach ($fileList	as $file)
 						{
 							if(preg_match("~^[0-9]+\.log$~",$file))
 							{	
@@ -3729,10 +3729,10 @@ function reset_ftp_gameserver_screens($debug)
 				if($fileListInfo)
 				{		
 						//	get req number of files which need to be deleted
-						$req_del_count	=	count($list);
+						$req_del_count	=	count($fileList);
 						
 						//	now remove the files in it
-						foreach ($list	as $file)
+						foreach ($fileList	as $file)
 						{
 							if(preg_match("~^pb[0-9]+\.htm$~",$file)||preg_match("~^pb[0-9]+\.png$~",$file)||$file=='pbsvss.htm')
 							{	
