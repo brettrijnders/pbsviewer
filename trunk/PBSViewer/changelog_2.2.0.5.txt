@@ -1,4 +1,7 @@
 Changelog 2.2.0.5:
 ------------------------------------
 
+- Added more detailed debug messages
+- Bug fix: PBSViewer now correctly parses the guids and ip adresses using the log files. The bug is caused due to the fact that some game servers do not specify if a guid is valid or invalid.
+- Bug fix: replaced ftp_nlist with a custom function in order to retrieve files.
 - Bug fix: reset functionality kept giving error "seems to be the wrong directory, did not delete any files". Thank you Douglas Carr for pointing this out.

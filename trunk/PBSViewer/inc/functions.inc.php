@@ -72,14 +72,199 @@ function update_check($fileLastUpdate)
 
 }
 
+//	New since version 2.2.0.5
+//	This function has the same functionality as ftp_nlist, though it is more fail safe. 
+//	It tries to get a list of files using multiple methods
+function get_file_list($connect,$dir)
+{
+	//	current working dir
+	$pwd	=	ftp_pwd($connect);
+	
+	$fileListStatus = false;
+		
+	if(DEBUG==true) 
+	{
+		echo date('H:i:s] ')."<li>Using the following \$dir variable: ".$dir."</li><br>";
+		echo date('H:i:s] ')."<li>Current working directory: ".$pwd."</li><br>";
+		echo date('H:i:s] ')."<li>Trying to get a list of files</li><br>";  
+	}
+		
+	//	get list of files in current working dir
+	if ($fileListStatus==false)
+	{
+		if(($fileList	=	ftp_nlist($connect,'.'))=='')
+		{
+			if(DEBUG==true)
+			{
+				echo date('H:i:s] ')."<li>Could not get file list using current working directory, trying another method (2)</li><br>"; 
+			}						
+		}
+	}
+	
+	//	check if there are any files in the $fileList 
+	is_valid_fileList($fileList) ? $fileListStatus=true : $fileListStatus=false;
 
+	
+	//	get list of files (on some systems the . or .. symbols are not working)
+	if ($fileListStatus==false)
+	{
+		if(($fileList	=	ftp_nlist($connect,'-la'))=='')
+		{
+			if(DEBUG==true)
+			{
+				echo date('H:i:s] ')."<li>Could not get file list using current working directory, trying another method (3)</li><br>"; 
+			}						
+		}
+	}
+	
+	//	check if there are any files in the $fileList 
+	is_valid_fileList($fileList) ? $fileListStatus=true : $fileListStatus=false;
+
+	
+	//	get list of files
+	if ($fileListStatus==false)
+	{
+		if (($fileList	=	ftp_nlist($connect,$dir))=='')
+		{
+			if(DEBUG==true)
+			{
+				echo date('H:i:s] ')."<li>Could not get file list using current working directory, trying another method (4)</li><br>"; 
+			}		
+		}
+	}
+	
+	//	check if there are any files in the $fileList 
+	is_valid_fileList($fileList) ? $fileListStatus=true : $fileListStatus=false;
+	
+	if ($fileListStatus==false)
+	{
+		if (($fileList	=	ftp_nlist($connect,basename($dir)))=='')
+		{
+			if(DEBUG==true)
+			{
+				echo date('H:i:s] ')."<li>Could not get file list using current working directory, trying another method (5)</li><br>"; 
+			}
+		}	
+	}
+	
+	//	check if there are any files in the $fileList 
+	is_valid_fileList($fileList) ? $fileListStatus=true : $fileListStatus=false;
+
+	//	if still no data available
+	if($fileListStatus==false)
+	{
+		//	if changing to root dir went succesfully
+		if(ftp_chroot_dir($connect))
+		{
+			if(($fileList	=	ftp_nlist($connect,PBDIR.$dir))=='')
+			{
+				if(DEBUG==true)
+				{
+					echo date('H:i:s] ')."<li>Could not get file list using current working directory</li><br>"; 
+				}
+			}
+		}
+	}
+	
+	//	check if there are any files in the $fileList 
+	is_valid_fileList($fileList) ? $fileListStatus=true : $fileListStatus=false;
+
+	
+	if($fileList!='' && $fileListStatus==true)
+	{
+		if(DEBUG==true)
+		{
+			echo date('H:i:s] ')."<li>Retreiving file list from directory: ".$dir."</li><br>";
+				
+			echo date('H:i:s] ')."<li>Available files: "; 
+			print_r($fileList);
+			echo "</li><br>";
+		}
+		
+		return $fileList;
+	}
+	else 
+	{
+		if(DEBUG==true)
+		{
+			echo date('H:i:s] ')."<li>Not able to generate a file list, maybe the directory is just empty?</li><br>"; 
+		}
+		
+		return false;
+	}
+	
+
+}
+
+//	New since version 2.2.0.5
+//	check if file list is valid
+function is_valid_fileList($fileList)
+{
+	$valid = false;
+	
+	if($fileList!='' || count($fileList)!=0)
+	{
+		foreach ($fileList as $content)
+		{
+			//	find all the .png files
+			if(preg_match("~pb[0-9]+\.png~",$content) || preg_match("~\.log~",$content))
+			{
+				return $valid=true;
+			}
+		}
+	}
+	
+	return $valid;
+}
+
+//	New since version 2.2.0.5
+//	change back to root dir
+function ftp_chroot_dir($connect)
+{
+	if(DEBUG==true)
+	{
+		echo date('H:i:s] ')."<li>Trying to change to root directory.</li><br>"; 
+	}
+	
+	//	prevent loop keeps going on
+	$max_depth	=	10;
+	
+	$i = 0;
+	while((basename(ftp_pwd($connect)))!="")
+	{
+		if($i<10)
+		{		
+			ftp_cdup($connect);
+			if(DEBUG==true)
+			{
+				echo date('H:i:s] ')."<li>Changed directory to:".ftp_pwd($connect)."</li><br>"; 
+			}
+			
+			//	return true if changed to root dir
+			if((basename(ftp_pwd($connect)))=="") return true;
+			
+			$i++;
+		}
+		else 
+		{
+			if(DEBUG==true)
+			{
+				echo date('H:i:s] ')."<li>Could not change to root dir</li><br>";
+			}
+			
+			//	could not change to root dir
+			return false;
+		}
+	}
+
+}
 
 //	get available pbscreens
-function get_list_pbscreens ($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$main=false)
+function get_list_pbscreens ($connect,$login,$ssdir,$main=false)
 {
 	//	ftp connect
-	$connect	=	ftp_connect($ftp_host,$ftp_port);
-	$login		=	ftp_login($connect,$ftp_user,$ftp_pass);
+	//	$connect	=	ftp_connect($ftp_host,$ftp_port);
+	//	$login		=	ftp_login($connect,$ftp_user,$ftp_pass);
 
 	if($connect && $login)
 	{
@@ -91,43 +276,86 @@ function get_list_pbscreens ($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$mai
 			ftp_pasv($connect, true);
 		}
 		
+		
+		//	new since 2.2.0.5
+		//	custom function is used instead of ftp_nlist
+		$fileList = get_file_list($connect,$ssdir);
+		
+		
 		//	return array of files from ssdir
-		$fileList	=	ftp_nlist($connect,$ssdir);
+		//$fileList	=	ftp_nlist($connect,$ssdir);
 		$i	=	0;
 		
-		if (DEBUG==true)
-		{
-			if ($main==false)
-			{
-				echo date('H:i:s] ')."<li>Retreiving file list from directory: ".$ssdir."</li><br>";
-			}
-		}
+
 
 		//	before updating table dl_screens, first truncate old data
 		$sql_del	=	"TRUNCATE TABLE `dl_screens`";
 		mysql_query($sql_del);
 		
 		$debugCount = 0;
-
-		foreach ($fileList as $i_nr=>$content)
+		
+		if($fileList!=false)
 		{
-			//	find all the .png files
-			if(preg_match("~pb[0-9]+\.png~",$content,$matches))
+			foreach ($fileList as $i_nr=>$content)
 			{
-				
-				// dirty fix, for those who are running windows gameserver, windows provides backwards slashes (\) instead of forward (/)
-				$content	=	str_replace("\\","/",$content);
-				
-				// new in version 1.2.2.3
-				// if .png file is smaller than 10 kB then do not include it in download list
-				// first check if ftp_size is supported by hosting
-				if (ftp_size($connect,$content)!=-1)
+				//	find all the .png files
+				if(preg_match("~pb[0-9]+\.png~",$content,$matches))
 				{
-					// no errors have been occurred, so continue with using ftp_size function
-					// this feature will save some bandwith
-					if (ftp_size($connect,$content)>MIN_SCREEN_SIZE)
+					
+					// dirty fix, for those who are running windows gameserver, windows provides backwards slashes (\) instead of forward (/)
+					$content	=	str_replace("\\","/",$content);
+					
+					// new in version 1.2.2.3
+					// if .png file is smaller than 10 kB then do not include it in download list
+					// first check if ftp_size is supported by hosting
+					if (ftp_size($connect,$content)!=-1)
 					{
-						
+						// no errors have been occurred, so continue with using ftp_size function
+						// this feature will save some bandwith
+						if (ftp_size($connect,$content)>MIN_SCREEN_SIZE)
+						{
+							
+							
+							if (DEBUG==true)
+							{
+								if ($main==false)
+								{
+								
+									if ($debugCount<2)
+									{
+										echo date('H:i:s] ')."<li>Current file (\$content): ".$content."</li><br>";
+										$debugCount++;
+									
+										if ($debugCount==2)
+										{
+											echo date('H:i:s] ')."<li>And some more files...</li><br>";
+										}
+									}
+								}
+							}
+											
+												
+							if(preg_match("~pb[0-9]+~",$matches[0],$matches2))
+							{							
+								$fileID	=	$matches2[0];
+								
+									
+								$sql_insert	=	"INSERT INTO `dl_screens` (`fid`) VALUES ('".$fileID."')";
+								$sql 		=	mysql_query($sql_insert);
+								
+								$png_files[$i]	=	$fileID.".png";
+								
+								$i++;
+							}
+							
+													
+						}
+					}
+					// error has occurred, stop using ftp_size and just store all .png images
+					else 
+					{
+						// dirty fix, for those who are running windows gameserver, windows provides backwards slashes (\) instead of forward (/)
+						$content	=	str_replace("\\","/",$content);
 						
 						if (DEBUG==true)
 						{
@@ -138,7 +366,7 @@ function get_list_pbscreens ($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$mai
 								{
 									echo date('H:i:s] ')."<li>Current file (\$content): ".$content."</li><br>";
 									$debugCount++;
-								
+									
 									if ($debugCount==2)
 									{
 										echo date('H:i:s] ')."<li>And some more files...</li><br>";
@@ -146,69 +374,29 @@ function get_list_pbscreens ($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$mai
 								}
 							}
 						}
-										
-											
+						
 						if(preg_match("~pb[0-9]+~",$matches[0],$matches2))
 						{							
 							$fileID	=	$matches2[0];
-							
+								
 								
 							$sql_insert	=	"INSERT INTO `dl_screens` (`fid`) VALUES ('".$fileID."')";
 							$sql 		=	mysql_query($sql_insert);
-							
+								
 							$png_files[$i]	=	$fileID.".png";
-							
+								
 							$i++;
 						}
-						
-												
 					}
 				}
-				// error has occurred, stop using ftp_size and just store all .png images
-				else 
-				{
-					// dirty fix, for those who are running windows gameserver, windows provides backwards slashes (\) instead of forward (/)
-					$content	=	str_replace("\\","/",$content);
-					
-					if (DEBUG==true)
-					{
-						if ($main==false)
-						{
-						
-							if ($debugCount<2)
-							{
-								echo date('H:i:s] ')."<li>Current file (\$content): ".$content."</li><br>";
-								$debugCount++;
-								
-								if ($debugCount==2)
-								{
-									echo date('H:i:s] ')."<li>And some more files...</li><br>";
-								}
-							}
-						}
-					}
-					
-					if(preg_match("~pb[0-9]+~",$matches[0],$matches2))
-					{							
-						$fileID	=	$matches2[0];
-							
-							
-						$sql_insert	=	"INSERT INTO `dl_screens` (`fid`) VALUES ('".$fileID."')";
-						$sql 		=	mysql_query($sql_insert);
-							
-						$png_files[$i]	=	$fileID.".png";
-							
-						$i++;
-					}
-				}
+	
+	
 			}
-
-
 		}
 	}
 
 	//	close connections
-	ftp_close($connect);
+	// ftp_close($connect);
 
 	return $png_files;
 
@@ -413,7 +601,9 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 				//	step 5:
 				#####################
 				//	get the png files that are available
-				$pbsslist	=	get_list_pbscreens($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$main);
+				// $pbsslist	=	get_list_pbscreens($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$main);
+				$pbsslist	=	get_list_pbscreens($connect,$login,$ssdir,$main);
+				
 
 
 				//	needed for check after download if there is an inconsistency
@@ -524,7 +714,8 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 					//	it will download the log files and parse them to DB
 					if(PB_log==true)
 					{
-						get_logs($debug,PB_log);
+						//get_logs($debug,PB_log);
+						get_logs($connect,$login,$debug,PB_log);
 					}
 
 					//	if everything went fine then set request_update back to false
@@ -2653,14 +2844,14 @@ function get_nr_screens_by_date($data)
 //	delete all from gameserver
 //	delete ''
 //	new since version 1.2.2.1
-function get_logs($debug=false,$log=false)
+function get_logs($connect,$login,$debug=false,$log=false)
 {
 	if($log==true)
 	{
-		$dir	=	PBDIR.'/svlogs';
+		$dir	=	PBDIR.'/'.SVLOGS_DIR;
 
-		$connect	=	ftp_connect(FTP_HOST,FTP_PORT,script_load_time);
-		$login		=	ftp_login($connect,FTP_USER,FTP_PASS);
+		//$connect	=	ftp_connect(FTP_HOST,FTP_PORT,script_load_time);
+		//$login		=	ftp_login($connect,FTP_USER,FTP_PASS);
 
 		
 		//	turn on passive mode if admin wants that
@@ -2671,7 +2862,8 @@ function get_logs($debug=false,$log=false)
 		}
 		
 		//	change to log dir
-		ftp_chdir($connect,$dir);
+		ftp_cdup($connect);
+		ftp_chdir($connect,SVLOGS_DIR);
 
 		//	dir changed to
 if($debug==true)	
@@ -2679,38 +2871,9 @@ if($debug==true)
 	echo date('H:i:s] ')."<li>Directory changed to: ".ftp_pwd($connect)."</li><br>";
 }
 		
-		//	update, download the missing files
-		//	first get list
-		// fixed since 2.2.0.4, retreiving list of all files should work
-		if($fileList	=	ftp_nlist($connect,'.'))
-		{
-			if($debug==true)	
-			{
-				echo date('H:i:s] ')."<li>Generating list of all files</li><br>";
-			}
-		}
-		elseif($fileList	=	ftp_nlist($connect,$dir))
-		{
-			if($debug==true)	
-			{
-				echo date('H:i:s] ')."<li>Generating list of all files</li><br>"; 
-			}
-		}
-		else 
-		{	
-			if($debug==true)	
-			{
-				echo date('H:i:s] ')."<li>Not able to generate a list of all files</li><br>";
-			}
-		}
-		
-
-if($debug==true)	
-{
-	echo date('H:i:s] ')."<li>Available files: "; 
-	print_r($fileList);
-	echo "</li><br>";
-}		
+		//	new since 2.2.0.5
+		//	custom function is used instead of ftp_nlist
+		$fileList = get_file_list($connect,SVLOGS_DIR);	
 		
 		$download_count	=	0;
 		$parse_count	=	0;
@@ -2719,23 +2882,84 @@ if($debug==true)
 		//	total number of files on ftp server
 		$req_count	=	count($fileList);
 		
-		foreach ($fileList	as $file)
+		if($debug==true)	
 		{
-			// dirty fix, for those who are running windows gameserver, windows provides backwards slashes (\) instead of forward (/)
-			$file	=	str_replace("\\","/",$file);
-					
-			//	only do something(parsing and deleting files) if files are downloaded
-			if(ftp_get($connect,'download/'.$file,$file,FTP_BINARY))
+			echo date('H:i:s] ')."<li>Going to download ".$req_count." log files</li><br>";
+		}
+		
+		if($fileList!=false)
+		{									
+			foreach ($fileList	as $file)
 			{
-
-				$download_count++;
+				// dirty fix, for those who are running windows gameserver, windows provides backwards slashes (\) instead of forward (/)
+				$file	=	str_replace("\\","/",$file);
+										
+				if($debug==true)	
+				{
+					echo date('H:i:s] ')."<li>Downloading log file (\"".$file."\") to: ".WEBLOGS_DIR.'/'.$file."</li><br>";
+				}
 				
-				//	parse each file and store it in DB
-				if(!parse_log('download/'.$file)) $parse_count++;
+				//$download_file = ftp_get($connect,WEBLOGS_DIR.'/'.$file,$file,FTP_BINARY);			
 
-				//	if downloaded and parsed then remove the file from gameserver
-				if(ftp_delete($connect,$file))	$del_count++;
+				
+				// Initate the download
+				$download_file = ftp_nb_get($connect, WEBLOGS_DIR.'/'.$file, $file, FTP_BINARY);
+				while ($download_file == FTP_MOREDATA) 
+				{				   
+				   // Do whatever you want
+				
+				   // Continue downloading...
+				   $download_file = ftp_nb_continue($connect);
+				}				
+				
+				
+				//	only do something(parsing and deleting files) if files are downloaded
+				if($download_file == FTP_FINISHED)
+				{	
+					$download_count++;
+					
+					//	parse each file and store it in DB
+					$parse_status = parse_log(WEBLOGS_DIR.'/'.$file);
+					
+					if($parse_status!=true) 
+					{
+						if($debug==true)	
+						{
+							echo date('H:i:s] ')."<li>Did not parse log file: ".$file."</li><br>";
+						}
+					}
+					else 
+					{
+						if($debug==true)	
+						{
+							echo date('H:i:s] ')."<li>Finished parsing and downloading log file: ".$file."</li><br>";
+						}
+						
+						$parse_count++;
+					}
+	
+					//	if downloaded and parsed then remove the file from gameserver
+					//	make this optional
+					if (AUTO_DEL_GAMESERVER==true)	
+					{
+						if(ftp_delete($connect,$file))	$del_count++;
+					}
+					
+
+				}
+				else 
+				{
+					if($debug==true)	
+					{
+						echo date('H:i:s] ')."<li>Not able to download the log file: ".$file."</li><br>";
+					}
+				}	
 			}
+		}
+		
+		if($debug==true)	
+		{
+			echo date('H:i:s] ')."<li>Downloaded ".$download_count." log files</li><br>";
 		}
 		
 		if($req_count>0)
@@ -2744,14 +2968,14 @@ if($debug==true)
 			{
 				if($debug==true)	
 				{
-					echo date('H:i:s] ')."<li>All(".$download_count.") log files were downloaded from your gameserver</li><br>";
+					echo date('H:i:s] ')."<li>All(".$download_count.") the log files were downloaded from your gameserver</li><br>";
 				}
 			}
 			else
 			{
 				if($debug==true)
 				{
-					echo date('H:i:s] ')."<li>Something went wrong, not all log files were downloaded. Only downloaded ".$download_count." of ".$req_count." log files</li><br>";
+					echo date('H:i:s] ')."<li>Something went wrong, not all the log files were downloaded. Only downloaded ".$download_count." of ".$req_count." log files</li><br>";
 				}
 			}
 
@@ -2766,7 +2990,7 @@ if($debug==true)
 			{
 				if($debug==true)	
 				{
-						echo date('H:i:s] ')."<li>Not all log files were parsed correctly, only parsed ".$parse_count." of ".$req_count." log files</li><br>";
+						echo date('H:i:s] ')."<li>Not all log files were parsed, only parsed ".$parse_count." of ".$req_count." log files</li><br>";
 				}
 			}
 		
@@ -2795,7 +3019,7 @@ if($debug==true)
 
 
 
-		ftp_close($connect);
+		//ftp_close($connect);
 
 		//	delete log files from webserver
 		if(auto_del_logs==true)
@@ -2851,7 +3075,8 @@ if($debug==true)
 //	count is the number of logs the webserver needs to have before it is going to delete all the logs
 function del_logs_webserver($count=0,$debug=false)
 {
-	if($connect	=	ftp_connect(FTP_HOST_WEB,FTP_PORT_WEB))
+	if($connect_web	=	ftp_connect(FTP_HOST_WEB,FTP_PORT_WEB))
+	if($connect_web)
 	{
 		if($debug==true)	
 		{
@@ -2866,13 +3091,14 @@ function del_logs_webserver($count=0,$debug=false)
 		}		
 	}
 	
-	if($login		=	ftp_login($connect,FTP_USER_WEB,FTP_PASS_WEB))
+	if($login_web		=	ftp_login($connect_web,FTP_USER_WEB,FTP_PASS_WEB))
+	if($login_web)
 	{
 		//	turn on passive mode if admin wants that
 		if(FTP_PASSIVE)
 		{
 			// turn passive mode on
-			ftp_pasv($connect, true);
+			ftp_pasv($connect_web, true);
 		}
 		
 		if($debug==true)	
@@ -2889,7 +3115,8 @@ function del_logs_webserver($count=0,$debug=false)
 	}
 
 	//	change dir to log dir
-	if(ftp_chdir($connect,PBSViewer_download))
+	//ftp_cdup($connect);
+	if(ftp_chdir($connect_web,PBSViewer_download))
 	{
 		if($debug==true)	
 		{
@@ -2905,7 +3132,7 @@ function del_logs_webserver($count=0,$debug=false)
 		
 		if($debug==true)	
 		{
-			if(check_PBSViewer_download($connect,PBSViewer_download))
+			if(check_PBSViewer_download($connect_web,PBSViewer_download))
 			{
 				echo date('H:i:s] ')."<li>However directory ".PBSViewer_download." seems to be correct</li><br>";
 			}
@@ -2919,62 +3146,77 @@ function del_logs_webserver($count=0,$debug=false)
 	}
 
 	
-	// fixed since 2.2.0.4, retreiving list of all files should work
+	//	new since 2.2.0.5
+	//	custom function is used instead of ftp_nlist
 	$fileListInfo = false;
-	if($fileList	=	ftp_nlist($connect,'.'))
-	{
-		if($debug==true)	
-		{
-			echo date('H:i:s] ')."<li>Generating list of all files</li><br>";
-		}
-		
-		$fileListInfo = true;
-	}
-	elseif($fileList	=	ftp_nlist($connect,PBSViewer_download))
-	{
-		if($debug==true)	
-		{
-			echo date('H:i:s] ')."<li>Generating list of all files</li><br>";
-		}
-		
-		$fileListInfo = true; 
-	}
-	else 
-	{
-		if($debug==true)	
-		{
-			echo date('H:i:s] ')."<li>Not able to generate a list of all files</li><br>";
-		}
-		
-		$fileListInfo = false;
-	}
+	$fileList = get_file_list($connect_web,PBSViewer_download);
+	($fileList!=false) ? $fileListInfo = true : 	$fileListInfo = false;	
+
+	
 	
 	//	if changed then list all the files
 	if($fileListInfo)
 	{
-	$nr_logs	=	0;
-
-	//	first count number of logs
-	foreach ($filelist	as $file)
-	{
-		//	if log file is found add up to $nr_logs
-		if(preg_match("~^[0-9]+\.log~",$file))	$nr_logs++;
-	}
-
-	//	delete logs if there are to many
-	if($nr_logs>=$count)
-	{
-		foreach ($filelist as $file)
+		$nr_logs	=	0;
+	
+		//	first count number of logs
+		foreach ($fileList	as $file)
 		{
-			//	find the log files and delete them
-			if(preg_match("~^[0-9]+\.log~",$file,$matches)) ftp_delete($connect,$file);
+			//	if log file is found add up to $nr_logs
+			if(preg_match("~^[0-9]+\.log~",$file))	$nr_logs++;
 		}
 		
-						if($debug==true)	
-{
-	echo date('H:i:s] ')."<li>number of log files was exceeded, log files were removed successfully from your webserver</li><br>";
-}
-	}
+		if($debug==true)	
+		{
+			echo date('H:i:s] ')."<li>Found ".$nr_logs." log file(s) in your PBSViewer download folder of your webserver</li><br>";
+		}
+	
+		//	delete logs if there are to many
+		if($nr_logs>=$count)
+		{
+			$del_log_count = 0;
+			
+			foreach ($fileList as $file)
+			{
+				//	find the log files and delete them
+				if(preg_match("~^[0-9]+\.log~",$file,$matches)) 
+				{
+					if($debug==true)	
+					{
+						echo date('H:i:s] ')."<li>Deleting log file: ".$file."</li><br>";
+					}
+					
+					if(ftp_delete($connect_web,$file)) $del_log_count++;
+				}			
+
+			}
+			
+			
+			if($del_log_count==$nr_logs && $nr_logs!=0)
+			{
+				if($debug==true)	
+				{
+					echo date('H:i:s] ')."<li>Number of log files was exceeded, log files were removed successfully from your webserver</li><br>";
+				}
+				
+				return true;
+			}
+			else if($nr_logs>0 && $del_log_count!=$nr_logs)
+			{				
+				if($debug==true)	
+				{
+					echo date('H:i:s] ')."<li>Warning: not all log files were deleted from your webserver...</li><br>";
+				}
+				
+				return false;				
+			}
+			else 
+			{
+				//	no log files were removed
+				return false;
+			}
+			
+		}
 	}
 }
 
@@ -3054,6 +3296,7 @@ if(ftp_chdir($stream,$dir))
 	
 	// fixed since 2.2.0.4, retreiving list of all files should work
 	$fileListInfo = false;
+	/*
 	if($fileList	=	ftp_nlist($connect,'.'))
 	{
 		if($debug==true)	
@@ -3081,6 +3324,12 @@ if(ftp_chdir($stream,$dir))
 		
 		$fileListInfo = false;
 	}
+	*/
+	
+	//	new since 2.2.0.5
+	//	custom function is used instead of ftp_nlist
+	$filelist = get_file_list($connect,$dir);
+	($filelist!=false) ? $fileListInfo=true : $fileListInfo=false;
 	
 			if($fileListInfo)
 			{
@@ -3107,7 +3356,9 @@ else
 //	new function since 1.2.2.1
 //	this will gather information from log files
 function parse_log($logfile)
-{
+{	
+	$parse_status = true;
+	
 	//	if we can read file
 	if($file	=	file($logfile))
 	{
@@ -3117,6 +3368,12 @@ function parse_log($logfile)
 	preg_match("~[0-9]+~",$logfile,$matches);
 	$logid	=	$matches[0];
 	
+	if(DEBUG==true)	
+	{
+		echo date('H:i:s] ')."<li>Starting with parsing file: ".$logfile."</li><br>";
+	}
+	
+	//	read each line
 	for($i=0;$i<count($file);$i++)
 	{
 		$info	=	$file[$i];
@@ -3135,7 +3392,7 @@ function parse_log($logfile)
 
 			//	get MD5
 			preg_match("~\(MD5=[A-Z0-9]+\)~",$info,$matches);
-			//	sometimes an TIME OUT occurs when pb tries to capture a screen
+			//	sometimes a TIME OUT occurs when pb tries to capture a screen
 			//	therefore we need to check if a MD5 is made of the screen
 			//	why not >0, because then something went wrong. You can't have multipe md5 for 1 screen
 			if(count($matches)==1)
@@ -3162,51 +3419,258 @@ function parse_log($logfile)
 				$c_date		=	$new_date;
 								
 				//	get guid
-				preg_match("~[a-z0-9]{32}\([A-Za-z]*\)~",$info,$matches);
+				//	updated parser in 2.2.0.5, some logs have something like d1ac3363a6c16630b8d4687fde9f8c91(-) instead of d1ac3363a6c16630b8d4687fde9f8c91(VALID)
+				preg_match("~[a-z0-9]{32}\([A-Za-z-]*\)~",$info,$matches);
 				$new	=	$matches[0];
 				preg_match("~^[a-z0-9]{32}~",$new,$guid);
 				//	current guid
 				$c_guid	=	$guid[0];
 
 				//	get ip
-				preg_match("~\([a-zA-z]*\) [0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\:[0-9]*\]~",$info,$matches);
+				//	bug fix A-z changed to A-z in version 2.2.0.5
+				preg_match("~\([a-zA-Z-]*\) [0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\:[0-9]*\]~",$info,$matches);
 				$new	=	$matches[0];
 				preg_match("~[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}~",$new,$ip);
 				//	current ip
 				$c_ip	=	$ip[0];
-				
-
-				
+								
 				if($c_fid!=''&&$c_md5!=''&&$c_guid!=''&&$c_ip!=''&&$c_date!='')
 				{
 				//	if everything went fine, then put them into DB
 				//	first check if logid of png already exist
-				$sql_select	=	"SELECT `id` FROM `logs` WHERE `logid`='".$logid."' AND `fid`='".$c_fid."'";
+				$sql_select	=	"SELECT `id`,`date` FROM `logs` WHERE `logid`='".$logid."' AND `fid`='".$c_fid."'";
 				$sql 		=	mysql_query($sql_select);
 				if(mysql_num_rows($sql)>=1)
 				{
-					//	update data
-					$sql_update	=	"UPDATE `logs` SET `md5`='".$c_md5."',`guid`='".$c_guid."',`ip`='".$c_ip."',`date`='".$c_date."' WHERE `logid`='".$logid."' AND `fid`='".$c_fid."' ";
-					$sql_2		=	mysql_query($sql_update);
+					$date_db = false;
+					
+					//	only update when the date is newer than the one currently stored in db
+					while ($row = mysql_fetch_object($sql))
+					{
+						$date_db = $row->date;
+					}
+					
+					if($date_db)
+					{
+						//	format date from db
+						$date_split = explode(' ',$date_db);		//	year.month.day AND hour:min:sec
+						$date_ymd	= explode('.',$date_split[0]);	//	year.month.day
+						$date_hms	= explode(':',$date_split[1]);	//	h:min:sec
+						
+						//	date 1 is defined as the date from db
+						//	D,M,Y,h,m,s (Day, Month, Year, hour, minute, second)
+						$date_1 = array($date_ymd[2],$date_ymd[1],$date_ymd[0],$date_hms[0],$date_hms[1],$date_hms[2]);
+						
+						//	date 2 is defined as the date from the log file
+						//	D,M,Y,h,m,s (Day, Month, Year, hour, minute, second)
+						$date_2_hms = explode(':',$data[1]);						
+						$date_2	= array($data_2[1],$data_2[0],$data_2[2],$date_2_hms[0],$date_2_hms[1],$date_2_hms[2]);
+						
+						$newest_date = compare_date_1_date_2($date_1,$date_2);				
+					
+						
+						//	only update when log data is newer than db data
+						if($newest_date==2)			
+						{
+							//	update data
+							$sql_update	=	"UPDATE `logs` SET `md5`='".$c_md5."',`guid`='".$c_guid."',`ip`='".$c_ip."',`date`='".$c_date."' WHERE `logid`='".$logid."' AND `fid`='".$c_fid."' ";
+												
+							if (($sql_2	=	mysql_query($sql_update))==false)
+							{
+								$parse_status = false;
+								
+								/*
+								if(DEBUG==true)	
+								{
+									echo date('H:i:s] ')."<li>Could not update data using log file \"".$logid.".log\" to insert data for ".$c_fid.".png</li><br>";
+								}
+								*/
+							}
+							/*
+							else 
+							{
+								if(DEBUG==true)	
+								{
+									echo date('H:i:s] ')."<li>Used log file \"".$logid.".log\" to update data for ".$c_fid.".png</li><br>";
+								}
+							}
+							*/
+						}
+						else 
+						{
+							$parse_status = false;
+						}
+					}
+					
 				}
 				else
 				{
 					//	create data
 					$sql_insert	=	"INSERT INTO `logs` (`logid`,`fid`,`md5`,`guid`,`ip`,`date`) VALUES ('".$logid."','".$c_fid."','".$c_md5."','".$c_guid."','".$c_ip."','".$c_date."')";
-					$sql_2		=	mysql_query($sql_insert);
+								
+					if (($sql_2 = mysql_query($sql_insert))==false)
+					{
+						$parse_status = false;
+						
+						/*
+						if(DEBUG==true)	
+						{
+							echo date('H:i:s] ')."<li>Could not insert data using log file \"".$logid.".log\" to insert data for ".$c_fid.".png</li><br>";
+						}
+						*/
+						
+					}
+					/*
+					else 
+					{
+						if(DEBUG==true)	
+						{
+							echo date('H:i:s] ')."<li>Using log file \"".$logid.".log\" to insert data for ".$c_fid.".png</li><br>";
+						}
+					}
+					*/
 				}
 				}
-
-
 			}
 		}
 	}
+	
+	//	when done with reading files
+	return $parse_status;
+	
 	}
 	else 
 	{
-		return false;
+		if(DEBUG==true)	
+		{
+			echo date('H:i:s] ')."<li>Could not open log file for parsing: ".$logfile."png</li><br>";
+		}
+		
+		return $parse_status = false;
 	}
 
+}
+
+/*
+/	new since version 2.2.0.5
+/	compare dates, which one is newer?
+/	original date format is: y.m.d h:m:s, e.g. 2009.09.14 20:48:23
+/	$date1 and $date2 format is:
+/	$date[0] = D
+/	$date[1] = M
+/	$date[2] = Y
+/	$date[3] = h
+/	$date[4] = m
+/	$date[5] = s
+/ 	
+/	if dates are equal the function returns 0
+*/
+function compare_date_1_date_2($date1,$date2)
+{
+	//	date is latest one as default
+	$newdate = 1;
+	
+	//	convert string to number
+	for($i=0;$i<count($date1);$i++)
+	{
+		$date1[$i] = intval($date1[$i]);
+		$date2[$i] = intval($date2[$i]);
+	}
+	
+	//	compare years
+	if($date1[2]!=$date2[2])
+	{
+		if($date1[2]>$date2[2])
+		{
+			return $newdate = 1;
+		}
+		else 
+		{
+			return $newdate = 2;
+		}
+	}
+	else 
+	{
+		//	compare months when years are equal
+		if($date1[1]!=$date2[1])
+		{
+			if ($date1[1]>$date2[1])
+			{
+				return $newdate =1;
+			}
+			else 
+			{
+				return $newdate =2;
+			}	
+		}
+		else 
+		{
+			//	compare days when years and months are equal
+			if(($date1[0]!=$date2[0]))
+			{
+				if($date1[0]>$date2[0])
+				{
+					return $newdate =1;
+				}
+				else 
+				{
+					return $newdate =2;
+				}
+			}
+			else 
+			{
+				//	compare hours when years, months and days are equal	
+				if($date1[3]!=$date2[3])
+				{					
+					if($date1[3]>$date2[3])
+					{
+						return $newdate =1;
+					}
+					else 
+					{
+						return $newdate =2;
+					}
+				}
+				else 
+				{
+					//	compare minutes when years, months, days and hours are equal	
+					if($date1[4]!=$date2[4])
+					{
+						if($date1[4]>$date2[4])
+						{
+							return $newdate =1;
+						}
+						else 
+						{
+							return $newdate =2;
+						}
+					}
+					else 
+					{
+						//	compare seconds when years, months, days, hours and minutes are equal	
+						if($date1[5]!=$date2[5])
+						{
+							if($date1[5]>$date2[5])
+							{
+								return $newdate =1;
+							}
+							else 
+							{
+								return $newdate =2;
+							}
+						}
+						else 
+						{
+							//	everything is equal
+							return 0;
+						}
+					}
+				}
+
+			}
+			
+		}
+	}	
 }
 
 //	get extra info from logs
@@ -3426,6 +3890,13 @@ function reset_ftp_web($debug)
 				
 				// fixed since 2.2.0.4, retreiving list of all files should work
 				$fileListInfo = false;
+				
+				//	new since 2.2.0.5
+				//	custom function is used instead of ftp_nlist
+				$fileList = get_file_list($connect,PBSViewer_download);
+				($fileList!=false) ? $fileListInfo=true : $fileListInfo=false;
+				
+				/*
 				if($fileList	=	ftp_nlist($connect,'.'))
 				{
 					if($debug==true)	
@@ -3453,6 +3924,7 @@ function reset_ftp_web($debug)
 					
 					$fileListInfo = false;
 				}
+				*/
 				
 				if($fileListInfo)
 				{
@@ -3551,7 +4023,7 @@ function reset_ftp_gameserver_logs($debug)
 {
 	$del_count	=	0;
 	
-	$dir	=	PBDIR.'/svlogs';
+	$dir	=	PBDIR.'/'.SVLOGS_DIR;
 	
 	if($connect	=	ftp_connect(FTP_HOST,FTP_PORT))
 	{
@@ -3570,6 +4042,13 @@ function reset_ftp_gameserver_logs($debug)
 				
 				// fixed since 2.2.0.4, retreiving list of all files should work
 				$fileListInfo = false;
+
+				//	new since 2.2.0.5
+				//	custom function is used instead of ftp_nlist
+				$fileList = get_file_list($connect,$dir);
+				($fileList!=false) ? 	$fileListInfo=true : $fileListInfo=false;
+							
+				/*
 				if($fileList	=	ftp_nlist($connect,'.'))
 				{
 					if($debug==true)	
@@ -3597,6 +4076,7 @@ function reset_ftp_gameserver_logs($debug)
 					
 					$fileListInfo = false;
 				}
+				*/
 				
 				if($fileListInfo)
 				{		
@@ -3678,7 +4158,7 @@ function reset_ftp_gameserver_screens($debug)
 {
 	$del_count	=	0;
 	
-	$dir	=	PBDIR.'/svss';
+	$dir	=	PBDIR.'/'.SVSS_DIR;
 	
 	if($connect	=	ftp_connect(FTP_HOST,FTP_PORT))
 	{
@@ -3698,6 +4178,13 @@ function reset_ftp_gameserver_screens($debug)
 				
 				// fixed since 2.2.0.4, retreiving list of all files should work
 				$fileListInfo = false;
+
+				//	new since 2.2.0.5
+				//	custom function is used instead of ftp_nlist
+				$fileList = get_file_list($connect,$dir);
+				($fileList!=false) ? $fileListInfo=true : $fileListInfo=false;
+							
+				/*
 				if($fileList	=	ftp_nlist($connect,'.'))
 				{
 					if($debug==true)	
@@ -3725,6 +4212,7 @@ function reset_ftp_gameserver_screens($debug)
 					
 					$fileListInfo = false;
 				}
+				*/				
 				
 				if($fileListInfo)
 				{		
