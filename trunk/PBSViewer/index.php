@@ -142,7 +142,7 @@ if(CUSTOM_UPDATE!=true)
 	if(time()>$lastUpdate+UPDATE_TIME)
 	{	
 		//	don't show messages about updating ($main=true)
-		update_file(FTP_HOST,FTP_PORT,FTP_USER,FTP_PASS,PBDIR.'/svss',L_FILE_TEMP,$fileLastUpdate,pb_sv_SsCeiling,false,true);
+		update_file(FTP_HOST,FTP_PORT,FTP_USER,FTP_PASS,PBDIR.'/'.SVSS_DIR,L_FILE_TEMP,$fileLastUpdate,pb_sv_SsCeiling,false,true);
 	}
 
 
