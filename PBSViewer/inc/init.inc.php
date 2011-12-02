@@ -195,8 +195,8 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 	//	If option is false, then it will update after x seconds which can can be configured with 'UPDATE_TIME' see below.
 	//	You still have the possibility to force an update manually by running 'update.php' if you want.
 
-	define('SVSS_DIR',$svss_dir);									//	Directory of pb screenshots on gameserver
-	define('SVLOGS_DIR',$svlogs_dir);									//	Directory of pb logs on gameserver
+	define('SVSS_DIR',$svss_dir);								//	Directory of pb screenshots on gameserver
+	define('SVLOGS_DIR',$svlogs_dir);							//	Directory of pb logs on gameserver
 	
 	if ($custom_update==1)
 	{define('CUSTOM_UPDATE',true);}
@@ -330,7 +330,7 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 	define('L_FILE','download/pbsvss.htm');						//	Local File to save remote data to. Only change this if you know what you are doing
 	define('L_FILE_TEMP','download/pbsvss_temp.htm'); 			//	Local file to temporary save remote data to. Only change this if you know what you are doing
 	define('R_FILE','pbsvss.htm');								//	Remote file, only change this if you know what you are doing
-	define('WEBLOGS_DIR',$weblog_dir);							//	directory where the log files are stored
+	define('WEBLOGS_DIR',$weblog_dir);							//	directory where the log and screenshots files are stored
 	
 	
 	//	define the fingerprint key of server

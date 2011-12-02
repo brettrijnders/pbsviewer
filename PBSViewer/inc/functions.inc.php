@@ -625,7 +625,7 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 							{
 								if ($debugCount<2)
 								{						
-									echo date('H:i:s] ').'<li>Local file path: download/'.$content.'</li><br>';
+									echo date('H:i:s] ').'<li>Local file path: '.WEBLOGS_DIR.'/'.$content.'</li><br>';
 									echo date('H:i:s] ').'<li>Remote file path: '.ftp_pwd($connect).'/'.$content.'</li><br>';
 									$debugCount++;
 								
@@ -637,7 +637,7 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 							}
 						}
 						
-						if($get2	=	ftp_get($connect,"download/".$content,$content,FTP_BINARY))
+						if($get2	=	ftp_get($connect,WEBLOGS_DIR."/".$content,$content,FTP_BINARY))
 						{
 							$DownloadCount++;
 						}
@@ -701,7 +701,7 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 					//	if files are downloaded, then also store their filesize
 					foreach ($pbsslist	as $file_id)
 					{
-						$size	=	filesize('download/'.$file_id);
+						$size	=	filesize(WEBLOGS_DIR.'/'.$file_id);
 
 						//	get file name without extension
 						$posStart	=	strpos($file_id,'.');
@@ -832,7 +832,7 @@ function is_same($file_id,$connect)
 
 	//	first check if file exist
 	//	if not, then download the file
-	if(file_exists('download/'.$file_id))
+	if(file_exists(WEBLOGS_DIR.'/'.$file_id))
 	{
 
 
@@ -1249,7 +1249,7 @@ function show_all_screens($nr=4,$page_nr,$available=false)
 					$md5_screen	=	$log_data[0];
 					$ip_player	=	$log_data[1];
 					
-					if($md5_screen==get_md5("download/".$fid.".png")) $md5_valid=true;
+					if($md5_screen==get_md5(WEBLOGS_DIR."/".$fid.".png")) $md5_valid=true;
 				}
 								
 
@@ -1328,7 +1328,7 @@ function show_date_selection ($nr=4,$page_nr,$data)
 					$md5_screen	=	$log_data[0];
 					$ip_player	=	$log_data[1];
 					
-					if($md5_screen==get_md5("download/".$fid.".png")) $md5_valid=true;
+					if($md5_screen==get_md5(WEBLOGS_DIR."/".$fid.".png")) $md5_valid=true;
 				}
 				
 				
@@ -1448,7 +1448,7 @@ function show_fid_screens($nr=4,$fileName)
 					$md5_screen	=	$log_data[0];
 					$ip_player	=	$log_data[1];
 					
-					if($md5_screen==get_md5("download/".$fid.".png")) $md5_valid=true;
+					if($md5_screen==get_md5(WEBLOGS_DIR."/".$fid.".png")) $md5_valid=true;
 				}
 				
 			
@@ -1520,7 +1520,7 @@ function show_guid_screens($nr=4,$page_nr,$guid)
 					$md5_screen	=	$log_data[0];
 					$ip_player	=	$log_data[1];
 					
-					if($md5_screen==get_md5("download/".$fid.".png")) $md5_valid=true;
+					if($md5_screen==get_md5(WEBLOGS_DIR."/".$fid.".png")) $md5_valid=true;
 				}
 								
 			}	
@@ -1592,7 +1592,7 @@ function show_name_screens($nr=4,$page_nr,$name)
 					$md5_screen	=	$log_data[0];
 					$ip_player	=	$log_data[1];
 					
-					if($md5_screen==get_md5("download/".$fid.".png")) $md5_valid=true;
+					if($md5_screen==get_md5(WEBLOGS_DIR."/".$fid.".png")) $md5_valid=true;
 				}
 			}
 
@@ -1722,7 +1722,7 @@ function show_main_screens($nr=4)
 					$md5_screen	=	$log_data[0];
 					$ip_player	=	$log_data[1];
 					
-					if($md5_screen==get_md5("download/".$fid.".png")) $md5_valid=true;
+					if($md5_screen==get_md5(WEBLOGS_DIR."/".$fid.".png")) $md5_valid=true;
 				}
 			}
 			
@@ -1759,19 +1759,19 @@ function show_screens_body($fid,$name,$guid,$date,$ip_player='',$md5_screen='',$
 				if($md5_valid)
 				{
 					echo "<tr>\n";
-					echo "<td align='center'><br><a href='?fid=".$fid."' target='_self'><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0' class=\"hover\"></a><div class=\"tooltip\"><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str['POP_IP']."</strong>: ".$ip_player."<br><strong>".$str["POP_MD5_VALID"]."</strong>: ".get_md5("download/".$fid.".png")."</div></td>\n";					
+					echo "<td align='center'><br><a href='?fid=".$fid."' target='_self'><img src='".WEBLOGS_DIR."/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0' class=\"hover\"></a><div class=\"tooltip\"><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str['POP_IP']."</strong>: ".$ip_player."<br><strong>".$str["POP_MD5_VALID"]."</strong>: ".get_md5(WEBLOGS_DIR."/".$fid.".png")."</div></td>\n";					
 				}
 				//	mismatch!
 				else 
 				{
 					echo "<tr>\n";
-					echo "<td align='center'><br><a href='?fid=".$fid."' target='_self'><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' class='md5_mismatch_border hover'></a><div class=\"tooltip\"><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str['POP_IP']."</strong>: ".$ip_player."<br><strong>".$str["POP_MD5_INVALID"]."</strong><br><strong>".$str["POP_MD5_SCREEN"]."</strong>:".get_md5("download/".$fid.".png")."<br><strong>md5 hash log</strong>: ".$md5_screen."</div></td>\n";
+					echo "<td align='center'><br><a href='?fid=".$fid."' target='_self'><img src='".WEBLOGS_DIR."/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' class='md5_mismatch_border hover'></a><div class=\"tooltip\"><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str['POP_IP']."</strong>: ".$ip_player."<br><strong>".$str["POP_MD5_INVALID"]."</strong><br><strong>".$str["POP_MD5_SCREEN"]."</strong>:".get_md5(WEBLOGS_DIR."/".$fid.".png")."<br><strong>md5 hash log</strong>: ".$md5_screen."</div></td>\n";
 				}
 			}
 			else 
 			{
 				echo "<tr>\n";
-				echo "<td align='center'><br><a href='?fid=".$fid."' target='_self'><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0' class=\"hover\"></a><div class=\"tooltip\"><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str["POP_MD5_HASH"]."</strong>: ".get_md5("download/".$fid.".png")."</div></td>\n";					
+				echo "<td align='center'><br><a href='?fid=".$fid."' target='_self'><img src='".WEBLOGS_DIR."/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0' class=\"hover\"></a><div class=\"tooltip\"><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str["POP_MD5_HASH"]."</strong>: ".get_md5(WEBLOGS_DIR."/".$fid.".png")."</div></td>\n";					
 			}
 					
 
@@ -1784,19 +1784,19 @@ function show_screens_body($fid,$name,$guid,$date,$ip_player='',$md5_screen='',$
 				if($md5_valid)
 				{
 							
-					echo "<td align='center'><br><a href='?fid=".$fid."' target='_self'><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0' class=\"hover\"></a><div class=\"tooltip\"><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str['POP_IP']."</strong>: ".$ip_player."<br><strong>".$str["POP_MD5_VALID"]."</strong>: ".get_md5("download/".$fid.".png")."</div></td>\n";					
+					echo "<td align='center'><br><a href='?fid=".$fid."' target='_self'><img src='".WEBLOGS_DIR."/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0' class=\"hover\"></a><div class=\"tooltip\"><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str['POP_IP']."</strong>: ".$ip_player."<br><strong>".$str["POP_MD5_VALID"]."</strong>: ".get_md5(WEBLOGS_DIR."/".$fid.".png")."</div></td>\n";					
 				}
 				//	mismatch!
 				else 
 				{
 							
-					echo "<td align='center'><br><a href='?fid=".$fid."' target='_self'><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' class='md5_mismatch_border hover'></a><div class=\"tooltip\"><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str['POP_IP']."</strong>: ".$ip_player."<br><strong>".$str["POP_MD5_INVALID"]."</strong><br><strong>".$str["POP_MD5_SCREEN"]."</strong>:".get_md5("download/".$fid.".png")."<br><strong>md5 hash log</strong>: ".$md5_screen."</div></td>\n";					
+					echo "<td align='center'><br><a href='?fid=".$fid."' target='_self'><img src='".WEBLOGS_DIR."/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' class='md5_mismatch_border hover'></a><div class=\"tooltip\"><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str['POP_IP']."</strong>: ".$ip_player."<br><strong>".$str["POP_MD5_INVALID"]."</strong><br><strong>".$str["POP_MD5_SCREEN"]."</strong>:".get_md5(WEBLOGS_DIR."/".$fid.".png")."<br><strong>md5 hash log</strong>: ".$md5_screen."</div></td>\n";					
 				}
 			}
 			else 
 			{
 						
-				echo "<td align='center'><br><a href='?fid=".$fid."' target='_self'><img src='download/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0' class=\"hover\"></a><div class=\"tooltip\"><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str["POP_MD5_HASH"]."</strong>: ".get_md5("download/".$fid.".png")."</div></td>\n";					
+				echo "<td align='center'><br><a href='?fid=".$fid."' target='_self'><img src='".WEBLOGS_DIR."/".$fid.".png' width='".IMG_W."' height='".IMG_H."' alt='player: ".$name.", taken on ".$date."' border='0' class=\"hover\"></a><div class=\"tooltip\"><strong>".$str['POP_FILE']."</strong>: ".$fid.".png<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."<br><strong>".$str["POP_MD5_HASH"]."</strong>: ".get_md5(WEBLOGS_DIR."/".$fid.".png")."</div></td>\n";					
 			}
 					
 
@@ -2884,7 +2884,7 @@ if($debug==true)
 		
 		if($debug==true)	
 		{
-			echo date('H:i:s] ')."<li>Going to download ".$req_count." log files</li><br>";
+			echo date('H:i:s] ')."<li>Going to download ".$req_count." log file(s)</li><br>";
 		}
 		
 		if($fileList!=false)
@@ -2968,7 +2968,7 @@ if($debug==true)
 			{
 				if($debug==true)	
 				{
-					echo date('H:i:s] ')."<li>All(".$download_count.") the log files were downloaded from your gameserver</li><br>";
+					echo date('H:i:s] ')."<li>All (".$download_count.") the log files were downloaded from your gameserver</li><br>";
 				}
 			}
 			else
@@ -2983,7 +2983,7 @@ if($debug==true)
 			{
 				if($debug==true)
 				{
-					echo date('H:i:s] ')."<li>Parsed all(".$parse_count.") log files</li><br>";
+					echo date('H:i:s] ')."<li>Parsed all (".$parse_count.") log files</li><br>";
 				}
 			}
 			else
