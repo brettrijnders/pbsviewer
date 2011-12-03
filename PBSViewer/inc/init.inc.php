@@ -38,36 +38,36 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 	connect_DB();
 	
 	// default values
-	$notify_update		= '';
-	$private_password	= '';	
-	$clan_name			= '';
-	$clan_tag			= '';
-	$clan_game			= '';
-	$clan_game_short 	= '';
-	$pb_dir 			= '';
-	$svss_dir			= 'svss';	// 2DO: add in ACP and db
-	$svlogs_dir			= 'svlogs';	// 2DO: add in ACP and db
-	$custom_update 		= 0;
-	$update_time 		= 86400;
-	$pb_sv_ssceiling 	= 10000;
-	$pbsv_download_dir	= '';
-	$reset				= 1;
-	$pbsvss_updater		= 1;
-	$pb_log				= 1;
-	$auto_del_count 	= -1;
-	$auto_del_gameserver= 0;
-	$nr_screens_main 	= 10;
-	$search_limit		= 10;
-	$screens_per_row	= 4;
-	$width 				= 200;
-	$height 			= 200;
-	$CB_game			= 'none';
-	$min_screen_size 	= 10000;
-	$cookieExpTime		= 604800;
-	$script_load_time	= 600;
-	$weblog_dir 		= 'download';
-	$ftp_passive		= 0;
-	$debug				= 0;
+	$notify_update				= '';
+	$private_password			= '';	
+	$clan_name					= '';
+	$clan_tag					= '';
+	$clan_game					= '';
+	$clan_game_short 			= '';
+	$pb_dir 					= '';
+	$svss_dir					= 'svss';	// 2DO: add in ACP and db
+	$svlogs_dir					= 'svlogs';	// 2DO: add in ACP and db
+	$custom_update 				= 0;
+	$update_time 				= 86400;
+	$pb_sv_ssceiling 			= 10000;
+	$pbsv_download_dir			= '';
+	$reset						= 1;
+	$pbsvss_updater				= 1;
+	$pb_log						= 1;
+	$auto_del_count 			= -1;
+	$auto_del_log_gameserver	= 0;
+	$nr_screens_main 			= 10;
+	$search_limit				= 10;
+	$screens_per_row			= 4;
+	$width 						= 200;
+	$height 					= 200;
+	$CB_game					= 'none';
+	$min_screen_size 			= 10000;
+	$cookieExpTime				= 604800;
+	$script_load_time			= 600;
+	$weblog_dir 				= 'download';
+	$ftp_passive				= 0;
+	$debug						= 0;
 	
 	// gather data
 	$sql_select = "SELECT `name`,`value` FROM `settings`";
@@ -254,13 +254,13 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 	}
 	
 	
-	if($auto_del_gameserver==1)
+	if($auto_del_log_gameserver==1)
 	{
-		define('AUTO_DEL_GAMESERVER',true);						//	Default = false, this option will automatically delete log files from your gameserver in order to save space and reduce bandwith when downloading your log files
+		define('AUTO_DEL_LOG_GAMESERVER',true);						//	Default = false, this option will automatically delete log files from your gameserver in order to save space and reduce bandwith when downloading your log files
 	}
 	else 
 	{
-		define('AUTO_DEL_GAMESERVER',false);
+		define('AUTO_DEL_LOG_GAMESERVER',false);
 	}
 
 

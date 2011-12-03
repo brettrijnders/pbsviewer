@@ -2940,7 +2940,7 @@ if($debug==true)
 	
 					//	if downloaded and parsed then remove the file from gameserver
 					//	make this optional
-					if (AUTO_DEL_GAMESERVER==true)	
+					if (AUTO_DEL_LOG_GAMESERVER==true)	
 					{
 						if(ftp_delete($connect,$file))	$del_count++;
 					}
