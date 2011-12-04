@@ -4,7 +4,8 @@ On this page people are listed who have supported me. Those people helped me wit
 ----
 *_I want to thank the following people:_*
 
-  * *[http://www.doa-clan.com/ Damjan Nemarnik]* - _For providing access to his server for testing/debugging_ 
+  * *[http://www.csa-squad.co.uk/ Paul Sinclair]* - _For donating money._
+  * *[http://www.doa-clan.com/ Damjan Nemarnik]* - _For providing access to his server for testing/debugging._ 
   * *[http://www.bfairmaps.com/ Michael Johnson]* - _For donating money._
   * *[http://www.geuner.eu/ Sölle & Sammy]* - _Added German translation._
   * *[http://www.xfire.com/profile/caponx/ Corax Capone]* - _Tested PBSViewer for CoD4 and sent some log files to me._
