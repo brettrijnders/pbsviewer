@@ -641,6 +641,12 @@ if($gd)
       </tr>
       <?php 
       }
+      ?>
+       <tr>
+        <td width="15%" align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_GGC"];?>:</strong></td>
+        <td align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo "<a href=\"http://www.ggc-stream.com/search/server/guid/gid/".$guid."\" target=\"_blank\">".$name."</a>";?></td>
+      </tr>
+      <?php
       if($alias)
       {
       	// bug fix: only show alias if there are any

@@ -113,6 +113,7 @@ $str["POP_NOT_AVAILABLE"] 				= 	"n/a";
 $str["DETSCRN_FILE"]					=	$str["POP_FILE"];
 $str["DETSCRN_PLAYER"]					=	$str["POP_PLAYER"];
 $str["DETSCRN_CB"]						=	"CB Link";
+$str["DETSCRN_GGC"]						=	"GGC-stream";
 $str["DETSCRN_ALIASES"]					=	"Aliases";
 $str["DETSCRN_ALIASES_2"]				=	"Dieser Spieler hat";
 $str["DETSCRN_ALIASES_3"]				=	"andere(n) Name(n)";
