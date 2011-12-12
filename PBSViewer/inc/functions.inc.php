@@ -156,7 +156,7 @@ function get_file_list($connect,$dir)
 		//	if changing to root dir went succesfully
 		if(ftp_chroot_dir($connect))
 		{
-			if(($fileList	=	ftp_nlist($connect,PBDIR.$dir))=='')
+			if(($fileList	=	ftp_nlist($connect,PBDIR.'/'.$dir))=='')
 			{
 				if(DEBUG==true)
 				{
