@@ -1825,10 +1825,10 @@ function check_ftp_connection($FTP_HOST,$FTP_PORT,$FTP_USER,$FTP_PASS,$PBDIR)
 	$error	=	array(false,false,false);
 
 	//	ftp connect
-	if($connect	=	@ftp_connect($FTP_HOST,$FTP_PORT)) $connection=true;
+	if($connect	=	ftp_connect($FTP_HOST,$FTP_PORT)) $connection=true;
 
 	//	check login
-	if($login		=	@ftp_login($connect,$FTP_USER,$FTP_PASS)) $loggedIn=true;
+	if($login		=	ftp_login($connect,$FTP_USER,$FTP_PASS)) $loggedIn=true;
 
 	if($connect && $login)
 	{
@@ -1847,10 +1847,10 @@ function check_ftp_web_connection($FTP_HOST,$FTP_PORT,$FTP_USER,$FTP_PASS,$DIR)
 	$error	=	array(false,false,false);
 
 	//	ftp connect
-	if($connect	=	@ftp_connect($FTP_HOST,$FTP_PORT)) $connection=true;
+	if($connect	=	ftp_connect($FTP_HOST,$FTP_PORT)) $connection=true;
 
 	//	check login
-	if($login		=	@ftp_login($connect,$FTP_USER,$FTP_PASS)) $loggedIn=true;
+	if($login		=	ftp_login($connect,$FTP_USER,$FTP_PASS)) $loggedIn=true;
 
 	if($connect && $login)
 	{
