@@ -34,7 +34,7 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 	
 	//change argument separator to &amp instead of &, because & is not valid
 	ini_set('arg_separator.output','&amp;'); 
-	
+		
 	connect_DB();
 	
 	// default values
@@ -185,6 +185,18 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 		elseif ($row->name=='language')
 		{
 			$language	 = $row->value;
+		}
+		elseif ($row->name=='svss_dir')
+		{
+			$svss_dir	 = $row->value;
+		}
+		elseif ($row->name=='svlogs_dir')
+		{
+			$svlogs_dir	 = $row->value;
+		}
+		elseif ($row->name=='auto_del_log_gameserver')
+		{
+			$auto_del_log_gameserver = $row->value;
 		}
 	}
 	

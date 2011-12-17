@@ -30,6 +30,9 @@ website:	http://www.beesar.com
 session_start();
 $step = isset( $_GET['step'] ) ? $_GET['step'] : 0;
 
+//	version number
+$version_new = "2.2.0.5";
+
 switch($step)
 {
 	//step 0
@@ -753,6 +756,18 @@ PRIMARY KEY(`optionID`)
 				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('ftp_passive','0');";
 				mysql_query($sql_insert) or die(mysql_error());
 
+				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('svss_dir','svss');";
+				mysql_query($sql_insert) or die(mysql_error());
+				
+				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('svlogs_dir','svlogs');";
+				mysql_query($sql_insert) or die(mysql_error());
+				
+				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('auto_del_log_gameserver','0');";
+				mysql_query($sql_insert) or die(mysql_error());
+				
+				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('version','".$version_new."');";
+				mysql_query($sql_insert) or die(mysql_error());
+				
 				session_destroy();
 				template_final();
 	
