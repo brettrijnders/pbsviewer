@@ -67,6 +67,16 @@ if(isset($_POST['save'])&&$ACP==true)
 		$error_msg .= "<li>PB directory field is empty.</li>";
 		$saving = false;
 	}
+	if ($_POST['svss_dir']=='')
+	{
+		$error_msg .= "<li>PB screenshot directory field is empty.</li>";
+		$saving = false;
+	}
+	if ($_POST['svlogs_dir']=='')
+	{
+		$error_msg .= "<li>PB log directory field is empty.</li>";
+		$saving = false;
+	}	
 	if($_POST['update_time']<60 || $_POST['update_time']=='')
 	{
 		$error_msg .= "<li>update time should be larger than 60 seconds.</li>";
@@ -211,6 +221,12 @@ if(isset($_POST['save'])&&$ACP==true)
 		$sql     	=	mysql_query($sql_update);
 		
 		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['pb_dir'])."' WHERE `name`='pb_dir'";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['svss_dir'])."' WHERE `name`='svss_dir'";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['svlogs_dir'])."' WHERE `name`='svlogs_dir'";
 		$sql     	=	mysql_query($sql_update);
 		
 		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['custom_update'])."' WHERE `name`='custom_update'";
@@ -456,6 +472,22 @@ if($ACP==true)
         <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p><?php echo $str["ACP_PB_DIR_COMMENT"];?></p>
           <p><?php echo $str["ACP_PB_DIR_COMMENT_2"];?></p></td>
       </tr>
+      <tr>
+        <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_PB_SS_DIR"];?></td>
+        <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
+          <input type="text" name="svss_dir" id="svss_dir" value="<?php echo $svss_dir;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
+        </label></td>
+        <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p><?php echo $str["ACP_PB_SS_DIR_COMMENT"];?></p>
+          </td>
+      </tr>
+      <tr>
+        <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_PB_LOG_DIR"];?></td>
+        <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
+          <input type="text" name="svlogs_dir" id="svlogs_dir" value="<?php echo $svlogs_dir;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
+        </label></td>
+        <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p><?php echo $str["ACP_PB_LOG_DIR_COMMENT"];?></p>
+          </td>
+      </tr>      
       <tr>
         <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_CUSTOM_UPDATE"];?></td>
         <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
