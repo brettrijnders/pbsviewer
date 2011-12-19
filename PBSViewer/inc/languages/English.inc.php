@@ -261,6 +261,8 @@ $str["ACP_MAX_LOGS"]					=	"max logs on webserver";
 $str["ACP_MAX_LOGS_COMMENT_1"]			=	"Default	=	4, 'max logs on webserver' needs to be lower than PB_SV_LogCeiling. Otherwise there won't be an auto-delete. This is the number of logs stored on your webserver";
 $str["ACP_MAX_LOGS_COMMENT_2"]			=	"If you choose 0, then log files are deleted immediately after updating";
 $str["ACP_MAX_LOGS_COMMENT_3"]			=	"If you don't want to delete the logs from your webserver then enter -1";
+$str["ACP_AUTO_DEL_LOG_GS"] 			=	"Auto del log gameserver";
+$str["ACP_AUTO_DEL_LOG_GS_COMMENT"]		=	"Default	=	false, automatically delete log files from your gameserver. A good reason to delete your log files is that it saves space and it reduces your bandwidth drastically when downloading your log files.";
 $str["ACP_TEMPLATE"]					=	"Template";
 $str["ACP_SCREENS_MAIN"]				=	"Screens on main page";
 $str["ACP_SCREENS_MAIN_COMMENT"]		=	"Default=10, on the main page the latest x screens are shown to save some bandwith.";
