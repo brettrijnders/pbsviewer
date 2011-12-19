@@ -250,6 +250,9 @@ if(isset($_POST['save'])&&$ACP==true)
 		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['pb_log'])."' WHERE `name`='pb_log';";
 		$sql     	=	mysql_query($sql_update);
 		
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['auto_del_log_gameserver'])."' WHERE `name`='auto_del_log_gameserver';";
+		$sql     	=	mysql_query($sql_update);
+		
 		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['auto_del_count'])."' WHERE `name`='auto_del_count'";
 		$sql     	=	mysql_query($sql_update);
 		
@@ -563,6 +566,16 @@ if($ACP==true)
         <td align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p><?php echo $str["ACP_PB_LOG_COMMENT_1"];?></p>
           <p><?php echo $str["ACP_PB_LOG_COMMENT_2"];?></p>
           <p><?php echo $str["ACP_PB_LOG_COMMENT_3"];?></p></td>
+      </tr>
+            <tr>
+        <td width="20%" align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_AUTO_DEL_LOG_GS"];?></td>
+        <td width="45%" align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
+          <select name="auto_del_log_gameserver" id="auto_del_log_gameserver">
+            <option value="1" <?php if($auto_del_log_gameserver=='1') echo "selected"; ?>><?php echo $str["ACP_TRUE"];?></option>
+            <option value="0" <?php if($auto_del_log_gameserver=='0') echo "selected"; ?>><?php echo $str["ACP_FALSE"];?></option>
+          </select>
+        </label></td>
+        <td align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p><?php echo $str["ACP_AUTO_DEL_LOG_GS_COMMENT"];?></p>
       </tr>
       <tr>
         <td width="20%" align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_MAX_LOGS"];?></td>
