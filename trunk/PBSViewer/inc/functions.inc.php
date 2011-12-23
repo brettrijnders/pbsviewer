@@ -177,7 +177,7 @@ function get_file_list($connect,$dir)
 			echo date('H:i:s] ')."<li>Retreiving file list from directory: ".$dir."</li><br>";
 				
 			echo date('H:i:s] ')."<li>Available files: "; 
-			print_r($fileList);
+			print_array_short($fileList);
 			echo "</li><br>";
 		}
 		
@@ -323,7 +323,7 @@ function get_list_pbscreens ($connect,$login,$ssdir,$main=false)
 								
 									if ($debugCount<2)
 									{
-										echo date('H:i:s] ')."<li>Current file (\$content): ".$content."</li><br>";
+										echo date('H:i:s] ')."<li>Processing current file (\$content): ".$content."</li><br>";
 										$debugCount++;
 									
 										if ($debugCount==2)
@@ -364,7 +364,7 @@ function get_list_pbscreens ($connect,$login,$ssdir,$main=false)
 							
 								if ($debugCount<2)
 								{
-									echo date('H:i:s] ')."<li>Current file (\$content): ".$content."</li><br>";
+									echo date('H:i:s] ')."<li>Processing current file (\$content): ".$content."</li><br>";
 									$debugCount++;
 									
 									if ($debugCount==2)
@@ -4430,6 +4430,23 @@ function check_version()
 
 	return $new;
 
+}
+
+// Only print a few array values
+function print_array_short($array,$limit_nr=2)
+{
+	$msg = "";
+	
+	for ($i=0;$i<count($array);$i++)
+	{
+		$msg.= $array[$i]."<br>\n";
+		
+		if ($i==$limit_nr) break;
+	}
+	
+	$msg .= "And more...";
+	
+	echo $msg;
 }
 
 ?>

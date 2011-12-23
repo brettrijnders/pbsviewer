@@ -1,6 +1,7 @@
 Changelog 2.2.0.5:
 ------------------------------------
 
+- Added function 'print_array_short(...)', this function shows only a limited amount of array values. It does something similar as print_r(...).
 - Added ACP option to automatically delete log files from gameserver when logging feature is used, see issue 43.
 - Implemented ACP option to change pb screenshot and pb log directory names, see issue 41.
 - Added an update script, user don't need to do a full reinstall anymore in order to update to a newer version.
