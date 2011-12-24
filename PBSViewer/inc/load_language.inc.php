@@ -27,30 +27,30 @@
 
 */
 // load correct language file
-	$available	=	false;
-	//$lang_file	=	get_current_lang().".inc.php";
-	$lang_file		=	LANGUAGE.".inc.php";
-		
-	// check if this file is available
-	if ($available_files = get_langs())
+$available	=	false;
+//$lang_file	=	get_current_lang().".inc.php";
+$lang_file		=	LANGUAGE.".inc.php";
+	
+// check if this file is available
+if ($available_files = get_langs())
+{
+	foreach ($available_files as $file)
 	{
-		foreach ($available_files as $file)
+		if($lang_file==$file.'.inc.php')
 		{
-			if($lang_file==$file.'.inc.php')
-			{
-				$available	=	true;
-			}
+			$available	=	true;
 		}
 	}
+}
 
-	if ($available==true)
-	{
-		include("inc/languages/".$lang_file);
-	}
-	else 
-	{
-		// include default language
-		include("inc/languages/English.inc.php");
-	}
+if ($available==true)
+{
+	include("inc/languages/".$lang_file);
+}
+else 
+{
+	// include default language
+	include("inc/languages/English.inc.php");
+}
 	
 ?>
