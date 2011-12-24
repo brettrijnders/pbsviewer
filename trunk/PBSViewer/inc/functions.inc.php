@@ -4413,6 +4413,41 @@ function get_current_lang()
 	return $current_lang;
 }
 
+//	get list of themes
+function get_themes()
+{
+	$themeDIR	=	"inc/themes";
+	$theme = array();
+	$i=0;
+	if($files = @scandir($themeDIR))
+	{
+		foreach ($files as $file)
+		{
+			if($file!='.' && $file!='..')
+			{
+				$theme[$i]	=	$file;
+				$i++;
+			}
+		}
+		
+		//	if there are language files available
+		if ($i>0)
+		{			
+			return $theme;
+		}
+		else 
+		{
+			//	language directory is empty
+			return false;
+		}
+	}
+	else 
+	{
+		//no languages, can't read language directory
+		return false;
+	}
+}
+
 // 	changed in version 2.0.0.0
 //	see if there is a new version
 function check_version()
