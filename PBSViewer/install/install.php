@@ -645,6 +645,16 @@ PRIMARY KEY(`id`)
 				
 				mysql_query($sql_create);
 				
+				$sql_create	=	"CREATE TABLE `dfiles`
+(
+`id` INT(8) NOT NULL AUTO_INCREMENT,
+`file` TEXT NOT NULL,
+`type` INT(1),
+PRIMARY KEY(`id`)
+);";
+				
+				mysql_query($sql_create);
+				
 				//	create access table for admin
 				$sql_create	=	"CREATE TABLE `access` 
 (
@@ -764,6 +774,24 @@ PRIMARY KEY(`optionID`)
 				
 				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('auto_del_log_gameserver','0');";
 				mysql_query($sql_insert) or die(mysql_error());
+				
+				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('incremental_update','0');";
+				mysql_query($sql_insert) or die(mysql_error());
+				
+				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('iu_nr_screens','20');";
+				mysql_query($sql_insert) or die(mysql_error());
+				
+				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('iu_nr_logs','2');";
+				mysql_query($sql_insert) or die(mysql_error());
+				
+				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('iu_update_time','30');";
+				mysql_query($sql_insert) or die(mysql_error());
+				
+				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('iu_wait_time','3');";
+				mysql_query($sql_insert) or die(mysql_error());
+				
+				
+
 				
 				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('version','".$version_new."');";
 				mysql_query($sql_insert) or die(mysql_error());

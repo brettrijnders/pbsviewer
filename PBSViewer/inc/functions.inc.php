@@ -459,7 +459,7 @@ function get_detailed_screen_info($fid)
 
 //	function needed to update the file
 //	and update pbsvss.htm (if needed) from preventing the file keep on growing for ever
-function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP,$fileLastUpdate,$SsCeiling,$debug,$main=false)
+function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP,$fileLastUpdate,$SsCeiling,$debug,$main=false,$cron=false)
 {
 	#####################
 	//	steps:
@@ -469,6 +469,15 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 	//	4]	parse main file
 	//	5]	download png files
 
+	
+	($main==false && $cron==false && INCREMENTAL_UPDATE==true) ? $incremental_update=true : $incremental_update=false;
+	
+	//	Needed to get incremental update working, see issue 44
+	if($incremental_update==true)
+	{		
+		$iu_start_time = time();		
+	}
+	
 	//	FIX v2.2.0.3 (issue 38): first update local file lastUpdate in order to prevent that other users are updating simultaneously
 	if($fp2	=	fopen($fileLastUpdate,'w+'))
 	{
@@ -605,6 +614,16 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 				$pbsslist	=	get_list_pbscreens($connect,$login,$ssdir,$main);
 				
 
+				//	incremental update feature: stop updating and do refresh and start downloading again, see issue 44
+				if($incremental_update==true)
+				{
+					$dlist = get_downloaded_files(0);	//	get files of type 0, i.e. screenshots
+							
+					//	get new list of files that need to be downloaded
+					$pbsslist = get_new_list_pbscreens($pbsslist,$dlist);
+
+				}
+				
 
 				//	needed for check after download if there is an inconsistency
 				$DownloadCount		=	0;
@@ -639,6 +658,7 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 						
 						if($get2	=	ftp_get($connect,WEBLOGS_DIR."/".$content,$content,FTP_BINARY))
 						{
+							update_downloaded_files($content);
 							$DownloadCount++;
 						}
 						else
@@ -647,7 +667,29 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 							$download	=	false;
 						}
 					}
-
+					
+					//	incremental update feature: stop updating and do refresh and start downloading again, see issue 44
+					if($incremental_update==true)
+					{
+						//	stop if download count has reach or when total update time is too large
+						if($DownloadCount>=IU_NR_SCREENS || (time()-$iu_start_time)>IU_UPDATE_TIME)
+						{
+							
+							
+							echo date('H:i:s] ').'<li><strong>Incremental update</strong><br><br>';
+																			
+							if(count($pbsslist)!=0)
+							{					
+								if(count($dlist)!=0) echo '<strong>Number of screenshots downloadeded during previous update cycle: '.count($dlist).'</strong><br>';		
+								echo '<strong>Number of screenshots going to download: '.count($pbsslist).'</strong><br>';
+							}
+							
+							echo '<strong>Going to reload page and continue with update in '.IU_WAIT_TIME.' seconds...</strong></li><br>';
+							
+							echo "<meta http-equiv=\"refresh\" content=\"".IU_WAIT_TIME.";URL=update.php\" />";
+							return;
+						}
+					}
 				}
 				
 
@@ -659,7 +701,14 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 						{
 							if ($main==false)
 							{
-								echo date('H:i:s] ').'<li> All PNG files ('.$DownloadCount.') were downloaded succesfully!</li><br>';
+								if($incremental_update==true)
+								{
+									echo date('H:i:s] ').'<li> All PNG files ('.count($dlist).') were downloaded succesfully!</li><br>';
+								}
+								else 
+								{
+									echo date('H:i:s] ').'<li> All PNG files ('.$DownloadCount.') were downloaded succesfully!</li><br>';
+								}
 							}
 						}
 					}
@@ -715,12 +764,22 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 					if(PB_log==true)
 					{
 						//get_logs($debug,PB_log);
-						get_logs($connect,$login,$debug,PB_log);
+						$log_status = get_logs($connect,$login,$debug,PB_log,$incremental_update,$iu_start_time);
+						
+						if ($log_status=='IU' && $incremental_update==true)
+						{
+							echo "<meta http-equiv=\"refresh\" content=\"".IU_WAIT_TIME.";URL=update.php\" />";
+							return;
+						}
 					}
 
 					//	if everything went fine then set request_update back to false
 					//	When this is set to false, someone can request an update
 					set_request_false();
+					
+					//	Clean downloaded files MySQL table so that it can be used for next update
+					if(count($pbsslist)==0)	trunc_downloaded_files();
+					
 				}
 				else
 				{
@@ -766,6 +825,52 @@ function update_file($ftp_host,$ftp_port,$ftp_user,$ftp_pass,$ssdir,$L_FILE_TEMP
 	//	close ftp connection
 	ftp_close($connect);
 
+}
+
+//	Used for incremental update feature, see issue 44
+//	Keep track of all downloaded files, those files won't be downloaded again in next update cycle
+function update_downloaded_files($file,$type=0)
+{
+	//	There are several types of files
+	//	type 0: screenshot
+	//	type 1: log file
+	$sql_insert = "INSERT INTO `dfiles` (`file`,`type`) VALUES ('".$file."','".$type."')";
+	$sql = mysql_query($sql_insert);
+}
+
+//	Used for incremental update feature, see issue 44
+//	Clean dfiles table so that it can be used for next update
+function trunc_downloaded_files()
+{
+	mysql_query("TRUNCATE TABLE `dfiles`");
+}
+
+//	Used for incremental update feature, see issue 44
+//	Get a list of downloaded files such that they are not downloaded again in next update cycle
+function get_downloaded_files($type)
+{
+	$dfiles = array();
+	$i=0;
+	
+	$sql_select = "SELECT `file`,`type` FROM `dfiles` WHERE `type`='".$type."'";
+	$sql		=	mysql_query($sql_select);
+	if(mysql_num_rows($sql)>0)
+	{
+		while ($result = mysql_fetch_object($sql))
+		{
+			$dfiles[$i] = $result->file;
+			$i++;
+		}
+	}
+	
+	return $dfiles;
+}
+
+//	Used for incremental update feature, see issue 44
+//	Compare list of downloaded files with complete list of available screenshot files
+function get_new_list_pbscreens($fullList, $dList)
+{
+	return array_diff($fullList,$dList);
 }
 
 function get_latest_size_by_fid	($fid)
@@ -2844,7 +2949,7 @@ function get_nr_screens_by_date($data)
 //	delete all from gameserver
 //	delete ''
 //	new since version 1.2.2.1
-function get_logs($connect,$login,$debug=false,$log=false)
+function get_logs($connect,$login,$debug=false,$log=false,$incremental_update=false,$iu_start_time=0)
 {
 	if($log==true)
 	{
@@ -2866,14 +2971,25 @@ function get_logs($connect,$login,$debug=false,$log=false)
 		ftp_chdir($connect,SVLOGS_DIR);
 
 		//	dir changed to
-if($debug==true)	
-{
-	echo date('H:i:s] ')."<li>Directory changed to: ".ftp_pwd($connect)."</li><br>";
-}
+		if($debug==true)	
+		{
+			echo date('H:i:s] ')."<li>Directory changed to: ".ftp_pwd($connect)."</li><br>";
+		}
 		
 		//	new since 2.2.0.5
 		//	custom function is used instead of ftp_nlist
 		$fileList = get_file_list($connect,SVLOGS_DIR);	
+		
+		
+		//	incremental update feature: stop updating and do refresh and start downloading again, see issue 44
+		if($incremental_update==true)
+		{
+			$dlist = get_downloaded_files(1);	//	get files of type 1, i.e. log files
+					
+			//	get new list of files that need to be downloaded
+			$fileList = get_new_list_pbscreens($fileList,$dlist);
+
+		}
 		
 		$download_count	=	0;
 		$parse_count	=	0;
@@ -2913,7 +3029,7 @@ if($debug==true)
 				}				
 				
 				
-				//	only do something(parsing and deleting files) if files are downloaded
+				//	only do something (parsing and deleting files) if files are downloaded
 				if($download_file == FTP_FINISHED)
 				{	
 					$download_count++;
@@ -2935,6 +3051,9 @@ if($debug==true)
 							echo date('H:i:s] ')."<li>Finished parsing and downloading log file: ".$file."</li><br>";
 						}
 						
+						//	update downloaded files db for incremental update, see issue 44
+						update_downloaded_files($file,1);
+						
 						$parse_count++;
 					}
 	
@@ -2943,8 +3062,7 @@ if($debug==true)
 					if (AUTO_DEL_LOG_GAMESERVER==true)	
 					{
 						if(ftp_delete($connect,$file))	$del_count++;
-					}
-					
+					}				
 
 				}
 				else 
@@ -2952,6 +3070,28 @@ if($debug==true)
 					if($debug==true)	
 					{
 						echo date('H:i:s] ')."<li>Not able to download the log file: ".$file."</li><br>";
+					}
+				}
+				
+				//	incremental update feature: stop updating and do refresh and start downloading again, see issue 44
+				if($incremental_update==true)
+				{
+					//	stop if parse count has reached number of logs or when total update time is too large
+					if($parse_count>=IU_NR_LOGS || (time()-$iu_start_time)>IU_UPDATE_TIME)
+					{
+						
+						
+						echo date('H:i:s] ').'<li><strong>Incremental update</strong><br><br>';
+																		
+						if(count($fileList)!=0)
+						{					
+							if(count($dlist)!=0) echo '<strong>Number of log files downloadeded during previous update cycle: '.count($dlist).'</strong><br>';		
+							echo '<strong>Number of log files going to download: '.count($fileList).'</strong><br>';
+						}
+						
+						echo '<strong>Going to reload page and continue with update in '.IU_WAIT_TIME.' seconds...</strong></li><br>';
+						
+						return 'IU';
 					}
 				}	
 			}
@@ -4480,6 +4620,19 @@ function print_array_short($array,$limit_nr=2)
 	}
 	
 	$msg .= "And more...";
+	
+	echo $msg;
+}
+
+// Only print a few array values
+function print_array_all($array)
+{
+	$msg = "";
+	
+	for ($i=0;$i<count($array);$i++)
+	{
+		$msg.= $array[$i]."<br>\n";
+	}
 	
 	echo $msg;
 }

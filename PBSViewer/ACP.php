@@ -96,6 +96,26 @@ if(isset($_POST['save'])&&$ACP==true)
 		$error_msg .= "<li>PBSV download dir field is empty.</li>";
 		$saving = false;
 	}
+	if ($_POST['iu_nr_screens']<1 && INCREMENTAL_UPDATE==true)				
+	{		
+		$error_msg .= "<li>Number of screens that will be downloaded during incremental update needs to be larger than 0 in order to download screenshots.</li>";
+		$saving = false;
+	}	
+	if ($_POST['iu_nr_logs']<1 && INCREMENTAL_UPDATE==true)				
+	{		
+		$error_msg .= "<li>Number of log files that will be downloaded during incremental update needs to be larger than 0 in order to download log files.</li>";
+		$saving = false;
+	}
+	if ($_POST['iu_update_time']<5 && INCREMENTAL_UPDATE==true)				
+	{		
+		$error_msg .= "<li>Amount of update time needs to be larger than 5 seconds in order to perform a good incremental update.</li>";
+		$saving = false;
+	}
+	if ($_POST['iu_wait_time']<0 && INCREMENTAL_UPDATE==true)				
+	{		
+		$error_msg .= "<li>Wait time during incremental update can't be a negative number!</li>";
+		$saving = false;
+	}	
 	if (!($_POST['auto_del_count']==-1 || $_POST['auto_del_count']>=0))
 	{
 		$error_msg .= "<li>Valid values for field 'max logs on webserver' are -1 or 0 and larger.</li>";
@@ -246,6 +266,21 @@ if(isset($_POST['save'])&&$ACP==true)
 		
 		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['pbsvss_updater'])."' WHERE `name`='pbsvss_updater';";
 		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['incremental_update'])."' WHERE `name`='incremental_update';";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['iu_nr_screens'])."' WHERE `name`='iu_nr_screens';";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['iu_nr_logs'])."' WHERE `name`='iu_nr_logs';";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['iu_update_time'])."' WHERE `name`='iu_update_time';";
+		$sql     	=	mysql_query($sql_update);
+		
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['iu_wait_time'])."' WHERE `name`='iu_wait_time';";
+		$sql     	=	mysql_query($sql_update);		
 		
 		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['pb_log'])."' WHERE `name`='pb_log';";
 		$sql     	=	mysql_query($sql_update);
@@ -552,6 +587,49 @@ if($ACP==true)
         </label></td>
         <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_PBSVSS_UPDATER_COMMENT"];?></td>
       </tr>
+      <tr>
+        <td width="20%" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_PBSVSS_IU"];?></td>
+        <td width="45%" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
+          <select name="incremental_update" id="incremental_update">
+            <option value="1" <?php if($incremental_update=='1') echo "selected"; ?>><?php echo $str["ACP_TRUE"];?></option>
+            <option value="0" <?php if($incremental_update=='0') echo "selected"; ?>><?php echo $str["ACP_FALSE"];?></option>
+          </select>
+        </label></td>
+        <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_PBSVSS_IU_COMMENT"];?></td>
+      </tr>
+      <tr>
+        <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_PBSVSS_IU_NR_SCREENS"];?></td>
+        <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
+          <input type="text" name="iu_nr_screens" id="iu_nr_screens" value="<?php echo $iu_nr_screens;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
+        </label></td>
+        <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p><?php echo $str["ACP_PBSVSS_IU_NR_SCREENS_COMMENT"];?></p>
+         </td>
+      </tr>
+      <tr>
+        <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_PBSVSS_IU_NR_LOGS"];?></td>
+        <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
+          <input type="text" name="iu_nr_logs" id="iu_nr_logs" value="<?php echo $iu_nr_logs;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
+        </label></td>
+        <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p><?php echo $str["ACP_PBSVSS_IU_NR_LOGS_COMMENT"];?></p>
+         </td>
+      </tr>
+        <tr>
+        <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_PBSVSS_IU_UPDATE_TIME"];?></td>
+        <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
+          <input type="text" name="iu_update_time" id="iu_update_time" value="<?php echo $iu_update_time;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';">
+        </label></td>
+        <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p><?php echo $str["ACP_PBSVSS_IU_UPDATE_TIME_COMMENT"];?></p>
+         </td>
+      </tr>
+        <tr>
+        <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_PBSVSS_IU_WAIT_TIME"];?></td>
+        <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><label>
+          <input type="text" name="iu_wait_time" id="iu_wait_time" value="<?php echo $iu_wait_time;?>" onclick="this.focus();" size="30" class= "search_field_bg" onmouseover="this.className='search_field_hover';" onmouseout="this.className='search_field_bg';" >
+        </label></td>
+        <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><p><?php echo $str["ACP_PBSVSS_IU_WAIT_TIME_COMMENT"];?></p>
+         </td>
+      </tr>      
+      
       <tr>
         <td colspan="3" align="center" class="bg_reset_table_row3"><span class="txt_light"><strong><?php echo $str["ACP_LOGGING"];?></strong></span></td>
       </tr>

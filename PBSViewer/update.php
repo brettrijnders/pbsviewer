@@ -140,7 +140,7 @@ elseif (is_cron_user($cronkey)==true)
 	  <tr>
 	    <td class="bg_update_table_row2"><table width="90%" border="0" align="center">
 	      <tr>
-	        <td><br><?php update_file(FTP_HOST,FTP_PORT,FTP_USER,FTP_PASS,PBDIR.'/'.SVSS_DIR,L_FILE_TEMP,$fileLastUpdate,pb_sv_SsCeiling,true);?></td>
+	        <td><br><?php update_file(FTP_HOST,FTP_PORT,FTP_USER,FTP_PASS,PBDIR.'/'.SVSS_DIR,L_FILE_TEMP,$fileLastUpdate,pb_sv_SsCeiling,true,false,true);?></td>
 	      </tr>
 	    </table>
 	      <br>

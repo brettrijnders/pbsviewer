@@ -252,6 +252,16 @@ $str["ACP_RESET_COMMENT_1"]				=	"Default	=	false. Reset feature allows admins t
 $str["ACP_RESET_COMMENT_2"]				=	"In order to use this function you need to configure the login details of your ftp webhosting in config.inc.php.";
 $str["ACP_PBSVSS_UPDATER"]				=	"pbsvss_updater";
 $str["ACP_PBSVSS_UPDATER_COMMENT"]		=	"Default=false. pb keeps logging screenshots data to pbsvss.htm, it places the newest entries at the end of this file. However pb does not remove old data, so this file will keep on growing in size. If you choose true, then old entries will be removed automatically. This will keep the filesize at a small size.";
+$str["ACP_PBSVSS_IU"]					=	"Incremental update";
+$str["ACP_PBSVSS_IU_COMMENT"]			=	"Default=false. If true, PBSViewer will use incremental update. It will update the files step by step using multiple update cycles. This might solve the issue when execution time of the update method is exceeding the maximum specified execution time. Next to this it prevents server overload or getting internal 500 server errors when doing an update.";
+$str["ACP_PBSVSS_IU_NR_SCREENS"]		=	"Number of screens (IU)";
+$str["ACP_PBSVSS_IU_NR_SCREENS_COMMENT"]=	"Number of screens to download with Incremental Update (IU) during each update cycle.";
+$str["ACP_PBSVSS_IU_NR_LOGS"]			=	"Number of logs (IU)";
+$str["ACP_PBSVSS_IU_NR_LOGS_COMMENT"]	=	"Number of log files to download with Incremental Update (IU) during each update cycle.";
+$str["ACP_PBSVSS_IU_UPDATE_TIME"]		=	"Update time (IU)";
+$str["ACP_PBSVSS_IU_UPDATE_TIME_COMMENT"]=	"Maximum time for each update cycle for Incremental update.";
+$str["ACP_PBSVSS_IU_WAIT_TIME"]			=	"Wait time (IU)";
+$str["ACP_PBSVSS_IU_WAIT_TIME_COMMENT"]	=	"Time to wait before continuing with next update cycle.";
 $str["ACP_LOGGING"]						=	"Logging";
 $str["ACP_PB_LOG"]						=	"PB_log";
 $str["ACP_PB_LOG_COMMENT_1"]			=	"Gather more info about screens, like md5 check or ip address of players, with help of logs";
