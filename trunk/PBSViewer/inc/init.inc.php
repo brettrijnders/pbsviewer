@@ -63,6 +63,7 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 	$width 						= 200;
 	$height 					= 200;
 	$CB_game					= 'none';
+	$theme						= 'default';
 	$min_screen_size 			= 10000;
 	$cookieExpTime				= 604800;
 	$script_load_time			= 600;
@@ -158,6 +159,10 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 		elseif ($row->name=='CB_game')
 		{
 			$CB_game	 = $row->value;
+		}
+		elseif ($row->name=='theme')
+		{
+			$theme	 = $row->value;
 		}
 		elseif ($row->name=='min_screen_size')
 		{
@@ -319,6 +324,7 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 	define('IMG_H',$height);									//	Thumbnail image height
 	define('LANGUAGE',$language);
 	define('CBGAMEID',$CB_game);
+	define('THEME',$theme);
 
 	// (optional)
 	if ($pbsvss_updater==1)

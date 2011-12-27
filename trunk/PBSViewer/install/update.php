@@ -121,6 +121,12 @@ function do_update($version_new)
 		mysql_query($sql_insert) or die(mysql_error());
 	}
 	
+	if(mysql_num_rows(mysql_query("SELECT `name`,`value` FROM `settings` WHERE `name`='theme'"))==0)
+	{	
+		$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('theme','default');";
+		mysql_query($sql_insert) or die(mysql_error());
+	}
+	
 	if(!table_exists('dfiles'))
 	{
 		$sql_create = "CREATE TABLE `dfiles`

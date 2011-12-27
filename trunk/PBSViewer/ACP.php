@@ -34,12 +34,14 @@ require_once('inc/templates.inc.php');
 $ACP=false;
 
 
-
 //	check if user's ip is on the list
 if (is_admin()==true) $ACP=true;
 
 //load correct language
 include("inc/load_language.inc.php");
+
+//load correct theme
+include("inc/load_theme.inc.php");
 
 if(isset($_POST['save'])&&$ACP==true)
 {
@@ -312,6 +314,9 @@ if(isset($_POST['save'])&&$ACP==true)
 		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['CB_game'])."' WHERE `name`='CB_game'";
 		$sql     	=	mysql_query($sql_update);
 		
+		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['theme'])."' WHERE `name`='theme'";
+		$sql     	=	mysql_query($sql_update);
+		
 		$sql_update = "UPDATE `settings` SET `value`='".mysql_real_escape_string($_POST['min_screen_size'])."' WHERE `name`='min_screen_size'";
 		$sql     	=	mysql_query($sql_update);
 		
@@ -385,15 +390,15 @@ if($ACP==true)
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title><?php echo $str["ACP_TITLE"];?></title>
-<link href="style/style.css" rel="stylesheet" type="text/css">
-<link rel="shortcut icon" href="style/img/favicon.ico"> 
+<link href="inc/themes/<?php echo THEME_DIR;?>/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="inc/themes/<?php echo THEME_DIR;?>/img/favicon.ico"> 
 
 </head>
 
 <body>
 	<table width="100%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a></td>
+    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a></td>
   </tr>
 </table>
 <br>
@@ -769,6 +774,42 @@ if($ACP==true)
         </label></td>
         <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo $str["ACP_CB_GAME_COMMENT"];?></td>
       </tr>
+            <tr>
+        <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><?php echo $str["ACP_THEME"];?></td>
+        <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>">
+        <?php
+        // get all language files
+        $theme_data	=	get_themes();
+        if($theme_data)
+        {
+        	echo "<label><select name=\"theme\" id=\"theme\">";
+        	
+        	foreach ($theme_data as $theme)
+        	{
+        		if (THEME==$theme)
+        		{
+        			echo "<option value=\"".$theme."\" selected>".$theme."</option>\n";
+        		}
+        		else 
+        		{
+        			echo "<option value=\"".$theme."\">".$theme."</option>\n";
+        		}
+        	}
+        	echo "            
+          </select>
+        </label>";
+        }
+        else
+        {
+        	echo "Please check your theme directory, can't read/find theme files";
+        }
+        
+        ?>  
+        
+</td>
+        <td class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">&nbsp;</td>
+      </tr>
+      
       <tr>
         <td colspan="3" align="center" class="bg_reset_table_row3"><span class="txt_light"><strong><?php echo $str["ACP_ADVANCED"];?></strong></span></td>
       </tr>
@@ -865,7 +906,7 @@ function template_error($msg,$back_page='ACP.php')
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Admin Control Panel (ACP)</title>
-<link href="style/style.css" rel="stylesheet" type="text/css">
+<link href="inc/themes/<?php echo THEME_DIR;?>/style.css" rel="stylesheet" type="text/css">
 <link rel="shortcut icon" href="style/img/favicon.ico"> 
 </head>
 
@@ -873,7 +914,7 @@ function template_error($msg,$back_page='ACP.php')
 <body>
 	<table width="100%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a></td>
+    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a></td>
   </tr>
 </table>
 <br>
@@ -919,7 +960,7 @@ function template_saved()
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title><?php echo $str["ACP_TITLE"];?></title>
-<link href="style/style.css" rel="stylesheet" type="text/css">
+<link href="inc/themes/<?php echo THEME_DIR;?>/style.css" rel="stylesheet" type="text/css">
 <link rel="shortcut icon" href="style/img/favicon.ico"> 
 </head>
 
@@ -928,7 +969,7 @@ function template_saved()
 <body>
 	<table width="100%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a></td>
+    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a></td>
   </tr>
 </table>
 <br>

@@ -37,6 +37,9 @@ require_once('inc/functions.inc.php');
 include("inc/load_language.inc.php");
 $update=false;
 
+//load correct theme
+include("inc/load_theme.inc.php");
+
 //	maximum script load time
 ini_set('max_execution_time',script_load_time);
 

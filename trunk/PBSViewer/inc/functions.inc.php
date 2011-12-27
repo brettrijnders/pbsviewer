@@ -1924,13 +1924,13 @@ function show_screens_body($fid,$name,$guid,$date,$ip_player='',$md5_screen='',$
 				if($nr_counter==0)
 				{
 					echo "<tr>\n";
-					echo "<td align='center'><br><a href='#' target='_self'><img src='style/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0' class=\"hover\"></a><div class=\"tooltip\"><strong>".$str['POP_FILE']."</strong>: ".$str["POP_NOT_AVAILABLE"]."<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."</div></td>\n";
+					echo "<td align='center'><br><a href='#' target='_self'><img src='inc/themes/".THEME_DIR."/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0' class=\"hover\"></a><div class=\"tooltip\"><strong>".$str['POP_FILE']."</strong>: ".$str["POP_NOT_AVAILABLE"]."<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."</div></td>\n";
 
 
 				}
 				else
 				{
-					echo "<td align='center'><br><a href='#' target='_self'><img src='style/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0' class=\"hover\"></a><div class=\"tooltip\"><strong>".$str['POP_FILE']."</strong>: ".$str["POP_NOT_AVAILABLE"]."<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."</div></td>\n";
+					echo "<td align='center'><br><a href='#' target='_self'><img src='inc/themes/".THEME_DIR."/img/na.png' width='".IMG_W."' height='".IMG_H."' alt='no image available' border='0' class=\"hover\"></a><div class=\"tooltip\"><strong>".$str['POP_FILE']."</strong>: ".$str["POP_NOT_AVAILABLE"]."<br><strong>".$str['POP_PLAYER']."</strong>: ".$name."<br><strong>".$str['POP_GUID']."</strong>: ".$guid."<br><strong>".$str['POP_TAKEN']."</strong>: ".$date."</div></td>\n";
 
 				}
 
@@ -4570,7 +4570,7 @@ function get_themes()
 			}
 		}
 		
-		//	if there are language files available
+		//	if there are theme files available
 		if ($i>0)
 		{			
 			return $theme;
