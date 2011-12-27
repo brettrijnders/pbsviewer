@@ -40,6 +40,9 @@ require_once('inc/functions.inc.php');
 //load correct language
 include("inc/load_language.inc.php");
 
+//load correct theme
+include("inc/load_theme.inc.php");
+
 require_once('inc/templates.inc.php');
 
 //	maximum script load time

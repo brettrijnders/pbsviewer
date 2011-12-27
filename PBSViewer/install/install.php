@@ -790,6 +790,9 @@ PRIMARY KEY(`optionID`)
 				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('iu_wait_time','3');";
 				mysql_query($sql_insert) or die(mysql_error());
 				
+				$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('theme','default');";
+				mysql_query($sql_insert) or die(mysql_error());
+				
 				
 
 				

@@ -32,12 +32,14 @@ $key=md5(($_SERVER['SERVER_SIGNATURE'].' '.php_uname()));
 require_once('inc/config.inc.php');
 require_once('inc/init.inc.php');
 require_once('inc/functions.inc.php');
-require_once('inc/templates.inc.php');
-
-
 
 //load correct language
 include("inc/load_language.inc.php");
+
+//load correct theme
+include("inc/load_theme.inc.php");
+
+require_once('inc/templates.inc.php');
 
 //	if admin is trying to visit this page without wanting to logout then just redirect to main page
 if (is_admin()==true&&!isset($_GET['logout']))

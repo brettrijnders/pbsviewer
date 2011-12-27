@@ -26,16 +26,15 @@
     website:	http://www.beesar.com       
 
 */
-// load correct language file
+// load correct theme
 $available	=	false;
-$lang_file		=	LANGUAGE.".inc.php";
 	
 // check if this file is available
-if ($available_files = get_langs())
+if ($available_files = get_themes())
 {
-	foreach ($available_files as $file)
+	foreach ($available_files as $theme)
 	{
-		if($lang_file==$file.'.inc.php')
+		if(THEME==$theme)
 		{
 			$available	=	true;
 		}
@@ -44,12 +43,11 @@ if ($available_files = get_langs())
 
 if ($available==true)
 {
-	include("inc/languages/".$lang_file);
+	define("THEME_DIR",THEME);
 }
 else 
 {
-	// include default language
-	include("inc/languages/English.inc.php");
+	define("THEME_DIR",'default');
 }
 	
 ?>

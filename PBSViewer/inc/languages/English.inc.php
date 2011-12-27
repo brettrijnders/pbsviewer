@@ -286,6 +286,7 @@ $str["ACP_IMG_H"]						=	"Image height";
 $str["ACP_IMG_H_COMMENT"]				=	"Thumbnail image height";
 $str["ACP_LANGUAGE"]					=	"Default language";
 $str["ACP_CB_GAME"]						=	"CB game";
+$str["ACP_THEME"]						=	"PBSViewer theme";
 $str["ACP_CB_GAME_COMMENT"]				=	"The games in this list are supported by clanbase, please select the game that is running on your gameserver. This information will be used to automatically find clanbase players (only if he/she has joined cb) for each pb screenshot. select none if you don't want this extra information.";
 $str["ACP_CB_NONE"]						=	"none";
 $str["ACP_ADVANCED"]					=	"Advanced";

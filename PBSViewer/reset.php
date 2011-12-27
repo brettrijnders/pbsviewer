@@ -37,6 +37,9 @@ require_once('inc/functions.inc.php');
 //load correct language
 include("inc/load_language.inc.php");
 
+//load correct theme
+include("inc/load_theme.inc.php");
+
 $reset=false;
 
 //	check if user's ip is on the list

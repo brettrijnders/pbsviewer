@@ -43,8 +43,8 @@ function template_header()
 <meta name="revisit-after" content="7">
 <title><?php echo $str["TITLE"];?></title>
 
-<link href="style/style.css" rel="stylesheet" type="text/css">
-<link rel="shortcut icon" href="style/img/favicon.ico">
+<link href="inc/themes/<?php echo THEME_DIR;?>/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="inc/themes/<?php echo THEME_DIR;?>/img/favicon.ico">
 <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 
 <script src="http://cdn.jquerytools.org/1.2.3/full/jquery.tools.min.js" type="text/javascript"></script>
@@ -149,7 +149,7 @@ function template_logo_header()
 	
 		<table width="100%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a></td>
+    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a></td>
   </tr>
 </table>
 <br>
@@ -176,8 +176,8 @@ function template_header_detailed_page($fid)
 <meta name="revisit-after" content="7">
 <title><?php echo $str["TITLE"];?></title>
 
-<link href="style/style.css" rel="stylesheet" type="text/css">
-<link rel="shortcut icon" href="style/img/favicon.ico"> 
+<link href="inc/themes/<?php echo THEME_DIR;?>/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="inc/themes/<?php echo THEME_DIR;?>/img/favicon.ico"> 
 <!-- Load zoom tool created by Janos Pal Toth
 // For more information go to http://valid.tjp.hu/tjpzoom/
 -->
@@ -204,7 +204,7 @@ $("img.hover").tooltip({
 	});
 	
 	//	show this during loading
-	var ajax_load = "<img src='style/img/ajax-loader.gif' alt='loading...' />";
+	var ajax_load = "<img src='inc/themes/<?php echo THEME_DIR;?>/img/ajax-loader.gif' alt='loading...' />";
 	//	url to get data from
 	var loadUrl = "inc/GD/GD_ajax.inc.php";
 	
@@ -274,7 +274,7 @@ if(!is_CHMOD_755()) template_chmod_755();
 	
 	<table width="100%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a></td>
+    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a></td>
   </tr>
 </table>
 <br>
@@ -540,14 +540,14 @@ function template_detailed_screen($fid)
 
 <script type="text/javascript">
 
-var imageURL = "style/img/zoom_disabled.gif";
+var imageURL = "inc/themes/<?php echo THEME_DIR;?>/img/zoom_disabled.gif";
 
 function changeImage() 
 {
      if (document.images) 
      {
-          if (imageURL == "style/img/zoom.gif") imageURL = "style/img/zoom_disabled.gif";
-          else imageURL = "style/img/zoom.gif";
+          if (imageURL == "inc/themes/<?php echo THEME_DIR;?>/img/zoom.gif") imageURL = "inc/themes/<?php echo THEME_DIR;?>/img/zoom_disabled.gif";
+          else imageURL = "inc/themes/<?php echo THEME_DIR;?>/img/zoom.gif";
 
          document.zoomIMG.src = imageURL;
      }
@@ -562,12 +562,12 @@ function changeImage()
   
   if ($pnfids[0]!='') 
   {
-  	echo "<a href=\"./?fid=".$pnfids[0]."\"><img src=\"style/img/prev.png\" width=\"32\" height=\"32\" border=\"0\" alt=\"".$str["DETSCRN_TOOLS_PREV_COMMENT"]."\" class=\"hover\"></a><div class=\"tooltip\">".$str["DETSCRN_TOOLS_PREV_COMMENT"]."</div>"; 
+  	echo "<a href=\"./?fid=".$pnfids[0]."\"><img src=\"inc/themes/".THEME_DIR."/img/prev.png\" width=\"32\" height=\"32\" border=\"0\" alt=\"".$str["DETSCRN_TOOLS_PREV_COMMENT"]."\" class=\"hover\"></a><div class=\"tooltip\">".$str["DETSCRN_TOOLS_PREV_COMMENT"]."</div>"; 
   }
   
   ?>
-  <a href="<?php echo "inc/imgSave.inc.php?saveIMG=".$fid;?>"><img src="style/img/save.gif" width="32" height="32" alt="<?php echo $str["DETSCRN_TOOLS_SAVE_COMMENT"];?>" border="0" class="hover"></a><div class="tooltip"><?php echo $str["DETSCRN_TOOLS_SAVE_COMMENT"];?></div>
-    &nbsp;<a href="#" onclick="TJPzoomswitch(document.getElementById('unique1337'))"><img src="style/img/zoom_disabled.gif" width="32" height="32" alt="<?php echo $str["DETSCRN_TOOLS_ZOOM_TITLE"];?>" border="0" onclick="changeImage()" NAME="zoomIMG" class="hover"></a><div class="tooltip"><strong><?php echo $str["DETSCRN_TOOLS_ZOOM_TITLE"];?></strong><br><ul>
+  <a href="<?php echo "inc/imgSave.inc.php?saveIMG=".$fid;?>"><img src="inc/themes/<?php echo THEME_DIR;?>/img/save.gif" width="32" height="32" alt="<?php echo $str["DETSCRN_TOOLS_SAVE_COMMENT"];?>" border="0" class="hover"></a><div class="tooltip"><?php echo $str["DETSCRN_TOOLS_SAVE_COMMENT"];?></div>
+    &nbsp;<a href="#" onclick="TJPzoomswitch(document.getElementById('unique1337'))"><img src="inc/themes/<?php echo THEME_DIR;?>/img/zoom_disabled.gif" width="32" height="32" alt="<?php echo $str["DETSCRN_TOOLS_ZOOM_TITLE"];?>" border="0" onclick="changeImage()" NAME="zoomIMG" class="hover"></a><div class="tooltip"><strong><?php echo $str["DETSCRN_TOOLS_ZOOM_TITLE"];?></strong><br><ul>
   <li><?php echo $str["DETSCRN_TOOLS_ZOOM_COMMENT"];?></li>
   <li><?php echo $str["DETSCRN_TOOLS_ZOOM_COMMENT_2"];?></li>
   <li><?php echo $str["DETSCRN_TOOLS_ZOOM_COMMENT_3"];?></li>
@@ -588,15 +588,15 @@ if($gd)
 {
 ?>
 
-&nbsp;<a href="#"><img src="style/img/gamma_min.png" width="32" height="32" alt="" border="0" class="gamma_min hover"></a><div class="tooltip"><?php echo $str["DETSCRN_TOOLS_GAMMA_PLUS"];?></div>
-&nbsp;<a href="#"><img src="style/img/gamma_plus.png" width="32" height="32" alt="" border="0" class="gamma_plus hover"></a><div class="tooltip"><?php echo $str["DETSCRN_TOOLS_GAMMA_MIN"];?></div>
-&nbsp;<a href="#"><img src="style/img/negative.png" width="32" height="32" alt="" border="0" class="negative hover"></a><div class="tooltip"><?php echo $str["DETSCRN_TOOLS_GAMMA_NEGATIVE"];?></div>
+&nbsp;<a href="#"><img src="inc/themes/<?php echo THEME_DIR;?>/img/gamma_min.png" width="32" height="32" alt="" border="0" class="gamma_min hover"></a><div class="tooltip"><?php echo $str["DETSCRN_TOOLS_GAMMA_PLUS"];?></div>
+&nbsp;<a href="#"><img src="inc/themes/<?php echo THEME_DIR;?>/img/gamma_plus.png" width="32" height="32" alt="" border="0" class="gamma_plus hover"></a><div class="tooltip"><?php echo $str["DETSCRN_TOOLS_GAMMA_MIN"];?></div>
+&nbsp;<a href="#"><img src="inc/themes/<?php echo THEME_DIR;?>/img/negative.png" width="32" height="32" alt="" border="0" class="negative hover"></a><div class="tooltip"><?php echo $str["DETSCRN_TOOLS_GAMMA_NEGATIVE"];?></div>
 <?php
 }
 
   if ($pnfids[1]!='') 
   {
-  	echo "<a href=\"./?fid=".$pnfids[1]."\"><img src=\"style/img/next.png\" width=\"32\" height=\"32\" border=\"0\" alt=\"".$str["DETSCRN_TOOLS_NEXT_COMMENT"]."\" class=\"hover\"></a><div class=\"tooltip\">".$str["DETSCRN_TOOLS_NEXT_COMMENT"]."</div>"; 
+  	echo "<a href=\"./?fid=".$pnfids[1]."\"><img src=\"inc/themes/".THEME_DIR."/img/next.png\" width=\"32\" height=\"32\" border=\"0\" alt=\"".$str["DETSCRN_TOOLS_NEXT_COMMENT"]."\" class=\"hover\"></a><div class=\"tooltip\">".$str["DETSCRN_TOOLS_NEXT_COMMENT"]."</div>"; 
   }
 ?>
 
@@ -1208,11 +1208,11 @@ function template_footer($update_time,$lastUpdate,$startTime,$page_nr=1,$nr_resu
       
         <p>
     <a href="http://validator.w3.org/check?uri=referer" target="_blank"><img
-        src="style/img/valid-html401-blue.png"
+        src="inc/themes/<?php echo THEME_DIR;?>/img/valid-html401-blue.png"
         alt="Valid HTML 4.01 Transitional" height="31" width="88" border="0"></a>
-      <a href="http://www.gnu.org/copyleft/gpl.html" target="_blank"><img src="style/img/gplv3-88x31.png" alt="Small GPLv3 logo" width="88" height="31" border="0"></a>
+      <a href="http://www.gnu.org/copyleft/gpl.html" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/gplv3-88x31.png" alt="Small GPLv3 logo" width="88" height="31" border="0"></a>
       <a href="https://code.google.com/p/pbsviewer/" target="_blank"><img
-        src="style/img/google_code_project_hosting.gif"
+        src="inc/themes/<?php echo THEME_DIR;?>/img/google_code_project_hosting.gif"
         alt="Google Code project hosting" height="34" width="34" border="0"></a>
       </p>
       <p>
@@ -1265,8 +1265,8 @@ function template_login()
 <meta name="revisit-after" content="7">
 <title>Punkbuster (PB) Screenshot Viewer (PBSViewer) - Login</title>
 
-<link href="style/style.css" rel="stylesheet" type="text/css">
-<link rel="shortcut icon" href="style/img/favicon.ico"> 
+<link href="inc/themes/<?php echo THEME_DIR;?>/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="inc/themes/<?php echo THEME_DIR;?>/img/favicon.ico"> 
 </head>
 
 <body>
@@ -1281,7 +1281,7 @@ function template_login()
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
@@ -1351,8 +1351,8 @@ function template_reset_password()
 <meta name="revisit-after" content="7">
 <title>Punkbuster (PB) Screenshot Viewer (PBSViewer) - Login</title>
 
-<link href="style/style.css" rel="stylesheet" type="text/css">
-<link rel="shortcut icon" href="style/img/favicon.ico"> 
+<link href="inc/themes/<?php echo THEME_DIR;?>/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="inc/themes/<?php echo THEME_DIR;?>/img/favicon.ico"> 
 </head>
 
 <body>
@@ -1367,7 +1367,7 @@ function template_reset_password()
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
@@ -1421,8 +1421,8 @@ function template_reset_invalid_mail()
 <meta name="revisit-after" content="7">
 <title>Punkbuster (PB) Screenshot Viewer (PBSViewer) - Login</title>
 
-<link href="style/style.css" rel="stylesheet" type="text/css">
-<link rel="shortcut icon" href="style/img/favicon.ico"> 
+<link href="inc/themes/<?php echo THEME_DIR;?>/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="inc/themes/<?php echo THEME_DIR;?>/img/favicon.ico"> 
 </head>
 
 <body>
@@ -1437,7 +1437,7 @@ function template_reset_invalid_mail()
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
@@ -1483,8 +1483,8 @@ function template_reset_correct_mail($mail)
 <meta name="revisit-after" content="7">
 <title>Punkbuster (PB) Screenshot Viewer (PBSViewer) - Login</title>
 
-<link href="style/style.css" rel="stylesheet" type="text/css">
-<link rel="shortcut icon" href="style/img/favicon.ico"> 
+<link href="inc/themes/<?php echo THEME_DIR;?>/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="inc/themes/<?php echo THEME_DIR;?>/img/favicon.ico"> 
 </head>
 
 <body>
@@ -1499,7 +1499,7 @@ function template_reset_correct_mail($mail)
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
@@ -1544,8 +1544,8 @@ function template_reset_password_succesfully($user,$password)
 <meta name="revisit-after" content="7">
 <title>Punkbuster (PB) Screenshot Viewer (PBSViewer) - Login</title>
 
-<link href="style/style.css" rel="stylesheet" type="text/css">
-<link rel="shortcut icon" href="style/img/favicon.ico"> 
+<link href="inc/themes/<?php echo THEME_DIR;?>/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="inc/themes/<?php echo THEME_DIR;?>/img/favicon.ico"> 
 </head>
 
 <body>
@@ -1560,7 +1560,7 @@ function template_reset_password_succesfully($user,$password)
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
@@ -1609,8 +1609,8 @@ function template_login_failed()
 <meta name="revisit-after" content="7">
 <title>Punkbuster (PB) Screenshot Viewer (PBSViewer) - Login</title>
 
-<link href="style/style.css" rel="stylesheet" type="text/css">
-<link rel="shortcut icon" href="style/img/favicon.ico"> 
+<link href="inc/themes/<?php echo THEME_DIR;?>/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="inc/themes/<?php echo THEME_DIR;?>/img/favicon.ico"> 
 </head>
 
 <body>
@@ -1625,7 +1625,7 @@ function template_login_failed()
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
@@ -1674,8 +1674,8 @@ function template_login_visitor_failed()
 <meta name="revisit-after" content="7">
 <title>Punkbuster (PB) Screenshot Viewer (PBSViewer)</title>
 
-<link href="style/style.css" rel="stylesheet" type="text/css">
-<link rel="shortcut icon" href="style/img/favicon.ico"> 
+<link href="inc/themes/<?php echo THEME_DIR;?>/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="inc/themes/<?php echo THEME_DIR;?>/img/favicon.ico"> 
 </head>
 
 <body>
@@ -1690,7 +1690,7 @@ function template_login_visitor_failed()
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
@@ -1738,8 +1738,8 @@ function template_login_success()
 <meta name="revisit-after" content="7">
 <title>Punkbuster (PB) Screenshot Viewer (PBSViewer) - Login</title>
 
-<link href="style/style.css" rel="stylesheet" type="text/css">
-<link rel="shortcut icon" href="style/img/favicon.ico"> 
+<link href="inc/themes/<?php echo THEME_DIR;?>/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="inc/themes/<?php echo THEME_DIR;?>/img/favicon.ico"> 
 
 <meta http-equiv="refresh" content="5;URL=./" />
 
@@ -1757,7 +1757,7 @@ function template_login_success()
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
@@ -1807,8 +1807,8 @@ function template_logout_success()
 <meta name="revisit-after" content="7">
 <title>Punkbuster (PB) Screenshot Viewer (PBSViewer) - Login</title>
 
-<link href="style/style.css" rel="stylesheet" type="text/css">
-<link rel="shortcut icon" href="style/img/favicon.ico"> 
+<link href="inc/themes/<?php echo THEME_DIR;?>/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="inc/themes/<?php echo THEME_DIR;?>/img/favicon.ico"> 
 
 <meta http-equiv="refresh" content="5;URL=./" />
 
@@ -1826,7 +1826,7 @@ function template_logout_success()
 <br>
 		<table width="60%" border="0" align="center">
 		  <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
@@ -1910,8 +1910,8 @@ function template_denied_no_perm()
 <meta name="revisit-after" content="7">
 <title>Punkbuster (PB) Screenshot Viewer (PBSViewer)</title>
 
-<link href="style/style.css" rel="stylesheet" type="text/css">
-<link rel="shortcut icon" href="style/img/favicon.ico"> 
+<link href="inc/themes/<?php echo THEME_DIR;?>/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="inc/themes/<?php echo THEME_DIR;?>/img/favicon.ico"> 
 </head>
 
 <body>
@@ -1926,7 +1926,7 @@ function template_denied_no_perm()
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
@@ -1977,8 +1977,8 @@ function template_denied_private()
 <meta name="revisit-after" content="7">
 <title>Punkbuster (PB) Screenshot Viewer (PBSViewer) - Private</title>
 
-<link href="style/style.css" rel="stylesheet" type="text/css">
-<link rel="shortcut icon" href="style/img/favicon.ico">
+<link href="inc/themes/<?php echo THEME_DIR;?>/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="inc/themes/<?php echo THEME_DIR;?>/img/favicon.ico">
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script> 
 </head>
 
@@ -2007,7 +2007,7 @@ $(document).ready(function()
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
@@ -2069,8 +2069,8 @@ function template_denied()
 <meta name="revisit-after" content="7">
 <title>Punkbuster (PB) Screenshot Viewer (PBSViewer)</title>
 
-<link href="style/style.css" rel="stylesheet" type="text/css">
-<link rel="shortcut icon" href="style/img/favicon.ico"> 
+<link href="inc/themes/<?php echo THEME_DIR;?>/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="inc/themes/<?php echo THEME_DIR;?>/img/favicon.ico"> 
 </head>
 
 <body>
@@ -2085,7 +2085,7 @@ function template_denied()
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
