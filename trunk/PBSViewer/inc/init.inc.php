@@ -53,6 +53,7 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 	$pbsv_download_dir			= '';
 	$reset						= 1;
 	$pbsvss_updater				= 1;
+	$incremental_update			= 0;
 	$pb_log						= 1;
 	$auto_del_count 			= -1;
 	$auto_del_log_gameserver	= 0;
@@ -198,6 +199,27 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 		{
 			$auto_del_log_gameserver = $row->value;
 		}
+		elseif ($row->name=='incremental_update')
+		{
+			$incremental_update = $row->value;
+		}
+		elseif ($row->name=='iu_nr_screens')
+		{
+			$iu_nr_screens = $row->value;
+		}
+		elseif ($row->name=='iu_nr_logs')
+		{
+			$iu_nr_logs = $row->value;
+		}
+		elseif ($row->name=='iu_update_time')
+		{
+			$iu_update_time = $row->value;
+		}
+		elseif ($row->name=='iu_wait_time')
+		{
+			$iu_wait_time = $row->value;
+		}
+		
 	}
 	
 	//---------------------]	REQUIRED	[---------------------\ 
@@ -307,6 +329,21 @@ if($key==md5($_SERVER['SERVER_SIGNATURE'].' '.php_uname()))
 	{
 	define('pbsvss_updater',false);								//	Default=false. pb keeps logging screenshots data to pbsvss.htm, it places the newest entries at the end of this file. However pb does not remove old data, so this file will keep on growing in size. If you choose true, then old entries will be removed. This will keep the filesize at a constant size.
 	}
+	
+	if ($incremental_update==1)
+	{
+	define('INCREMENTAL_UPDATE',true);							//	Default=false. It is possible to perform incremental update, i.e. PBSViewer will update step by step
+	}
+	else 
+	{
+	define('INCREMENTAL_UPDATE',false);							//	Default=false. It is possible to perform incremental update, i.e. PBSViewer will update step by step
+	}
+	
+	define('IU_NR_SCREENS',$iu_nr_screens);						//	number of screens that needs to be downloaded before another update cycle starts
+	define('IU_NR_LOGS',$iu_nr_logs);							//	number of logs that needs to be downloaded before another update cycle starts
+	define('IU_UPDATE_TIME',$iu_update_time);					//	Maximum time of each update cycle
+	define('IU_WAIT_TIME',$iu_wait_time);						//	time to wait before another update cycle is being started
+	
 		
 	//	script load time (optional)
 	define('script_load_time',$script_load_time);				//	Default=600 seconds or 10 minutes, after 600 Maximum execution time error will be shown.

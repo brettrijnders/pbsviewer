@@ -35,7 +35,7 @@ require_once('../inc/config.inc.php');
 
 //	old and new versions
 $version_old = "2.2.0.4";
-$version_new = "2.2.0.5";
+$version_new = "2.2.1.0";
 
 //	connect with db
 connect_DB();
@@ -71,8 +71,7 @@ function do_update($version_new)
 	{	
 		$sql_update = "UPDATE `settings` SET `value`='".$version_new."' WHERE `name`='version'";
 		mysql_query($sql_update) or die(mysql_error());
-	}
-	
+	}	
 	
 	if(mysql_num_rows(mysql_query("SELECT `name`,`value` FROM `settings` WHERE `name`='svss_dir'"))==0)
 	{
@@ -90,14 +89,73 @@ function do_update($version_new)
 	{	
 		$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('auto_del_log_gameserver','0');";
 		mysql_query($sql_insert) or die(mysql_error());
-	}	
+	}
+
+	if(mysql_num_rows(mysql_query("SELECT `name`,`value` FROM `settings` WHERE `name`='incremental_update'"))==0)
+	{	
+		$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('incremental_update','0');";
+		mysql_query($sql_insert) or die(mysql_error());
+	}
+	
+	if(mysql_num_rows(mysql_query("SELECT `name`,`value` FROM `settings` WHERE `name`='iu_nr_screens'"))==0)
+	{	
+		$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('iu_nr_screens','20');";
+		mysql_query($sql_insert) or die(mysql_error());
+	}
+
+	if(mysql_num_rows(mysql_query("SELECT `name`,`value` FROM `settings` WHERE `name`='iu_nr_logs'"))==0)
+	{	
+		$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('iu_nr_logs','2');";
+		mysql_query($sql_insert) or die(mysql_error());
+	}
+	
+	if(mysql_num_rows(mysql_query("SELECT `name`,`value` FROM `settings` WHERE `name`='iu_update_time'"))==0)
+	{	
+		$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('iu_update_time','30');";
+		mysql_query($sql_insert) or die(mysql_error());
+	}
+	
+	if(mysql_num_rows(mysql_query("SELECT `name`,`value` FROM `settings` WHERE `name`='iu_wait_time'"))==0)
+	{	
+		$sql_insert = "INSERT INTO `settings` (`name`,`value`) VALUES ('iu_wait_time','3');";
+		mysql_query($sql_insert) or die(mysql_error());
+	}
+	
+	if(!table_exists('dfiles'))
+	{
+		$sql_create = "CREATE TABLE `dfiles`
+(
+`id` INT(8) NOT NULL AUTO_INCREMENT,
+`file` TEXT NOT NULL,
+`type` INT(1),
+PRIMARY KEY(`id`)
+);";
+		
+		mysql_query($sql_create);
+	}
+
+}
+
+function table_exists ($table) 
+{
+	$sql = mysql_query("SHOW TABLES LIKE \"".$table."\"");
+	if (mysql_num_rows($sql)>0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 //	check if pbsviewer is being updated or not
 function needs_update($version_new)
 {
-	if($version_current = get_current_version()!=0)
-	{
+	$version_current = get_current_version();
+	
+	if($version_current!=0)
+	{		
 		if($version_current==$version_new)
 		{
 			//	pbsviewer does not need an update
