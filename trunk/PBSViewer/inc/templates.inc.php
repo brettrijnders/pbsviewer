@@ -1216,7 +1216,7 @@ function template_footer($update_time,$lastUpdate,$startTime,$page_nr=1,$nr_resu
         alt="Google Code project hosting" height="34" width="34" border="0"></a>
       </p>
       <p>
-  <iframe src="http://www.facebook.com/plugins/like.php?app_id=250036168353254&amp;href=http%3A%2F%2Fcode.google.com%2Fp%2Fpbsviewer%2F&amp;send=false&amp;layout=box_count&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font=tahoma&amp;height=90" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:50px; height:60px;" allowTransparency="true"></iframe>
+  <iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FPBSViewer&amp;send=false&amp;layout=box_count&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font=tahoma&amp;height=90" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:50px; height:60px;" allowTransparency="true"></iframe>
   <g:plusone size="tall" href="http://code.google.com/p/pbsviewer/"></g:plusone>
   </p>
     </td>
