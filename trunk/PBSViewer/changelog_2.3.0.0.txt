@@ -1,6 +1,7 @@
-Changelog 2.2.1.0:
+Changelog 2.3.0.0:
 ------------------------------------
 
+- Added Light theme
 - Implemented issue 12, users can now easily change theme in ACP.
 - Added incremental update feature, see issue 44.
 - Added function 'print_array_short(...)', this function shows only a limited amount of array values. It does something similar as print_r(...).

@@ -31,7 +31,7 @@ session_start();
 $step = isset( $_GET['step'] ) ? $_GET['step'] : 0;
 
 //	version number
-$version_new = "2.2.0.5";
+$version_new = "2.3.0.0";
 
 switch($step)
 {
