@@ -73,14 +73,14 @@ if($update==true)
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title><?php echo $str["UPD8_TITLE"];?></title>
-<link href="style/style.css" rel="stylesheet" type="text/css">
-<link rel="shortcut icon" href="style/img/favicon.ico"> 
+<link href="inc/themes/<?php echo THEME_DIR;?>/style.css" rel="stylesheet" type="text/css">
+<link rel="shortcut icon" href="inc/themes/<?php echo THEME_DIR;?>/img/favicon.ico"> 
 </head>
 
 <body>
 		<table width="100%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a></td>
+    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a></td>
   </tr>
 </table>
 <br>
@@ -125,14 +125,14 @@ elseif (is_cron_user($cronkey)==true)
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title><?php echo $str["UPD8_TITLE"];?></title>
-	<link href="style/style.css" rel="stylesheet" type="text/css">
-	<link rel="shortcut icon" href="style/img/favicon.ico"> 
+	<link href="inc/themes/<?php echo THEME_DIR;?>/style.css" rel="stylesheet" type="text/css">
+	<link rel="shortcut icon" href="inc/themes/<?php echo THEME_DIR;?>/img/favicon.ico"> 
 	</head>
 	
 	<body>
 			<table width="100%" border="0" align="center">
 	  <tr>
-	    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="style/img/header.png" alt="free php script" width="400" height="100" border="0"></a></td>
+	    <td align="center"><a href="http://www.beesar.com/work/php/pbsviewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a></td>
 	  </tr>
 	</table>
 	<br>
