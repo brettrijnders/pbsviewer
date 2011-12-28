@@ -35,7 +35,7 @@ require_once('../inc/config.inc.php');
 
 //	old and new versions
 $version_old = "2.2.0.4";
-$version_new = "2.2.1.0";
+$version_new = "2.3.0.0";
 
 //	connect with db
 connect_DB();
