@@ -1,0 +1,228 @@
+/*
+    This program 'PBSViewer' also known as Punkbuster Screenshot Viewer, 
+    will download pb screens. Those downloaded screens are published on
+    your website.
+    
+    Copyright (C) 2009  B.S. Rijnders aka BandAhr
+
+    PBSViewer is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    PBSViewer is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with PBSViewer.  If not, see <http://www.gnu.org/licenses/>.
+    
+    ____________________
+    contact information:
+    --------------------
+    mail:		brettrijnders@gmail.com
+    website:	http://www.beesar.com       
+*/
+
+body,td,th {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #1d1d1d;
+}
+body {
+	background-color: #f7f7f7;
+	background-repeat: no-repeat;
+}
+a:link {
+	color: #00245a;
+	font-weight:bold;
+	text-decoration: underline;
+}
+a:visited {
+	text-decoration: underline;
+	color: #747474;
+}
+a:hover {
+	text-decoration: none;
+	color: #006caa;
+}
+a:active {
+	text-decoration: underline;
+	color: #FFFF00;
+}
+
+/* table styles */
+
+.header_main_bg
+{background-color:#f1efef;}
+
+.header_menu_bg
+{background-color:#e2e2e2;}
+
+.header_menu_bg_admin
+{background-color:#ebeaea;}
+
+.txt_admin_message
+{color:#FF0000;
+text-decoration:blink;}
+
+.bg_main_table
+{background-color:#f4f4f4;}
+
+.footer_main_bg_1
+{background-color:#f1f0f0;}
+
+.footer_main_bg_1_row_1
+{background-color:#e4e2e2;}
+
+.footer_main_bg_1_row_2
+{background-color:#e0e0e0;}
+
+.footer_main_bg_2
+{background-color:#EBEAEA;}
+
+.bg_new_version
+{background-color:#dddcdc;}
+
+.bg_install_del_warning
+{background-color:#dddcdc;}
+
+
+
+/* txt styles */
+.txt_light
+{color:#393939;}
+
+.txt_warning
+{color: #FF0000; background-color:#F4F4F4;}
+
+/* form */
+.search_field_bg
+{background-color: #EAEAEA;}
+
+.search_field_hover
+{background-color: #F9F9F9;}
+
+.option_search_bg
+{background-color: #F9F9F9; border:thin;}
+
+.option_search_hover
+{background-color: #EAEAEA; border:thin;}
+
+.option_fields_bg_1
+{background-color: #D8D8D8;}
+
+.option_fields_bg_2
+{background-color: #CACACA;}
+
+.buttons
+{background-color: #dadada; border:thin;}
+
+.req_button
+{background-color: #C5C5C5; border:thin;}
+
+.buttons_hover
+{background-color: #F2F2F2; border:thin;}
+
+/*style for info about gathered screens*/
+
+.header_info_screen_row1
+{background-color: #EBEAEA;}
+
+.header_info_screen_row2
+{background-color: #e2e2e2;}
+
+.header_info_screen_bg
+{background-color:#e8e8e8;}
+
+.tooltip {
+	display:none;
+	background-color: #FFF;
+	border:double;
+	border-color:#09F;
+	font-size:11px;
+	color: #000;
+	padding: 5px;
+	text-align:left;
+  	-moz-box-shadow: 2px 2px 11px #666;
+	-webkit-box-shadow: 2px 2px 11px #666;
+
+}
+
+/* error style */
+.header_error_bg
+{background-color:#EBEAEA;}
+
+.header_error_txt
+{color:#ff0000;}
+
+.body_error_bg
+{background-color:#dfdddd;}
+
+/* custom msg */
+.header_msg_bg
+{background-color:#d3d3d3;}
+
+.header_msg_txt
+{color:#ff0000;}
+
+.body_msg_bg
+{background-color:#dfdddd;}
+
+/* detailed screen styles */
+.bg_detailed_screen_tools
+{background-color:#bdbdbd;}
+
+.body_bg_detailed_screen
+{background-color:#e2e2e2;}
+
+.first_row_detailed_screen
+{background-color:#F3F3F3;}
+
+.second_row_detailed_screen
+{background-color:#E2E2E2;}
+
+.bg_detailed_screen_back_table
+{background-color:#CCCCCC;}
+
+/* style for update page*/
+.bg_update_table_row1
+{background-color:#e2e2e2;}
+
+.bg_update_table_row2
+{background-color:#f4f4f4;}
+
+.bg_update_table_row3
+{background-color:#cecece;}
+
+/* style for reset page*/
+.bg_reset_table_row1
+{background-color:#e2e2e2;}
+
+.bg_reset_table_row2
+{background-color:#f4f4f4;}
+
+.bg_reset_table_row3
+{background-color:#cecece;}
+
+.txt_reset_warning
+{color:#F00;}
+
+
+.md5_valid
+{
+	color:#00CC00;
+}
+
+.md5_mismatch
+{
+	color:#FF0000;
+}
+
+.md5_mismatch_border
+{
+   padding:1px;
+   border:4px solid #F00;
+
+}
