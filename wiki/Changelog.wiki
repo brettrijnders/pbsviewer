@@ -3,6 +3,20 @@
 
 =Changelog=
 
+==Changelog 2.3.0.0==
+    * Created official fb page: http://www.facebook.com/PBSViewer.
+    * Added Light theme.
+    * Implemented issue 12, users can now easily change theme in ACP.
+    * Added incremental update feature, see issue 44.
+    * Added function 'print_array_short(...)', this function shows only a limited amount of array values. It does something similar as print_r(...).
+    * Added ACP option to automatically delete log files from the gameserver when logging feature is used, see issue 43.
+    * Implemented ACP option to change pb screenshot and pb log directory names, see issue 41.
+    * Added an update script, user don't need to do a full reinstall anymore in order to update to a newer version.
+    * Added more detailed debug messages.
+    * Bug fix: PBSViewer now correctly parses the guids and ip addresses using the log files. The bug is caused due to the fact that some game servers do not specify if a guid is valid or invalid.
+    * Bug fix: replaced ftp_nlist with a custom function in order to retrieve files. Thank you Damjan Nemarnik for providing me access to your servers for testing.
+    * Bug fix: reset functionality kept giving error "seems to be the wrong directory, did not delete any files". Thank you Douglas Carr for pointing this out.
+
 ==Changelog 2.2.0.4==
 
     * Added a Facebook like button.
