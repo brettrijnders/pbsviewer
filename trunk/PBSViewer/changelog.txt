@@ -1,6 +1,10 @@
 Changelog:
 ====================
 
+2.3.0.1
+----------
+- Added a new theme 'RD-Aarmy' created by Mario Vranckx.
+
 2.3.0.0
 ----------
 - Created official fb page: http://www.facebook.com/PBSViewer.
