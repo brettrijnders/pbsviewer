@@ -1837,14 +1837,14 @@ function write_config($data)
 function check_db_connection($DB_HOST,$DB_USER,$DB_PASS,$DB_NAME)
 {
 	$error	=	array('','');
-	if($connect	=	@mysql_connect($DB_HOST,$DB_USER,$DB_PASS))
+	if($connect	=	mysql_connect($DB_HOST,$DB_USER,$DB_PASS))
 	{$connection1=true;}
 	else
 	{
 		$connection1=false;
 	}
 
-	if(@mysql_select_db($DB_NAME,$connect))
+	if(mysql_select_db($DB_NAME,$connect))
 	{$connection2=true;}
 	else
 	{
