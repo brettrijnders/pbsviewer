@@ -4,6 +4,7 @@ Changelog:
 2.3.0.1
 ----------
 - Added a new theme 'RD-Aarmy' created by Mario Vranckx.
+- Small fix: file listing now also works correctly when blank spaces are used on ftp gameserver. Problem often occurs in windows environment.
 
 2.3.0.0
 ----------
