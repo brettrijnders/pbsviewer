@@ -81,6 +81,7 @@ function get_file_list($connect,$dir)
 	$pwd	=	ftp_pwd($connect);
 	
 	$fileListStatus = false;
+	$fileList = '';
 		
 	if(DEBUG==true) 
 	{
@@ -88,11 +89,12 @@ function get_file_list($connect,$dir)
 		echo date('H:i:s] ')."<li>Current working directory: ".$pwd."</li><br>";
 		echo date('H:i:s] ')."<li>Trying to get a list of files</li><br>";  
 	}
-		
+
+	//	Method 1
 	//	get list of files in current working dir
 	if ($fileListStatus==false)
-	{
-		if(($fileList	=	ftp_nlist($connect,'.'))=='')
+	{		
+		if(($fileList	=	ftp_nlist($connect,'.'))=='' || count(ftp_nlist($connect,'.'))==0)
 		{
 			if(DEBUG==true)
 			{
@@ -104,11 +106,16 @@ function get_file_list($connect,$dir)
 	//	check if there are any files in the $fileList 
 	is_valid_fileList($fileList) ? $fileListStatus=true : $fileListStatus=false;
 
-	
+	//	Method 2
 	//	get list of files (on some systems the . or .. symbols are not working)
 	if ($fileListStatus==false)
 	{
-		if(($fileList	=	ftp_nlist($connect,'-la'))=='')
+		if(DEBUG==true)
+		{
+			echo date('H:i:s] ')."<li>Using method 2</li><br>"; 
+		}
+		
+		if(($fileList	=	ftp_nlist($connect,'-la'))=='' || count(ftp_nlist($connect,'-la'))==0)
 		{
 			if(DEBUG==true)
 			{
@@ -120,11 +127,16 @@ function get_file_list($connect,$dir)
 	//	check if there are any files in the $fileList 
 	is_valid_fileList($fileList) ? $fileListStatus=true : $fileListStatus=false;
 
-	
+	//	Method 3
 	//	get list of files
 	if ($fileListStatus==false)
 	{
-		if (($fileList	=	ftp_nlist($connect,$dir))=='')
+		if(DEBUG==true)
+		{
+			echo date('H:i:s] ')."<li>Using method 3</li><br>"; 
+		}
+		
+		if (($fileList	=	ftp_nlist($connect,$dir))=='' || count(ftp_nlist($connect,$dir))==0)
 		{
 			if(DEBUG==true)
 			{
@@ -136,9 +148,15 @@ function get_file_list($connect,$dir)
 	//	check if there are any files in the $fileList 
 	is_valid_fileList($fileList) ? $fileListStatus=true : $fileListStatus=false;
 	
+	//	Method 4
 	if ($fileListStatus==false)
 	{
-		if (($fileList	=	ftp_nlist($connect,basename($dir)))=='')
+		if(DEBUG==true)
+		{
+			echo date('H:i:s] ')."<li>Using method 4</li><br>"; 
+		}
+		
+		if (($fileList	=	ftp_nlist($connect,basename($dir)))=='' || count(ftp_nlist($connect,basename($dir))==0))
 		{
 			if(DEBUG==true)
 			{
@@ -150,17 +168,23 @@ function get_file_list($connect,$dir)
 	//	check if there are any files in the $fileList 
 	is_valid_fileList($fileList) ? $fileListStatus=true : $fileListStatus=false;
 
+	//	Method 5
 	//	if still no data available
 	if($fileListStatus==false)
 	{
+		if(DEBUG==true)
+		{
+			echo date('H:i:s] ')."<li>Using method 5</li><br>"; 
+		}
+		
 		//	if changing to root dir went succesfully
 		if(ftp_chroot_dir($connect))
 		{
-			if(($fileList	=	ftp_nlist($connect,PBDIR.'/'.$dir))=='')
+			if(($fileList	=	ftp_nlist($connect,PBDIR.'/'.$dir))=='' || count(ftp_nlist($connect,PBDIR.'/'.$dir)==0))
 			{
 				if(DEBUG==true)
 				{
-					echo date('H:i:s] ')."<li>Could not get file list using current working directory</li><br>"; 
+					echo date('H:i:s] ')."<li>Could not get file list using current working directory, trying another method (6)</li><br>"; 
 				}
 			}
 		}
@@ -168,7 +192,48 @@ function get_file_list($connect,$dir)
 	
 	//	check if there are any files in the $fileList 
 	is_valid_fileList($fileList) ? $fileListStatus=true : $fileListStatus=false;
-
+	
+	//	Method 6
+	//	if still no data available try changing directory (windows servers have problems when blank spaces are used)
+	if($fileListStatus==false)
+	{
+		if(DEBUG==true)
+		{
+			echo date('H:i:s] ')."<li>Using method 6</li><br>"; 
+			echo date('H:i:s] ')."<li>Trying to change to dir: ".$dir."</li><br>"; 
+		}
+		
+		//	if changing to root dir went succesfully
+		if((ftp_chdir($connect,$dir)))
+		{
+			if(DEBUG==true)
+			{
+				echo date('H:i:s] ')."<li>Changed directory to: ".$dir."</li><br>"; 
+			}
+			
+			ftp_chdir($connect,$dir);
+			$fileList = ftp_nlist($connect, "");
+			
+			if(($fileList=='' || count($fileList)==0))
+			{
+				if(DEBUG==true)
+				{
+					echo date('H:i:s] ')."<li>Could not get file list by changing to dir: ".$dir."</li><br>"; 
+				}
+			}
+		}
+		else 
+		{
+			if(DEBUG==true)
+			{
+				echo date('H:i:s] ')."<li>Could not change to dir: ".$dir."</li><br>"; 
+			}
+		}			
+		
+	}
+	
+	//	check if there are any files in the $fileList 
+	is_valid_fileList($fileList) ? $fileListStatus=true : $fileListStatus=false;
 	
 	if($fileList!='' && $fileListStatus==true)
 	{
@@ -187,7 +252,10 @@ function get_file_list($connect,$dir)
 	{
 		if(DEBUG==true)
 		{
-			echo date('H:i:s] ')."<li>Not able to generate a file list, maybe the directory is just empty?</li><br>"; 
+			echo date('H:i:s] ')."<li>Not able to generate a file list, maybe the directory is just empty?</li><br>";
+			echo date('H:i:s] ')."<li>List of available files: "; 
+			print_array_short($fileList);
+			echo "</li><br>"; 
 		}
 		
 		return false;
@@ -2953,11 +3021,7 @@ function get_logs($connect,$login,$debug=false,$log=false,$incremental_update=fa
 {
 	if($log==true)
 	{
-		$dir	=	PBDIR.'/'.SVLOGS_DIR;
-
-		//$connect	=	ftp_connect(FTP_HOST,FTP_PORT,script_load_time);
-		//$login		=	ftp_login($connect,FTP_USER,FTP_PASS);
-
+		$pblogdir	=	PBDIR.'/'.SVLOGS_DIR;
 		
 		//	turn on passive mode if admin wants that
 		if(FTP_PASSIVE)
@@ -2965,10 +3029,6 @@ function get_logs($connect,$login,$debug=false,$log=false,$incremental_update=fa
 			// turn passive mode on
 			ftp_pasv($connect, true);
 		}
-		
-		//	change to log dir
-		ftp_cdup($connect);
-		ftp_chdir($connect,SVLOGS_DIR);
 
 		//	dir changed to
 		if($debug==true)	
@@ -2978,7 +3038,7 @@ function get_logs($connect,$login,$debug=false,$log=false,$incremental_update=fa
 		
 		//	new since 2.2.0.5
 		//	custom function is used instead of ftp_nlist
-		$fileList = get_file_list($connect,SVLOGS_DIR);	
+		$fileList = get_file_list($connect,$pblogdir);//,$pblogdir);	
 		
 		
 		//	incremental update feature: stop updating and do refresh and start downloading again, see issue 44
