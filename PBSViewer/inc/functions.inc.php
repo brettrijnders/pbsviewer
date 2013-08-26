@@ -270,6 +270,11 @@ function is_valid_fileList($fileList)
 {
 	$valid = false;
 	
+	if(DEBUG==true)
+	{
+		echo date('H:i:s] ')."<li> is_valid_fileList argument: ".print_array_short($fileList)."</li><br>";
+	}
+	
 	if($fileList!='' || count($fileList)!=0)
 	{
 		foreach ($fileList as $content)

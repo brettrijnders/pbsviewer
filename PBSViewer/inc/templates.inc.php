@@ -644,7 +644,7 @@ if($gd)
       ?>
        <tr>
         <td width="15%" align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_GGC"];?>:</strong></td>
-        <td align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo "<a href=\"http://www.ggc-stream.com/search/server/guid/gid/".$guid."\" target=\"_blank\">".$name."</a>";?></td>
+        <td align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>"><?php echo "<a href=\"http://www.ggc-stream.net/search/server/guid/gid/".$guid."\" target=\"_blank\">".$name."</a>";?></td>
       </tr>
       <?php
       if($alias)
@@ -785,7 +785,7 @@ if($gd)
       <tr>
         <td width="15%" align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';}?>"><strong><?php echo $str["DETSCRN_MORE_INFO"];?>:</strong></td>
         <td align="left" class="<?php if($row_nr %2 == 0) {echo 'first_row_detailed_screen';}else{echo'second_row_detailed_screen';} $row_nr++;?>">
-        <a href="http://www.google.com/#q=<?php echo $name.' '.CLAN_GAME;?>" target="_blank"><?php echo $str["DETSCRN_MORE_INFO_GOOGLE"];?></a> <a href="http://www.xfire.com/people_search/?q=<?php echo $name;?>" target="_blank"><?php echo $str["DETSCRN_MORE_INFO_XFIRE"];?></a>
+        <a href="http://www.google.com/#q=<?php echo $name.' '.CLAN_GAME;?>" target="_blank"><?php echo $str["DETSCRN_MORE_INFO_GOOGLE"];?></a>
         </td>
       </tr>
 
