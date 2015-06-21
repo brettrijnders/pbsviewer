@@ -1,25 +1,22 @@
 Here you will find Frequently Asked Questions (FAQ).
 
 # Install #
-  * [Why do you need my ftp login details during install?](FAQ#Why_do_you_need_my_ftp_login_details_during_install?.md)
-  * [What do I need to fill in for 'PB path'?](FAQ#What_do_I_need_to_fill_in_for_'PB_path'?.md)
-  * [What do you mean with CHMOD?](FAQ#What_do_you_mean_with_CHMOD?.md)
+  * [Why do you need my ftp login details during install?](FAQ.md#why-do-you-need-my-ftp-login-details-during-install)
+  * [What do I need to fill in for 'PB path'?](FAQ.md#what-do-i-need-to-fill-in-for-pb-path)
+  * [What do you mean with CHMOD?](FAQ.md#what-do-you-mean-with-chmod)
 
 # Usage #
-  * [After update the download folder is still empty, what is wrong?](FAQ#After_update_the_download_folder_is_still_empty,_what_is_wrong?.md)
-  * [Why are all pages are blank?](FAQ#Why_are_all_pages_are_blank?.md)
-  * [My update page ran for a while and timed out, what to do?](FAQ#My_update_page_ran_for_a_while_and_timed_out,_what_to_do?.md)
-  * [What is a cron job?](FAQ#What_is_a_cron_job?.md)
-  * [How can I update using a cron job?](FAQ#How_can_I_update_using_a_cron_job?.md)
+  * [After update the download folder is still empty, what is wrong?](FAQ.md#after-update-the-download-folder-is-still-empty-what-is-wrong)
+  * [Why are all pages are blank?](FAQ.md#why-are-all-pages-are-blank)
+  * [My update page ran for a while and timed out, what to do?](FAQ.md#my-update-page-ran-for-a-while-and-timed-out-what-to-do)
+  * [What is a cron job?](FAQ.md#what-is-a-cron-job)
+  * [How can I update using a cron job?](FAQ.md#how-can-i-update-using-a-cron-job)
 
 # Miscellaneous #
-  * [Who are you?](FAQ#Who_are_you?.md)
-  * [I can not find my answer, I need further help](FAQ#I_can_not_find_my_answer,_I_need_further_help.md)
-
-
+  * [Who are you?](FAQ.md#who-are-you)
+  * [I can not find my answer, I need further help](FAQ.md#i-can-not-find-my-answer-i-need-further-help)
 
 ---
-
 
 # Install #
 ### Why do you need my ftp login details during install? ###
