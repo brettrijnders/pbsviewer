@@ -1,6 +1,11 @@
 # PBSViewer 
 This program **‘PBSViewer’** also known as Punkbuster (pb) Screenshot Viewer will download [punkbuster](http://www.evenbalance.com/) screens from your gameserver. Those downloaded screens are published on your website. Next to this you can search for pb screens by name or guid.
 
+  * [See latest changes](../wiki/Changelog.md)
+  * [Frequently Asked Questions (FAQ)](../wiki/FAQ.md)
+  * [Request a new feature](../wiki/FeatureRequest.md)
+  * [Supported Games](../wiki/SupportedGames.md)
+
 # Downloads
 
 Use 'Featured downloads' to download the latest version.
