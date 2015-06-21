@@ -1,4 +1,4 @@
-On this page people are listed who have supported me. Those people helped me with testing, sending log files, made a donation or did something else. If you are not listed, please [contact me](http://code.google.com/p/pbsviewer/#Contact).
+On this page people are listed who have supported me. Those people helped me with testing, sending log files, made a donation or did something else. If you are not listed, please [contact me](http://www.brettrijnders.nl/contact/).
 
 
 ---
