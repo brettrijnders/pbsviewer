@@ -1,0 +1,15 @@
+This page is meant for project members and PR people. Below you will find a list of websites/fora where PBSViewer is being promoted. This list should be used to let people know when a new release is being published.
+
+  * [Game-Violations](http://game-violations.ggl.com/index.php?page=Thread&threadID=41573)
+  * [Punksbusted](http://www.punksbusted.com/forums/index.php?showtopic=62885)
+  * [PBBans](http://www.pbbans.com/forums/pbsviewer-php-script-t102406.html/page__p__273132__hl__pbsviewer__fromsearch__1#entry273132)
+  * [Battlefield Heroes Forum](http://www.battlefieldheroes.com/en/forum/showthread.php?tid=151795)
+  * [FPSadmin](http://www.fpsadmin.com/forum/showthread.php?t=20655)
+  * [Anti Cheat Inc](http://www.anticheatinc.net/forums/showthread.php?t=69161)
+  * [AmericasArmy Forum](http://forum.americasarmy.com/viewtopic.php?t=318091)
+  * [i3D forum](http://forum.i3d.net/show-off-spam/153965-pb-screenshot-viewer-pbsviewer-php-script.html)
+  * [Xfire forum](http://www.xfire.com/forums/182635/topic/2023193/)
+  * [Battletracker forum: Offtopic](http://battletracker.com/forum/other/offtopic-forum/200759-pb-screenshot-viewer-pbsviewer-php-script/)
+  * [Battletracker forum: Bad Company 2](http://battletracker.com/forum/bad-company-forums/bad-company-2-discussions/200763-pb-screenshot-viewer-pbsviewer-php-script/)
+  * [airdaleops forum](http://www.airdaleops.com/index.php?topic=55961.0)
+  * [unitedgamerscommunity (Gaming Clan)](http://www.unitedgamerscommunity.com/index.php?topic=50.0)
