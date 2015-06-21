@@ -13,11 +13,11 @@ The change log can also be found here: [changelog](../wiki/Changelog.md)
 
 # Demo
 You can see this script in action on the following site:
-http://brettrijnders.com/pbs_viewer/index.php
+http://brettrijnders.nl/pbs_viewer/index.php
 
 # Documentation
 Documentation on how to install this script can be found here:
-http://brettrijnders.com/pbs_viewer/readme.html
+http://brettrijnders.nl/pbs_viewer/readme.html
 
 # System recommendations
 
@@ -69,7 +69,7 @@ If you have more ideas or you want to request a feature then please go to the [F
 
 # Contributing
 
-So you want to help? Well there are several ways how you can help. First of all you can download and install PBSViewer and test it for your game. If your game is not listed here and it works, please tell me by leaving a comment or [contact me](http://www.beesar.com/contact/). In case it's not working and you have found a bug then please check the [issues page](https://github.com/brettrijnders/pbsviewer/issues). If you have a suggestion or you want to request a feature for next version then please go to [Feature request](../wiki/FeatureRequest.md) or go to the [issue page](https://github.com/brettrijnders/pbsviewer/issues) (for advanced users).
+So you want to help? Well there are several ways how you can help. First of all you can download and install PBSViewer and test it for your game. If your game is not listed here and it works, please tell me by leaving a comment or [contact me](http://www.brettrijnders.nl/contact/). In case it's not working and you have found a bug then please check the [issues page](https://github.com/brettrijnders/pbsviewer/issues). If you have a suggestion or you want to request a feature for next version then please go to [Feature request](../wiki/FeatureRequest.md) or go to the [issue page](https://github.com/brettrijnders/pbsviewer/issues) (for advanced users).
 
 At the moment I’m still looking for people who want to join this project and help me. There are a lot of things that can be done:
 
@@ -81,7 +81,7 @@ At the moment I’m still looking for people who want to join this project and h
   * Help with translation
   * PR: recruit for new members and make announcements on websites/fora about this beautiful program. Those announcements can be related to recruitment, new releases etc...
 
-If you want to help you can [contact me](http://www.beesar.com/contact/) (please use contact form) or leave a comment. Please mention what you want to do and mention your speciality/experience. If there is something you want to do but it is not mentioned in this list, please contact me and we can discuss it. Remember you are not only helping me but the whole gaming community!
+If you want to help you can [contact me](http://www.brettrijnders.nl/contact/) (please use contact form) or leave a comment. Please mention what you want to do and mention your speciality/experience. If there is something you want to do but it is not mentioned in this list, please contact me and we can discuss it. Remember you are not only helping me but the whole gaming community!
 
 ## Donate
 PBSViewer is free for everyone. I have put a lot of time in this project. If you want to help me, consider donating. Then I know for who I’m doing all this. It also keeps me motivated to bring out new updates for this tool. For donating please check my blog:
@@ -91,4 +91,4 @@ A list of the people who have helped me can be found on the [ThankYouList](../wi
 
 # Contact
 For contact details see the following link:
-http://www.beesar.com/contact/
+http://www.brettrijnders.nl/contact/
