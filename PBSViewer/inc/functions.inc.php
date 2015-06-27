@@ -23,7 +23,7 @@ ____________________
 contact information:
 --------------------
 mail:		brettrijnders@gmail.com
-website:	http://www.beesar.com
+website:	http://www.brettrijnders.nl
 
 */
 //	check if install is deleted
@@ -4659,7 +4659,7 @@ function check_version()
 {
 	$new=1;
 
-	$nfo_data	=	file('http://beesar.com/download/PBSViewer/nfo');
+	$nfo_data	=	file('http://brettrijnders.nl/download/PBSViewer/nfo');
 	$version	=	file('VERSION');
 	
 	if($nfo_data[2]!='')

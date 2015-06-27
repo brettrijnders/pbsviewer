@@ -23,7 +23,7 @@
     contact information:
     --------------------
     mail:		brettrijnders@gmail.com
-    website:	http://www.beesar.com       
+    website:	http://www.brettrijnders.nl       
 
 */
 
@@ -149,7 +149,7 @@ function template_logo_header()
 	
 		<table width="100%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a></td>
+    <td align="center"><a href="http://www.brettrijnders.nl/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a></td>
   </tr>
 </table>
 <br>
@@ -274,7 +274,7 @@ if(!is_CHMOD_755()) template_chmod_755();
 	
 	<table width="100%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a></td>
+    <td align="center"><a href="http://www.brettrijnders.nl/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a></td>
   </tr>
 </table>
 <br>
@@ -318,7 +318,7 @@ function template_new_version()
 		
 		<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="bg_new_version">
   <tr>
-    <td align="center"><strong>There is a new version available, check <a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><em>www.beesar.com</em></a> for more info! </strong></td>
+    <td align="center"><strong>There is a new version available, check <a href="http://www.brettrijnders.nl/work/php/pb-screenshot-viewer/" target="_blank"><em>www.brettrijnders.nl</em></a> for more info! </strong></td>
   </tr>
 </table>
 <br>
@@ -1025,20 +1025,20 @@ echo "</table>";
 function template_copyright()
 {
 	// this is used to gather copyright and version number information
-	$nfo_data	=	file('http://beesar.com/download/PBSViewer/nfo');
+	$nfo_data	=	file('http://brettrijnders.nl/download/PBSViewer/nfo');
 	$version	=	file('VERSION');
 	if($nfo_data[1]!='')
 	{
 		echo $nfo_data[1].'<br>';
 		echo 'V '.$version[0].' ';
-		echo 'Powered by <a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank">PBSViewer</a>';
+		echo 'Powered by <a href="http://www.brettrijnders.nl/work/php/pb-screenshot-viewer/" target="_blank">PBSViewer</a>';
 	}
 	// nfo data on beesar is not available
 	else
 	{
-		echo 'Copyright &copy; '.date('Y').', Brett S. Rijnders, <a href="http://www.beesar.com" target="_blank">www.beesar.com</a><br>';
+		echo 'Copyright &copy; '.date('Y').', Brett Rijnders, <a href="http://www.brettrijnders.nl" target="_blank">www.brettrijnders.nl</a><br>';
 		echo 'V '.$version[0].' ';
-		echo 'Powered by <a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank">PBSViewer</a>';
+		echo 'Powered by <a href="http://www.brettrijnders.nl/work/php/pb-screenshot-viewer/" target="_blank">PBSViewer</a>';
 	}
 
 }
@@ -1281,7 +1281,7 @@ function template_login()
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.brettrijnders.nl/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
@@ -1367,7 +1367,7 @@ function template_reset_password()
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.brettrijnders.nl/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
@@ -1437,7 +1437,7 @@ function template_reset_invalid_mail()
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.brettrijnders.nl/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
@@ -1499,7 +1499,7 @@ function template_reset_correct_mail($mail)
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.brettrijnders.nl/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
@@ -1560,7 +1560,7 @@ function template_reset_password_succesfully($user,$password)
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.brettrijnders.nl/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
@@ -1625,7 +1625,7 @@ function template_login_failed()
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.brettrijnders.nl/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
@@ -1690,7 +1690,7 @@ function template_login_visitor_failed()
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.brettrijnders.nl/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
@@ -1757,7 +1757,7 @@ function template_login_success()
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.brettrijnders.nl/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
@@ -1826,7 +1826,7 @@ function template_logout_success()
 <br>
 		<table width="60%" border="0" align="center">
 		  <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.brettrijnders.nl/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
@@ -1926,7 +1926,7 @@ function template_denied_no_perm()
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.brettrijnders.nl/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
@@ -2007,7 +2007,7 @@ $(document).ready(function()
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.brettrijnders.nl/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
@@ -2085,7 +2085,7 @@ function template_denied()
 <br>
 		<table width="60%" border="0" align="center">
   <tr>
-    <td align="center"><a href="http://www.beesar.com/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
+    <td align="center"><a href="http://www.brettrijnders.nl/work/php/pb-screenshot-viewer/" target="_blank"><img src="inc/themes/<?php echo THEME_DIR;?>/img/header.png" alt="free php script" width="400" height="100" border="0"></a><br>
 <br><br>
 <br></td>
   </tr>
