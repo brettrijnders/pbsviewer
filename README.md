@@ -12,7 +12,7 @@ You can see this script in action on the following site:
 http://brettrijnders.nl/pbs_viewer/index.php
 
 # Quick start
-* Download latest version here
+* [Download latest version here](https://github.com/brettrijnders/pbsviewer/archive/v2.3.0.1.zip)
 * Install documentation:
 http://brettrijnders.nl/pbs_viewer/readme.html
 * The change log is located here: [changelog](../wiki/Changelog.md)
