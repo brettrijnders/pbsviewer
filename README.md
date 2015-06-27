@@ -1,23 +1,21 @@
 # PBSViewer 
 This program **‘PBSViewer’** also known as Punkbuster (pb) Screenshot Viewer will download [punkbuster](http://www.evenbalance.com/) screens from your gameserver. Those downloaded screens are published on your website. Next to this you can search for pb screens by name or guid.
 
+# Table of contents
   * [See latest changes](../wiki/Changelog.md)
   * [Frequently Asked Questions (FAQ)](../wiki/FAQ.md)
   * [Request a new feature](../wiki/FeatureRequest.md)
   * [Supported Games](../wiki/SupportedGames.md)
 
-# Downloads
-
-Use 'Featured downloads' to download the latest version.
-The change log can also be found here: [changelog](../wiki/Changelog.md)
-
 # Demo
 You can see this script in action on the following site:
 http://brettrijnders.nl/pbs_viewer/index.php
 
-# Documentation
-Documentation on how to install this script can be found here:
+# Quick start
+* Download latest version here
+* Install documentation:
 http://brettrijnders.nl/pbs_viewer/readme.html
+* The change log is located here: [changelog](../wiki/Changelog.md)
 
 # System recommendations
 
@@ -92,3 +90,6 @@ A list of the people who have helped me can be found on the [ThankYouList](../wi
 # Contact
 For contact details see the following link:
 http://www.brettrijnders.nl/contact/
+
+# Copyright and license
+PBSViewer is developed by Brett Rijnders (http://www.brettrijnders.nl) and is released under the GPL licence ( see 'licence.txt').
