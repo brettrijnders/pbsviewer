@@ -1,5 +1,11 @@
 # Changelog #
 
+## Changelog 2.3.0.1 ##
+* Added a new theme 'RD-Aarmy' created by Mario Vranckx;
+* Small fix: file listing now also works correctly when blank spaces are used for the PB directory on the gameserver. Problem often occurs in windows environment;
+* Removed xfire link on detailed screen page;
+* Fixed GGC-stream link.
+
 ## Changelog 2.3.0.0 ##
   * Created official fb page: http://www.facebook.com/PBSViewer.
   * Added Light theme.
