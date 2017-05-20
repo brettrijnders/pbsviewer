@@ -1,15 +1,13 @@
-# PBSViewer 
+# PBSViewer (No longer maintained*)
 This program **‘PBSViewer’** also known as Punkbuster (pb) Screenshot Viewer will download [punkbuster](http://www.evenbalance.com/) screens from your gameserver. Those downloaded screens are published on your website. Next to this you can search for pb screens by name or guid.
+
+*Due to lack of time I decided to no longer maintain PBSViewer. I really enjoyed helping the gaming community and learned a lot! At the moment I'm working on several other projects, one of my favorite projects is www.playnow.gs, a game server hosting company.
 
 # Table of contents
   * [See latest changes](../wiki/Changelog.md)
   * [Frequently Asked Questions (FAQ)](../wiki/FAQ.md)
   * [Request a new feature](../wiki/FeatureRequest.md)
   * [Supported Games](../wiki/SupportedGames.md)
-
-# Demo
-You can see this script in action on the following site:
-http://brettrijnders.nl/pbs_viewer/index.php
 
 # Quick start
 * [Download latest version here](https://github.com/brettrijnders/pbsviewer/archive/v2.3.0.1.zip)
@@ -63,28 +61,7 @@ Here is a short overview of ideas for future development.
   - Bandwidth limiter to prevent that admin reach his/her limit of web hosting
   - History of player and screens
 
-If you have more ideas or you want to request a feature then please go to the [Feature Request page](../wiki/FeatureRequest.md) or go to the [issue page](https://github.com/brettrijnders/pbsviewer/issues) (for advanced users)
-
-# Contributing
-
-So you want to help? Well there are several ways how you can help. First of all you can download and install PBSViewer and test it for your game. If your game is not listed here and it works, please tell me by leaving a comment or [contact me](http://www.brettrijnders.nl/contact/). In case it's not working and you have found a bug then please check the [issues page](https://github.com/brettrijnders/pbsviewer/issues). If you have a suggestion or you want to request a feature for next version then please go to [Feature request](../wiki/FeatureRequest.md) or go to the [issue page](https://github.com/brettrijnders/pbsviewer/issues) (for advanced users).
-
-At the moment I’m still looking for people who want to join this project and help me. There are a lot of things that can be done:
-
-  * Testing PBSViewer for different games and environments
-  * Providing logs and screens, in short provide test data
-  * Work as developer and improve/add features
-  * Add new awesome graphics as artist
-  * Create documentation
-  * Help with translation
-  * PR: recruit for new members and make announcements on websites/fora about this beautiful program. Those announcements can be related to recruitment, new releases etc...
-
-If you want to help you can [contact me](http://www.brettrijnders.nl/contact/) (please use contact form) or leave a comment. Please mention what you want to do and mention your speciality/experience. If there is something you want to do but it is not mentioned in this list, please contact me and we can discuss it. Remember you are not only helping me but the whole gaming community!
-
-## Donate
-PBSViewer is free for everyone. I have put a lot of time in this project. If you want to help me, consider donating. Then I know for who I’m doing all this. It also keeps me motivated to bring out new updates for this tool. For donating please check my blog:
-http://www.brettrijnders.nl
-
+## Thank you
 A list of the people who have helped me can be found on the [ThankYouList](../wiki/ThankYouList.md) page.
 
 # Contact
