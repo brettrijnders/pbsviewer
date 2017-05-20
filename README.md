@@ -1,4 +1,4 @@
-# PBSViewer (No longer maintained*)
+# PBSViewer (No longer maintained)*
 This program **‘PBSViewer’** also known as Punkbuster (pb) Screenshot Viewer will download [punkbuster](http://www.evenbalance.com/) screens from your gameserver. Those downloaded screens are published on your website. Next to this you can search for pb screens by name or guid.
 
 *Due to lack of time I decided to no longer maintain PBSViewer. I really enjoyed helping the gaming community and learned a lot! At the moment I'm working on several other projects, one of my favorite projects is www.playnow.gs, a game server hosting company.
@@ -47,9 +47,6 @@ Probably it can also be used for other [punkbuster](http://www.evenbalance.com/)
   - Get aliases of player.
   - Easy installation script included.
   - Reset feature included to delete all screens and logs.
-
-# Ideas for future development
-Here is a short overview of ideas for future development.
 
 ## Install
   - Check for ss ceiling, read pbsv.cfg file during install
