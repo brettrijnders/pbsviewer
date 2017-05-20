@@ -11,8 +11,6 @@ This program **‘PBSViewer’** also known as Punkbuster (pb) Screenshot Viewer
 
 # Quick start
 * [Download latest version here](https://github.com/brettrijnders/pbsviewer/archive/v2.3.0.1.zip)
-* Install documentation:
-http://brettrijnders.nl/pbs_viewer/readme.html
 * The change log is located here: [changelog](../wiki/Changelog.md)
 
 # System recommendations
@@ -63,7 +61,7 @@ A list of the people who have helped me can be found on the [ThankYouList](../wi
 
 # Contact
 For contact details see the following link:
-http://www.brettrijnders.nl/contact/
+http://www.brettrijnders.nl
 
 # Copyright and license
 PBSViewer is developed by Brett Rijnders (http://www.brettrijnders.nl) and is released under the GPL licence ( see 'licence.txt').
